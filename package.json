@@ -4,6 +4,7 @@
   "description": "A full stack application for sharing interesting or scenic views and searching for views by location and keyword",
   "main": "server/server.js",
   "scripts": {
+    "start": "node server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i",
@@ -35,6 +36,8 @@
   },
   "homepage": "https://github.com/MMMPhoto/View-From-Here#readme",
   "dependencies": {
-    "concurrently": "^7.4.0"
+    "apollo-server-express": "^3.6.2",
+    "concurrently": "^7.4.0",
+    "graphql-tag": "^2.12.6"
   }
 }
