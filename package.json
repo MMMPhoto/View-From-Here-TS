@@ -1,0 +1,40 @@
+{
+  "name": "view-from-here",
+  "version": "1.0.0",
+  "description": "A full stack application for sharing interesting or scenic views and searching for views by location and keyword",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MMMPhoto/View-From-Here.git"
+  },
+  "keywords": [
+    "photo",
+    "sharing",
+    "map",
+    "search"
+  ],
+  "author": "Max McDonough",
+  "contributors": [
+    {
+      "name": "Gabriel Adams Bogar"
+    },
+    {
+      "name": "John Evenden"
+    }
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MMMPhoto/View-From-Here/issues"
+  },
+  "homepage": "https://github.com/MMMPhoto/View-From-Here#readme",
+  "dependencies": {
+    "concurrently": "^7.4.0"
+  }
+}
