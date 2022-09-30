@@ -1,6 +1,6 @@
-import gpl from 'graphql-tag';
+import { gql } from 'apollo-server-express';
 
-const typeDefs = gpl`
+const typeDefs = gql`
     type Profile {
         _id: ID
         name: String
