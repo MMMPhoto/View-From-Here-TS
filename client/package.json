@@ -6,9 +6,11 @@
   "dependencies": {
     "@apollo/client": "^3.6.9",
     "@googlemaps/react-wrapper": "^1.1.35",
+    "@react-google-maps/api": "^2.13.1",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "bootstrap": "^5.2.2",
     "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",
     "react": "^18.2.0",
