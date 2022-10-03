@@ -11291,7 +11291,16 @@ textarea.form-control-lg {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
   max-width: auto;
   max-height: auto;
+}
+
+#map {
+ max-height: 1080px;
+ min-height: 800px;
+ max-width: 1920px;
+ min-width: 1200px;
+
+
 }
