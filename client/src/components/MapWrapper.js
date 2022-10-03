@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 // import { Wrapper, Status, Spinner, ErrorCompnent } from "@googlemaps/react-wrapper";
-import { GoogleMap, LoadScript, useLoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, useLoadScript, MarkerF, InfoWindow } from "@react-google-maps/api";
 import mapSeeds from '../data/mapSeeds';
 
 // import Map from './Map';
@@ -18,25 +18,59 @@ import mapSeeds from '../data/mapSeeds';
 
 const apiKey = '';
 
+// Map Container Styling
 const containerStyle = {
     width: '90vw',
     height: '90vh'
   };
 
 const MapWrapper = () => {
-    // const isLoaded = useLoadScript({
-        
+    // Set Map State
+    const [map, setMap] = useState(null);
+
+    const onLoad = useCallback((map) => setMap(map), []);
+
+    const markers = mapSeeds;
+
+    useEffect(() => {
+        if (map) {
+            const bounds = new window.google.maps.LatLngBounds();
+            markers.map((marker) => {
+                bounds.extend({
+                    lat: marker.position.lat,
+                    lng: marker.position.lng
+                });
+            });
+            map.fitBounds(bounds);
+        };
+    }, [map, markers])
+
+    const handleMouseOver = () => {
+
+    };
+
+    // const isLoaded = useLoadScript({        
     // });
         return (
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap 
-                zoom={10} 
-                center={mapSeeds[0].position}
+                zoom={10}
+                // center={mapSeeds[0].position}
                 mapContainerStyle={containerStyle}
+                onLoad={onLoad} 
                 >
-                {mapSeeds.map((seed, index) => (
-                     <Marker position={ seed.position }></Marker>
-                ))};
+                {markers.map((marker) => (
+                    <MarkerF 
+                        key={marker.id} 
+                        position={marker.position}
+                        // label={marker.title}
+                        tooltip={marker.title}
+                        onMouseOver={() => handleMouseOver(marker.title)}
+
+                    >
+                        {/* <Info */}
+                    </MarkerF>
+                ))}
             </GoogleMap>
         </LoadScript>
         )

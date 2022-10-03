@@ -1,5 +1,6 @@
 const mapSeeds = [
     {
+        "id": 1,
         "title": "Shelburne Farms, Lake Champlain",
         "position": {
             "lat": 44.39573333333333,
@@ -8,6 +9,7 @@ const mapSeeds = [
        
     },
     {
+        "id": 2,
         "title": "Beach North Bay, Lake Champlain",
         "position": {
             "lat": 44.55444722222222,
@@ -15,6 +17,7 @@ const mapSeeds = [
         }
     },
     {
+        "id": 3,
         "title": "Sheep Meadow Dock, Lake George",
         "position": {
             "lat": 43.63946111111111,
@@ -22,6 +25,7 @@ const mapSeeds = [
         }
     },
     {
+        "id": 4,
         "title": "Huletts Landing Marina, Lake George",
         "position": {
             "lat": 43.64437777777778,
@@ -29,6 +33,7 @@ const mapSeeds = [
         }
     },
     {
+        "id": 5,
         "title": "Sheep Meadow Sunset, Lake George",
         "position": {
             "lat": 43.63823333333333,
