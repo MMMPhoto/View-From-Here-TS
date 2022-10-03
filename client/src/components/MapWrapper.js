@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 // import { Wrapper, Status, Spinner, ErrorCompnent } from "@googlemaps/react-wrapper";
-import { GoogleMap, LoadScript, useLoadScript, Marker } from "@react-google-maps/api"; 
+import { GoogleMap, LoadScript, useLoadScript, Marker } from "@react-google-maps/api";
+import mapSeeds from '../data/mapSeeds';
 
 // import Map from './Map';
 
@@ -15,7 +16,7 @@ import { GoogleMap, LoadScript, useLoadScript, Marker } from "@react-google-maps
 //     }
 // };
 
-const apiKey = 'mykey';
+const apiKey = '';
 
 const containerStyle = {
     width: '90vw',
@@ -30,9 +31,12 @@ const MapWrapper = () => {
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap 
                 zoom={10} 
-                center={{lat: 30, lng: -90}}
+                center={mapSeeds[0].position}
                 mapContainerStyle={containerStyle}
                 >
+                {mapSeeds.map((seed, index) => (
+                     <Marker position={ seed.position }></Marker>
+                ))};
             </GoogleMap>
         </LoadScript>
         )
