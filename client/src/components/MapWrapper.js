@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 // import { Wrapper, Status, Spinner, ErrorCompnent } from "@googlemaps/react-wrapper";
-import { GoogleMap, LoadScript, useLoadScript, MarkerF, InfoWindow } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import mapSeeds from '../data/mapSeeds';
 
 // import Map from './Map';
@@ -27,11 +27,13 @@ const containerStyle = {
 const MapWrapper = () => {
     // Set Map State
     const [map, setMap] = useState(null);
+    const [activeMarker, setActiveMarker] = useState(null);
 
     const onLoad = useCallback((map) => setMap(map), []);
 
     const markers = mapSeeds;
 
+    // Set Bounds of Map to contain Markers
     useEffect(() => {
         if (map) {
             const bounds = new window.google.maps.LatLngBounds();
@@ -43,11 +45,11 @@ const MapWrapper = () => {
             });
             map.fitBounds(bounds);
         };
-    }, [map, markers])
+    }, [map, markers]);
 
-    const handleMouseOver = () => {
-
-    };
+    // const revealInfoWindow = (markerId) => {
+    //     (markerId);
+    // };
 
     // const isLoaded = useLoadScript({        
     // });
@@ -60,16 +62,15 @@ const MapWrapper = () => {
                 onLoad={onLoad} 
                 >
                 {markers.map((marker) => (
-                    <MarkerF 
-                        key={marker.id} 
+                    <Marker 
+                        key={marker.id} I
                         position={marker.position}
-                        // label={marker.title}
-                        tooltip={marker.title}
-                        onMouseOver={() => handleMouseOver(marker.title)}
-
+                        // onClick={() => setActiveMarker({marker})}
                     >
-                        {/* <Info */}
-                    </MarkerF>
+                        <InfoWindow key={marker.id} anchor={marker} >
+                            <h6>{marker.title}</h6>
+                        </InfoWindow>
+                    </Marker>
                 ))}
             </GoogleMap>
         </LoadScript>
