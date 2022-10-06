@@ -36,6 +36,8 @@
   },
   "homepage": "https://github.com/MMMPhoto/View-From-Here#readme",
   "dependencies": {
-    "concurrently": "^7.4.0"
+    "concurrently": "^7.4.0",
+    "graphql-tag": "^2.12.6",
+    "startbootstrap-full-width-pics": "^5.0.5"
   }
 }
