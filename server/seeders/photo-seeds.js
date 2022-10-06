@@ -16,7 +16,7 @@ const seedFunction = async () => {
         
         console.log(rawPhotos);
 
-        const photoData = [{}];
+        const photoData = [];
         let i = 1;
         
         for (const photo of rawPhotos) {
@@ -26,16 +26,21 @@ const seedFunction = async () => {
 
             // Get GPS data from photo
             const exifData = await exifr.gps(`${moveFrom}/${photo}`);
-            exifData.id = i;
-            i = i++;
+            exifData.id = i++;
             // Add photo data to array
             photoData.push(exifData);
             console.log(photoData);
 
-            // Write new file
+            // Write photos to new location
             await fsPromises.rename(`${moveFrom}/${photo}`, `${moveTo}/${photo}`);
             console.log('Wrote file');
         }
+        // Write GPS data to JSON file
+        const jsonData = JSON.stringify(photoData);
+        fs.writeFile('./seeders/json-photo-data.json', jsonData, 'utf8', (err, data) => {
+            err ? console.err(err) : console.log('File written!');
+        });
+
     } catch (error) {
         console.error(error);
     }
