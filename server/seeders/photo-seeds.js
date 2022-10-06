@@ -2,6 +2,8 @@ import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
 
+import { uploadImage, getAssetInfo, createImageTag } from '../utils/cloudinary.js';
+
 // EXIF data package
 import exifr from "exifr";
 
@@ -31,6 +33,10 @@ const seedFunction = async () => {
             photoData.push(exifData);
             console.log(photoData);
 
+            // Upload image to Cloudinary
+            const uploadId = await uploadImage(`${moveFrom}/${photo}`);
+            console.log(`Photo ${uploadId} written to Cloud`);
+            
             // Write photos to new location
             await fsPromises.rename(`${moveFrom}/${photo}`, `${moveTo}/${photo}`);
             console.log('Wrote file');
