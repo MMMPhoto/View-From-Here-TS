@@ -1,18 +1,23 @@
 import fs from 'fs';
+import fsPromises from 'fs/promises';
 import path from 'path';
 
 // EXIF data package
 import exifr from "exifr";
 
 // File Path variables
-const moveFrom = './raw-photos';
-const moveTo = './parsed-photos';
+const moveFrom = './seeders/rawPhotos';
+const moveTo = './seeders/parsed-photos/.';
 
-(async () => {
+const rawPhotos = fs.readdirSync(moveFrom);
+
+const seedFunction = async () => {
     try {
-        const rawPhotos = await fs.promises.readdir(moveFrom);
+        
+        console.log(rawPhotos);
 
         const photoData = [{}];
+        let i = 1;
         
         for (const photo of rawPhotos) {
             // Get file paths
@@ -20,12 +25,20 @@ const moveTo = './parsed-photos';
             const toPath = path.join(moveTo, photo);
 
             // Get GPS data from photo
-            const exifData = await exifr.gps(photo);
+            const exifData = await exifr.gps(`${moveFrom}/${photo}`);
+            exifData.id = i;
+            i = i++;
+            // Add photo data to array
             photoData.push(exifData);
             console.log(photoData);
 
-
+            // Write new file
+            await fsPromises.rename(`${moveFrom}/${photo}`, `${moveTo}/${photo}`);
+            console.log('Wrote file');
         }
-
+    } catch (error) {
+        console.error(error);
     }
-}
+};
+
+seedFunction();
