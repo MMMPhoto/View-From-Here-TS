@@ -1,7 +1,9 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 // import { Wrapper, Status, Spinner, ErrorCompnent } from "@googlemaps/react-wrapper";
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import mapSeeds from '../data/mapSeeds';
+
+import MapInfoWindow from './MapInfoWindow';
 
 // import Map from './Map';
 
@@ -32,6 +34,7 @@ const MapWrapper = () => {
     const onLoad = useCallback((map) => setMap(map), []);
 
     const markers = mapSeeds;
+    const currentMarker = useRef(null);
 
     // Set Bounds of Map to contain Markers
     useEffect(() => {
@@ -47,9 +50,26 @@ const MapWrapper = () => {
         };
     }, [map, markers]);
 
-    // const revealInfoWindow = (markerId) => {
-    //     (markerId);
+    // const activateMarker = (marker) => {
+    //     setActiveMarker(marker);
     // };
+
+    useEffect(() => {
+        currentMarker.current = activeMarker;
+        console.log(currentMarker);
+
+    }, [activeMarker]);
+
+    const showInfoWindow = () => {
+        if (currentMarker) {
+            return (
+                <InfoWindow key={currentMarker.current.marker.id} position={currentMarker.current.marker.position} >
+                    <h6>{currentMarker.current.marker.title}</h6>
+                </InfoWindow>
+            );
+        };   
+    };
+
 
     // const isLoaded = useLoadScript({        
     // });
@@ -65,15 +85,20 @@ const MapWrapper = () => {
                     <Marker 
                         key={marker.id} I
                         position={marker.position}
-                        // onClick={() => setActiveMarker({marker})}
+                        onClick={() => setActiveMarker({marker})}
+                        activeMarker={activeMarker}
                     >
-                        <InfoWindow key={marker.id} anchor={marker} >
-                            <h6>{marker.title}</h6>
-                        </InfoWindow>
                     </Marker>
                 ))}
+                { activeMarker && (
+                    <InfoWindow key={currentMarker.current.id} position={currentMarker.current.position} >
+                        <h6>{currentMarker.current.title}</h6>
+                    </InfoWindow>
+                )}
+                {showInfoWindow()}
             </GoogleMap>
         </LoadScript>
+        
         )
 };
 
