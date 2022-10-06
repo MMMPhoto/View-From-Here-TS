@@ -6,7 +6,7 @@ import {
   createNewPic,
   updatePic,
   deletePic,
-} from "../../controllers";
+} from "../../controllers/pic-controller";
 
 router.route("/").get(getAllPics).post(createNewPic);
 

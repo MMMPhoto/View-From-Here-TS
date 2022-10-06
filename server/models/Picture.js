@@ -27,6 +27,6 @@ const picSchema = new Schema(
   }
 );
 
-const Pic = model("Picture", picSchema);
+const Picture = model("Picture", picSchema);
 
-module.exports = Pic;
+module.exports = Picture;
