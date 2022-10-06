@@ -1,12 +1,12 @@
 import router from "express";
 
-const {
+import {
   getAllUsers,
   getUserById,
   createNewUser,
   updateUser,
   deleteUser,
-} = require("../../controllers");
+} from "../../controllers";
 
 router.route("/".get(getAllUsers).post(createNewUser));
 
