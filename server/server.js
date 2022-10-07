@@ -1,19 +1,15 @@
 import express from 'express';
-import { ApolloServer } from 'apollo-server-express';
 import path from 'path';
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
 
-import { resolvers, typeDefs } from './schemas/index.js';
 import db from './config/connection.js';
+import 'dotenv/config';
+import { Router } from 'express';
 
 
 const PORT = process.env.PORT || 3001;
 const app = express();
-
-const server = new ApolloServer({
-    resolvers,
-    typeDefs
-
-})
 
 // Express Middleware
 app.use(express.urlencoded({extended: false}));
@@ -27,18 +23,8 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../client/build/index.html'))
 });
 
-// Create new Apollo server with GraphQL schema
-const startApolloServer = async (typeDefs, resolvers) => {
-    await server.start();
-    server.applyMiddleware({ app });
+app.use(Router);
 
-    db.once('open', () => {
-        app.listen(PORT, () => {
-            console.log(`API server running on ${PORT}`);
-            console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-        });
-    });
-};
-
-// Start Server
-startApolloServer(typeDefs, resolvers);
+db.once('open', () => {
+    app.listen(PORT, () => console.log(`Now listening on ${PORT}`));
+});
