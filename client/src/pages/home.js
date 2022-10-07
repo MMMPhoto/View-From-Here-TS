@@ -1,12 +1,17 @@
 import React, { Component } from 'react'; 
 
+import Header from '../Components/header';
+import Footer from '../Components/footer';
+
 class Home extends Component {
 
     render() {
 
         return (
-            <body><div id map class="py-5 bg-image-full">
-            </div><section class="py-5">
+            <><Header /><body>
+                <div id map class="py-5 bg-image-full">
+                </div>
+                <section class="py-5">
                     <div class="container my-5">
                         <div class="row justify-content-center">
                             <div class="col-lg-6">
@@ -16,7 +21,9 @@ class Home extends Component {
                             </div>
                         </div>
                     </div>
-                </section></body>
+                </section>
+                <Footer />
+            </body></>
 
 )
 
