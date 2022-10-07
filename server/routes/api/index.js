@@ -1,8 +1,10 @@
-import router from "express";
-import userRoutes from "./userRoutes";
-import picRoutes from "./picRoutes";
+import userRoutes from "./userRoutes.js";
+import picRoutes from "./picRoutes.js";
+import express from "express";
+
+const router = express.Router();
 
 router.use("/users", userRoutes);
 router.use("/pics", picRoutes);
 
-module.exports = router;
+export default router;

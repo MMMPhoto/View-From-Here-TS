@@ -1,10 +1,11 @@
-import router from "express";
-import apiRoutes from "/api";
+import express from "express";
+import apiRoutes from "./api/index.js";
+const router = express.Router();
 
-router.request("/api", apiRoutes);
+router.use("/api", apiRoutes);
 
-router.request((req, res) => {
+router.use((req, res) => {
   return res.send("Your route sucks and you should feel bad about yourself.");
 });
 
-module.exports = router;
+export default router;

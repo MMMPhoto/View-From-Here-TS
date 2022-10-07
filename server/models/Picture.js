@@ -1,5 +1,5 @@
 import { Schema, model, Types } from "mongoose";
-import userSchema from "./User";
+// import userSchema from "./User";
 
 const picSchema = new Schema(
   {
@@ -29,4 +29,4 @@ const picSchema = new Schema(
 
 const Picture = model("Picture", picSchema);
 
-module.exports = Picture;
+export default Picture;
