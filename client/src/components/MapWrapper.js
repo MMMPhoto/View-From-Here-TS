@@ -1,13 +1,16 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import mapSeeds from '../data/mapSeeds';
+import env from 'react-dotenv';
 
-const apiKey = '';
+import MarkerInfoCard from './MarkerInfoCard'
+
+const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 // Map Container Styling
 const containerStyle = {
-    width: '90vw',
-    height: '90vh'
+    width: '100vw',
+    height: '100vh'
   };
 
 const MapWrapper = () => {
@@ -38,34 +41,31 @@ const MapWrapper = () => {
         setActiveMarker(markerId) 
     };
 
-
-
-        return (
+    return (
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap 
-                zoom={10}
+                zoom={12}
                 mapContainerStyle={containerStyle}
                 onLoad={onLoad} 
                 >
                 {markers.map((marker) => (
                     <Marker 
-                        key={marker.id} I
+                        key={marker.id}
                         position={marker.position}
                         onMouseOver={() => handleActiveMarker(marker.id)}
                         onMouseOut={() => handleActiveMarker(null)}
                     >
                         {activeMarker === marker.id && (
                             <InfoWindow key={marker.id} position={marker.position} >
-                                <h6>{marker.title}</h6>
+                                <MarkerInfoCard marker={marker} />
                             </InfoWindow>
                         )}
                     </Marker>
                 ))}
             </GoogleMap>
         </LoadScript>
-        )
+    )
 };
-
 
 export default MapWrapper;
 
