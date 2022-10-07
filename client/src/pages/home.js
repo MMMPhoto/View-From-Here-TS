@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import Header from '../Components/header';
 import Footer from '../Components/footer';
+import './home.css'
 
 class Home extends Component {
 
@@ -9,7 +10,7 @@ class Home extends Component {
 
         return (
             <><Header />
-                <div id map className="py-5 bg-image-full">
+                <div id="map" className="py-5 bg-image-full">
                 </div>
                 <section className="py-5">
                     <div className="container my-5">
