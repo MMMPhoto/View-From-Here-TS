@@ -1,4 +1,5 @@
-import router from "express";
+import express from "express";
+const router = express.Router();
 
 import {
   getAllPics,
@@ -6,10 +7,10 @@ import {
   createNewPic,
   updatePic,
   deletePic,
-} from "../../controllers/pic-controller";
+} from "../../controllers/pic-controller.js";
 
 router.route("/").get(getAllPics).post(createNewPic);
 
 router.route("/:id").get(getPicById).put(updatePic).delete(deletePic);
 
-module.exports = router;
+export default router;
