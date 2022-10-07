@@ -3,9 +3,7 @@ import fsPromises from 'fs/promises';
 import path from 'path';
 
 import { uploadImage, getAssetInfo, createImageTag } from '../utils/cloudinary.js';
-
-// EXIF data package
-import exifr from "exifr";
+import { getGpsData, getCustomExifData, exifOptions } from '../utils/exifr.js';
 
 // File Path variables
 const moveFrom = './seeders/rawPhotos';
@@ -18,7 +16,7 @@ const seedFunction = async () => {
         
         console.log(rawPhotos);
 
-        const photoData = [];
+        const photoDataArray = [];
         let i = 1;
         
         for (const photo of rawPhotos) {
@@ -27,22 +25,32 @@ const seedFunction = async () => {
             const toPath = path.join(moveTo, photo);
 
             // Get GPS data from photo
-            const exifData = await exifr.gps(`${moveFrom}/${photo}`);
-            exifData.id = i++;
-            // Add photo data to array
-            photoData.push(exifData);
+            const gpsData = await getGpsData(fromPath);
+            console.log(gpsData);
+
+            // Get custom Exif data
+            const exifData = await getCustomExifData(fromPath, exifOptions);
+            console.log(exifData);
+
+            const photoData = {
+                ...gpsData,
+                ...exifData
+            }
+
             console.log(photoData);
+            photoData.id = i++;
+            photoDataArray.push(photoData);
 
             // Upload image to Cloudinary
-            const uploadId = await uploadImage(`${moveFrom}/${photo}`);
-            console.log(`Photo ${uploadId} written to Cloud`);
+            // const uploadId = await uploadImage(`${moveFrom}/${photo}`);
+            // console.log(`Photo ${uploadId} written to Cloud`);
             
-            // Write photos to new location
-            await fsPromises.rename(`${moveFrom}/${photo}`, `${moveTo}/${photo}`);
+            // Write photos to new location so we know they have been processed
+            await fsPromises.rename(fromPath, toPath);
             console.log('Wrote file');
         }
         // Write GPS data to JSON file
-        const jsonData = JSON.stringify(photoData);
+        const jsonData = JSON.stringify(photoDataArray);
         fs.writeFile('./seeders/json-photo-data.json', jsonData, 'utf8', (err, data) => {
             err ? console.err(err) : console.log('File written!');
         });
