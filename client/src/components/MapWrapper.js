@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import mapSeeds from '../data/mapSeeds';
 
-import MapInfoWindow from './MapInfoWindow';
-
 const apiKey = '';
 
 // Map Container Styling
@@ -40,6 +38,8 @@ const MapWrapper = () => {
         setActiveMarker(markerId) 
     };
 
+
+
         return (
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap 
@@ -51,7 +51,8 @@ const MapWrapper = () => {
                     <Marker 
                         key={marker.id} I
                         position={marker.position}
-                        onClick={() => handleActiveMarker(marker.id)}
+                        onMouseOver={() => handleActiveMarker(marker.id)}
+                        onMouseOut={() => handleActiveMarker(null)}
                     >
                         {activeMarker === marker.id && (
                             <InfoWindow key={marker.id} position={marker.position} >
