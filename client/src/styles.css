@@ -242,7 +242,7 @@ a:hover {
   color: #0a58ca;
 }
 
-a:not([href]):not([class]), a:not([href]):not([class]):hover {
+a:not([href]):not([className]), a:not([href]):not([className]):hover {
   color: inherit;
   text-decoration: none;
 }
@@ -11290,17 +11290,17 @@ textarea.form-control-lg {
   background-image: url('https://www.surfertoday.com/images/stories/physical-world-map.jpg');  
   background-repeat: no-repeat;
   background-attachment: scroll;
-  background-position: center;
+  background-position: contain;
   background-size: cover;
   max-width: auto;
   max-height: auto;
 }
 
-#map {
+/* #map {
  max-height: 1080px;
  min-height: 800px;
  max-width: 1920px;
  min-width: 1200px;
 
 
-}
+} */
