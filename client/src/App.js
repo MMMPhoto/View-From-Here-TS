@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import home from './pages/home.js'
 import './App.css';
 
@@ -8,11 +8,11 @@ function App() {
 
       <Router>
 
-        <Switch>
+        <Routes>
 
           <Route exact path='/' component={home} />
 
-        </Switch>
+        </Routes>
 
       </Router>
 
