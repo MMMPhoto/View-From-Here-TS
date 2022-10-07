@@ -11290,7 +11290,7 @@ textarea.form-control-lg {
   background-image: url('https://www.surfertoday.com/images/stories/physical-world-map.jpg');  
   background-repeat: no-repeat;
   background-attachment: scroll;
-  background-position: center;
+  background-position: contain;
   background-size: cover;
   max-width: auto;
   max-height: auto;
