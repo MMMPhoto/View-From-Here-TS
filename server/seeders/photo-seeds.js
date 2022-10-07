@@ -16,7 +16,7 @@ const seedFunction = async () => {
         
         console.log(rawPhotos);
 
-        const photoData = [];
+        const photoDataArray = [];
         let i = 1;
         
         for (const photo of rawPhotos) {
@@ -32,11 +32,14 @@ const seedFunction = async () => {
             const exifData = await getCustomExifData(fromPath, exifOptions);
             console.log(exifData);
 
-            // Add photo data to array
-            photoData.push(gpsData);
-            photoData.push(exifData);
+            const photoData = {
+                ...gpsData,
+                ...exifData
+            }
+
             console.log(photoData);
             photoData.id = i++;
+            photoDataArray.push(photoData);
 
             // Upload image to Cloudinary
             // const uploadId = await uploadImage(`${moveFrom}/${photo}`);
@@ -47,7 +50,7 @@ const seedFunction = async () => {
             console.log('Wrote file');
         }
         // Write GPS data to JSON file
-        const jsonData = JSON.stringify(photoData);
+        const jsonData = JSON.stringify(photoDataArray);
         fs.writeFile('./seeders/json-photo-data.json', jsonData, 'utf8', (err, data) => {
             err ? console.err(err) : console.log('File written!');
         });
