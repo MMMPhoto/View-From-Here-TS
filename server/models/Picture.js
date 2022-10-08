@@ -18,6 +18,14 @@ const picSchema = new Schema(
     description: {
       type: String,
     },
+    lat: {
+      type: Number,
+      required: true,
+    },
+    long: {
+      type: Number,
+      required: true,
+    },
   },
   {
     toJSON: {
