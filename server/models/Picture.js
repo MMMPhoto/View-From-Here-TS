@@ -31,9 +31,9 @@ const picSchema = new Schema(
     createdAt: {
       type: Date,
     },
-    offsetTime: {
-      type: Number,
-    }
+    // offsetTime: {
+    //   type: Number,
+    // }
   },
   {
     toJSON: {
