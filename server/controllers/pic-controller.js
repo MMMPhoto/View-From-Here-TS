@@ -26,30 +26,14 @@ const getPicById = async ({ params }, res) => {
     });
 };
 
-const createNewPic = async ({ body }, res) => {
-  Picture.create(body)
-    .then((dbPictureData) => {
-      return Picture.findOneandUpdate(
-        { userName: body.userName },
-        { $push: { Picture: dbPictureData } },
-        { new: true }
-      );
-    })
-    .then((dbPictureData) => {
-      if (!dbPictureData) {
-        res.status(404).json({ message: "No picture found with that id." });
-        return;
-      }
-      res.json(dbPictureData);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(404);
-    });
+const createNewPic = async (req, res) => {
+  Picture.create(req.body)
+    .then((dbUsersData) => res.json(dbUsersData))
+    .catch((err) => res.status(500).json(err));
 };
 
-const updatePic = async ({ params: body }, res) => {
-  Picture.findByIdAndUpdate({ _id: params.id }.body, { new: true })
+const updatePic = async ({ params, body }, res) => {
+  Picture.findByIdAndUpdate({ _id: params.id }, body, { new: true })
     .then((dbPictureData) => {
       if (!dbPictureData) {
         res.status(404).json({ message: "No picture found with that id." });
