@@ -11,6 +11,6 @@ import {
 
 router.route("/").get(getAllUsers).post(createNewUser);
 
-router.route("/id").get(getUserById).put(updateUser).delete(deleteUser);
+router.route("/:id").get(getUserById).put(updateUser).delete(deleteUser);
 
 export default router;

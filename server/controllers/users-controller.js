@@ -35,7 +35,7 @@ const createNewUser = async (req, res) => {
 };
 
 const updateUser = ({ params, body }, res) => {
-  User.findByIdAndUpdate({ _d: params.id }, body, { new: true })
+  User.findByIdAndUpdate({ _id: params.id }, body, { new: true })
     .then((dbUserData) => {
       if (!dbUserData) {
         res.status(404).json({ message: "No user found with that ID" });
