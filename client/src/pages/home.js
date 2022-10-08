@@ -1,8 +1,9 @@
 import React, { Component } from 'react'; 
 
-import Header from '../Components/header';
-import Footer from '../Components/footer';
+import Header from '../components/header';
+import Footer from '../components/footer';
 import './home.css'
+import MapWrapper from '../components/MapWrapper';
 
 class Home extends Component {
 
@@ -10,7 +11,8 @@ class Home extends Component {
 
         return (
             <><Header />
-                <div id="map" className="py-5 bg-image-full">
+                <div id="map" className="">
+                    <MapWrapper />
                 </div>
                 <section className="py-5">
                     <div className="container my-5">

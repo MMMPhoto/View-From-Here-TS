@@ -3,7 +3,7 @@ import exifr from 'exifr';
 const exifOptions = {
     ifd0: false,
     exif: {
-        pick: ['CreateDate', 'OffsetTime', "ExifImageWidth", "ExifImageHeight"]
+        pick: ['CreateDate', 'OffsetTime']
     },
     gps: false
 };
