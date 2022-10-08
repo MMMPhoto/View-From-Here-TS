@@ -32,18 +32,26 @@ const seedFunction = async () => {
             const exifData = await getCustomExifData(fromPath, exifOptions);
             console.log(exifData);
 
+            // Upload image to Cloudinary
+            const uploadPhotoData = await uploadImage(fromPath);
+            console.log(uploadPhotoData)
+
+            // Get unique photo URL
+            const photoUrl = uploadPhotoData.secure_url;
+
+            // Build object for database
             const photoData = {
                 ...gpsData,
                 ...exifData
-            }
+            };
+            photoData.url = photoUrl;
 
             console.log(photoData);
+
+            // Placeholder for database model insert
             photoData.id = i++;
             photoDataArray.push(photoData);
 
-            // Upload image to Cloudinary
-            // const uploadId = await uploadImage(`${moveFrom}/${photo}`);
-            // console.log(`Photo ${uploadId} written to Cloud`);
             
             // Write photos to new location so we know they have been processed
             await fsPromises.rename(fromPath, toPath);
