@@ -10,16 +10,17 @@ cloudinary.config({
 });
 console.log(cloudinary.config);
 
-// Upload image to Cloudinary
-const uploadImage = async (imagePath) => {
+// Upload Options
+const uploadOptions = {
+  use_filename: true,
+  unique_filename: false,
+  overwrite: true,
+  upload_preset: 'view-from-here-general',
+  // folder: 'view-from-here'
+};
 
-    // Use the uploaded file's name as the asset's public ID and 
-    // allow overwriting the asset with new versions
-    const options = {
-      use_filename: true,
-      unique_filename: false,
-      overwrite: true,
-    };
+// Upload image to Cloudinary
+const uploadImage = async (imagePath, options) => {
 
     try {
       // Upload the image
@@ -68,5 +69,5 @@ const createImageTag = (publicId, ...colors) => {
     return imageTag;
 };
 
-export { uploadImage, getAssetInfo, createImageTag };
+export { uploadImage, getAssetInfo, createImageTag, uploadOptions };
 

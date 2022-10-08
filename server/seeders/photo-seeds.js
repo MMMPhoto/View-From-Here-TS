@@ -2,8 +2,10 @@ import fs from 'fs';
 import fsPromises from 'fs/promises';
 import path from 'path';
 
-import { uploadImage, getAssetInfo, createImageTag } from '../utils/cloudinary.js';
+import { uploadImage, getAssetInfo, createImageTag, uploadOptions } from '../utils/cloudinary.js';
 import { getGpsData, getCustomExifData, exifOptions } from '../utils/exifr.js';
+import { User, Picture } from "../models/index.js";
+
 
 // File Path variables
 const moveFrom = './seeders/rawPhotos';
@@ -33,7 +35,7 @@ const seedFunction = async () => {
             console.log(exifData);
 
             // Upload image to Cloudinary
-            const uploadPhotoData = await uploadImage(fromPath);
+            const uploadPhotoData = await uploadImage(fromPath, uploadOptions);
             console.log(uploadPhotoData)
 
             // Get unique photo URL
