@@ -1,13 +1,9 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
-// import picSchema from "./Picture";
+import Picture from "./Picture.js";
 
 const userSchema = new Schema(
   {
-    userId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
     userName: {
       type: String,
       required: true,

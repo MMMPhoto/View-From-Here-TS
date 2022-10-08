@@ -1,19 +1,14 @@
 import { Schema, model, Types } from "mongoose";
-// import userSchema from "./User";
 
 const picSchema = new Schema(
   {
-    picId: {
-      type: Schema.Types.ObjectId,
-      default: () => new Types.ObjectId(),
-    },
     image: {
       type: String,
       required: true,
     },
     title: {
       type: String,
-      required: true,
+      // required: true,
     },
     description: {
       type: String,
@@ -22,9 +17,16 @@ const picSchema = new Schema(
       type: Number,
       required: true,
     },
-    long: {
+    lng: {
       type: Number,
       required: true,
+    },
+    url: {
+      type: String,
+      required: true,
+    },
+    tag: {
+      type: String,
     },
   },
   {
