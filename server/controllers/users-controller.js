@@ -2,7 +2,7 @@ import { User, Picture } from "../models/index.js";
 
 const getAllUsers = async (req, res) => {
   User.find({})
-    .populate({ path: "Picture" })
+    // .populate({ path: "Picture" })
     .select("-__v")
     .then((dbUserData) => res.json(dbUserData))
     .catch((err) => {
@@ -13,7 +13,7 @@ const getAllUsers = async (req, res) => {
 
 const getUserById = async ({ params }, res) => {
   User.findOne({ _id: params.id })
-    .populate({ path: "Picture" })
+    // .populate({ path: "Picture" })
     .select("-__v")
     .then((dbUserData) => {
       if (!dbUserData) {
@@ -35,7 +35,7 @@ const createNewUser = async (req, res) => {
 };
 
 const updateUser = ({ params, body }, res) => {
-  User.findByIdAndUpdate({ _d: params.id }, body, { new: true })
+  User.findByIdAndUpdate({ _id: params.id }, body, { new: true })
     .then((dbUserData) => {
       if (!dbUserData) {
         res.status(404).json({ message: "No user found with that ID" });
