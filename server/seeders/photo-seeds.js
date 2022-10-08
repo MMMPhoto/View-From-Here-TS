@@ -8,20 +8,19 @@ import { Picture } from "../models/index.js";
 
 import db from "../config/connection.js";
 
-
 // File Path variables
 const moveFrom = './seeders/rawPhotos';
 const moveTo = './seeders/parsed-photos/.';
 
+// Get photos
 const rawPhotos = fs.readdirSync(moveFrom);
+// Pull .gitkeep file out of array
+rawPhotos.shift();
 
 const seedFunction = async () => {
     try {
         
         console.log(rawPhotos);
-
-        const photoDataArray = [];
-        let i = 1;
         
         for (const photo of rawPhotos) {
             // Get file paths
@@ -58,7 +57,8 @@ const seedFunction = async () => {
                     const addPicture = await Picture.create({
                         lat: photoData.latitude,
                         lng: photoData.longitude,
-                        url: photoData.url
+                        url: photoData.url,
+                        createdAt: photoData.CreateDate
                     });
                     console.log(addPicture);
                 } catch (err) {

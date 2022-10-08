@@ -28,6 +28,9 @@ const picSchema = new Schema(
     tag: {
       type: String,
     },
+    createdAt: {
+      type: Date,
+    },
   },
   {
     toJSON: {
