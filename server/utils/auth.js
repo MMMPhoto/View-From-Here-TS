@@ -5,7 +5,7 @@ const secret = "kylesMomIsABitch";
 const expiration = "2h";
 
 // function for our authenticated routes
-const authMiddleware = async (req, res, next) => {
+export const authMiddleware = async (req, res, next) => {
   // allows token to be sent via  req.query or headers
   let token = req.query.token || req.headers.authorization;
 
@@ -31,10 +31,10 @@ const authMiddleware = async (req, res, next) => {
   next();
 };
 
-const signToken = async ({ username, email, _id }) => {
+export const signToken = async ({ username, email, _id }) => {
   const payload = { username, email, _id };
 
   return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
 };
 
-export { authMiddleware, signToken };
+// export default { signToken };

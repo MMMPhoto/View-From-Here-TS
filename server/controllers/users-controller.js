@@ -1,5 +1,5 @@
 import { User, Picture } from "../models/index.js";
-import signToken from "../utils/auth.js";
+import { signToken } from "../utils/auth.js";
 
 const getAllUsers = async (req, res) => {
   User.find({})
@@ -68,7 +68,7 @@ const deleteUser = async ({ params }, res) => {
 
 const login = async ({ body }, res) => {
   const user = await User.findOne({
-    $or: [{ username: body.username }, { email: body.email }],
+    $or: [{ username: body.userName }, { email: body.email }],
   });
   if (!user) {
     return res.status(400).json({ message: "No user found" });
