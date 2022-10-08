@@ -4,7 +4,9 @@ import path from 'path';
 
 import { uploadImage, getAssetInfo, createImageTag, uploadOptions } from '../utils/cloudinary.js';
 import { getGpsData, getCustomExifData, exifOptions } from '../utils/exifr.js';
-import { User, Picture } from "../models/index.js";
+import { Picture } from "../models/index.js";
+
+import db from "../config/connection.js";
 
 
 // File Path variables
@@ -50,10 +52,20 @@ const seedFunction = async () => {
 
             console.log(photoData);
 
-            // Placeholder for database model insert
-            photoData.id = i++;
-            photoDataArray.push(photoData);
+            // Database model insert
+            const addPicture = async (req, res) => {
+                Picture.create({
+                    lat: req.latitude,
+                    lng: req.longitude,
+                    url: req.url
+                })
+                .then((res) => res.json(res))
+                .catch((err) => {
+                    console.error({message: err})
+                });
+            };
 
+            addPicture(photoData);
             
             // Write photos to new location so we know they have been processed
             await fsPromises.rename(fromPath, toPath);
@@ -70,4 +82,12 @@ const seedFunction = async () => {
     }
 };
 
-seedFunction();
+db.once('open', async () => {
+    try {
+        seedFunction();
+    } catch (err) {
+      throw err;
+    }
+  });
+
+

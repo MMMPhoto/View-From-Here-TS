@@ -4,7 +4,7 @@ const picSchema = new Schema(
   {
     image: {
       type: String,
-      required: true,
+      // required: true,
     },
     title: {
       type: String,
