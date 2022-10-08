@@ -1,4 +1,4 @@
-import User from "./User";
-import Picture from "./Picture";
+import User from "./User.js";
+import Picture from "./Picture.js";
 
-module.exports = { User, Picture };
+export { User, Picture };
