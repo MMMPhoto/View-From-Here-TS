@@ -33,6 +33,7 @@ const seedFunction = async () => {
 
             // Get custom Exif data
             const exifData = await getCustomExifData(fromPath, exifOptions);
+            exifData.OffsetTime = parseInt(exifData.OffsetTime);
             console.log(exifData);
 
             // Upload image to Cloudinary
@@ -58,7 +59,8 @@ const seedFunction = async () => {
                         lat: photoData.latitude,
                         lng: photoData.longitude,
                         url: photoData.url,
-                        createdAt: photoData.CreateDate
+                        createdAt: photoData.CreateDate,
+                        offsetTime: photoData.OffsetTime
                     });
                     console.log(addPicture);
                 } catch (err) {
