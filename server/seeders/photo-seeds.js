@@ -53,29 +53,24 @@ const seedFunction = async () => {
             console.log(photoData);
 
             // Database model insert
-            const addPicture = async (req, res) => {
-                Picture.create({
-                    lat: req.latitude,
-                    lng: req.longitude,
-                    url: req.url
-                })
-                .then((res) => res.json(res))
-                .catch((err) => {
-                    console.error({message: err})
-                });
+            const addPicture = async (photoData) => {
+                try {
+                    const addPicture = await Picture.create({
+                        lat: photoData.latitude,
+                        lng: photoData.longitude,
+                        url: photoData.url
+                    });
+                    console.log(addPicture);
+                } catch (err) {
+                    throw err
+                };
             };
-
             addPicture(photoData);
             
             // Write photos to new location so we know they have been processed
             await fsPromises.rename(fromPath, toPath);
             console.log('Wrote file');
         }
-        // Write GPS data to JSON file
-        const jsonData = JSON.stringify(photoDataArray);
-        fs.writeFile('./seeders/json-photo-data.json', jsonData, 'utf8', (err, data) => {
-            err ? console.err(err) : console.log('File written!');
-        });
 
     } catch (error) {
         console.error(error);
