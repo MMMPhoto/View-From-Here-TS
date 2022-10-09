@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import bcrypt from "bcrypt";
-import Picture from "./Picture.js";
+// import Picture from "./Picture.js";
 
 const userSchema = new Schema(
   {
@@ -41,6 +41,10 @@ userSchema.pre("save", async function (next) {
   }
   next();
 });
+
+userSchema.methods.isCorrectPassword = async function (password) {
+  return bcrypt.compare(password, this.password);
+};
 
 userSchema.virtual("picCount").get(function () {
   return this.savedPics.length;
