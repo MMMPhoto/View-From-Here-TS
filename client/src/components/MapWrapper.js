@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import mapSeeds from '../data/mapSeeds';
+import { getAllPics } from '../utils/api';
 import env from 'react-dotenv';
 
 import MarkerInfoCard from './MarkerInfoCard'
@@ -17,22 +18,46 @@ const MapWrapper = () => {
     // Set Map State
     const [map, setMap] = useState(null);
     const [activeMarker, setActiveMarker] = useState(null);
+    const [markers, setMarkers] = useState("");
 
     const onLoad = useCallback((map) => setMap(map), []);
 
-    const markers = mapSeeds;
+    // const markers = mapSeeds;
+
+    useEffect(() => {
+    
+        const fetchPicData = async () => {
+          try {
+            const response = await fetch('/api/pics/', {
+                method: 'GET',
+                headers: {
+                'Content-Type': 'application/json',
+                }
+            });
+            const json = await response.json();
+            console.log(json);
+            setMarkers(json);
+          } catch (error) {
+            console.log("error", error);
+          }
+        };
+    
+        fetchPicData();
+    }, []);
 
     // Set Bounds of Map to contain Markers
     useEffect(() => {
         if (map) {
             const bounds = new window.google.maps.LatLngBounds();
-            markers.map((marker) => {
-                bounds.extend({
-                    lat: marker.position.lat,
-                    lng: marker.position.lng
+            if (markers) {
+                markers.map((marker) => {
+                    bounds.extend({
+                        lat: marker.lat,
+                        lng: marker.lng
+                    });
                 });
-            });
             map.fitBounds(bounds);
+            };
         };
     }, [map, markers]);
 
@@ -44,14 +69,15 @@ const MapWrapper = () => {
     return (
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap 
-                zoom={12}
+                zoom={4.5}
+                center={{lat: 38, lng: -98}}
                 mapContainerStyle={containerStyle}
                 onLoad={onLoad} 
                 >
-                {markers.map((marker) => (
+                {markers && (markers.map((marker) => (
                     <Marker 
                         key={marker.id}
-                        position={marker.position}
+                        position={{lat: marker.lat, lng: marker.lng}}
                         onMouseOver={() => handleActiveMarker(marker.id)}
                         onMouseOut={() => handleActiveMarker(null)}
                     >
@@ -61,7 +87,7 @@ const MapWrapper = () => {
                             </InfoWindow>
                         )}
                     </Marker>
-                ))}
+                )))}
             </GoogleMap>
         </LoadScript>
     )
