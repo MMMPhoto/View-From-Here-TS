@@ -1,5 +1,5 @@
 // Route to get All Photos
-const getPics = () => {
+const getAllPics = () => {
     return fetch('/api/pics/', {
         method: 'GET',
         headers: {
@@ -8,6 +8,6 @@ const getPics = () => {
     });
 };
 
-export { getPics };
+export { getAllPics };
 
 
