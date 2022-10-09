@@ -3,10 +3,16 @@ import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react
 import './MarkerInfoCard.css';
 
 const MarkerInfoCard = ({marker}) => {
+
+    let url = marker.url;
+    console.log(url);
+    url = url.replace('heic', 'jpg');
+    console.log(url);
+
     return (
         <div className='info-div'>
             <h6>{marker.title}</h6>
-            <img className="marker-thumb" src={marker.url} />
+            <img className="marker-thumb" src={url} />
         </div>
        
     )

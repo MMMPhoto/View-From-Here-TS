@@ -70,7 +70,6 @@ const MapWrapper = () => {
         <LoadScript googleMapsApiKey={apiKey}>
             <GoogleMap 
                 zoom={4.5}
-                center={{lat: 38, lng: -98}}
                 mapContainerStyle={containerStyle}
                 onLoad={onLoad} 
                 >
