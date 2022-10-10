@@ -36,5 +36,3 @@ export const signToken = async ({ username, email, _id }) => {
 
   return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
 };
-
-// export default { signToken };

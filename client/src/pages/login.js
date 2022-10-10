@@ -1,8 +1,8 @@
 import React, { Component } from 'react'; 
-
+import { loginUser } from '../utils/api';
 import Header from '../components/header';
 import Footer from '../components/footer';
-
+import Auth from "../utils/auth"
 
 
 class Login extends Component {
