@@ -21,6 +21,7 @@
     "dotenv": "^16.0.3",
     "graphql": "^16.6.0",
     "jwt-decode": "^3.1.2",
+    "node-geometry-library": "^1.2.6",
     "postcss-dir-pseudo-class": "^6.0.5",
     "postcss-pseudo-class-any-link": "^7.1.6",
     "react": "^18.2.0",

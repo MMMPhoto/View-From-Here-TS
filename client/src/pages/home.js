@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react'; 
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { getAllPics } from '../utils/api';
 
 import Header from '../components/header';
@@ -29,10 +29,28 @@ const Home = () => {
         fetchPicData();
     }, []);
 
+    // Filter all markers on submission of filter form
+    useEffect(() => {
+        const center = searchFilter.location;
+        const radius = searchFilter.radius;
+
+        const filteredMarkers = markers.filter((marker) => {
+            const isWithinRadius = (marker, center, radius) => {
+                let response = SphericalUtil.computeDistanceBetween(
+                    {lat: 25.775, lng: -80.19},
+                    {lat: 21.774, lng: -80.19}
+                )
+            };
+            return isWithinRadius;
+        });
+        console.log(filteredMarkers);
+        setMarkers(filteredMarkers);
+    }, [searchFilter]);
+
     const handleFormChange = (event) => {
         const { name, value } = event.target;
         setSearchFilter({ ...searchFilter, [name]: value });        
-    }
+    };
 
     const handleFilter = (searchFilter) => {
         setSearchFilter(searchFilter);
