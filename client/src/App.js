@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './pages/home.js'
+import Home from './pages/home.js';
 import './App.css';
 import SignUp from './pages/signup.js';
+import Login from './pages/login.js';
+import Profile from './pages/profile.js';
 
 function App() {
   return (
@@ -13,6 +15,8 @@ function App() {
 
           <Route exact path='/' element={<Home/>} />
           <Route exact path='/signup' element={<SignUp/>} />
+          <Route exact path='/login' element={<Login/>} />
+          <Route exact path='/profile' element={<Profile/>} />
 
         </Routes>
 

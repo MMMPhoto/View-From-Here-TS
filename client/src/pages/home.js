@@ -2,8 +2,9 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { getAllPics } from '../utils/api';
 
 import Header from '../components/header';
-import Footer from '../components/footer';
+import SearchFooter from '../components/searchFooter';
 import './home.css'
+import './searchFooter.css'
 import MapWrapper from '../components/MapWrapper';
 
 const Home = () => {
@@ -43,7 +44,7 @@ const Home = () => {
                 </div>
             </div>
         </section>
-        <Footer />
+        <SearchFooter />
         </div>
     )
 };
