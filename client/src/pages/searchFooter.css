@@ -1,0 +1,9 @@
+footer#searchFooter {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    width: 100%
+}
