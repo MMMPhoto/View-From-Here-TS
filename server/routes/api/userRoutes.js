@@ -11,6 +11,7 @@ import {
   login,
   savePic,
   deleteSavedPic,
+  getCurrentUser,
 } from "../../controllers/users-controller.js";
 
 router
@@ -22,6 +23,8 @@ router
 router.route("/login").post(login);
 
 router.route("/:id").put(updateUser).delete(authMiddleware, deleteUser);
+
+router.route("/me/").get(authMiddleware, getCurrentUser);
 
 router.route("/me/:id").get(authMiddleware, getUserById);
 
