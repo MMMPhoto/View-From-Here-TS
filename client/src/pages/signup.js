@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { createUser } from "../utils/api";
 import Header from "../components/header";
 import Footer from "../components/footer";
+import Auth from "../utils/auth";
 
 class SignUp extends Component {
   render() {
