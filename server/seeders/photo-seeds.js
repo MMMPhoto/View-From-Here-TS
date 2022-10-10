@@ -1,16 +1,21 @@
-import fs from 'fs';
-import fsPromises from 'fs/promises';
-import path from 'path';
+import fs from "fs";
+import fsPromises from "fs/promises";
+import path from "path";
 
-import { uploadImage, getAssetInfo, createImageTag, uploadOptions } from '../utils/cloudinary.js';
-import { getGpsData, getCustomExifData, exifOptions } from '../utils/exifr.js';
+import {
+  uploadImage,
+  getAssetInfo,
+  createImageTag,
+  uploadOptions,
+} from "../utils/cloudinary.js";
+import { getGpsData, getCustomExifData, exifOptions } from "../utils/exifr.js";
 import { Picture } from "../models/index.js";
 
 import db from "../config/connection.js";
 
 // File Path variables
-const moveFrom = './seeders/rawPhotos';
-const moveTo = './seeders/parsed-photos/.';
+const moveFrom = "./seeders/rawPhotos";
+const moveTo = "./seeders/parsed-photos/.";
 
 // Get photos
 const rawPhotos = fs.readdirSync(moveFrom);
@@ -18,73 +23,69 @@ const rawPhotos = fs.readdirSync(moveFrom);
 rawPhotos.shift();
 
 const seedFunction = async () => {
-    try {
-        
-        console.log(rawPhotos);
-        
-        for (const photo of rawPhotos) {
-            // Get file paths
-            const fromPath = path.join(moveFrom, photo);
-            const toPath = path.join(moveTo, photo);
+  try {
+    console.log(rawPhotos);
 
-            // Get GPS data from photo
-            const gpsData = await getGpsData(fromPath);
-            console.log(gpsData);
+    for (const photo of rawPhotos) {
+      // Get file paths
+      const fromPath = path.join(moveFrom, photo);
+      const toPath = path.join(moveTo, photo);
 
-            // Get custom Exif data
-            const exifData = await getCustomExifData(fromPath, exifOptions);
-            // exifData.OffsetTime = parseInt(exifData.OffsetTime);
-            console.log(exifData);
+      // Get GPS data from photo
+      const gpsData = await getGpsData(fromPath);
+      console.log(gpsData);
 
-            // Upload image to Cloudinary
-            const uploadPhotoData = await uploadImage(fromPath, uploadOptions);
-            console.log(uploadPhotoData)
+      // Get custom Exif data
+      const exifData = await getCustomExifData(fromPath, exifOptions);
+      // exifData.OffsetTime = parseInt(exifData.OffsetTime);
+      console.log(exifData);
 
-            // Get unique photo URL
-            const photoUrl = uploadPhotoData.secure_url;
+      // Upload image to Cloudinary
+      const uploadPhotoData = await uploadImage(fromPath, uploadOptions);
+      console.log(uploadPhotoData);
 
-            // Build object for database
-            const photoData = {
-                ...gpsData,
-                ...exifData
-            };
-            photoData.url = photoUrl;
+      // Get unique photo URL
+      const photoUrl = uploadPhotoData.secure_url;
 
-            console.log(photoData);
+      // Build object for database
+      const photoData = {
+        ...gpsData,
+        ...exifData,
+      };
+      photoData.url = photoUrl;
 
-            // Database model insert
-            const addPicture = async (photoData) => {
-                try {
-                    const addPicture = await Picture.create({
-                        lat: photoData.latitude,
-                        lng: photoData.longitude,
-                        url: photoData.url,
-                        createdAt: photoData.CreateDate,
-                        offsetTime: photoData.OffsetTime
-                    });
-                    console.log(addPicture);
-                } catch (err) {
-                    throw err
-                };
-            };
-            addPicture(photoData);
-            
-            // Write photos to new location so we know they have been processed
-            await fsPromises.rename(fromPath, toPath);
-            console.log('Wrote file');
+      console.log(photoData);
+
+      // Database model insert
+      const addPicture = async (photoData) => {
+        try {
+          const addPicture = await Picture.create({
+            lat: photoData.latitude,
+            lng: photoData.longitude,
+            url: photoData.url,
+            createdAt: photoData.CreateDate,
+            offsetTime: photoData.OffsetTime,
+          });
+          console.log(addPicture);
+        } catch (err) {
+          throw err;
         }
+      };
+      addPicture(photoData);
 
-    } catch (error) {
-        console.error(error);
+      // Write photos to new location so we know they have been processed
+      await fsPromises.rename(fromPath, toPath);
+      console.log("Wrote file");
     }
+  } catch (error) {
+    console.error(error);
+  }
 };
 
-db.once('open', async () => {
-    try {
-        seedFunction();
-    } catch (err) {
-      throw err;
-    }
-  });
-
-
+db.once("open", async () => {
+  try {
+    seedFunction();
+  } catch (err) {
+    throw err;
+  }
+});
