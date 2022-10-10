@@ -28,7 +28,7 @@ const loginUser = (userData) => {
   });
 };
 
-const getMe = (token) => {
+const getCurrentUser = (token) => {
   return fetch("api/users/me", {
     headers: {
       "Content-Type": "application/json",
@@ -57,4 +57,11 @@ const deleteSavedPic = (picId, token) => {
   });
 };
 
-export { getAllPics, createNewUser, loginUser, savePic, deleteSavedPic, getMe };
+export {
+  getAllPics,
+  createNewUser,
+  loginUser,
+  savePic,
+  deleteSavedPic,
+  getCurrentUser,
+};
