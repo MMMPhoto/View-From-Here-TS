@@ -1,10 +1,12 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
-// import mapSeeds from '../data/mapSeeds';
+import {Routes, Route, useNavigate} from 'react-router-dom';
+import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow, MarkerClusterer } from "@react-google-maps/api";
+import { Link } from 'react-router-dom';
 import { getAllPics } from '../utils/api';
 import env from 'react-dotenv';
 
-import MarkerInfoCard from './MarkerInfoCard'
+import MarkerInfoCard from './MarkerInfoCard';
+import SingleView from '../pages/SingleView';
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -14,7 +16,9 @@ const containerStyle = {
     height: '100vh'
   };
 
-function MapWrapper({markers}) {
+const MapWrapper = ({markers}) => {
+    const navigate = useNavigate();
+
     // Set Map State
     const [map, setMap] = useState(null);
     const [activeMarker, setActiveMarker] = useState(null);
@@ -37,6 +41,10 @@ function MapWrapper({markers}) {
         };
     }, [map, markers]);
 
+    const navigateToSingleView = ((marker) => {
+        navigate(`/single-view/${marker.id}`, {state:{marker}});
+    })
+
     // Handle Active Marker change
     const handleActiveMarker = (markerId) => {
         setActiveMarker(markerId) 
@@ -55,6 +63,7 @@ function MapWrapper({markers}) {
                         position={{lat: marker.lat, lng: marker.lng}}
                         onMouseOver={() => handleActiveMarker(marker.id)}
                         onMouseOut={() => handleActiveMarker(null)}
+                        onClick={() => navigateToSingleView(marker)}
                     >
                         {activeMarker === marker.id && (
                             <InfoWindow key={marker.id} position={marker.position} >

@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import { Link } from 'react-router-dom';
 import './MarkerInfoCard.css';
 
 const MarkerInfoCard = ({marker}) => {

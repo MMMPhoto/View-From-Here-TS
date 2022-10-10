@@ -6,7 +6,7 @@ import Footer from '../components/footer';
 import './home.css'
 import MapWrapper from '../components/MapWrapper';
 
-function Home() {
+const Home = () => {
 
     // Set marker state
     const [markers, setMarkers] = useState("");
