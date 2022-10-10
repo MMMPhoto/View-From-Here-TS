@@ -62,7 +62,7 @@ const MapWrapper = ({markers}) => {
                         key={marker.id}
                         position={{lat: marker.lat, lng: marker.lng}}
                         onMouseOver={() => handleActiveMarker(marker.id)}
-                        onMouseOut={() => handleActiveMarker(null)}
+                        // onMouseOut={() => handleActiveMarker(null)}
                         onClick={() => navigateToSingleView(marker)}
                     >
                         {activeMarker === marker.id && (
