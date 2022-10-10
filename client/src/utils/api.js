@@ -28,4 +28,24 @@ const loginUser = (userData) => {
   });
 };
 
-export { getAllPics, createNewUser, loginUser };
+const savePic = (picData, token) => {
+  return fetch("/api/users", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(picData),
+  });
+};
+
+const deleteSavedPic = (picId, token) => {
+  return fetch(`/api/users/${picId}`, {
+    method: "DELETE",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+};
+
+export { getAllPics, createNewUser, loginUser, savePic, deleteSavedPic };
