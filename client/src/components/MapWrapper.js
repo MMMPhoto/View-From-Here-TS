@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
-import mapSeeds from '../data/mapSeeds';
+// import mapSeeds from '../data/mapSeeds';
 import { getAllPics } from '../utils/api';
 import env from 'react-dotenv';
 
@@ -14,36 +14,12 @@ const containerStyle = {
     height: '100vh'
   };
 
-const MapWrapper = () => {
+function MapWrapper({markers}) {
     // Set Map State
     const [map, setMap] = useState(null);
     const [activeMarker, setActiveMarker] = useState(null);
-    const [markers, setMarkers] = useState("");
 
     const onLoad = useCallback((map) => setMap(map), []);
-
-    // const markers = mapSeeds;
-
-    useEffect(() => {
-    
-        const fetchPicData = async () => {
-          try {
-            const response = await fetch('/api/pics/', {
-                method: 'GET',
-                headers: {
-                'Content-Type': 'application/json',
-                }
-            });
-            const json = await response.json();
-            console.log(json);
-            setMarkers(json);
-          } catch (error) {
-            console.log("error", error);
-          }
-        };
-    
-        fetchPicData();
-    }, []);
 
     // Set Bounds of Map to contain Markers
     useEffect(() => {
