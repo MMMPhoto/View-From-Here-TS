@@ -12,6 +12,20 @@ const getAllUsers = async (req, res) => {
     });
 };
 
+const getCurrentUser = async ({ user = null, params }, res) => {
+  const foundUser = await User.findOne({
+    $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+  });
+
+  if (!foundUser) {
+    return res
+      .status(400)
+      .json({ message: "Cannot find a user with this id!" });
+  }
+
+  res.json(foundUser);
+};
+
 const getUserById = async ({ params }, res) => {
   User.findOne({ _id: params.id })
     // .populate({ path: "Picture" })
@@ -121,4 +135,5 @@ export {
   login,
   savePic,
   deleteSavedPic,
+  getCurrentUser,
 };
