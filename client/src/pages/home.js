@@ -11,6 +11,8 @@ const Home = () => {
 
     // Set marker state
     const [markers, setMarkers] = useState("");
+    // Set search filter state
+    const [searchFilter, setSearchFilter] = useState({ location: '', radius: '' });
 
     // Load all pictures on page load
     useEffect(() => {
@@ -26,6 +28,16 @@ const Home = () => {
         };
         fetchPicData();
     }, []);
+
+    const handleFormChange = (event) => {
+        const { name, value } = event.target;
+        setSearchFilter({ ...searchFilter, [name]: value });        
+    }
+
+    const handleFilter = (searchFilter) => {
+        setSearchFilter(searchFilter);
+        console.log(searchFilter);
+    };
 
     return (
         <div>
@@ -44,7 +56,7 @@ const Home = () => {
                 </div>
             </div>
         </section>
-        <SearchFooter />
+        <SearchFooter markers={markers} searchFilter={searchFilter} handleFormChange={handleFormChange} handleFilter={handleFilter} />
         </div>
     )
 };
