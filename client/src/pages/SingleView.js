@@ -12,17 +12,14 @@ const SingleView = () => {
     useEffect(() => {
         const getPicData = async () => {
             try {
-                console.log(pictureId)
                 const response = await getOnePic(pictureId);
                 const jsonData = await response.json();
-                console.log(jsonData);
                 let jsonArray = [];
                 jsonArray.push(jsonData);
                 setPictureData(jsonArray);
                 let url = jsonData.url;
                 url = url.replace('heic', 'jpg');
                 setPicUrl(url);
-                console.log(picUrl);            
             } catch (error) {
                 console.log("error", error);
             };

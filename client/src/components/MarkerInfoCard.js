@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import './MarkerInfoCard.css';
 
-const MarkerInfoCard = ({marker}) => {
+const MarkerInfoCard = ({marker, navigate}) => {
 
     // Set url to lower resolution for thumbnail
     let urlArray  = marker.url.split("/");
@@ -10,7 +10,7 @@ const MarkerInfoCard = ({marker}) => {
     url = url.replace('heic', 'jpg');
 
     return (
-        <div className='info-div'>
+        <div className='info-div' onClick={() => navigate(`/single-view/${marker.id}`)}>
             <h6>{marker.title}</h6>
             <img className="marker-thumb" src={url} />
         </div>

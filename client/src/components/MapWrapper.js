@@ -3,7 +3,6 @@ import {Routes, Route, useNavigate} from 'react-router-dom';
 import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow, MarkerClusterer } from "@react-google-maps/api";
 import { Link } from 'react-router-dom';
 import { getAllPics } from '../utils/api';
-import env from 'react-dotenv';
 
 import MarkerInfoCard from './MarkerInfoCard';
 
@@ -35,20 +34,19 @@ const MapWrapper = ({markers}) => {
                         lng: marker.lng
                     });
                 });
-                // if (markers.length === 1) {
-                //     map.setCenter(bounds.getCenter());
-                //     map.setZoom(14);
-                // } else {
-        
-                // }
-                map.fitBounds(bounds);
+                if (markers.length === 1) {
+                    map.setCenter(bounds.getCenter());
+                    map.setZoom(12);
+                } else {
+                    map.fitBounds(bounds);        
+                }
             };
         };
     }, [map, markers]);
 
     // Handle Active Marker change
     const handleActiveMarker = (markerId) => {
-        setActiveMarker(markerId) 
+        setActiveMarker(markerId)
     };
 
     return (
@@ -63,13 +61,17 @@ const MapWrapper = ({markers}) => {
                             key={marker.id}
                             position={{lat: marker.lat, lng: marker.lng}}
                             onMouseOver={() => handleActiveMarker(marker.id)}
-                            // onMouseOut={() => handleActiveMarker(null)}
+                            onMouseOut={() => {
+                                setTimeout(() => {
+                                    handleActiveMarker(null);
+                                }, 1000);
+                            }}
                             onClick={() => navigate(`/single-view/${marker.id}`)}
                         >
 
                             {activeMarker === marker.id && (
                                 <InfoWindow key={marker.id} position={marker.position} >
-                                    <MarkerInfoCard marker={marker} />
+                                    <MarkerInfoCard marker={marker} navigate={navigate} />
                                 </InfoWindow>
                             )}
                         </Marker>

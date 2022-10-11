@@ -1,11 +1,9 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getAllPics, savePic } from "../utils/api";
-import Header from "../components/header";
 import SearchFooter from "../components/searchFooter";
 import "./home.css";
 import "./searchFooter.css";
 import MapWrapper from "../components/MapWrapper";
-import Auth from "../utils/auth";
 
 const Home = () => {
 
@@ -18,7 +16,6 @@ const Home = () => {
       try {
         const response = await getAllPics();
         const jsonData = await response.json();
-        console.log(jsonData);
         setMarkers(jsonData);
       } catch (error) {
         console.log("error", error);
