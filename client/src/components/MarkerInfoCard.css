@@ -6,3 +6,8 @@
     width: 100%;
     height: auto;
 }
+
+.info-div:hover {
+    border: solid;
+    border-color: black;
+}

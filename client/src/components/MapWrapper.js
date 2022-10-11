@@ -64,7 +64,7 @@ const MapWrapper = ({markers}) => {
                             onMouseOut={() => {
                                 setTimeout(() => {
                                     handleActiveMarker(null);
-                                }, 1000);
+                                }, 1500);
                             }}
                             onClick={() => navigate(`/single-view/${marker.id}`)}
                         >
