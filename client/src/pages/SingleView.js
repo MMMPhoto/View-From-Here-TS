@@ -28,12 +28,16 @@ const SingleView = () => {
             };
         };
         getPicData();
-    }, [pictureId]);
+    }, []);
     
     return (
         <div className='d-flex flex-column align-items-center p-4'>
             <img className='single-pic' src={picUrl} />
-            {pictureData && <MapWrapper markers={pictureData} />}
+            <div>
+                { pictureData[0].lat ? (<MapWrapper markers={pictureData} />) : (
+                    <p>Loading...</p>
+                )}
+            </div>
         </div>
     )
 };

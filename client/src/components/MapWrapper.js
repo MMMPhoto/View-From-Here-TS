@@ -35,12 +35,13 @@ const MapWrapper = ({markers}) => {
                         lng: marker.lng
                     });
                 });
-                if (markers.length === 1) {
-                    map.setCenter(bounds.getCenter());
-                    map.setZoom(14);
-                } else {
-                    map.fitBounds(bounds);
-                }
+                // if (markers.length === 1) {
+                //     map.setCenter(bounds.getCenter());
+                //     map.setZoom(14);
+                // } else {
+        
+                // }
+                map.fitBounds(bounds);
             };
         };
     }, [map, markers]);
