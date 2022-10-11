@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
-const { connect, connection } = mongoose;
+// const { connect, connection } = mongoose;
 
-connect(
+mongoose.connect(
     process.env.MONGOOSE_URI || 'mongodb://localhost:27017/view-from-here',
     {
         useNewUrlParser: true,
@@ -9,4 +9,4 @@ connect(
     }
 );
 
-export default connection;
+export default mongoose.connection;
