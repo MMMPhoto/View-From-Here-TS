@@ -12,9 +12,9 @@ function SignUp() {
     password: "",
   });
   // set state for form validation
-  const [validated] = useState(false);
+  // const [validated] = useState(false);
   // set state for alert
-  const [showAlert, setShowAlert] = useState(false);
+  // const [showAlert, setShowAlert] = useState(false);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -43,7 +43,7 @@ function SignUp() {
       Auth.login(token);
     } catch (err) {
       console.error(err);
-      setShowAlert(true);
+      // setShowAlert(true);
     }
 
     setUserFormData({
