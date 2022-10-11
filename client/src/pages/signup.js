@@ -5,6 +5,29 @@ import Footer from "../components/footer";
 import Auth from "../utils/auth";
 
 function SignUp() {
+      // Here we set two state variables for firstName and lastName using `useState`
+ const [userName, setUserName] = useState('');
+ const [password, setPassword] = useState('');
+ const [email, setEmail] = useState('')
+
+ const handleInputChange = (e) => {
+   // Getting the value and name of the input which triggered the change
+   const { name, value } = e.target;
+
+   // Ternary statement that will call either setFirstName or setLastName based on what field the user is typing in
+   return name === 'firstName' ? setFirstName(value) : setLastName(value);
+ };
+
+ const handleFormSubmit = (e) => {
+   // Preventing the default behavior of the form submit (which is to refresh the page)
+   e.preventDefault();
+
+   // Alert the user their first and last name, clear the inputs
+   alert(`Hello ${userName}`);
+   setUserName('');
+   setPassword('');
+   setEmail('')
+ }; 
 
   return (
     <>
@@ -25,6 +48,9 @@ function SignUp() {
                           <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={userName}
+                              name="username"
+                              onChange={handleInputChange}
                               type="text"
                               id="form3Example1c"
                               className="form-control"
@@ -42,6 +68,9 @@ function SignUp() {
                           <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={email}
+                              name="email"
+                              onChange={handleInputChange}  
                               type="email"
                               id="form3Example3c"
                               className="form-control"
@@ -59,7 +88,10 @@ function SignUp() {
                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={password}
+                              name="password"
                               type="password"
+                              onChange={handleInputChange}
                               id="form3Example4c"
                               className="form-control"
                             />
@@ -72,7 +104,7 @@ function SignUp() {
                           </div>
                         </div>
 
-                        <div className="d-flex flex-row align-items-center mb-4">
+                        {/* <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
@@ -103,12 +135,13 @@ function SignUp() {
                             I agree all statements in{" "}
                             <a href="#!">Terms of service</a>
                           </label>
-                        </div>
+                        </div> */}
 
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
                             type="button"
                             className="btn btn-primary btn-lg"
+                            onClick={handleFormSubmit}
                           >
                             Register
                           </button>
