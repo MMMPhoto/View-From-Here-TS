@@ -27,8 +27,7 @@ function Home() {
   }, []);
 
   return (
-    <div>
-      <Header />
+    <>
       <div id="map" className="">
         <MapWrapper markers={markers} />
       </div>
@@ -50,8 +49,8 @@ function Home() {
           </div>
         </div>
       </section>
-      <SearchFooter />
-    </div>
+      {/* <SearchFooter /> */}
+    </>
   );
 }
 
