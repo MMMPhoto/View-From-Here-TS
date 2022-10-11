@@ -1,33 +1,57 @@
-import React from "react";
-import { createUser } from "../utils/api";
-import Header from "../components/header";
-import Footer from "../components/footer";
+import React, { useState } from "react";
+import { createNewUser } from "../utils/api";
+// import Header from "../components/header";
+// import Footer from "../components/footer";
 import Auth from "../utils/auth";
 
 function SignUp() {
-      // Here we set two state variables for firstName and lastName using `useState`
- const [userName, setUserName] = useState('');
- const [password, setPassword] = useState('');
- const [email, setEmail] = useState('')
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+  });
+  // set state for form validation
+  const [validated] = useState(false);
+  // set state for alert
+  const [showAlert, setShowAlert] = useState(false);
 
- const handleInputChange = (e) => {
-   // Getting the value and name of the input which triggered the change
-   const { name, value } = e.target;
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
 
-   // Ternary statement that will call either setFirstName or setLastName based on what field the user is typing in
-   return name === 'firstName' ? setFirstName(value) : setLastName(value);
- };
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
 
- const handleFormSubmit = (e) => {
-   // Preventing the default behavior of the form submit (which is to refresh the page)
-   e.preventDefault();
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-   // Alert the user their first and last name, clear the inputs
-   alert(`Hello ${userName}`);
-   setUserName('');
-   setPassword('');
-   setEmail('')
- }; 
+    try {
+      const response = await createNewUser(userFormData);
+
+      if (!response.ok) {
+        throw new Error("something went wrong!");
+      }
+
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      setShowAlert(true);
+    }
+
+    setUserFormData({
+      userName: "",
+      email: "",
+      password: "",
+    });
+  };
 
   return (
     <>
@@ -48,11 +72,11 @@ function SignUp() {
                           <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
-                              value={userName}
-                              name="username"
+                              value={userFormData.userName}
+                              name="userName"
                               onChange={handleInputChange}
                               type="text"
-                              id="form3Example1c"
+                              id="form3Example3c"
                               className="form-control"
                             />
                             <label
@@ -68,9 +92,9 @@ function SignUp() {
                           <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
-                              value={email}
+                              value={userFormData.email}
                               name="email"
-                              onChange={handleInputChange}  
+                              onChange={handleInputChange}
                               type="email"
                               id="form3Example3c"
                               className="form-control"
@@ -88,7 +112,7 @@ function SignUp() {
                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
-                              value={password}
+                              value={userFormData.password}
                               name="password"
                               type="password"
                               onChange={handleInputChange}
@@ -163,7 +187,7 @@ function SignUp() {
         </div>
       </section>
     </>
-  )
-};
+  );
+}
 
 export default SignUp;
