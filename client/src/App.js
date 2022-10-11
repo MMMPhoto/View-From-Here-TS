@@ -7,24 +7,22 @@ import Home from './pages/home.js';
 import SignUp from './pages/signup.js';
 import Login from './pages/login.js';
 import Profile from './pages/profile.js';
-import SingleView from './pages/SingleView.js';
+// import SingleView from './pages/SingleView.js';
 
 function App() {
   return (
     <div className='wrapper'>
 
       <Router>
-
+      <Header />
         <Routes>
-          <Header />
           <Route exact path='/' element={<Home/>} />
           <Route exact path='/signup' element={<SignUp/>} />
           <Route exact path='/login' element={<Login/>} />
           <Route exact path='/profile' element={<Profile/>} />
-          <Route path='/single-view/:pictureId' element={<SingleView/>} />
-          <Footer />
+          {/* <Route path='/single-view/:pictureId' element={<SingleView/>} /> */}
         </Routes>
-
+        <Footer />
       </Router>
 
     </div>
