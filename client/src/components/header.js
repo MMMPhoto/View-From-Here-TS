@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
+import auth from '../utils/auth';
 
 function Header() {
 
@@ -13,6 +14,7 @@ function Header() {
                         <NavLink className="nav-link" to="/" end><li className="nav-item">Home</li></NavLink>
                         <NavLink className="nav-link" to="/login"><li className="nav-item">Login</li></NavLink>
                         <NavLink className="nav-link" to="signup"><li className="nav-item">Signup</li></NavLink>
+                        <NavLink onClick={auth.logout} className="nav-link" to="signup"><li className="nav-item">Logout</li></NavLink>
                     </ul>
                 </div>
             </div>
