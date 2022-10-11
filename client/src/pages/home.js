@@ -28,8 +28,7 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
-      <Header />
+    <>
       <div id="map" className="">
         <MapWrapper markers={markers} />
       </div>
@@ -51,8 +50,8 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <SearchFooter />
-    </div>
+      {/* <SearchFooter /> */}
+    </>
   );
 }
 
