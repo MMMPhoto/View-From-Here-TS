@@ -35,7 +35,7 @@ function SignUp() {
       const response = await createNewUser(userFormData);
 
       if (!response.ok) {
-        throw new Error("something went wrong!");
+        throw new Error("Something went wrong!");
       }
 
       const { token, user } = await response.json();
@@ -103,7 +103,7 @@ function SignUp() {
                               className="form-label"
                               htmlFor="form3Example3c"
                             >
-                              Your Email
+                              Email
                             </label>
                           </div>
                         </div>

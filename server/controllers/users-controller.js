@@ -82,7 +82,7 @@ const deleteUser = async ({ params }, res) => {
 
 const login = async ({ body }, res) => {
   const user = await User.findOne({
-    $or: [{ username: body.userName }, { email: body.email }],
+    $or: [{ email: body.email }, { password: body.password }],
   });
   if (!user) {
     return res.status(400).json({ message: "No user found" });

@@ -40,7 +40,6 @@ function Login() {
     }
 
     setUserFormData({
-      username: "",
       email: "",
       password: "",
     });
@@ -64,6 +63,9 @@ function Login() {
                           <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={userFormData.email}
+                              name="email"
+                              onChange={handleInputChange}
                               type="email"
                               id="form3Example3c"
                               className="form-control"
@@ -81,7 +83,10 @@ function Login() {
                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={userFormData.password}
+                              name="password"
                               type="password"
+                              onChange={handleInputChange}
                               id="form3Example4c"
                               className="form-control"
                             />
@@ -98,6 +103,7 @@ function Login() {
                           <button
                             type="button"
                             className="btn btn-primary btn-lg"
+                            onClick={handleFormSubmit}
                           >
                             Login
                           </button>
