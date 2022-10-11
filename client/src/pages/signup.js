@@ -1,10 +1,57 @@
-import React from "react";
-import { createUser } from "../utils/api";
-import Header from "../components/header";
-import Footer from "../components/footer";
+import React, { useState } from "react";
+import { createNewUser } from "../utils/api";
+// import Header from "../components/header";
+// import Footer from "../components/footer";
 import Auth from "../utils/auth";
 
 function SignUp() {
+  // set initial form state
+  const [userFormData, setUserFormData] = useState({
+    userName: "",
+    email: "",
+    password: "",
+  });
+  // set state for form validation
+  // const [validated] = useState(false);
+  // set state for alert
+  // const [showAlert, setShowAlert] = useState(false);
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setUserFormData({ ...userFormData, [name]: value });
+  };
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    // check if form has everything (as per react-bootstrap docs)
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    try {
+      const response = await createNewUser(userFormData);
+
+      if (!response.ok) {
+        throw new Error("Something went wrong!");
+      }
+
+      const { token, user } = await response.json();
+      console.log(user);
+      Auth.login(token);
+    } catch (err) {
+      console.error(err);
+      // setShowAlert(true);
+    }
+
+    setUserFormData({
+      userName: "",
+      email: "",
+      password: "",
+    });
+  };
 
   return (
     <>
@@ -25,8 +72,11 @@ function SignUp() {
                           <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={userFormData.userName}
+                              name="userName"
+                              onChange={handleInputChange}
                               type="text"
-                              id="form3Example1c"
+                              id="form3Example3c"
                               className="form-control"
                             />
                             <label
@@ -42,6 +92,9 @@ function SignUp() {
                           <i className="fas fa-envelope fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={userFormData.email}
+                              name="email"
+                              onChange={handleInputChange}
                               type="email"
                               id="form3Example3c"
                               className="form-control"
@@ -50,7 +103,7 @@ function SignUp() {
                               className="form-label"
                               htmlFor="form3Example3c"
                             >
-                              Your Email
+                              Email
                             </label>
                           </div>
                         </div>
@@ -59,7 +112,10 @@ function SignUp() {
                           <i className="fas fa-lock fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
+                              value={userFormData.password}
+                              name="password"
                               type="password"
+                              onChange={handleInputChange}
                               id="form3Example4c"
                               className="form-control"
                             />
@@ -72,7 +128,7 @@ function SignUp() {
                           </div>
                         </div>
 
-                        <div className="d-flex flex-row align-items-center mb-4">
+                        {/* <div className="d-flex flex-row align-items-center mb-4">
                           <i className="fas fa-key fa-lg me-3 fa-fw"></i>
                           <div className="form-outline flex-fill mb-0">
                             <input
@@ -103,12 +159,13 @@ function SignUp() {
                             I agree all statements in{" "}
                             <a href="#!">Terms of service</a>
                           </label>
-                        </div>
+                        </div> */}
 
                         <div className="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
                           <button
                             type="button"
                             className="btn btn-primary btn-lg"
+                            onClick={handleFormSubmit}
                           >
                             Register
                           </button>
@@ -130,7 +187,7 @@ function SignUp() {
         </div>
       </section>
     </>
-  )
-};
+  );
+}
 
 export default SignUp;
