@@ -1,4 +1,8 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
+const __dirname = fileURLToPath(import.meta.url);
+
 import apiRoutes from "./api/index.js";
 const router = express.Router();
 

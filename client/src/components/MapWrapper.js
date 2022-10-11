@@ -61,11 +61,11 @@ const MapWrapper = ({markers}) => {
                             key={marker.id}
                             position={{lat: marker.lat, lng: marker.lng}}
                             onMouseOver={() => handleActiveMarker(marker.id)}
-                            onMouseOut={() => {
-                                setTimeout(() => {
-                                    handleActiveMarker(null);
-                                }, 1500);
-                            }}
+                            // onMouseOut={() => {
+                            //     setTimeout(() => {
+                            //         handleActiveMarker(null);
+                            //     }, 1500);
+                            // }}
                             onClick={() => navigate(`/single-view/${marker.id}`)}
                         >
 
