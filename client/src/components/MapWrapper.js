@@ -6,7 +6,6 @@ import { getAllPics } from '../utils/api';
 import env from 'react-dotenv';
 
 import MarkerInfoCard from './MarkerInfoCard';
-import SingleView from '../pages/SingleView';
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -36,14 +35,15 @@ const MapWrapper = ({markers}) => {
                         lng: marker.lng
                     });
                 });
-            map.fitBounds(bounds);
+                if (markers.length === 1) {
+                    map.setCenter(bounds.getCenter());
+                    map.setZoom(14);
+                } else {
+                    map.fitBounds(bounds);
+                }
             };
         };
     }, [map, markers]);
-
-    const navigateToSingleView = ((marker) => {
-        navigate(`/single-view/${marker.id}`, {state:{marker}});
-    })
 
     // Handle Active Marker change
     const handleActiveMarker = (markerId) => {
@@ -58,19 +58,20 @@ const MapWrapper = ({markers}) => {
                 onLoad={onLoad} 
                 >
                 {markers && (markers.map((marker) => (
-                    <Marker 
-                        key={marker.id}
-                        position={{lat: marker.lat, lng: marker.lng}}
-                        onMouseOver={() => handleActiveMarker(marker.id)}
-                        // onMouseOut={() => handleActiveMarker(null)}
-                        onClick={() => navigateToSingleView(marker)}
-                    >
-                        {activeMarker === marker.id && (
-                            <InfoWindow key={marker.id} position={marker.position} >
-                                <MarkerInfoCard marker={marker} />
-                            </InfoWindow>
-                        )}
-                    </Marker>
+                        <Marker 
+                            key={marker.id}
+                            position={{lat: marker.lat, lng: marker.lng}}
+                            onMouseOver={() => handleActiveMarker(marker.id)}
+                            // onMouseOut={() => handleActiveMarker(null)}
+                            onClick={() => navigate(`/single-view/${marker.id}`)}
+                        >
+
+                            {activeMarker === marker.id && (
+                                <InfoWindow key={marker.id} position={marker.position} >
+                                    <MarkerInfoCard marker={marker} />
+                                </InfoWindow>
+                            )}
+                        </Marker>
                 )))}
             </GoogleMap>
         </LoadScript>

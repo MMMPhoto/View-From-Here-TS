@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "seed": "node seeders/photo-seeds.js",
-    "watch": "nodemon"
+    "watch": "nodemon server.js --ignore client"
   },
   "repository": {
     "type": "git",

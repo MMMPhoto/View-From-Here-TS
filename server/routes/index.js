@@ -9,8 +9,8 @@ router.use((req, res) => {
 });
 
 // serve up react front-end in production
-router.use((req, res) => {
-  res.sendFile(path.join(__dirname, '../../client/build/index.html'));
-});
+// router.use((req, res) => {
+//   res.sendFile(path.join(__dirname, '../../client/build/index.html'));
+// });
 
 export default router;

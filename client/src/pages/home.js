@@ -22,7 +22,7 @@ const Home = () => {
         setMarkers(jsonData);
       } catch (error) {
         console.log("error", error);
-      }
+      };
     };
     fetchPicData();
   }, []);

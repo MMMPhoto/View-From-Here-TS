@@ -1,16 +1,41 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { getOnePic } from '../utils/api';
+import MapWrapper from '../components/MapWrapper';
+import './SingleView.css';
 
-import Header from '../components/header';
-import Footer from '../components/footer';
+const SingleView = () => {
+    const { pictureId } = useParams();
+    const [pictureData, setPictureData] = useState([{}]);
+    const [picUrl, setPicUrl] = useState("");
 
-const SingleView = ({marker}) => {
-
+    useEffect(() => {
+        const getPicData = async () => {
+            try {
+                console.log(pictureId)
+                const response = await getOnePic(pictureId);
+                const jsonData = await response.json();
+                console.log(jsonData);
+                let jsonArray = [];
+                jsonArray.push(jsonData);
+                setPictureData(jsonArray);
+                let url = jsonData.url;
+                url = url.replace('heic', 'jpg');
+                setPicUrl(url);
+                console.log(picUrl);            
+            } catch (error) {
+                console.log("error", error);
+            };
+        };
+        getPicData();
+    }, [pictureId]);
+    
     return (
-        <div>
-            <img src={marker.url}></img>
+        <div className='d-flex flex-column align-items-center p-4'>
+            <img className='single-pic' src={picUrl} />
+            {pictureData && <MapWrapper markers={pictureData} />}
         </div>
     )
-
 };
 
 export default SingleView;
