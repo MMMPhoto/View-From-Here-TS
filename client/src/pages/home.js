@@ -28,7 +28,12 @@ const Home = ({mapState, setMapState}) => {
         console.log("error", error);
       };
     };
-    fetchPicData();
+    // Check to see if previous map state exists
+    if (mapState.markers) {
+      setMarkers(mapState.markers);
+    } else {
+      fetchPicData();
+    };
   }, []);
 
   return (
