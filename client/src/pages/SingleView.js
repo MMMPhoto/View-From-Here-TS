@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getOnePic } from '../utils/api';
+import { Link } from 'react-router-dom';
 import MapWrapper from '../components/MapWrapper';
 import './SingleView.css';
 
@@ -34,14 +35,17 @@ const SingleView = () => {
     }, []);
     
     return (
-        <div className='d-flex flex-column align-items-center p-4'>
-            <img className='single-pic p-4' src={picUrl} />
-            <div>
-                { pictureData[0].lat ? (<MapWrapper markers={pictureData} containerStyle={containerStyle} />) : (
-                    <p>Loading...</p>
-                )}
+        <>
+            <Link to="/"><h5>&#60; Go back to Map</h5></Link>
+            <div className='d-flex flex-column align-items-center p-4'>
+                <img className='single-pic p-4' src={picUrl} />
+                <div>
+                    { pictureData[0].lat ? (<MapWrapper markers={pictureData} containerStyle={containerStyle} />) : (
+                        <p>Loading...</p>
+                    )}
+                </div>
             </div>
-        </div>
+        </>
     )
 };
 

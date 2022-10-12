@@ -1,3 +1,4 @@
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -10,17 +11,25 @@ import Profile from './pages/profile.js';
 import SingleView from './pages/SingleView.js';
 
 function App() {
+
+  // Set persisting map state
+  const [mapState, setMapState] = useState({
+    markers: "",
+    mapBounds: "",
+    mapZoom: ""
+  });
+
   return (
     <div className='wrapper'>
 
       <Router>
         <Header />
         <Routes>
-          <Route exact path='/' element={<Home/>} />
+          <Route exact path='/' element={<Home mapState={mapState} setMapState={setMapState} />} />
           <Route exact path='/signup' element={<SignUp/>} />
           <Route exact path='/login' element={<Login/>} />
-          <Route exact path='/profile' element={<Profile/>} />
-          <Route path='/single-view/:pictureId' element={<SingleView />} />
+          <Route exact path='/profile' element={<Profile mapState={mapState} setMapState={setMapState}/>} />
+          <Route path='/single-view/:pictureId' element={<SingleView mapState={mapState} setMapState={setMapState} />} />
         </Routes>
         <Footer />
       </Router>

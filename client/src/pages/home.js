@@ -5,7 +5,7 @@ import "./home.css";
 import "./searchFooter.css";
 import MapWrapper from "../components/MapWrapper";
 
-const Home = () => {
+const Home = ({mapState, setMapState}) => {
 
   // Set marker state
   const [markers, setMarkers] = useState("");
@@ -23,6 +23,7 @@ const Home = () => {
         const response = await getAllPics();
         const jsonData = await response.json();
         setMarkers(jsonData);
+        setMapState({markers: jsonData});
       } catch (error) {
         console.log("error", error);
       };
@@ -33,7 +34,7 @@ const Home = () => {
   return (
     <>
       <div id="map" className="">
-        <MapWrapper markers={markers} containerStyle={containerStyle} />
+        <MapWrapper markers={markers} containerStyle={containerStyle} mapState={mapState} setMapState={setMapState} />
       </div>
       <section className="py-5">
         <div className="container my-5">
