@@ -8,7 +8,6 @@ class Profile extends Component {
   render() {
     return (
       <>
-        <Header />
         <div className="container rounded bg-white mt-5 mb-5">
           <div className="row">
             <div className="col-md-3 border-right">
@@ -26,111 +25,14 @@ class Profile extends Component {
             <div className="col-md-5 border-right">
               <div className="p-3 py-5">
                 <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h4 className="text-right">Profile Settings</h4>
+                  <h4 className="text-right">Your saved photos:</h4>
                 </div>
-                <div className="row mt-2">
-                  <div className="col-md-6">
-                    <label className="labels">First Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="first name"
-                      value=""
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="labels">Last Name</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value=""
-                      placeholder="last name"
-                    />
-                  </div>
+                <div id = "savedPhotos">  
+                <img src ="https://i.picsum.photos/id/883/200/300.jpg?hmac=L62LMsIBfvhnxlTirzshbyv6HarwJvd-tSSBcIvbCVw"/>
+                <img src ="https://i.picsum.photos/id/311/200/300.jpg?hmac=ltcRErkHQZRTlJl3xZ_6HSzWzco1GSU3zbZhA12WvJw"/>
+                <img src ="https://i.picsum.photos/id/145/200/300.jpg?hmac=mIsOtHDzbaNzDdNRa6aQCd5CHCVewrkTO5B1D4aHMB8"/>
                 </div>
-                <div className="row mt-3">
-                  <div className="col-md-12">
-                    <label className="labels">Mobile Number</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="enter phone number"
-                      value=""
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <label className="labels">Address Line 1</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="enter address line 1"
-                      value=""
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <label className="labels">Postal Code</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="enter address line 2"
-                      value=""
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <label className="labels">State</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="enter address line 2"
-                      value=""
-                    />
-                  </div>
-                  <div className="col-md-12">
-                    <label className="labels">City</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="enter address line 2"
-                      value=""
-                    />
-                  </div>
-                </div>
-                <div className="row mt-3">
-                  <div className="col-md-6">
-                    <label className="labels">Country</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      placeholder="country"
-                      value=""
-                    />
-                  </div>
-                  <div className="col-md-6">
-                    <label className="labels">State/Region</label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      value=""
-                      placeholder="state"
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <div className="mt-5 text-center">
-                <button
-                  className="btn btn-primary profile-button"
-                  type="button"
-                >
-                  Save Profile
-                </button>
-              </div>
-              <div className="mt-5 text-center">
+
                 <button
                   className="btn btn-primary profile-button"
                   type="button"
@@ -139,17 +41,10 @@ class Profile extends Component {
                 </button>
               </div>
               <div className="mt-5 text-center">
-                <button
-                  className="btn btn-primary profile-button"
-                  type="button"
-                >
-                  View Saved Photos
-                </button>
               </div>
             </div>
           </div>
         </div>
-        <Footer />
       </>
     );
   }
