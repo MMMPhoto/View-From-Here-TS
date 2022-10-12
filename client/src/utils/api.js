@@ -8,6 +8,15 @@ const getAllPics = () => {
   });
 };
 
+const getOnePic = (picId) => {
+  return fetch(`/api/pics/${picId}`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+};
+
 const createNewUser = (userData) => {
   return fetch("/api/users", {
     method: "POST",
@@ -59,6 +68,7 @@ const deleteSavedPic = (picId, token) => {
 
 export {
   getAllPics,
+  getOnePic,
   createNewUser,
   loginUser,
   savePic,

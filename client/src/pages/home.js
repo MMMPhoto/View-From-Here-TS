@@ -1,15 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { getAllPics, savePic } from "../utils/api";
-import Header from "../components/header";
 import SearchFooter from "../components/searchFooter";
 import "./home.css";
 import "./searchFooter.css";
 import MapWrapper from "../components/MapWrapper";
-import Auth from "../utils/auth";
 
-function Home() {
+const Home = () => {
+
   // Set marker state
   const [markers, setMarkers] = useState("");
+
+  // Map Container Styling
+  const containerStyle = {
+    width: '100vw',
+    height: '100vh'
+  };
 
   // Load all pictures on page load
   useEffect(() => {
@@ -17,11 +22,10 @@ function Home() {
       try {
         const response = await getAllPics();
         const jsonData = await response.json();
-        console.log(jsonData);
         setMarkers(jsonData);
       } catch (error) {
         console.log("error", error);
-      }
+      };
     };
     fetchPicData();
   }, []);
@@ -29,7 +33,7 @@ function Home() {
   return (
     <>
       <div id="map" className="">
-        <MapWrapper markers={markers} />
+        <MapWrapper markers={markers} containerStyle={containerStyle} />
       </div>
       <section className="py-5">
         <div className="container my-5">
