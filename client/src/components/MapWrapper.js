@@ -8,13 +8,7 @@ import MarkerInfoCard from './MarkerInfoCard';
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-// Map Container Styling
-const containerStyle = {
-    width: '100vw',
-    height: '100vh'
-  };
-
-const MapWrapper = ({markers}) => {
+const MapWrapper = ({markers, containerStyle}) => {
     const navigate = useNavigate();
 
     // Set Map State
@@ -69,7 +63,7 @@ const MapWrapper = ({markers}) => {
                             onClick={() => navigate(`/single-view/${marker.id}`)}
                         >
 
-                            {activeMarker === marker.id && (
+                            {(activeMarker === marker.id && markers.length > 1) && (
                                 <InfoWindow key={marker.id} position={marker.position} >
                                     <MarkerInfoCard marker={marker} navigate={navigate} />
                                 </InfoWindow>

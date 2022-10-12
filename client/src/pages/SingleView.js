@@ -9,6 +9,12 @@ const SingleView = () => {
     const [pictureData, setPictureData] = useState([{}]);
     const [picUrl, setPicUrl] = useState("");
 
+    // Map Container Styling
+    const containerStyle = {
+        width: '60vh',
+        height: '60vh'
+    };
+
     useEffect(() => {
         const getPicData = async () => {
             try {
@@ -29,9 +35,9 @@ const SingleView = () => {
     
     return (
         <div className='d-flex flex-column align-items-center p-4'>
-            <img className='single-pic' src={picUrl} />
+            <img className='single-pic p-4' src={picUrl} />
             <div>
-                { pictureData[0].lat ? (<MapWrapper markers={pictureData} />) : (
+                { pictureData[0].lat ? (<MapWrapper markers={pictureData} containerStyle={containerStyle} />) : (
                     <p>Loading...</p>
                 )}
             </div>

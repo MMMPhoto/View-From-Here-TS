@@ -7,8 +7,14 @@ import MapWrapper from "../components/MapWrapper";
 
 const Home = () => {
 
-    // Set marker state
-    const [markers, setMarkers] = useState("");
+  // Set marker state
+  const [markers, setMarkers] = useState("");
+
+  // Map Container Styling
+  const containerStyle = {
+    width: '100vw',
+    height: '100vh'
+  };
 
   // Load all pictures on page load
   useEffect(() => {
@@ -27,7 +33,7 @@ const Home = () => {
   return (
     <>
       <div id="map" className="">
-        <MapWrapper markers={markers} />
+        <MapWrapper markers={markers} containerStyle={containerStyle} />
       </div>
       <section className="py-5">
         <div className="container my-5">
