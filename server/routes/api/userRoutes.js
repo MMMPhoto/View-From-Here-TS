@@ -14,7 +14,11 @@ const {
 
 const { authMiddleware } = require("../../utils/auth.js");
 
-router.route("/").get(getAllUsers).post(createNewUser).put(savePic);
+router
+  .route("/")
+  .get(getAllUsers)
+  .post(createNewUser)
+  .put(authMiddleware, savePic);
 
 router.route("/login").post(login);
 

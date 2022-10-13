@@ -42,9 +42,9 @@ const SingleView = () => {
 
   // Handle save photo
   const handleSavePhoto = async (picId) => {
-    // const picToSave = pictureData.find(
-    //   (picture) => pictureData[0].id === picId
-    // );
+    const picToSave = pictureData.find(
+      (picture) => pictureData[0].id === picId
+    );
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -54,7 +54,7 @@ const SingleView = () => {
     }
 
     try {
-      const response = await savePic(picId, token);
+      const response = await savePic(picToSave, token);
 
       if (!response.ok) {
         console.log(response);
