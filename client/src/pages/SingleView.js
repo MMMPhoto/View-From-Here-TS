@@ -54,14 +54,15 @@ const SingleView = () => {
     }
 
     try {
-      const response = await savePic(picId);
+      const response = await savePic(picId, token);
 
       if (!response.ok) {
+        console.log(response);
         throw new Error("Yo shit sux, playa!");
       }
 
       // If the pic successfully saves to the user's account, save pic id to state
-      setSavedPicIds([...savedPicIds, picId.picId]);
+      setSavedPicIds([...savedPicIds, picId]);
     } catch (err) {
       console.error(err);
     }

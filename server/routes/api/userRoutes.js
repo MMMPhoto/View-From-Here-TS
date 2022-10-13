@@ -14,11 +14,7 @@ import {
   getCurrentUser,
 } from "../../controllers/users-controller.js";
 
-router
-  .route("/")
-  .get(getAllUsers)
-  .post(createNewUser)
-  .put(authMiddleware, savePic);
+router.route("/").get(getAllUsers).post(createNewUser).put(savePic);
 
 router.route("/login").post(login);
 
