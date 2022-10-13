@@ -1,17 +1,14 @@
-import fs from "fs";
-import fsPromises from "fs/promises";
-import path from "path";
+const fs = require('fs');
+const fsPromises = require('fs').promises;
+const path = require("path");
 
-import {
+const {
   uploadImage,
   getAssetInfo,
   createImageTag,
   uploadOptions,
-} from "../utils/cloudinary.js";
-import { getGpsData, getCustomExifData, exifOptions } from "../utils/exifr.js";
-import { Picture } from "../models/index.js";
-
-import db from "../config/connection.js";
+} = require("../utils/cloudinary.js");
+const { getGpsData, getCustomExifData, exifOptions } = require("../utils/exifr.js");
 
 // File Path variables
 const moveFrom = "./seeders/rawPhotos";
@@ -25,6 +22,8 @@ rawPhotos.shift();
 const seedFunction = async () => {
   try {
     console.log(rawPhotos);
+
+    const photoDataArray = [];
 
     for (const photo of rawPhotos) {
       // Get file paths
@@ -44,8 +43,9 @@ const seedFunction = async () => {
       const uploadPhotoData = await uploadImage(fromPath, uploadOptions);
       console.log(uploadPhotoData);
 
-      // Get unique photo URL
-      const photoUrl = uploadPhotoData.secure_url;
+      // Get unique cloudinary photo ID
+      const photoUrl = uploadPhotoData. secure_url;
+      const publicId = uploadPhotoData.public_id;
 
       // Build object for database
       const photoData = {
@@ -53,39 +53,26 @@ const seedFunction = async () => {
         ...exifData,
       };
       photoData.url = photoUrl;
-
+      photoData.public_id = publicId;
       console.log(photoData);
 
-      // Database model insert
-      const addPicture = async (photoData) => {
-        try {
-          const addPicture = await Picture.create({
-            lat: photoData.latitude,
-            lng: photoData.longitude,
-            url: photoData.url,
-            createdAt: photoData.CreateDate,
-            offsetTime: photoData.OffsetTime,
-          });
-          console.log(addPicture);
-        } catch (err) {
-          throw err;
-        }
-      };
-      addPicture(photoData);
+      // Push to array for JSON data file
+      photoDataArray.push(photoData);
 
       // Write photos to new location so we know they have been processed
       await fsPromises.rename(fromPath, toPath);
       console.log("Wrote file");
-    }
+    };
+
+    // Write GPS data to JSON file
+    const jsonData = JSON.stringify(photoDataArray);
+    fs.writeFile('./seeders/json-photo-data.json', jsonData, 'utf8', (err, data) => {
+        err ? console.err(err) : console.log('File written!');
+    });
+
   } catch (error) {
     console.error(error);
   }
 };
 
-db.once("open", async () => {
-  try {
-    seedFunction();
-  } catch (err) {
-    throw err;
-  }
-});
+seedFunction();
