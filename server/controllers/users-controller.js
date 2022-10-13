@@ -105,8 +105,8 @@ module.exports = {
     console.log(user);
     try {
       const updatedUser = await User.findByIdAndUpdate(
-        { id: user._id },
-        { $push: { savedPic: body } },
+        { _id: user._id },
+        { $push: { savedPics: body } },
         { new: true, runValidators: true }
       );
       return res.json(updatedUser);

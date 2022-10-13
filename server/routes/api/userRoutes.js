@@ -26,7 +26,7 @@ router.route("/:id").put(updateUser).delete(authMiddleware, deleteUser);
 
 router.route("/me/").get(getCurrentUser);
 
-router.route("/me/:id").get(authMiddleware, getUserById);
+router.route("/me/:id").get(getUserById);
 
 router.route("/pics/:picId").delete(authMiddleware, deleteSavedPic);
 

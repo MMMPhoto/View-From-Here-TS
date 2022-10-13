@@ -41,7 +41,7 @@ export const getCurrentUser = (token) => {
   return fetch("/api/users/me", {
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      // authorization: `Bearer ${token}`,
     },
   });
 };

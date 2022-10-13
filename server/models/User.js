@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
-const Picture = require("./Picture.js");
+// const Picture = require("./Picture.js");
+// const picSchema = require("./Picture");
 
 const userSchema = new Schema(
   {
@@ -21,7 +22,6 @@ const userSchema = new Schema(
       required: true,
     },
     savedPics: [
-      // picSchema,
       {
         type: Schema.Types.ObjectId,
         ref: "Picture",
