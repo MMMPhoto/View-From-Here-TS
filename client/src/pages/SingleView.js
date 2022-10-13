@@ -8,9 +8,14 @@ import { getOnePic, savePic } from "../utils/api";
 import { savePicIds, getSavedPicIds } from "../utils/localStorage";
 
 const SingleView = () => {
+  // const [searchedPics, setSearchedPics] = useState([]);
+  const [savedPicIds, setSavedPicIds] = useState(getSavedPicIds());
+  useEffect(() => {
+    return () => savePicIds(savedPicIds);
+  });
+
   const { pictureId } = useParams();
   const [pictureData, setPictureData] = useState([{}]);
-  const [savedPicIds, setSavedPicIds] = useState(getSavedPicIds());
   const [picUrl, setPicUrl] = useState("");
 
   // Set state for saved photo

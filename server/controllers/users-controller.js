@@ -130,14 +130,3 @@ module.exports = {
     return res.json(updatedUser);
   },
 };
-// export {
-//   getAllUsers,
-//   getUserById,
-//   createNewUser,
-//   updateUser,
-//   deleteUser,
-//   login,
-//   savePic,
-//   deleteSavedPic,
-//   getCurrentUser,
-// };
