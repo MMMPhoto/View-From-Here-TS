@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
-import bcrypt from "bcrypt";
-// import Picture from "./Picture.js";
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
+const Picture = require("./Picture.js");
 
 const userSchema = new Schema(
   {
@@ -21,6 +21,7 @@ const userSchema = new Schema(
       required: true,
     },
     savedPics: [
+      // picSchema,
       {
         type: Schema.Types.ObjectId,
         ref: "Picture",
@@ -52,4 +53,4 @@ userSchema.virtual("picCount").get(function () {
 
 const User = model("User", userSchema);
 
-export default User;
+module.exports = User;

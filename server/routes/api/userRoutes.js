@@ -1,8 +1,6 @@
-import { authMiddleware } from "../../utils/auth.js";
-import express from "express";
-const router = express.Router();
+const router = require("express").Router();
 
-import {
+const {
   getAllUsers,
   getUserById,
   createNewUser,
@@ -12,13 +10,11 @@ import {
   savePic,
   deleteSavedPic,
   getCurrentUser,
-} from "../../controllers/users-controller.js";
+} = require("../../controllers/users-controller.js");
 
-router
-  .route("/")
-  .get(getAllUsers)
-  .post(createNewUser)
-  .put(authMiddleware, savePic);
+const { authMiddleware } = require("../../utils/auth.js");
+
+router.route("/").get(getAllUsers).post(createNewUser).put(savePic);
 
 router.route("/login").post(login);
 
@@ -30,4 +26,4 @@ router.route("/me/:id").get(authMiddleware, getUserById);
 
 router.route("/pics/:picId").delete(authMiddleware, deleteSavedPic);
 
-export default router;
+module.exports = router;

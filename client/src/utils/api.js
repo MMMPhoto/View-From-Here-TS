@@ -38,7 +38,7 @@ const loginUser = (userData) => {
 };
 
 const getCurrentUser = (token) => {
-  return fetch("api/users/me", {
+  return fetch("/api/users/me", {
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
@@ -46,14 +46,14 @@ const getCurrentUser = (token) => {
   });
 };
 
-const savePic = (picData, token) => {
+const savePic = (picId, token) => {
   return fetch("/api/users", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(picData),
+    body: picId,
   });
 };
 
