@@ -1,6 +1,6 @@
-import { Schema, model } from "mongoose";
-import bcrypt from "bcrypt";
-import picSchema from "./Picture.js";
+const { Schema, model } = require("mongoose");
+const bcrypt = require("bcrypt");
+const Picture = require("./Picture.js");
 
 const userSchema = new Schema(
   {
@@ -53,4 +53,4 @@ userSchema.virtual("picCount").get(function () {
 
 const User = model("User", userSchema);
 
-export default User;
+module.exports = User;

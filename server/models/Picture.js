@@ -1,4 +1,4 @@
-import { Schema, model, Types } from "mongoose";
+const { Schema, model } = require("mongoose");
 
 const picSchema = new Schema(
   {
@@ -45,4 +45,4 @@ const picSchema = new Schema(
 
 const Picture = model("Picture", picSchema);
 
-export default Picture;
+module.exports = Picture;

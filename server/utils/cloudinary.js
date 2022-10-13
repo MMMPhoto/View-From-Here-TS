@@ -1,73 +1,70 @@
-import cloudinary from "cloudinary";
-import 'dotenv/config';
+const cloudinary = require("cloudinary");
+// import 'dotenv/config';
 
 // Cloudinary config
-cloudinary.config({ 
-    cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
-    api_key: process.env.CLOUDINARY_API_KEY, 
-    api_secret: process.env.CLOUDINARY_API_SECRET,
-    secure: true
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
 });
 console.log(cloudinary.config);
 
 // Upload Options
+module.exports = {};
 const uploadOptions = {
   use_filename: true,
   unique_filename: false,
   overwrite: true,
-  upload_preset: 'view-from-here-general',
+  upload_preset: "view-from-here-general",
   // folder: 'view-from-here'
 };
 
 // Upload image to Cloudinary
 const uploadImage = async (imagePath, options) => {
-
-    try {
-      // Upload the image
-      const result = await cloudinary.uploader.upload(imagePath, options);
-      console.log(result);
-      return result;
-    } catch (error) {
-      console.error(error);
-    }
+  try {
+    // Upload the image
+    const result = await cloudinary.uploader.upload(imagePath, options);
+    console.log(result);
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // Get details of uploaded image
 const getAssetInfo = async (publicId) => {
+  // Return colors in the response
+  const options = {
+    colors: true,
+  };
 
-    // Return colors in the response
-    const options = {
-      colors: true,
-    };
-
-    try {
-        // Get details about the asset
-        const result = await cloudinary.api.resource(publicId, options);
-        console.log(result);
-        return result.colors;
-        } catch (error) {
-        console.error(error);
-    }
+  try {
+    // Get details about the asset
+    const result = await cloudinary.api.resource(publicId, options);
+    console.log(result);
+    return result.colors;
+  } catch (error) {
+    console.error(error);
+  }
 };
 
 // Create image tag
 const createImageTag = (publicId, ...colors) => {
+  // Set the effect color and background color
+  const [effectColor, backgroundColor] = colors;
 
-    // Set the effect color and background color
-    const [effectColor, backgroundColor] = colors;
+  // Create an image tag with transformations applied to the src URL
+  let imageTag = cloudinary.image(publicId, {
+    transformation: [
+      { width: 250, height: 250, gravity: "faces", crop: "thumb" },
+      { radius: "max" },
+      { effect: "outline:10", color: effectColor },
+      { background: backgroundColor },
+    ],
+  });
 
-    // Create an image tag with transformations applied to the src URL
-    let imageTag = cloudinary.image(publicId, {
-      transformation: [
-        { width: 250, height: 250, gravity: 'faces', crop: 'thumb' },
-        { radius: 'max' },
-        { effect: 'outline:10', color: effectColor },
-        { background: backgroundColor },
-      ],
-    });
-
-    return imageTag;
+  return imageTag;
 };
 
 export { uploadImage, getAssetInfo, createImageTag, uploadOptions };
-

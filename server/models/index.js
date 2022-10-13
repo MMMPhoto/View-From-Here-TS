@@ -1,4 +1,4 @@
-import User from "./User.js";
-import Picture from "./Picture.js";
+const User = require("./User.js");
+const Picture = require("./Picture.js");
 
-export { User, Picture };
+module.exports = { User, Picture };
