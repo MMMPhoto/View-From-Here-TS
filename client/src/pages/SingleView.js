@@ -30,8 +30,8 @@ const SingleView = () => {
         let jsonArray = [];
         jsonArray.push(jsonData);
         setPictureData(jsonArray);
-        let url = jsonData.url;
-        url = url.replace("heic", "jpg");
+        // Call API to set photo URL
+        const url = `https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${jsonData.public_id}.jpg`;
         setPicUrl(url);
       } catch (error) {
         console.log("error", error);
