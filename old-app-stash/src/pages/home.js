@@ -6,13 +6,14 @@ import "./searchFooter.css";
 import MapWrapper from "../components/MapWrapper";
 
 const Home = () => {
+
   // Set marker state
   const [markers, setMarkers] = useState("");
 
   // Map Container Styling
   const containerStyle = {
-    width: "100vw",
-    height: "100vh",
+    width: '100vw',
+    height: '100vh'
   };
 
   // Load all pictures on page load
@@ -20,12 +21,11 @@ const Home = () => {
     const fetchPicData = async () => {
       try {
         const response = await getAllPics();
-        console.log(response);
         const jsonData = await response.json();
         setMarkers(jsonData);
       } catch (error) {
         console.log("error", error);
-      }
+      };
     };
     fetchPicData();
   }, []);
@@ -35,7 +35,7 @@ const Home = () => {
       <div id="map" className="">
         <MapWrapper markers={markers} containerStyle={containerStyle} />
       </div>
-      {/* <section className="py-5">
+      <section className="py-5">
         <div className="container my-5">
           <div className="row justify-content-center">
             <div className="col-lg-6">
@@ -52,10 +52,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-      </section> */}
+      </section>
       {/* <SearchFooter /> */}
     </>
   );
-};
+}
 
 export default Home;
