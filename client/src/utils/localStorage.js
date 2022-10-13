@@ -7,7 +7,8 @@ export const getSavedPicIds = () => {
 };
 
 export const savePicIds = (picIdArr) => {
-  if (picIdArr.length) {
+  console.log(picIdArr);
+  if (picIdArr) {
     localStorage.setItem("saved_pics", JSON.stringify(picIdArr));
   } else {
     localStorage.removeItem("saved_pics");

@@ -118,8 +118,8 @@ module.exports = {
 
   async deleteSavedPic({ user, params }, res) {
     const updatedUser = await User.findByIdAndUpdate(
-      { _id: user_id },
-      { $oull: { savedPics: { picId: params.picId } } },
+      { _id: user._id },
+      { $pull: { savedPics: { picId: params.picId } } },
       { new: true }
     );
     if (!updatedUser) {
