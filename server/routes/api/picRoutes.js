@@ -1,16 +1,15 @@
-import express from "express";
-const router = express.Router();
+const router = require("express").Router();
 
-import {
+const {
   getAllPics,
   getPicById,
   createNewPic,
   updatePic,
   deletePic,
-} from "../../controllers/pic-controller.js";
+} = require("../../controllers/pic-controller.js");
 
 router.route("/").get(getAllPics).post(createNewPic);
 
 router.route("/:id").get(getPicById).put(updatePic).delete(deletePic);
 
-export default router;
+module.exports = router;
