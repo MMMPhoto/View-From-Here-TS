@@ -1,7 +1,8 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
-const __dirname = fileURLToPath(import.meta.url);
+import * as url from 'url';
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 import db from "./config/connection.js";
 import "dotenv/config";
@@ -22,7 +23,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
 app.use(Router);
