@@ -1,6 +1,8 @@
 const fs = require('fs');
 const fsPromises = require('fs').promises;
 const path = require("path");
+const cloudinary = require('cloudinary').v2;
+require('dotenv').config();
 
 const {
   uploadImage,
@@ -10,9 +12,18 @@ const {
 } = require("../utils/cloudinary.js");
 const { getGpsData, getCustomExifData, exifOptions } = require("../utils/exifr.js");
 
+// Cloudinary config
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+  secure: true,
+});
+console.log(cloudinary.config);
+
 // File Path variables
-const moveFrom = "./seeders/rawPhotos";
-const moveTo = "./seeders/parsed-photos/.";
+const moveFrom = "./server/seeders/rawPhotos";
+const moveTo = "./server/seeders/parsed-photos/.";
 
 // Get photos
 const rawPhotos = fs.readdirSync(moveFrom);
