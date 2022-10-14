@@ -12,7 +12,16 @@
 }
 
 .nav-link{
-    border-style: solid;
-    background-color: black;
-    margin-right: 10px;
+    color: black;
+    margin-top: 20px;
+    margin-left: 12px;
 }
+
+#cloud {
+    background-image: url(../../public/assets/cloudicon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    min-width: 100px;
+    min-height: 80px;
+}
+
