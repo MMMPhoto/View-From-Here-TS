@@ -1,6 +1,9 @@
 #header {
     background-image: url(../../public/assets/clouds.jpg) ;
     background-position: center;
+    border-bottom: solid;
+    border-color: black;
+    width: 100.9%;
 }
 
 #title {
@@ -11,11 +14,16 @@
     
 }
 
-.nav-link{
+.nav-link li {
     color: black;
     margin-top: 20px;
     margin-left: 12px;
 }
+
+.nav-link li:hover {
+    color: blue;
+}
+
 
 #cloud {
     background-image: url(../../public/assets/cloudicon.png);
@@ -24,4 +32,6 @@
     min-width: 100px;
     min-height: 80px;
 }
+
+
 
