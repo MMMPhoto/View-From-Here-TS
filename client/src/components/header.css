@@ -1,0 +1,18 @@
+#header {
+    background-image: url(../../public/assets/clouds.jpg) ;
+    background-position: center;
+}
+
+#title {
+    border-style: solid;
+    background-color: black;
+    box-sizing: border-box;
+    padding: 10px;
+    
+}
+
+.nav-link{
+    border-style: solid;
+    background-color: black;
+    margin-right: 10px;
+}
