@@ -10,6 +10,7 @@ const seedDatabase = async () => {
         // Database model insert
         const addPicture = async (seed) => {
         try {
+            await Picture.deleteMany({});
             const addPicture = await Picture.create({
             lat: seed.latitude,
             lng: seed.longitude,
