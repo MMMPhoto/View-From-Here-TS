@@ -34,7 +34,7 @@ const Home = (props) => {
       <div id="map" className="">
         <MapWrapper markers={markers} containerStyle={containerStyle} />
       </div>
-      {/* <section className="py-5">
+      <section className="py-5">
         <div className="container my-5">
           <div className="row justify-content-center">
             <div className="col-lg-6">
@@ -51,8 +51,8 @@ const Home = (props) => {
             </div>
           </div>
         </div>
-      </section> */}
-      {/* <SearchFooter /> */}
+      </section>
+      <SearchFooter />
     </>
   );
 };
