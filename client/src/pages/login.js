@@ -4,7 +4,7 @@ import { loginUser } from "../utils/api";
 // import Footer from '../components/footer';
 import Auth from "../utils/auth";
 
-function Login() {
+function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   //   const [validated] = useState(false);
   //   const [showAlert, setShowAlert] = useState(false);
@@ -30,7 +30,7 @@ function Login() {
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
-
+      props.setLogin(true)
       const { token, user } = await response.json();
       console.log(user);
       Auth.login(token);
