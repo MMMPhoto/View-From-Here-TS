@@ -6,6 +6,7 @@ import Auth from "../utils/auth";
 
 function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
+  const [images, setImages] = useState([]);
   //   const [validated] = useState(false);
   //   const [showAlert, setShowAlert] = useState(false);
 
@@ -30,8 +31,12 @@ function Login(props) {
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
-      props.setLogin(true)
+      props.setLogin(true);
       const { token, user } = await response.json();
+      const imgCollection = user.savedPics;
+      window.localStorage.setItem("saved_pics", imgCollection);
+      for (var i = 0; i < user.savedPics.length; i++) {}
+      // console.log(images);
       console.log(user);
       Auth.login(token);
     } catch (err) {

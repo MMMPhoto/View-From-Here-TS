@@ -15,7 +15,6 @@ const app = express();
 // Express Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(routes);
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
@@ -26,6 +25,7 @@ app.get("/", (req, res) => {
 });
 
 // app.use(Router);
+app.use(routes);
 
 db.once("open", () => {
   app.listen(PORT, () => console.log(`Now listening on ${PORT}`));

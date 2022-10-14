@@ -1,32 +1,33 @@
 export const getSavedPicIds = () => {
-  const savedBookIds = localStorage.getItem("saved_pics")
+  const savedPicIds = localStorage.getItem("saved_pics")
     ? JSON.parse(localStorage.getItem("saved_pics"))
     : [];
 
-  return savedBookIds;
+  return savedPicIds;
 };
 
 export const savePicIds = (picIdArr) => {
-  if (picIdArr.length) {
+  console.log(picIdArr);
+  if (picIdArr) {
     localStorage.setItem("saved_pics", JSON.stringify(picIdArr));
   } else {
     localStorage.removeItem("saved_pics");
   }
 };
 
-export const removeBookId = (picId) => {
-  const savedBookIds = localStorage.getItem("saved_pics")
+export const removePicId = (picId) => {
+  const savedPicIds = localStorage.getItem("saved_pics")
     ? JSON.parse(localStorage.getItem("saved_pics"))
     : null;
 
-  if (!savedBookIds) {
+  if (!savedPicIds) {
     return false;
   }
 
-  const updatedSavedBookIds = savedBookIds?.filter(
-    (savedBookId) => savedBookId !== picId
+  const updatedSavedPicIds = savedPicIds?.filter(
+    (savedPicId) => savedPicId !== picId
   );
-  localStorage.setItem("saved_pics", JSON.stringify(updatedSavedBookIds));
+  localStorage.setItem("saved_pics", JSON.stringify(updatedSavedPicIds));
 
   return true;
 };

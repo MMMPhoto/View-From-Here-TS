@@ -105,8 +105,8 @@ module.exports = {
     console.log(user);
     try {
       const updatedUser = await User.findByIdAndUpdate(
-        { id: user._id },
-        { $push: { savedPic: body } },
+        { _id: user._id },
+        { $push: { savedPics: body } },
         { new: true, runValidators: true }
       );
       return res.json(updatedUser);
@@ -116,10 +116,10 @@ module.exports = {
     }
   },
 
-  async deleteSavedPic({ user, params }, res) {
+  async deleteSavedPic({ params }, res) {
     const updatedUser = await User.findByIdAndUpdate(
-      { _id: user_id },
-      { $oull: { savedPics: { picId: params.picId } } },
+      { _id: params.user },
+      { $pull: { savedPics: params.picId } },
       { new: true }
     );
     if (!updatedUser) {
@@ -127,17 +127,6 @@ module.exports = {
         .status(404)
         .json({ message: "Couldn't find a user or pic with that id!" });
     }
-    return res.json(updatedUser);
+    return res.json("Pic's gone, yo");
   },
 };
-// export {
-//   getAllUsers,
-//   getUserById,
-//   createNewUser,
-//   updateUser,
-//   deleteUser,
-//   login,
-//   savePic,
-//   deleteSavedPic,
-//   getCurrentUser,
-// };

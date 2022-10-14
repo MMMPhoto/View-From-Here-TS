@@ -5,6 +5,7 @@ import decode from "jwt-decode";
 class AuthService {
   // get user data
   getProfile() {
+    // console.log(decode(this));
     return decode(this.getToken());
   }
 
@@ -35,11 +36,13 @@ class AuthService {
   login(idToken) {
     // Saves user token to localStorage
     localStorage.setItem("id_token", idToken);
+    // const savedPics =
+    // localStorage.setItem("saved_pics", savedPics);
   }
 
   logout() {
     // Clear user token and profile data from localStorage
-    localStorage.removeItem("id_token");
+    localStorage.clear();
     // this will reload the page and reset the state of the application
     window.location.assign("/");
   }

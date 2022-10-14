@@ -8,9 +8,9 @@ router.use("/api", apiRoutes);
 //   return res.send("Your route sucks and you should feel bad about yourself.");
 // });
 
-// // serve up react front-end in production
-// router.use((req, res) => {
-//   res.sendFile(path.join(__dirname, '../../client/build/index.html'));
-// });
+// serve up react front-end in production
+router.use((req, res) => {
+  res.sendFile(path.join(__dirname, "../../client/build/index.html"));
+});
 
 module.exports = router;

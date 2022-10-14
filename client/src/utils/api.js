@@ -1,5 +1,5 @@
 // Route to get All Photos
-const getAllPics = () => {
+export const getAllPics = () => {
   return fetch("/api/pics/", {
     method: "GET",
     headers: {
@@ -8,7 +8,7 @@ const getAllPics = () => {
   });
 };
 
-const getOnePic = (picId) => {
+export const getOnePic = (picId) => {
   return fetch(`/api/pics/${picId}`, {
     method: "GET",
     headers: {
@@ -17,7 +17,7 @@ const getOnePic = (picId) => {
   });
 };
 
-const createNewUser = (userData) => {
+export const createNewUser = (userData) => {
   return fetch("/api/users", {
     method: "POST",
     headers: {
@@ -27,7 +27,7 @@ const createNewUser = (userData) => {
   });
 };
 
-const loginUser = (userData) => {
+export const loginUser = (userData) => {
   return fetch("/api/users/login", {
     method: "POST",
     headers: {
@@ -37,27 +37,27 @@ const loginUser = (userData) => {
   });
 };
 
-const getCurrentUser = (token) => {
+export const getCurrentUser = (token) => {
   return fetch("/api/users/me", {
     headers: {
       "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
+      // authorization: `Bearer ${token}`,
     },
   });
 };
 
-const savePic = (picId, token) => {
+export const savePic = (picToSave, token) => {
   return fetch("/api/users", {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
       authorization: `Bearer ${token}`,
     },
-    body: picId,
+    body: JSON.stringify(picToSave),
   });
 };
 
-const deleteSavedPic = (picId, token) => {
+export const deleteSavedPic = (picId, token) => {
   return fetch(`/api/users/${picId}`, {
     method: "DELETE",
     headers: {
@@ -66,12 +66,12 @@ const deleteSavedPic = (picId, token) => {
   });
 };
 
-export {
-  getAllPics,
-  getOnePic,
-  createNewUser,
-  loginUser,
-  savePic,
-  deleteSavedPic,
-  getCurrentUser,
-};
+// export {
+//   getAllPics,
+//   getOnePic,
+//   createNewUser,
+//   loginUser,
+//   savePic,
+//   deleteSavedPic,
+//   getCurrentUser,
+// };

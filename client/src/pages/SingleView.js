@@ -8,9 +8,14 @@ import { getOnePic, savePic } from "../utils/api";
 import { savePicIds, getSavedPicIds } from "../utils/localStorage";
 
 const SingleView = () => {
+  // const [searchedPics, setSearchedPics] = useState([]);
+  const [savedPicIds, setSavedPicIds] = useState(getSavedPicIds());
+  useEffect(() => {
+    return () => savePicIds(savedPicIds);
+  });
+
   const { pictureId } = useParams();
   const [pictureData, setPictureData] = useState([{}]);
-  const [savedPicIds, setSavedPicIds] = useState(getSavedPicIds());
   const [picUrl, setPicUrl] = useState("");
   const [tags, setPicTags] = useState([]);
 
@@ -44,9 +49,9 @@ const SingleView = () => {
 
   // Handle save photo
   const handleSavePhoto = async (picId) => {
-    // const picToSave = pictureData.find(
-    //   (picture) => pictureData[0].id === picId
-    // );
+    const picToSave = pictureData.find(
+      (picture) => pictureData[0].id === picId
+    );
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -56,7 +61,7 @@ const SingleView = () => {
     }
 
     try {
-      const response = await savePic(picId, token);
+      const response = await savePic(picToSave, token);
 
       if (!response.ok) {
         console.log(response);
