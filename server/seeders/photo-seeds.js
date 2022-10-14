@@ -79,8 +79,8 @@ const seedFunction = async () => {
 
     // Write GPS data to JSON file
     const jsonData = JSON.stringify(photoDataArray);
-    fs.writeFile('./seeders/json-photo-data.json', jsonData, 'utf8', (err, data) => {
-        err ? console.err(err) : console.log('File written!');
+    fs.writeFile('./server/seeders/json-photo-data.json', jsonData, 'utf8', (err, data) => {
+        err ? console.error(err) : console.log('File written!');
     });
 
   } catch (error) {
