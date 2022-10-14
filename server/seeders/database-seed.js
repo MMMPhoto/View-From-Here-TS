@@ -1,6 +1,6 @@
 const db = require("../config/connection.js");
 const { Picture } = require("../models/index.js");
-const databaseSeeds = require("./json-photo-data.js");  
+const databaseSeeds = require("./json-photo-data.json");  
 
 console.log(databaseSeeds);
 
