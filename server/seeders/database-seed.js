@@ -17,6 +17,7 @@ const seedDatabase = async () => {
             public_id: seed.public_id,
             createdAt: seed.CreateDate,
             offsetTime: seed.OffsetTime,
+            tags: seed.tags
             });
             console.log(addPicture);
         } catch (err) {

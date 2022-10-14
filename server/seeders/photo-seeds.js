@@ -14,9 +14,9 @@ const { getGpsData, getCustomExifData, exifOptions } = require("../utils/exifr.j
 
 // Cloudinary config
 cloudinary.config({
-  cloud_name: "dwuqez3pg",
-  api_key: "142425624895534",
-  api_secret: "CxiI5YI81tPnTKxvoEkQCmwsRvA",
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
   secure: true,
 });
 console.log(cloudinary.config);
