@@ -37,7 +37,6 @@ class AuthService {
     localStorage.setItem("id_token", idToken);
     // const savedPics =
     // localStorage.setItem("saved_pics", savedPics);
-    window.location.assign("/");
   }
 
   logout() {

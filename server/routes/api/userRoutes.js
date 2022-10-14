@@ -28,6 +28,6 @@ router.route("/me/").get(getCurrentUser);
 
 router.route("/me/:id").get(getUserById);
 
-router.route("/pics/:picId").delete(authMiddleware, deleteSavedPic);
+router.route("/pics/:picId").delete(deleteSavedPic);
 
 module.exports = router;

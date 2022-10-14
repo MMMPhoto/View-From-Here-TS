@@ -5,7 +5,7 @@ import "./home.css";
 import "./searchFooter.css";
 import MapWrapper from "../components/MapWrapper";
 
-const Home = () => {
+const Home = (props) => {
   // Set marker state
   const [markers, setMarkers] = useState("");
 
@@ -20,7 +20,6 @@ const Home = () => {
     const fetchPicData = async () => {
       try {
         const response = await getAllPics();
-        console.log(response);
         const jsonData = await response.json();
         setMarkers(jsonData);
       } catch (error) {
