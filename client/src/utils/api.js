@@ -61,7 +61,7 @@ export const deleteSavedPic = (picId, token) => {
   return fetch(`/api/users/${picId}`, {
     method: "DELETE",
     headers: {
-      // authorization: `Bearer ${token}`,
+      authorization: `Bearer ${token}`,
     },
   });
 };
