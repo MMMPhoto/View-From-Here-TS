@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { loginUser } from "../utils/api";
+import { useNavigate } from "react-router-dom";
+// import Header from '../components/header';
+// import Footer from '../components/footer';
 import Auth from "../utils/auth";
 
 function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   //   const [validated] = useState(false);
   //   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -34,6 +38,7 @@ function Login(props) {
       window.localStorage.setItem("saved_pics", imgCollection);
       console.log(user);
       Auth.login(token);
+      navigate("/");
     } catch (err) {
       console.error(err);
     }
