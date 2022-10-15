@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import { loginUser } from "../utils/api";
-// import Header from '../components/header';
-// import Footer from '../components/footer';
 import Auth from "../utils/auth";
 
 function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
-  const [images, setImages] = useState([]);
   //   const [validated] = useState(false);
   //   const [showAlert, setShowAlert] = useState(false);
 
@@ -35,13 +32,10 @@ function Login(props) {
       const { token, user } = await response.json();
       const imgCollection = user.savedPics;
       window.localStorage.setItem("saved_pics", imgCollection);
-      for (var i = 0; i < user.savedPics.length; i++) {}
-      // console.log(images);
       console.log(user);
       Auth.login(token);
     } catch (err) {
       console.error(err);
-      //   setShowAlert(true);
     }
 
     setUserFormData({

@@ -85,9 +85,12 @@ const SingleView = () => {
         {isSavedPhoto ? <p className="ms-3 mb-0">Photo saved!</p> : <></>}
       </div>
       <div>
-        <p>Tags: {tags.map((tag, index) => (
-          <span key={index}>{tag} </span>
-        ))}</p>
+        <p>
+          Tags:{" "}
+          {tags.map((tag, index) => (
+            <span key={index}>{tag} </span>
+          ))}
+        </p>
       </div>
       <img className="single-pic p-4" src={picUrl} />
       <div>
