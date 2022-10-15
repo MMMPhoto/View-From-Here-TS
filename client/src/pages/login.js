@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../utils/api";
+import { useNavigate } from 'react-router-dom';
 // import Header from '../components/header';
 // import Footer from '../components/footer';
 import Auth from "../utils/auth";
@@ -9,6 +10,7 @@ function Login(props) {
   const [images, setImages] = useState([]);
   //   const [validated] = useState(false);
   //   const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -39,6 +41,7 @@ function Login(props) {
       // console.log(images);
       console.log(user);
       Auth.login(token);
+      navigate('/');
     } catch (err) {
       console.error(err);
       //   setShowAlert(true);
