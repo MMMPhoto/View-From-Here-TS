@@ -111,12 +111,12 @@ const Profile = () => {
           })}
            </CardGroup>
           </Container>
-                <button
-                  className="btn btn-primary profile-button"
-                  type="button"
-                >
-                  Upload Photo
-                </button>
+          <br></br>
+          <form action="/action_page.php">
+            <label for="myfile">Upload photos:</label>
+            <input type="file" id="myfile" name="myfile" multiple/>
+            <input type="submit"/>
+            </form>
               </div>
               <div className="mt-5 text-center">
               </div>
