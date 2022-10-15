@@ -66,6 +66,15 @@ const deleteSavedPic = (picId, token) => {
   });
 };
 
+const uploadPic = (picFile, token) => {
+  return fetch('/api/pics/', {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+});
+};
+
 export {
   getAllPics,
   getOnePic,
