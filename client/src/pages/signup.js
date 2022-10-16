@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { createNewUser } from "../utils/api";
+import { useNavigate } from 'react-router-dom';
 // import Header from "../components/header";
 // import Footer from "../components/footer";
 import Auth from "../utils/auth";
@@ -15,6 +16,7 @@ function SignUp() {
   // const [validated] = useState(false);
   // set state for alert
   // const [showAlert, setShowAlert] = useState(false);
+  const navigate = useNavigate();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -41,6 +43,7 @@ function SignUp() {
       const { token, user } = await response.json();
       console.log(user);
       Auth.login(token);
+      navigate('/login');
     } catch (err) {
       console.error(err);
       // setShowAlert(true);
