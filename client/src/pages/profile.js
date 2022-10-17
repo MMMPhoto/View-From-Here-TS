@@ -66,7 +66,7 @@ const Profile = () => {
 
   // if data isn't here yet, say so
   if (!userDataLength) {
-    return <h2>LOADING...</h2>;
+    return <h2>Please login to view your profile and saved pics!</h2>;
   }
  
     return (
