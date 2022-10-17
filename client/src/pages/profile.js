@@ -115,9 +115,9 @@ const Profile = () => {
            </CardGroup>
           </Container>
           <br></br>
-          <form action="/action_page.php">
-            <label htmlFor="myfile">Upload photos:</label>
-            <input type="file" id="myfile" name="myfile" multiple/>
+          <form action="/uploads" method="post" encType="multipart/form-data">
+            <label htmlFor="userFile">Upload photos:</label>
+            <input type="file" id="userFile" name="userFile" multiple/>
             <input type="submit"/>
             </form>
               </div>
