@@ -18,9 +18,20 @@
 #cards {
     min-width: min-content;
     max-width: max-content;
+    width: 100%;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5%;
+    margin: 5px;
+}
+
+#contain {
+    width: 180%;
 }
 
 #cardimage {
+    border-radius: 5%;
     height: 100px;
+    width: 130px;
     
 }

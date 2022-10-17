@@ -93,7 +93,7 @@ const Profile = () => {
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="text-right">Your saved photos:</h4>
               </div>
-              <Container>
+              <Container id = "contain">
                 <h2>
                   {savedPics.length
                     ? `Viewing ${savedPics.length} saved ${
@@ -114,13 +114,13 @@ const Profile = () => {
                         ) : null}
                         <Card.Body>
                           <Card.Title>{pic.title}</Card.Title>
-                          <p className="small">Authors: {pic.authors}</p>
+                          {/* <p className="small">Authors: {pic.authors}</p> */}
                           <Card.Text>{pic.description}</Card.Text>
                           <Button
                             className="btn-block btn-danger"
                             onClick={() => handleDeletePic(pic._id)}
                           >
-                            Delete this pic!
+                            Delete
                           </Button>
                         </Card.Body>
                       </Card>
