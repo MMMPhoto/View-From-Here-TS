@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { loginUser } from "../utils/api";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 // import Header from '../components/header';
 // import Footer from '../components/footer';
 import Auth from "../utils/auth";
@@ -8,7 +8,6 @@ import './login.css'
 
 function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
-  const [images, setImages] = useState([]);
   //   const [validated] = useState(false);
   //   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
@@ -36,16 +35,13 @@ function Login(props) {
       }
       props.setLogin(true);
       const { token, user } = await response.json();
-      const imgCollection = user.savedPics;
-      window.localStorage.setItem("saved_pics", imgCollection);
-      for (var i = 0; i < user.savedPics.length; i++) {}
-      // console.log(images);
+      // const imgCollection = user.savedPics;
+      // window.localStorage.setItem("saved_pics", imgCollection);
       console.log(user);
       Auth.login(token);
-      navigate('/');
+      navigate("/");
     } catch (err) {
       console.error(err);
-      //   setShowAlert(true);
     }
 
     setUserFormData({
