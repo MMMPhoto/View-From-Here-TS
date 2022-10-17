@@ -9,6 +9,7 @@ const upload = multer({ dest: 'uploads/' });
 const { getGpsData, getCustomExifData, exifOptions } = require('./utils/exifr');
 const { uploadImage, uploadOptions } = require('./utils/cloudinary');
 const { Picture } = require("./models/index.js");
+const fs = require('fs');
 
 // const __dirname = fileURLToPath(const.meta.url);
 // const { fileURLToPath } = require("url");
@@ -56,21 +57,19 @@ app.post("/api/pics", upload.single('userFile'), async function (req, res, next)
        photoData.public_id = publicId;
        console.log(photoData);
 
-        try {
-            const addPicture = await Picture.create({
-            lat: photoData.latitude,
-            lng: photoData.longitude,
-            url: photoData.url,
-            public_id: photoData.public_id,
-            createdAt: photoData.CreateDate,
-            offsetTime: photoData.OffsetTime,
-            tags: photoData.tags
-            });
-            console.log(addPicture);
-            return res.json(addPicture);
-        } catch (err) {
-            throw err;
-        };
+  
+      const addPicture = await Picture.create({
+      lat: photoData.latitude,
+      lng: photoData.longitude,
+      url: photoData.url,
+      public_id: photoData.public_id,
+      createdAt: photoData.CreateDate,
+      offsetTime: photoData.OffsetTime,
+      tags: photoData.tags
+      });
+      console.log(addPicture);
+      fs.unlinkSync(filePath);     
+      return res.json(addPicture);
 
 
 
