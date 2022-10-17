@@ -1,15 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
 import Auth from "../utils/auth";
-// import Header from "../components/header";
-// import Footer from "../components/footer";
 import { getCurrentUser, deleteSavedPic } from "../utils/api";
-// import { removePicId } from "../utils/localStorage";
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
   const [savedPics, setSavedPics] = useState([{}]);
-
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
 
@@ -57,8 +53,7 @@ const Profile = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // // upon success, remove pic's id from localStorage
-      // removePicId(picId);
+      window.location.reload();
     } catch (err) {
       console.error(err);
     }
