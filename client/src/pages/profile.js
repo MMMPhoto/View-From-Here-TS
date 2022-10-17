@@ -3,15 +3,15 @@ import { Container, CardGroup, Card, Button } from 'react-bootstrap';
 import Auth from "../utils/auth";
 import Header from "../components/header";
 import Footer from "../components/footer";
-import { getCurrentUser, getOnePic, deleteSavedPic } from "../utils/api";
+import { getCurrentUser, deleteSavedPic } from "../utils/api";
 import { removePicId } from '../utils/localStorage';
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
-  const [savedPics, setSavedPics] = useState([]);
+  const [savedPics, setSavedPics] = useState([{}]);
 
   // use this to determine if `useEffect()` hook needs to run again
-  // const userDataLength = Object.keys(userData).length;
+  const userDataLength = Object.keys(userData).length;
 
   useEffect(() => {
     const getUserData = async () => {
@@ -29,37 +29,15 @@ const Profile = () => {
         }
 
         const user = await response.json();
-        console.log(user);
         setUserData(user);
+        setSavedPics(user.savedPics);
       } catch (err) {
         console.error(err);
-      };
+      }
     };
 
     getUserData();
-  }, []);
-
-  // useEffect(() => {
-  //   const getUserPics = async (userData) => {
-  //     try {
-  //       const savedPicIds = userData.savedPics;
-  //       console.log(savedPicIds);
-  //       const savedPics = [];
-  //       savedPicIds.map( async (picId) => {
-  //         const response = await getOnePic(picId);
-  //         const data = await response.json();
-  //         console.log(data);
-  //         savedPics.push(data);
-  //       });
-  //       console.log(`These are the ${savedPics}`);
-  //       setSavedPics(savedPics);
-
-  //     } catch (err) {
-  //       console.error(err);
-  //     };
-  //   };
-  //   getUserPics(userData);
-  // }, [userData]);
+  }, [userDataLength]);
 
   // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (picId) => {
@@ -87,7 +65,7 @@ const Profile = () => {
   };
 
   // if data isn't here yet, say so
-  if (!userData) {
+  if (!userDataLength) {
     return <h2>LOADING...</h2>;
   }
  
@@ -115,14 +93,14 @@ const Profile = () => {
                 <Container>
                 <h2>
                   {savedPics.length
-                    ? `Viewing ${userData.savedPics.length} saved ${userData.savedPics.length === 1 ? 'pic' : 'pics'}:`
+                    ? `Viewing ${savedPics.length} saved ${savedPics.length === 1 ? 'pic' : 'pics'}:`
                     : 'You have no saved photos!'}
                 </h2>
                 <CardGroup>
-                  {savedPics.map((pic, index) => {
+                  {userData.savedPics.map((pic, index) => {
                     return (
                     <Card key={index} border='dark'>
-                    <Card.Img src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${pic.public_id}.jpg`} alt={`The cover for ${pic.title}`} variant='top' />
+                  {pic ? <Card.Img src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`} alt={`The cover for ${pic.title}`} variant='top' /> : null}
                   <Card.Body>
                   <Card.Title>{pic.title}</Card.Title>
                   <p className='small'>Authors: {pic.authors}</p>
