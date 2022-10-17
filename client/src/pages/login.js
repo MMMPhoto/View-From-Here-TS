@@ -34,8 +34,8 @@ function Login(props) {
       }
       props.setLogin(true);
       const { token, user } = await response.json();
-      const imgCollection = user.savedPics;
-      window.localStorage.setItem("saved_pics", imgCollection);
+      // const imgCollection = user.savedPics;
+      // window.localStorage.setItem("saved_pics", imgCollection);
       console.log(user);
       Auth.login(token);
       navigate("/");

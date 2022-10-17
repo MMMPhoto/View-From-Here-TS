@@ -14,10 +14,10 @@ module.exports = {
   },
 
   async getCurrentUser({ user = null, params }, res) {
-    const foundUser = await User.findOne(
-        { _id: user._id }
-    )
-    .populate({ path: 'savedPics', options: {strictPopulate: false}});
+    const foundUser = await User.findOne({ _id: user._id }).populate({
+      path: "savedPics",
+      options: { strictPopulate: false },
+    });
 
     if (!foundUser) {
       return res
@@ -114,10 +114,12 @@ module.exports = {
     }
   },
 
-  async deleteSavedPic({ params }, res) {
-    const updatedUser = await User.findByIdAndUpdate(
-      { _id: params.user },
-      { $pull: { savedPics: params.picId } },
+  async deleteSavedPic({ user, params }, res) {
+    console.log(user);
+    console.log(params);
+    const updatedUser = await User.findOneAndUpdate(
+      { _id: user._id },
+      { $pull: { savedPics: { $in: [params.picId] } } },
       { new: true }
     );
     if (!updatedUser) {
@@ -125,6 +127,6 @@ module.exports = {
         .status(404)
         .json({ message: "Couldn't find a user or pic with that id!" });
     }
-    return res.json("Pic's gone, yo");
+    return res.json(updatedUser);
   },
 };
