@@ -57,7 +57,7 @@ const seedFunction = async () => {
       console.log(uploadPhotoData);
 
       // Get unique cloudinary photo ID
-      const photoUrl = uploadPhotoData. secure_url;
+      const photoUrl = uploadPhotoData.secure_url;
       const publicId = uploadPhotoData.public_id;
 
       // Build object for database

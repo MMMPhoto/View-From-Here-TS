@@ -28,6 +28,7 @@ module.exports = {
   },
 
   async createNewPic(req, res) {
+    console.log(req.files);
     Picture.create(req.body)
       .then((dbUsersData) => res.json(dbUsersData))
       .catch((err) => res.status(500).json(err));

@@ -8,7 +8,8 @@ const {
   deletePic,
 } = require("../../controllers/pic-controller.js");
 
-router.route("/").get(getAllPics).post(createNewPic);
+router.route("/").get(getAllPics);
+// .post(createNewPic);
 
 router.route("/:id").get(getPicById).put(updatePic).delete(deletePic);
 

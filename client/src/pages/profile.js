@@ -115,7 +115,7 @@ const Profile = () => {
            </CardGroup>
           </Container>
           <br></br>
-          <form action="/uploads" method="post" encType="multipart/form-data">
+          <form action="/api/pics" method="post" encType="multipart/form-data">
             <label htmlFor="userFile">Upload photos:</label>
             <input type="file" id="userFile" name="userFile" multiple/>
             <input type="submit"/>
