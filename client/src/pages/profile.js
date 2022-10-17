@@ -47,6 +47,7 @@ const Profile = () => {
     }
 
     try {
+      console.log(token)
       const response = await deleteSavedPic(picId, token);
 
       if (!response.ok) {
