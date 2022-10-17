@@ -101,12 +101,12 @@ const Profile = () => {
                       }:`
                     : "You have no saved photos!"}
                 </h2>
-                <CardGroup>
+                <CardGroup >
                   {savedPics.map((pic, index) => {
                     return (
-                      <Card key={index} border="dark">
+                      <Card id = "cards" key={index} border="dark">
                         {pic ? (
-                          <Card.Img
+                          <Card.Img id = "cardimage"
                             src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
                             alt={`The cover for ${pic.title}`}
                             variant="top"

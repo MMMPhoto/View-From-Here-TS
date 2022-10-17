@@ -14,3 +14,13 @@
 #formbg {
     opacity: 90%;
 }
+
+#cards {
+    min-width: min-content;
+    max-width: max-content;
+}
+
+#cardimage {
+    height: 100px;
+    
+}
