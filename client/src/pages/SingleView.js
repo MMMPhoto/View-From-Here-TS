@@ -9,10 +9,10 @@ import { savePicIds, getSavedPicIds } from "../utils/localStorage";
 
 const SingleView = () => {
   // const [searchedPics, setSearchedPics] = useState([]);
-  const [savedPicIds, setSavedPicIds] = useState(getSavedPicIds());
-  useEffect(() => {
-    return () => savePicIds(savedPicIds);
-  });
+  // const [savedPicIds, setSavedPicIds] = useState(getSavedPicIds());
+  // useEffect(() => {
+  //   return () => savePicIds(savedPicIds);
+  // });
 
   const { pictureId } = useParams();
   const [pictureData, setPictureData] = useState([{}]);
@@ -31,6 +31,7 @@ const SingleView = () => {
   useEffect(() => {
     const getPicData = async () => {
       try {
+        // Get picture Data
         const response = await getOnePic(pictureId);
         const jsonData = await response.json();
         let jsonArray = [];
@@ -63,13 +64,16 @@ const SingleView = () => {
     try {
       const response = await savePic(picToSave, token);
 
+
       if (!response.ok) {
         console.log(response);
         throw new Error("Yo shit sux, playa!");
-      }
+      } else {
+        setSavedPhoto(true);
+      };
 
       // If the pic successfully saves to the user's account, save pic id to state
-      setSavedPicIds([...savedPicIds, picId]);
+  //     setSavedPicIds([...savedPicIds, picId]);
     } catch (err) {
       console.error(err);
     }
