@@ -29,6 +29,7 @@ const Profile = () => {
 
         const user = await response.json();
         setUserData(user);
+        console.log(user);
       } catch (err) {
         console.error(err);
       }
@@ -77,8 +78,8 @@ const Profile = () => {
                   width="150px"
                   src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
                 />
-                <span className="font-weight-bold">username</span>
-                <span className="text-black-50">userEmail</span>
+                <span className="font-weight-bold">{userData.userName}</span>
+                <span className="text-black-50">{userData.email}</span>
                 <span></span>
               </div>
             </div>
