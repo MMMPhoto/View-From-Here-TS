@@ -5,15 +5,8 @@ import MapWrapper from "../components/MapWrapper";
 import "./SingleView.css";
 import Auth from "../utils/auth";
 import { getOnePic, savePic } from "../utils/api";
-import { savePicIds, getSavedPicIds } from "../utils/localStorage";
 
 const SingleView = () => {
-  // const [searchedPics, setSearchedPics] = useState([]);
-  // const [savedPicIds, setSavedPicIds] = useState(getSavedPicIds());
-  // useEffect(() => {
-  //   return () => savePicIds(savedPicIds);
-  // });
-
   const { pictureId } = useParams();
   const [pictureData, setPictureData] = useState([{}]);
   const [picUrl, setPicUrl] = useState("");
@@ -64,22 +57,17 @@ const SingleView = () => {
     try {
       const response = await savePic(picToSave, token);
 
-
       if (!response.ok) {
         console.log(response);
         throw new Error("Yo shit sux, playa!");
       } else {
         setSavedPhoto(true);
-      };
-
-      // If the pic successfully saves to the user's account, save pic id to state
-  //     setSavedPicIds([...savedPicIds, picId]);
+      }
     } catch (err) {
       console.error(err);
     }
   };
 
-  // setSavedPhoto(true);
   return (
     <div className="d-flex flex-column align-items-center p-4">
       <div className="d-flex flex-row justify-content-center align-items-center">

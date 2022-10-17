@@ -33,7 +33,7 @@ const Profile = () => {
     };
 
     getUserData();
-  }, [userDataLength]);
+  }, [userData]);
 
   // create function that accepts the pics mongo _id value as param and deletes the pic from the user's profile
   const handleDeletePic = async (picId) => {
@@ -53,14 +53,14 @@ const Profile = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      window.location.reload();
+      // window.location.reload();
     } catch (err) {
       console.error(err);
     }
   };
 
   // if data isn't here yet, say so
-  if (!userDataLength) {
+  if (!userData) {
     return <h2>LOADING...</h2>;
   }
 
