@@ -16,7 +16,8 @@ module.exports = {
   async getCurrentUser({ user = null, params }, res) {
     const foundUser = await User.findOne(
         { _id: user._id }
-    );
+    )
+    .populate({ path: 'savedPics', options: {strictPopulate: false}});
 
     if (!foundUser) {
       return res
