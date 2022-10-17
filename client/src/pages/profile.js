@@ -5,6 +5,7 @@ import Header from "../components/header";
 import Footer from "../components/footer";
 import { getCurrentUser, deleteSavedPic } from "../utils/api";
 import { removePicId } from '../utils/localStorage';
+import './profile.css'
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
@@ -66,13 +67,19 @@ const Profile = () => {
 
   // if data isn't here yet, say so
   if (!userDataLength) {
-    return <h2>LOADING...</h2>;
+    return (
+      <section className="vh-100" id = 'background'>
+        <h2>Please Login to see your profile and saved pics!</h2>
+      </section>
+    )
   }
  
     return (
       <>
-        <div className="container rounded bg-white mt-5 mb-5">
-          <div className="row">
+      <section className="vh-100" id = 'background'>
+        <br></br><br></br><br></br><br></br><br></br><br></br>
+        <div className="container rounded bg-white mt-5 mb-5" id = 'formbg'>
+          <div className="row" id = "formdiv" >
             <div className="col-md-3 border-right">
               <div className="d-flex flex-column align-items-center text-center p-3 py-5">
                 <img
@@ -126,7 +133,8 @@ const Profile = () => {
             </div>
           </div>
         </div>
-      </>
+      </section>
+    </>
     );
   }
 
