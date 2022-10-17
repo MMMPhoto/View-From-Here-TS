@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { loginUser } from "../utils/api";
 import { useNavigate } from "react-router-dom";
-// import Header from '../components/header';
-// import Footer from '../components/footer';
 import Auth from "../utils/auth";
 
 function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
-  //   const [validated] = useState(false);
-  //   const [showAlert, setShowAlert] = useState(false);
   const navigate = useNavigate();
 
   const handleInputChange = (event) => {
@@ -34,8 +30,6 @@ function Login(props) {
       }
       props.setLogin(true);
       const { token, user } = await response.json();
-      // const imgCollection = user.savedPics;
-      // window.localStorage.setItem("saved_pics", imgCollection);
       console.log(user);
       Auth.login(token);
       navigate("/");
