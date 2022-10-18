@@ -2,7 +2,7 @@ const { User, Picture } = require("../models/index");
 const path = require("path");
 const { getGpsData, getCustomExifData, exifOptions } = require('../utils/exifr');
 const { uploadImage, uploadOptions } = require('../utils/cloudinary');
-const fs = require('fs');
+const fsPromises = require('fs').promises;
 
 module.exports = {
   async getAllPics(req, res) {
@@ -60,13 +60,9 @@ module.exports = {
       offsetTime: photoData.OffsetTime,
       tags: photoData.tags
       });
-      // Delete
-      if (addPicture) {
-        fs.unlinkSync(filePath);     
-        return res.json(addPicture);
-      } else {
-        return res.json('Something went wrong!');
-      };
+      // Delete file from temporary upload folder
+      await fsPromises.unlink(filePath);     
+      return res.json(addPicture);
     } catch(err) {
       console.error(err);
     };
