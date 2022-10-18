@@ -9,3 +9,8 @@
 #formbg {
     opacity: 90%
 }
+
+#loginFormImg {
+    border-style: solid;
+    border-radius: 7px;
+}

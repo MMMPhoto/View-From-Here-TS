@@ -120,6 +120,7 @@ function Login(props) {
                         src="https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_500/v1665696442/View-from-here/1ddfeb86305588512f79432b4a107ec5.jpg"
                         className="img-fluid"
                         alt="Sample image"
+                        id="loginFormImg"
                       />
                     </div>
                   </div>

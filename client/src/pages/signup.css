@@ -7,5 +7,10 @@
 }
 
 #formbg {
-    opacity: 90%
+    opacity: 90%;
+}
+
+#signupFormImg{
+    border-style: solid;
+    border-radius: 7px;
 }
