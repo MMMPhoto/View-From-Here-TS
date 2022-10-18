@@ -1,29 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
-import { getCurrentUser, deleteSavedPic } from "../utils/api";
+import { getCurrentUser, deleteSavedPic, uploadNewPic } from "../utils/api";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState({});
   const [savedPics, setSavedPics] = useState([{}]);
-  // use this to determine if `useEffect()` hook needs to run again
-  const userDataLength = Object.keys(userData).length;
 
+  // Image Upload State
+  const [image, setImage] = useState();
+  const [status, setStatus] = useState('');
+
+  // Get Logged in User's Data
   useEffect(() => {
     const getUserData = async () => {
       try {
         const token = Auth.loggedIn() ? Auth.getToken() : null;
-
         if (!token) {
           return false;
         }
-
         const response = await getCurrentUser(token);
-
         if (!response.ok) {
           throw new Error("something went wrong!");
         }
-
         const user = await response.json();
         setUserData(user);
         setSavedPics(user.savedPics);
@@ -35,28 +37,45 @@ const Profile = () => {
     getUserData();
   }, [userData]);
 
-  // create function that accepts the pics mongo _id value as param and deletes the pic from the user's profile
+  // Delete Pic from User's Saved Pics
   const handleDeletePic = async (picId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
-
     if (!token) {
       return false;
     }
-
     try {
-      // console.log(token);
       const response = await deleteSavedPic(picId, token);
-
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
-
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      // window.location.reload();
-    } catch (err) {
+     } catch (err) {
       console.error(err);
-    }
+    };
+  };
+
+  // Submit function for image Upload
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setStatus('Loading...');
+    let formData = new FormData();
+    formData.append('userFile', image.data);
+    const response = await uploadNewPic(formData);
+    const uploadedImage = await response.json();
+    setImage(uploadedImage);
+    if (response) {
+      setStatus(response.statusText)
+    };
+  };
+
+  const handleFileChange = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    };
+    setStatus('File Chosen');
+    setImage(img);
   };
 
   // if data isn't here yet, say so
@@ -71,6 +90,7 @@ const Profile = () => {
           <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
               <img
+                alt="avatar"
                 className="rounded-circle mt-5"
                 width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
@@ -102,6 +122,7 @@ const Profile = () => {
                             src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
                             alt={`The cover for ${pic.title}`}
                             variant="top"
+                            onClick={() => navigate(`/single-view/${pic.id}`)}
                           />
                         ) : null}
                         <Card.Body>
@@ -121,11 +142,20 @@ const Profile = () => {
                 </CardGroup>
               </Container>
               <br></br>
-              <form action="/action_page.php">
-                <label htmlFor="myfile">Upload photos:</label>
-                <input type="file" id="myfile" name="myfile" multiple />
-                <input type="submit" />
-              </form>
+              {/* Upload Photo Div */}
+              <div>
+                <h1>Upload to server:</h1>
+                {status && <h3>{status}</h3>}
+                {status === 'OK' &&
+                  (<div>
+                      <img alt="Uploaded file" src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${image.public_id}.jpg`} onClick={() => navigate(`/single-view/${image.id}`)} width='500vw' />
+                    </div>)}
+                <hr></hr>
+                <form onSubmit={handleSubmit}>
+                  <input type='file' name='userFile' onChange={handleFileChange}></input>
+                  <button type='submit'>Submit</button>
+                </form>
+              </div>
             </div>
             <div className="mt-5 text-center"></div>
           </div>

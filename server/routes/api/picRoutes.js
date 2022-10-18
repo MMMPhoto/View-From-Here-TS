@@ -1,4 +1,6 @@
 const router = require("express").Router();
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const {
   getAllPics,
@@ -8,7 +10,11 @@ const {
   deletePic,
 } = require("../../controllers/pic-controller.js");
 
-router.route("/").get(getAllPics).post(createNewPic);
+console.log(upload);
+
+router.route("/").get(getAllPics);
+
+router.post("/", upload.single('userFile'), createNewPic);
 
 router.route("/:id").get(getPicById).put(updatePic).delete(deletePic);
 
