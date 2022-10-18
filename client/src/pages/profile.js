@@ -65,7 +65,7 @@ const Profile = () => {
   if (!userDataLength) {
     return (
       <section className="vh-100" id = 'background'>
-        <h2>Please Login to see your profile and saved pics!</h2>
+        <h2>Loading your profile and saved pics...</h2>
       </section>
     )
   }
