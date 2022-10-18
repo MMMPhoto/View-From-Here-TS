@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const { ProvidedRequiredArgumentsOnDirectivesRule } = require("graphql/validation/rules/ProvidedRequiredArgumentsRule.js");
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 

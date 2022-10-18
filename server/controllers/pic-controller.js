@@ -33,47 +33,43 @@ module.exports = {
 
   async createNewPic(req, res, next) {
     try {
-      console.log(req.file.filename);
+      // Define path of uploaded picture
       const filePath = path.join(`./uploads/${req.file.filename}`);
+      // Get GPS and Exif data from picture
       const gpsData = await getGpsData(filePath);
-      console.log(gpsData);
       const exifData = await getCustomExifData(filePath, exifOptions);
-      console.log(exifData);
-      const uploadPhotoData = await uploadImage(filePath, uploadOptions);
-      console.log(uploadPhotoData);
-  
-         // Get unique cloudinary photo ID
-         const photoUrl = uploadPhotoData.secure_url;
-         const publicId = uploadPhotoData.public_id;
-   
-         // Build object for database
-         const photoData = {
-           ...gpsData,
-           ...exifData,
-         };
-         photoData.url = photoUrl;
-         photoData.public_id = publicId;
-         console.log(photoData);
-  
-    
-        const addPicture = await Picture.create({
-        lat: photoData.latitude,
-        lng: photoData.longitude,
-        url: photoData.url,
-        public_id: photoData.public_id,
-        createdAt: photoData.CreateDate,
-        offsetTime: photoData.OffsetTime,
-        tags: photoData.tags
-        });
-        console.log(addPicture);
+      // Upload to Cloudinary
+      const uploadPhotoData = await uploadImage(filePath, uploadOptions);  
+      // Get unique cloudinary photo ID
+      const photoUrl = uploadPhotoData.secure_url;
+      const publicId = uploadPhotoData.public_id;
+      // Build object for database
+      const photoData = {
+        ...gpsData,
+        ...exifData,
+      };
+      photoData.url = photoUrl;
+      photoData.public_id = publicId;
+      // Add Photo Data to Database
+      const addPicture = await Picture.create({
+      lat: photoData.latitude,
+      lng: photoData.longitude,
+      url: photoData.url,
+      public_id: photoData.public_id,
+      createdAt: photoData.CreateDate,
+      offsetTime: photoData.OffsetTime,
+      tags: photoData.tags
+      });
+      // Delete
+      if (addPicture) {
         fs.unlinkSync(filePath);     
-        return res.json(addPicture);    } catch(err) {
+        return res.json(addPicture);
+      } else {
+        return res.json('Something went wrong!');
+      };
+    } catch(err) {
       console.error(err);
     };
-    // console.log(req.files);
-    // Picture.create(req.body)
-    //   .then((dbUsersData) => res.json(dbUsersData))
-    //   .catch((err) => res.status(500).json(err));
   },
 
   async updatePic({ params, body }, res) {
