@@ -80,8 +80,8 @@ const Profile = () => {
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
               <img
                 className="rounded-circle mt-5"
-                width="150px"
-                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                width="200px"
+                src="https://www.pngkey.com/png/detail/966-9665347_icon-profile-circle.png" alt="Icon-profile - Circle@pngkey.com"
               />
               <span className="font-weight-bold">{userData.userName}</span>
               <span className="text-black-50">{userData.email}</span>
