@@ -8,6 +8,7 @@ import {
   uploadNewPic,
   savePic,
 } from "../utils/api";
+import "./profile.css"
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -151,11 +152,11 @@ const Profile = () => {
                 <CardGroup >
                   {savedPics.map((pic, index) => {
                     return (
-                      <Card id = "cards" key={index} border="dark">
+                      <Card id = "cards" key={index} >
                         {pic ? (
                           <Card.Img id = "cardimage"
                             src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
-                            alt={`The cover for ${pic.title}`}
+                            
                             variant="top"
                             onClick={() => navigate(`/single-view/${pic.id}`)}
                           />
@@ -183,7 +184,7 @@ const Profile = () => {
                     name="userFile"
                     onChange={handleFileChange}
                   ></input>
-                  <button type="submit">Submit</button>
+                  <button type="submit" id = "submit">Submit</button>
                 </form>
               </div>
             </div>
