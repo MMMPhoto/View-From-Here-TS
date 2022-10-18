@@ -81,23 +81,25 @@ const SingleView = () => {
 
   // setSavedPhoto(true);
   return (
-    <div className="d-flex flex-column align-items-center p-4">
-      <div className="d-flex flex-row justify-content-center align-items-center">
+    <div className="d-flex flex-column align-items-center p-4" id = "singleViewBg">
+      <p>Click the heart to save a photo!</p>
+      <div className="d-flex flex-row justify-content-center align-items-center" id = "savePhoto">
+      
         <h3>
           <GrFavorite onClick={() => handleSavePhoto(pictureData[0].id)} />
         </h3>
         {isSavedPhoto ? <p className="ms-3 mb-0">Photo saved!</p> : <></>}
       </div>
-      <div>
+      {/* <div>
         <p>
           Tags:{" "}
           {tags.map((tag, index) => (
             <span key={index}>{tag} </span>
           ))}
         </p>
-      </div>
-      <img className="single-pic p-4" src={picUrl} />
-      <div>
+      </div> */}
+      <img className="single-pic p-4" src={picUrl} id = "singleViewImg" />
+      <div id = "singleViewMap">
         {pictureData[0].lat ? (
           <MapWrapper markers={pictureData} containerStyle={containerStyle} />
         ) : (
