@@ -17,6 +17,13 @@ export const getOnePic = (picId) => {
   });
 };
 
+export const uploadNewPic = (formData) => {
+  return fetch('/api/pics', {
+    method: 'POST',
+    body: formData,
+  });
+};
+
 export const createNewUser = (userData) => {
   return fetch("/api/users", {
     method: "POST",

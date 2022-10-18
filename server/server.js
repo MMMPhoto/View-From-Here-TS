@@ -2,12 +2,6 @@ const express = require("express");
 const path = require("path");
 const db = require("./config/connection");
 const routes = require("./routes/index.js");
-// const __dirname = fileURLToPath(const.meta.url);
-// const { fileURLToPath } = require("url");
-// const "dotenv/config";
-// const { Router } = require"express";
-
-// const route = routes;
 
 const PORT = process.env.PORT || 3001;
 const app = express();

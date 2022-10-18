@@ -16,7 +16,7 @@ console.log(cloudinary.config);
     unique_filename: true,
     overwrite: true,
     upload_preset: "view-from-here-general",
-    // folder: 'view-from-here'
+    folder: 'view-from-here/user-uploads'
   };
 
   // Upload image to Cloudinary
@@ -24,7 +24,6 @@ console.log(cloudinary.config);
     try {
       // Upload the image
       const result = await cloudinary.uploader.upload(imagePath, options);
-      console.log(result);
       return result;
     } catch (error) {
       console.error(error);
