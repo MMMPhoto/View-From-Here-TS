@@ -120,8 +120,8 @@ const Profile = () => {
 
   return (
     <>
-    <section className="vh-100" id = 'background'>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
+    <section  id = 'background'>
+      
       <div className="container rounded bg-white mt-5 mb-5" id = "formbg" >
         <div className="row" id = "formdiv">
           <div className="col-md-3 border-right">
@@ -136,7 +136,7 @@ const Profile = () => {
               <span></span>
             </div>
           </div>
-          <div className="col-md-5 border-right">
+          <div className="col-md-9 border-right">
             <div className="p-3 py-5">
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="text-right">Your saved photos:</h4>
