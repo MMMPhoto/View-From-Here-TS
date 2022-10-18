@@ -84,9 +84,10 @@ const Profile = () => {
   // };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    let formData = new FormData()
-    formData.append('userFile', image.data)
+    e.preventDefault();
+    setStatus('Loading...');
+    let formData = new FormData();
+    formData.append('userFile', image.data);
     const response = await fetch('/api/pics', {
       method: 'POST',
       body: formData,
@@ -188,7 +189,6 @@ const Profile = () => {
                 {status && <h3>{status}</h3>}
                 {image &&
                   (<div>
-      
                       <img src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${image.public_id}.jpg`} onClick={() => navigate(`/single-view/${image.id}`)} width='500vw' />
                     </div>)}
                 <hr></hr>
