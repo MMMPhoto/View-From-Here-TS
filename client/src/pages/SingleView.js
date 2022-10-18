@@ -34,6 +34,13 @@ const SingleView = () => {
         // Call API to set photo URL
         const url = `https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${jsonData.public_id}.jpg`;
         setPicUrl(url);
+        // Check token
+        const token = Auth.loggedIn() ? Auth.getToken() : null;
+        if (!token) {
+          return false;
+        }
+        // Get User Data
+
       } catch (error) {
         console.log("error", error);
       }
