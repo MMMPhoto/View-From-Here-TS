@@ -2,7 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
-import { getCurrentUser, deleteSavedPic, uploadNewPic } from "../utils/api";
+import {
+  getCurrentUser,
+  deleteSavedPic,
+  uploadNewPic,
+  savePic,
+} from "../utils/api";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -68,11 +73,30 @@ const Profile = () => {
     formData.append("userFile", image.data);
     const response = await uploadNewPic(formData);
     const uploadedImage = await response.json();
-    setImage(uploadedImage);
-    console.log(uploadedImage);
+    // setImage(uploadedImage);
+    // console.log(uploadedImage);
     if (response) {
       setStatus(response.statusText);
     }
+
+    // get token
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+
+    if (!token) {
+      return false;
+    }
+
+    try {
+      const response = await savePic(uploadedImage, token);
+
+      if (!response.ok) {
+        console.log(response);
+        throw new Error("Yo shit sux, playa!");
+      }
+    } catch (err) {
+      console.error(err);
+    }
+    setNewDeletedPic(true);
   };
 
   const handleFileChange = (e) => {
@@ -150,18 +174,8 @@ const Profile = () => {
               <br></br>
               {/* Upload Photo Div */}
               <div>
-                <h1>Upload to server:</h1>
-                {status && <h3>{status}</h3>}
-                {status === "OK" && (
-                  <div>
-                    <img
-                      alt="Uploaded file"
-                      src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${image.public_id}.jpg`}
-                      onClick={() => navigate(`/single-view/${image.id}`)}
-                      width="500vw"
-                    />
-                  </div>
-                )}
+                <h1>Upload your image:</h1>
+                {status === "OK" && <h3>Image saved and uploaded!</h3>}
                 <hr></hr>
                 <form onSubmit={handleSubmit}>
                   <input

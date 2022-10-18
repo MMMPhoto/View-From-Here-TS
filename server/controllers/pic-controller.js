@@ -1,8 +1,12 @@
 const { User, Picture } = require("../models/index");
 const path = require("path");
-const { getGpsData, getCustomExifData, exifOptions } = require('../utils/exifr');
-const { uploadImage, uploadOptions } = require('../utils/cloudinary');
-const fsPromises = require('fs').promises;
+const {
+  getGpsData,
+  getCustomExifData,
+  exifOptions,
+} = require("../utils/exifr");
+const { uploadImage, uploadOptions } = require("../utils/cloudinary");
+const fsPromises = require("fs").promises;
 
 module.exports = {
   async getAllPics(req, res) {
@@ -39,7 +43,7 @@ module.exports = {
       const gpsData = await getGpsData(filePath);
       const exifData = await getCustomExifData(filePath, exifOptions);
       // Upload to Cloudinary
-      const uploadPhotoData = await uploadImage(filePath, uploadOptions);  
+      const uploadPhotoData = await uploadImage(filePath, uploadOptions);
       // Get unique cloudinary photo ID
       const photoUrl = uploadPhotoData.secure_url;
       const publicId = uploadPhotoData.public_id;
@@ -52,20 +56,20 @@ module.exports = {
       photoData.public_id = publicId;
       // Add Photo Data to Database
       const addPicture = await Picture.create({
-      lat: photoData.latitude,
-      lng: photoData.longitude,
-      url: photoData.url,
-      public_id: photoData.public_id,
-      createdAt: photoData.CreateDate,
-      offsetTime: photoData.OffsetTime,
-      tags: photoData.tags
+        lat: photoData.latitude,
+        lng: photoData.longitude,
+        url: photoData.url,
+        public_id: photoData.public_id,
+        createdAt: photoData.CreateDate,
+        offsetTime: photoData.OffsetTime,
+        tags: photoData.tags,
       });
       // Delete file from temporary upload folder
-      await fsPromises.unlink(filePath);     
+      await fsPromises.unlink(filePath);
       return res.json(addPicture);
-    } catch(err) {
+    } catch (err) {
       console.error(err);
-    };
+    }
   },
 
   async updatePic({ params, body }, res) {
@@ -100,4 +104,3 @@ module.exports = {
       });
   },
 };
-// export { getAllPics, getPicById, createNewPic, updatePic, deletePic };
