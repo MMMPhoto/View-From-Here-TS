@@ -14,7 +14,7 @@ const Profile = () => {
 
   // Image Upload State
   const [image, setImage] = useState();
-  const [status, setStatus] = useState('');
+  const [status, setStatus] = useState("");
 
   // Get Logged in User's Data
   useEffect(() => {
@@ -55,23 +55,24 @@ const Profile = () => {
       const updatedUser = await response.json();
       setUserData(updatedUser);
       setNewDeletedPic(true);
-     } catch (err) {
+    } catch (err) {
       console.error(err);
-    };
+    }
   };
 
   // Submit function for image Upload
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setStatus('Loading...');
+    setStatus("Loading...");
     let formData = new FormData();
-    formData.append('userFile', image.data);
+    formData.append("userFile", image.data);
     const response = await uploadNewPic(formData);
     const uploadedImage = await response.json();
     setImage(uploadedImage);
+    console.log(uploadedImage);
     if (response) {
-      setStatus(response.statusText)
-    };
+      setStatus(response.statusText);
+    }
   };
 
   const handleFileChange = (e) => {
@@ -79,7 +80,7 @@ const Profile = () => {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     };
-    setStatus('File Chosen');
+    setStatus("File Chosen");
     setImage(img);
   };
 
@@ -151,14 +152,24 @@ const Profile = () => {
               <div>
                 <h1>Upload to server:</h1>
                 {status && <h3>{status}</h3>}
-                {status === 'OK' &&
-                  (<div>
-                      <img alt="Uploaded file" src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${image.public_id}.jpg`} onClick={() => navigate(`/single-view/${image.id}`)} width='500vw' />
-                    </div>)}
+                {status === "OK" && (
+                  <div>
+                    <img
+                      alt="Uploaded file"
+                      src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${image.public_id}.jpg`}
+                      onClick={() => navigate(`/single-view/${image.id}`)}
+                      width="500vw"
+                    />
+                  </div>
+                )}
                 <hr></hr>
                 <form onSubmit={handleSubmit}>
-                  <input type='file' name='userFile' onChange={handleFileChange}></input>
-                  <button type='submit'>Submit</button>
+                  <input
+                    type="file"
+                    name="userFile"
+                    onChange={handleFileChange}
+                  ></input>
+                  <button type="submit">Submit</button>
                 </form>
               </div>
             </div>
