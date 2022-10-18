@@ -17,12 +17,10 @@ export const getOnePic = (picId) => {
   });
 };
 
-export const uploadNewPic = (file) => {
-  return fetch("/api/pics", file, {
-    method: "POST",
-    // headers: {
-    //   "content-type": "multipart/form-data"
-    // }
+export const uploadNewPic = (formData) => {
+  return fetch('/api/pics', {
+    method: 'POST',
+    body: formData,
   });
 };
 
