@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import Auth from "../utils/auth";
 import { getOnePic, getCurrentUser, deleteSavedPic } from "../utils/api";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState({});
   const [savedPics, setSavedPics] = useState([{}]);
-  const [file, setFile] = useState();
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
 
-  const navigate = useNavigate();
-
-  // Multer test
-  const [image, setImage] = useState({ preview: '', data: '' })
-  const [status, setStatus] = useState('')
+  // Image Upload State
+  const [image, setImage] = useState();
+  const [status, setStatus] = useState('');
+  // const [uploaded, setUploaded] = useState(false);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -41,7 +41,11 @@ const Profile = () => {
     };
 
     getUserData();
-  }, [userData]);
+  }, []);
+
+  // useEffect(() => {
+  //   navigate(`/single-view/${image.id}`);
+  // }, [uploaded]);
 
   // create function that accepts the pics mongo _id value as param and deletes the pic from the user's profile
   const handleDeletePic = async (picId) => {
@@ -90,7 +94,7 @@ const Profile = () => {
     if (response) setStatus(response.statusText);
     const uploadedImage = await response.json();
     console.log(uploadedImage);
-    navigate(`/single-view/${uploadedImage.id}`);        
+    setImage(uploadedImage); 
   };
 
   const handleFileChange = (e) => {
@@ -98,7 +102,8 @@ const Profile = () => {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
     }
-    setImage(img)
+    setStatus('File Chosen');
+    setImage(img);
   }
 
   // if data isn't here yet, say so
@@ -144,6 +149,7 @@ const Profile = () => {
                             src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
                             alt={`The cover for ${pic.title}`}
                             variant="top"
+                            onClick={() => navigate(`/single-view/${pic.id}`)}
                           />
                         ) : null}
                         <Card.Body>
@@ -178,14 +184,19 @@ const Profile = () => {
               </form> */}
 
               <div>
-                <h1>Upload to server</h1>
-                {image.preview && <img src={image.preview} width='100' height='100' />}
+                <h1>Upload to server:</h1>
+                {status && <h3>{status}</h3>}
+                {image &&
+                  (<div>
+      
+                      <img src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${image.public_id}.jpg`} onClick={() => navigate(`/single-view/${image.id}`)} width='500vw' />
+                    </div>)}
                 <hr></hr>
                 <form onSubmit={handleSubmit}>
                   <input type='file' name='userFile' onChange={handleFileChange}></input>
                   <button type='submit'>Submit</button>
                 </form>
-                {status && <h4>{status}</h4>}
+              
               </div>
             </div>
             <div className="mt-5 text-center"></div>
