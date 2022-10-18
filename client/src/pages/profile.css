@@ -30,9 +30,21 @@
     width: 180%;
 }
 
-#cardimage {
+#cardimage{
     border-radius: 5%;
     height: 100px;
     width: 130px;
     
+}
+
+#submit {
+    border-radius: 25px;
+    background-color: goldenrod;
+    border-color: green
+}
+
+#submit:hover {
+    background-color: limegreen;
+    border-color: goldenrod
+
 }
