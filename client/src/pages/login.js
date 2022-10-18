@@ -45,7 +45,7 @@ function Login(props) {
   };
   return (
     <>
-      <section className="vh-100" id = 'background'>
+      <section id = 'background'>
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center h-100" id = 'formbg' >
             <div className="col-lg-12 col-xl-11" >
