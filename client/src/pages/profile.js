@@ -15,7 +15,6 @@ const Profile = () => {
   // Image Upload State
   const [image, setImage] = useState();
   const [status, setStatus] = useState('');
-  // const [uploaded, setUploaded] = useState(false);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -43,10 +42,6 @@ const Profile = () => {
     getUserData();
   }, []);
 
-  // useEffect(() => {
-  //   navigate(`/single-view/${image.id}`);
-  // }, [uploaded]);
-
   // create function that accepts the pics mongo _id value as param and deletes the pic from the user's profile
   const handleDeletePic = async (picId) => {
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -67,21 +62,8 @@ const Profile = () => {
       setUserData(updatedUser);
      } catch (err) {
       console.error(err);
-    }
+    };
   };
-
-  // const handleUpload = async (e) => {
-  //   try {
-  //     // e.preventDefault();
-  //     const formData = new FormData();
-  //     formData.append("userFile", file);
-  //     const response = await getOnePic(formData);
-  //     const uploadPic = await response.json();
-  //     console.log(uploadPic);
-  //   } catch (err) {
-  //     console.error(err);
-  //   };    
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -92,20 +74,21 @@ const Profile = () => {
       method: 'POST',
       body: formData,
     });
-    if (response) setStatus(response.statusText);
     const uploadedImage = await response.json();
-    console.log(uploadedImage);
-    setImage(uploadedImage); 
+    setImage(uploadedImage);
+    if (response) {
+      setStatus(response.statusText)
+    };
   };
 
   const handleFileChange = (e) => {
     const img = {
       preview: URL.createObjectURL(e.target.files[0]),
       data: e.target.files[0],
-    }
+    };
     setStatus('File Chosen');
     setImage(img);
-  }
+  };
 
   // if data isn't here yet, say so
   if (!userDataLength) {
@@ -170,24 +153,11 @@ const Profile = () => {
                 </CardGroup>
               </Container>
               <br></br>
-
-              {/* <form action="/api/pics" method="post" encType="multipart/form-data">
-                <label htmlFor="userFile">Upload photos:</label>
-                <input type="file" id="userFile" name="userFile" />
-                <input type="submit" />
-              </form> */}
-{/* 
-              <form action="/api/pics" method="post" encType="multipart/form-data">
-                <input type="file" id="userFile" onChange={(e)=>setFile(e.target.files)} className="form-control" name="userFile" />
-                <button type="submit" onClick={handleUpload} className="mt-2 btn btn-primary">
-                  Upload File
-                </button>
-              </form> */}
-
+              {/* Upload Photo Div */}
               <div>
                 <h1>Upload to server:</h1>
                 {status && <h3>{status}</h3>}
-                {image &&
+                {status === 'OK' &&
                   (<div>
                       <img src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${image.public_id}.jpg`} onClick={() => navigate(`/single-view/${image.id}`)} width='500vw' />
                     </div>)}
@@ -196,7 +166,6 @@ const Profile = () => {
                   <input type='file' name='userFile' onChange={handleFileChange}></input>
                   <button type='submit'>Submit</button>
                 </form>
-              
               </div>
             </div>
             <div className="mt-5 text-center"></div>
