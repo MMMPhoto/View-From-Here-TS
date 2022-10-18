@@ -1,4 +1,7 @@
 const router = require("express").Router();
+const { ProvidedRequiredArgumentsOnDirectivesRule } = require("graphql/validation/rules/ProvidedRequiredArgumentsRule.js");
+const multer  = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 const {
   getAllPics,
@@ -8,8 +11,11 @@ const {
   deletePic,
 } = require("../../controllers/pic-controller.js");
 
+console.log(upload);
+
 router.route("/").get(getAllPics);
-// .post(createNewPic);
+
+router.post("/", upload.single('userFile'), createNewPic);
 
 router.route("/:id").get(getPicById).put(updatePic).delete(deletePic);
 

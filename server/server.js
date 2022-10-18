@@ -33,47 +33,13 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
-app.post("/api/pics", upload.single('userFile'), async function (req, res, next) {
-  try {
-    console.log(req.file.filename);
-    const filePath = path.join(`./uploads/${req.file.filename}`);
-    const gpsData = await getGpsData(filePath);
-    console.log(gpsData);
-    const exifData = await getCustomExifData(filePath, exifOptions);
-    console.log(exifData);
-    const uploadPhotoData = await uploadImage(filePath, uploadOptions);
-    console.log(uploadPhotoData);
-
-       // Get unique cloudinary photo ID
-       const photoUrl = uploadPhotoData.secure_url;
-       const publicId = uploadPhotoData.public_id;
- 
-       // Build object for database
-       const photoData = {
-         ...gpsData,
-         ...exifData,
-       };
-       photoData.url = photoUrl;
-       photoData.public_id = publicId;
-       console.log(photoData);
-
-  
-      const addPicture = await Picture.create({
-      lat: photoData.latitude,
-      lng: photoData.longitude,
-      url: photoData.url,
-      public_id: photoData.public_id,
-      createdAt: photoData.CreateDate,
-      offsetTime: photoData.OffsetTime,
-      tags: photoData.tags
-      });
-      console.log(addPicture);
-      fs.unlinkSync(filePath);     
-      return res.json(addPicture);
-  } catch (err) {
-    console.error(err);
-  };
-});
+// app.post("/api/pics", upload.single('userFile'), async function (req, res, next) {
+//   try {
+    
+//   } catch (err) {
+//     console.error(err);
+//   };
+// });
 
 // app.use(Router);
 app.use(routes);
