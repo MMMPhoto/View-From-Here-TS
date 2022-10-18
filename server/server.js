@@ -70,11 +70,6 @@ app.post("/api/pics", upload.single('userFile'), async function (req, res, next)
       console.log(addPicture);
       fs.unlinkSync(filePath);     
       return res.json(addPicture);
-
-
-
-
-
   } catch (err) {
     console.error(err);
   };

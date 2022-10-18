@@ -1,13 +1,21 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
 import Auth from "../utils/auth";
-import { getCurrentUser, deleteSavedPic } from "../utils/api";
+import { getOnePic, getCurrentUser, deleteSavedPic } from "../utils/api";
 
 const Profile = () => {
   const [userData, setUserData] = useState({});
   const [savedPics, setSavedPics] = useState([{}]);
+  const [file, setFile] = useState();
   // use this to determine if `useEffect()` hook needs to run again
   const userDataLength = Object.keys(userData).length;
+
+  const navigate = useNavigate();
+
+  // Multer test
+  const [image, setImage] = useState({ preview: '', data: '' })
+  const [status, setStatus] = useState('')
 
   useEffect(() => {
     const getUserData = async () => {
@@ -33,7 +41,7 @@ const Profile = () => {
     };
 
     getUserData();
-  }, [userDataLength]);
+  }, [userData]);
 
   // create function that accepts the pics mongo _id value as param and deletes the pic from the user's profile
   const handleDeletePic = async (picId) => {
@@ -53,11 +61,45 @@ const Profile = () => {
 
       const updatedUser = await response.json();
       setUserData(updatedUser);
-      window.location.reload();
-    } catch (err) {
+     } catch (err) {
       console.error(err);
     }
   };
+
+  // const handleUpload = async (e) => {
+  //   try {
+  //     // e.preventDefault();
+  //     const formData = new FormData();
+  //     formData.append("userFile", file);
+  //     const response = await getOnePic(formData);
+  //     const uploadPic = await response.json();
+  //     console.log(uploadPic);
+  //   } catch (err) {
+  //     console.error(err);
+  //   };    
+  // };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    let formData = new FormData()
+    formData.append('userFile', image.data)
+    const response = await fetch('/api/pics', {
+      method: 'POST',
+      body: formData,
+    });
+    if (response) setStatus(response.statusText);
+    const uploadedImage = await response.json();
+    console.log(uploadedImage);
+    navigate(`/single-view/${uploadedImage.id}`);        
+  };
+
+  const handleFileChange = (e) => {
+    const img = {
+      preview: URL.createObjectURL(e.target.files[0]),
+      data: e.target.files[0],
+    }
+    setImage(img)
+  }
 
   // if data isn't here yet, say so
   if (!userDataLength) {
@@ -121,11 +163,30 @@ const Profile = () => {
                 </CardGroup>
               </Container>
               <br></br>
-              <form action="/api/pics" method="post" encType="multipart/form-data">
+
+              {/* <form action="/api/pics" method="post" encType="multipart/form-data">
                 <label htmlFor="userFile">Upload photos:</label>
                 <input type="file" id="userFile" name="userFile" />
                 <input type="submit" />
-              </form>
+              </form> */}
+{/* 
+              <form action="/api/pics" method="post" encType="multipart/form-data">
+                <input type="file" id="userFile" onChange={(e)=>setFile(e.target.files)} className="form-control" name="userFile" />
+                <button type="submit" onClick={handleUpload} className="mt-2 btn btn-primary">
+                  Upload File
+                </button>
+              </form> */}
+
+              <div>
+                <h1>Upload to server</h1>
+                {image.preview && <img src={image.preview} width='100' height='100' />}
+                <hr></hr>
+                <form onSubmit={handleSubmit}>
+                  <input type='file' name='userFile' onChange={handleFileChange}></input>
+                  <button type='submit'>Submit</button>
+                </form>
+                {status && <h4>{status}</h4>}
+              </div>
             </div>
             <div className="mt-5 text-center"></div>
           </div>
