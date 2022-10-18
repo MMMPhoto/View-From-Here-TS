@@ -2,3 +2,31 @@
     width: 90vw;
     height: auto;
 }
+
+#singleViewBg {
+    background-color: cornflowerblue;
+    width: 100.9%;
+}
+
+#singleViewImg {
+    border-style: solid;
+    padding: 0!important;
+    
+}
+
+#singleViewMap {
+    border-style: solid;
+    margin-top: 20px;
+}
+
+svg {
+    font-size: 48px;
+}
+
+svg:hover {
+    font: pink
+}
+
+p {
+    font-size: 36px
+}

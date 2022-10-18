@@ -1,0 +1,38 @@
+#background {
+    background-image: url(https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_1000/v1665696442/View-from-here/1ddfeb86305588512f79432b4a107ec5.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100.9%
+
+}
+
+#formdiv {
+    margin-top: -50px;
+   
+}
+
+#formbg {
+    opacity: 90%;
+}
+
+#cards {
+    min-width: min-content;
+    max-width: max-content;
+    width: 100%;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5%;
+    margin: 5px;
+    background-color: black;
+}
+
+#contain {
+    width: 180%;
+}
+
+#cardimage {
+    border-radius: 5%;
+    height: 100px;
+    width: 130px;
+    
+}
