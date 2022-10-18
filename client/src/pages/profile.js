@@ -9,6 +9,8 @@ const Profile = () => {
 
   const [userData, setUserData] = useState({});
   const [savedPics, setSavedPics] = useState([{}]);
+  const [newLoad, setnewLoad] = useState(true);
+  const [newDeletedPic, setNewDeletedPic] = useState(false);
 
   // Image Upload State
   const [image, setImage] = useState();
@@ -29,13 +31,15 @@ const Profile = () => {
         const user = await response.json();
         setUserData(user);
         setSavedPics(user.savedPics);
+        setNewDeletedPic(false);
+        setnewLoad(false);
       } catch (err) {
         console.error(err);
       }
     };
 
     getUserData();
-  }, [userData]);
+  }, [newLoad, newDeletedPic]);
 
   // Delete Pic from User's Saved Pics
   const handleDeletePic = async (picId) => {
@@ -50,6 +54,7 @@ const Profile = () => {
       }
       const updatedUser = await response.json();
       setUserData(updatedUser);
+      setNewDeletedPic(true);
      } catch (err) {
       console.error(err);
     };
