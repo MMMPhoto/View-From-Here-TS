@@ -16,7 +16,7 @@ console.log(cloudinary.config);
     unique_filename: true,
     overwrite: true,
     upload_preset: "view-from-here-general",
-    // folder: 'view-from-here'
+    folder: 'view-from-here/user-uploads'
   };
 
   // Upload image to Cloudinary
