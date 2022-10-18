@@ -112,17 +112,12 @@ const Profile = () => {
                             variant="top"
                           />
                         ) : null}
-                        <Card.Body>
-                          <Card.Title>{pic.title}</Card.Title>
-                          {/* <p className="small">Authors: {pic.authors}</p> */}
-                          <Card.Text>{pic.description}</Card.Text>
                           <Button
                             className="btn-block btn-danger"
                             onClick={() => handleDeletePic(pic._id)}
                           >
                             Delete
-                          </Button>
-                        </Card.Body>
+                          </Button>  
                       </Card>
                     );
                   })}
