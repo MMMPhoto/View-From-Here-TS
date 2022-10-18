@@ -35,7 +35,7 @@ const Profile = () => {
     };
 
     getUserData();
-  }, [userData]);
+  }, []);
 
   // Delete Pic from User's Saved Pics
   const handleDeletePic = async (picId) => {
