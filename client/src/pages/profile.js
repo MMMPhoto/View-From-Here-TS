@@ -110,20 +110,25 @@ const Profile = () => {
 
   // if data isn't here yet, say so
   if (!userData) {
-    return <h2>LOADING...</h2>;
+    return (
+      <section className="vh-100" id = 'background'>
+        <h2>Loading your profile and saved pics...</h2>
+      </section>
+    )
   }
 
   return (
     <>
-      <div className="container rounded bg-white mt-5 mb-5">
-        <div className="row">
+    <section className="vh-100" id = 'background'>
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <div className="container rounded bg-white mt-5 mb-5" id = "formbg" >
+        <div className="row" id = "formdiv">
           <div className="col-md-3 border-right">
             <div className="d-flex flex-column align-items-center text-center p-3 py-5">
               <img
-                alt="avatar"
                 className="rounded-circle mt-5"
-                width="150px"
-                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
+                width="200px"
+                src="https://www.pngkey.com/png/detail/966-9665347_icon-profile-circle.png" alt="Icon-profile - Circle@pngkey.com"
               />
               <span className="font-weight-bold">{userData.userName}</span>
               <span className="text-black-50">{userData.email}</span>
@@ -135,7 +140,7 @@ const Profile = () => {
               <div className="d-flex justify-content-between align-items-center mb-3">
                 <h4 className="text-right">Your saved photos:</h4>
               </div>
-              <Container>
+              <Container id = "contain">
                 <h2>
                   {savedPics.length
                     ? `Viewing ${savedPics.length} saved ${
@@ -143,29 +148,24 @@ const Profile = () => {
                       }:`
                     : "You have no saved photos!"}
                 </h2>
-                <CardGroup>
+                <CardGroup >
                   {savedPics.map((pic, index) => {
                     return (
-                      <Card key={index} border="dark">
+                      <Card id = "cards" key={index} border="dark">
                         {pic ? (
-                          <Card.Img
+                          <Card.Img id = "cardimage"
                             src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
                             alt={`The cover for ${pic.title}`}
                             variant="top"
                             onClick={() => navigate(`/single-view/${pic.id}`)}
                           />
                         ) : null}
-                        <Card.Body>
-                          <Card.Title>{pic.title}</Card.Title>
-                          <p className="small">Authors: {pic.authors}</p>
-                          <Card.Text>{pic.description}</Card.Text>
                           <Button
                             className="btn-block btn-danger"
                             onClick={() => handleDeletePic(pic._id)}
                           >
-                            Delete this pic!
-                          </Button>
-                        </Card.Body>
+                            Delete
+                          </Button>  
                       </Card>
                     );
                   })}
@@ -191,6 +191,7 @@ const Profile = () => {
           </div>
         </div>
       </div>
+      </section>
     </>
   );
 };

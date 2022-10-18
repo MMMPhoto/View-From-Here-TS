@@ -7,8 +7,12 @@
     height: auto;
 }
 
+.info-div img {
+    width: 100%;
+}
+
 .info-div img:hover {
     border: solid;
-    border-width: 2px;
+    border-width: 3px;
     border-color: black;
 }
