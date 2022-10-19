@@ -74,6 +74,7 @@ const Profile = () => {
     formData.append("userFile", image.data);
     const response = await uploadNewPic(formData);
     const uploadedImage = await response.json();
+
     // Check to see if response is okay
     if (!response.ok) {
       console.log(uploadedImage);
@@ -175,7 +176,6 @@ const Profile = () => {
                   </CardGroup>
                 </Container>
                 <br></br>
-                {/* Upload Photo Div */}
                 <div>
                   <h1>Upload your image:</h1>
                   {status && <h4>{status}</h4>}

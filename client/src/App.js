@@ -5,7 +5,7 @@ import Auth from "./utils/auth";
 import Header from "./components/header";
 import Footer from "./components/footer";
 import Home from "./pages/home/home.js";
-import SignUp from "./pages/signup.js";
+import SignUp from "./pages//signup/signup.js";
 import Login from "./pages/login/login.js";
 import Profile from "./pages/profile/profile.js";
 import SingleView from "./pages/SingleView.js";
