@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { getAllPics } from "../utils/api";
+import { getAllPics } from "../../utils/api";
 import "./home.css";
-import "./searchFooter.css";
-import MapWrapper from "../components/MapWrapper";
+import "../searchFooter.css";
+import MapWrapper from "../../components/MapWrapper";
 
 const Home = (props) => {
   // Set marker state

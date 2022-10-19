@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 import Auth from "./utils/auth";
 import Header from "./components/header";
 import Footer from "./components/footer";
-import Home from "./pages/home.js";
+import Home from "./pages/home/home.js";
 import SignUp from "./pages/signup.js";
-import Login from "./pages/login.js";
-import Profile from "./pages/profile.js";
+import Login from "./pages/login/login.js";
+import Profile from "./pages/profile/profile.js";
 import SingleView from "./pages/SingleView.js";
 
 function App() {
