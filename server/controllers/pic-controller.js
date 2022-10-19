@@ -50,8 +50,12 @@ module.exports = {
       console.log(exifData);
       // Upload to Cloudinary
       const uploadPhotoData = await uploadImage(filePath, uploadOptions);
+      // Return error if cloudinary response is bad
+      if (!uploadPhotoData) {
+        await fsPromises.unlink(filePath);
+        return res.status(400).json({error: "fileTooBig", message: "Your file is too large. Upload limit is 10MB!"});
+      };
       // Get unique cloudinary photo ID
-      console.log(uploadPhotoData);
       const photoUrl = uploadPhotoData.secure_url;
       const publicId = uploadPhotoData.public_id;
       // Build object for database
