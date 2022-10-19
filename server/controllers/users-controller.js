@@ -4,7 +4,6 @@ const { signToken } = require("../utils/auth.js");
 module.exports = {
   async getAllUsers(req, res) {
     User.find({})
-      // .populate({ path: "Picture" })
       .select("-__v")
       .then((dbUserData) => res.json(dbUserData))
       .catch((err) => {
@@ -30,7 +29,6 @@ module.exports = {
 
   async getUserById({ params }, res) {
     User.findOne({ _id: params.id })
-      // .populate({ path: "Picture" })
       .select("-__v")
       .then((dbUserData) => {
         if (!dbUserData) {

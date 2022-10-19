@@ -1,4 +1,4 @@
-const { User, Picture } = require("../models/index");
+const { Picture } = require("../models/index");
 const path = require("path");
 const {
   getGpsData,
@@ -44,8 +44,14 @@ module.exports = {
       // Return error if no GPS data present
       if (!gpsData) {
         await fsPromises.unlink(filePath);
-        return res.status(400).json({error: "NoGPS", message: "Your photo does not contain GPS data. Please try another photo!"});
-      };
+        return res
+          .status(400)
+          .json({
+            error: "NoGPS",
+            message:
+              "Your photo does not contain GPS data. Please try another photo!",
+          });
+      }
       const exifData = await getCustomExifData(filePath, exifOptions);
       console.log(exifData);
       // Upload to Cloudinary
@@ -53,8 +59,13 @@ module.exports = {
       // Return error if cloudinary response is bad
       if (!uploadPhotoData) {
         await fsPromises.unlink(filePath);
-        return res.status(400).json({error: "fileTooBig", message: "Your file is too large. Upload limit is 10MB!"});
-      };
+        return res
+          .status(400)
+          .json({
+            error: "fileTooBig",
+            message: "Your file is too large. Upload limit is 10MB!",
+          });
+      }
       // Get unique cloudinary photo ID
       const photoUrl = uploadPhotoData.secure_url;
       const publicId = uploadPhotoData.public_id;
@@ -81,7 +92,7 @@ module.exports = {
     } catch (err) {
       console.error(err);
       res.json(err);
-    };
+    }
   },
 
   async updatePic({ params, body }, res) {

@@ -4,11 +4,9 @@ const picSchema = new Schema(
   {
     image: {
       type: String,
-      // required: true,
     },
     title: {
       type: String,
-      // required: true,
     },
     description: {
       type: String,
@@ -31,15 +29,12 @@ const picSchema = new Schema(
     },
     tags: [
       {
-      type: String,
+        type: String,
       },
-    ],    
+    ],
     createdAt: {
       type: Date,
     },
-    // offsetTime: {
-    //   type: Number,
-    // }
   },
   {
     toJSON: {
