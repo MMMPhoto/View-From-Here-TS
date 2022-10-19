@@ -4,7 +4,7 @@
 }
 
 #singleViewBg {
-    background-color: cornflowerblue;
+    background-color: rgb(229, 233, 242);
     width: 100.9%;
 }
 
@@ -27,6 +27,6 @@ svg:hover {
     font: pink
 }
 
-p {
-    font-size: 36px
+.save-pic {
+    font-size: 24px
 }
