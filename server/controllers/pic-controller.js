@@ -41,10 +41,17 @@ module.exports = {
       const filePath = path.join(`./uploads/${req.file.filename}`);
       // Get GPS and Exif data from picture
       const gpsData = await getGpsData(filePath);
+      // Return error if no GPS data present
+      if (!gpsData) {
+        await fsPromises.unlink(filePath);
+        return res.status(400).json({error: "NoGPS", message: "Your photo does not contain GPS data. Please try another photo!"});
+      };
       const exifData = await getCustomExifData(filePath, exifOptions);
+      console.log(exifData);
       // Upload to Cloudinary
       const uploadPhotoData = await uploadImage(filePath, uploadOptions);
       // Get unique cloudinary photo ID
+      console.log(uploadPhotoData);
       const photoUrl = uploadPhotoData.secure_url;
       const publicId = uploadPhotoData.public_id;
       // Build object for database
@@ -69,7 +76,8 @@ module.exports = {
       return res.json(addPicture);
     } catch (err) {
       console.error(err);
-    }
+      res.json(err);
+    };
   },
 
   async updatePic({ params, body }, res) {
