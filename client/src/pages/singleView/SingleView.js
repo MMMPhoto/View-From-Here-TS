@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GrFavorite } from "react-icons/gr";
-import MapWrapper from "../components/MapWrapper";
+import MapWrapper from "../../components/MapWrapper";
 import "./SingleView.css";
-import Auth from "../utils/auth";
-import { getOnePic, savePic } from "../utils/api";
+import Auth from "../../utils/auth";
+import { getOnePic, savePic } from "../../utils/api";
 
 const SingleView = () => {
   const { pictureId } = useParams();
