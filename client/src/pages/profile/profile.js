@@ -95,7 +95,7 @@ const Profile = () => {
 
       if (!response.ok) {
         console.log(response);
-        throw new Error("Yo shit sux, playa!");
+        throw new Error("Something went wrong!");
       }
     } catch (err) {
       console.error(err);

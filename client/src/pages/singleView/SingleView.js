@@ -71,7 +71,7 @@ const SingleView = () => {
 
       if (!response.ok) {
         console.log(response);
-        throw new Error("Yo shit sux, playa!");
+        throw new Error("Something went wrong!");
       } else {
         setSavedPhoto(true);
       }
