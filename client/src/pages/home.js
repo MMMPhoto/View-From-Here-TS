@@ -1,6 +1,5 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
-import { getAllPics, savePic } from "../utils/api";
-import SearchFooter from "../components/searchFooter";
+import React, { useEffect, useState } from "react";
+import { getAllPics } from "../utils/api";
 import "./home.css";
 import "./searchFooter.css";
 import MapWrapper from "../components/MapWrapper";
