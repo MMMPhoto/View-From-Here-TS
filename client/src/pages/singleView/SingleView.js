@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GrFavorite } from "react-icons/gr";
 import MapWrapper from "../../components/MapWrapper";
