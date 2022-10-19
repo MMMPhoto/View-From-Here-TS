@@ -74,12 +74,14 @@ const Profile = () => {
     formData.append("userFile", image.data);
     const response = await uploadNewPic(formData);
     const uploadedImage = await response.json();
-    // setImage(uploadedImage);
-    // console.log(uploadedImage);
-    if (response) {
-      setStatus(response.statusText);
+    // Check to see if response is okay
+    if (!response.ok) {
+      console.log(uploadedImage);
+      setStatus(uploadedImage.message);
+      return;
+    } else {
+      setStatus("Image saved and uploaded!");
     }
-
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -176,7 +178,7 @@ const Profile = () => {
               {/* Upload Photo Div */}
               <div>
                 <h1>Upload your image:</h1>
-                {status === "OK" && <h3>Image saved and uploaded!</h3>}
+                {status && (<h4>{status}</h4>)}
                 <hr></hr>
                 <form onSubmit={handleSubmit}>
                   <input
