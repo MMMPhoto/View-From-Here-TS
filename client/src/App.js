@@ -2,13 +2,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useEffect, useState } from "react";
 import Auth from "./utils/auth";
-import Header from "./components/header";
-import Footer from "./components/footer";
+import Header from "./components/header/header";
+import Footer from "./components/footer/footer";
 import Home from "./pages/home/home.js";
 import SignUp from "./pages//signup/signup.js";
 import Login from "./pages/login/login.js";
 import Profile from "./pages/profile/profile.js";
-import SingleView from "./pages//singleView/SingleView.js";
+import SingleView from "./pages/singleView/SingleView.js";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

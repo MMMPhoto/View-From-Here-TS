@@ -1,5 +1,5 @@
 #header {
-    background-image: url(../../public/assets/clouds.jpg) ;
+    background-image: url(../../../public/assets/clouds.jpg) ;
     background-position: center;
     border-bottom: solid;
     border-color: black;
@@ -29,7 +29,7 @@
 
 
 #cloud {
-    background-image: url(../../public/assets/cloudicon.png);
+    background-image: url(../../../public/assets/cloudicon.png);
     background-size: contain;
     background-repeat: no-repeat;
     min-width: 100px;
