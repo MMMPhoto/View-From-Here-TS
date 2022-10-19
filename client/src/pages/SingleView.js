@@ -12,6 +12,18 @@ const SingleView = () => {
   const [picUrl, setPicUrl] = useState("");
   const [tags, setPicTags] = useState([]);
 
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Check login status on load
+  useEffect(() => {
+    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    if (!token) {
+      setIsLoggedIn(false);
+    } else {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   // Set state for saved photo
   const [isSavedPhoto, setSavedPhoto] = useState(false);
 
@@ -73,7 +85,11 @@ const SingleView = () => {
       className="d-flex flex-column align-items-center p-4"
       id="singleViewBg"
     >
-      <p className="save-pic">Click the heart to save a photo!</p>
+      {isLoggedIn ? (
+        <p className="save-pic">Click the heart to save the photo!</p>
+      ) : (
+        <p className="save-pic">You must be logged in to save photos!</p>
+      )}
       <div
         className="d-flex flex-row justify-content-center align-items-center"
         id="savePhoto"
@@ -84,17 +100,9 @@ const SingleView = () => {
         {isSavedPhoto ? (
           <p className="ms-3 mb-0 save-pic">Photo saved!</p>
         ) : (
-          <p className="ms-3 mb-0 save-pic">You must log in to save photos.</p>
+          <div></div>
         )}
       </div>
-      {/* <div>
-        <p>
-          Tags:{" "}
-          {tags.map((tag, index) => (
-            <span key={index}>{tag} </span>
-          ))}
-        </p>
-      </div> */}
       <img className="single-pic p-4" src={picUrl} id="singleViewImg" />
       <div id="singleViewMap">
         {pictureData[0].lat ? (
