@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { getAllPics } from "../../utils/api";
 import "./home.css";
-import "../../components/searchFooter.css";
+import "../../components/searchFooter/searchFooter.css";
 import MapWrapper from "../../components/MapWrapper";
 
 const Home = (props) => {
