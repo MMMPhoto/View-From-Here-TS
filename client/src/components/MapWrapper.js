@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import {Routes, Route, useNavigate} from 'react-router-dom';
-import { GoogleMap, LoadScript, useLoadScript, Marker, InfoWindow, MarkerClusterer } from "@react-google-maps/api";
-import { Link } from 'react-router-dom';
-import { getAllPics } from '../utils/api';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 
 import MarkerInfoCard from './MarkerInfoCard';
 
@@ -23,7 +21,7 @@ const MapWrapper = ({markers, containerStyle}) => {
             const bounds = new window.google.maps.LatLngBounds();
             if (markers) {
                 markers.map((marker) => {
-                    bounds.extend({
+                    return bounds.extend({
                         lat: marker.lat,
                         lng: marker.lng
                     });
@@ -48,7 +46,8 @@ const MapWrapper = ({markers, containerStyle}) => {
             <GoogleMap 
                 zoom={4.5}
                 mapContainerStyle={containerStyle}
-                onLoad={onLoad} 
+                onLoad={onLoad}
+                mapTypeId="hybrid"
                 >
                 {markers && (markers.map((marker) => (
                         <Marker 
