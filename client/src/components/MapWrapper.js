@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useMediaQuery } from 'react-responsive';
 import {
   GoogleMap,
   LoadScript,
@@ -12,6 +13,10 @@ import MarkerInfoCard from "./markerInfoCard/MarkerInfoCard";
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
 const MapWrapper = ({ markers, containerStyle }) => {
+  // Query screen size for mobile and tablet
+  const isMobile = useMediaQuery({ query: '(max-width: 700px)' });
+  const isTablet = useMediaQuery({ query: '(max-width: 1200px)' })
+  // Set up redirect function
   const navigate = useNavigate();
 
   // Set Map State
@@ -31,15 +36,20 @@ const MapWrapper = ({ markers, containerStyle }) => {
             lng: marker.lng,
           });
         });
+        map.setCenter(bounds.getCenter());
+        // Asjust map zoom for screen size or single marker
         if (markers.length === 1) {
-          map.setCenter(bounds.getCenter());
           map.setZoom(12);
+        } else if (isMobile) {
+          map.setZoom(2);
+        } else if (isTablet) {
+          map.setZoom(3);
         } else {
           map.fitBounds(bounds);
         }
       }
     }
-  }, [map, markers]);
+  }, [map, markers, isMobile, isTablet]);
 
   // Handle Active Marker change
   const handleActiveMarker = (markerId) => {
