@@ -63,6 +63,14 @@ const MapWrapper = ({ markers, containerStyle }) => {
     setActiveMarker(markerId);
   };
 
+  // Record change in bounds
+  const handleBoundsChange = () => {
+    if (markers.length > 1) {
+      dispatch(saveBounds(JSON.stringify(map.getBounds())));
+      console.log(store.getState());
+    };
+  };
+
   return (
     <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap
@@ -70,7 +78,7 @@ const MapWrapper = ({ markers, containerStyle }) => {
         mapContainerStyle={containerStyle}
         onLoad={onLoad}
         mapTypeId="hybrid"
-        onBoundsChanged={() => dispatch(saveBounds(JSON.stringify(map.getBounds())))}
+        onBoundsChanged={handleBoundsChange}
       >
         {markers &&
           markers.map((marker) => (

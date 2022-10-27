@@ -5,7 +5,7 @@ export const mapStateSlice = createSlice({
   initialState: {
     markers: [{}],
     zoom: null,
-    bounds: {}
+    bounds: null
   },
   reducers: {
     saveMarkers: (state, action) => {
