@@ -20,10 +20,10 @@ const MapWrapper = ({ markers, containerStyle }) => {
   const isTablet = useMediaQuery({ query: '(max-width: 1200px)' })
   // Set up redirect function
   const navigate = useNavigate();
-   // Define React Redux functions
-   const savedZoom = useSelector((state) => state.mapState.zoom);
-   const savedBounds = useSelector((state) => state.mapState.bounds);
-   const dispatch = useDispatch();
+  // Define React Redux functions
+  const savedZoom = useSelector((state) => state.mapState.zoom);
+  const savedBounds = useSelector((state) => state.mapState.bounds);
+  const dispatch = useDispatch();
 
   // Set Map State
   const [map, setMap] = useState(null);
@@ -36,26 +36,30 @@ const MapWrapper = ({ markers, containerStyle }) => {
   useEffect(() => {
     if (map) {
       const bounds = new window.google.maps.LatLngBounds();
-      if (markers) {
-        markers.map((marker) => {
-          return bounds.extend({
-            lat: marker.lat,
-            lng: marker.lng,
+      if (savedBounds && markers.length > 1) {
+        return map.fitBounds(JSON.parse(savedBounds));
+      } else {
+        if (markers) {
+          markers.map((marker) => {
+            return bounds.extend({
+              lat: marker.lat,
+              lng: marker.lng,
+            });
           });
-        });
-        map.setCenter(bounds.getCenter());
-        // Asjust map zoom for screen size or single marker
-        if (markers.length === 1) {
-          map.setZoom(12);
-        } else if (isMobile) {
-          map.setZoom(2);
-        } else if (isTablet) {
-          map.setZoom(3);
-        } else {
-          map.fitBounds(bounds);
-        }
-      }
-    }
+          map.setCenter(bounds.getCenter());
+          // Asjust map zoom for screen size or single marker
+          if (markers.length === 1) {
+            map.setZoom(12);
+          } else if (isMobile) {
+            map.setZoom(2);
+          } else if (isTablet) {
+            map.setZoom(3);
+          } else {
+            map.fitBounds(bounds);
+          }
+        };
+      };      
+    };
   }, [map, markers, isMobile, isTablet]);
 
   // Handle Active Marker change
