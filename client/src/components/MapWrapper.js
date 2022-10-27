@@ -21,7 +21,7 @@ const MapWrapper = ({ markers, containerStyle }) => {
   // Set up redirect function
   const navigate = useNavigate();
   // Define React Redux functions
-  const savedZoom = useSelector((state) => state.mapState.zoom);
+  // const savedZoom = useSelector((state) => state.mapState.zoom);
   const savedBounds = useSelector((state) => state.mapState.bounds);
   const dispatch = useDispatch();
 

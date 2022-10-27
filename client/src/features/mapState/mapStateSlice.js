@@ -4,16 +4,16 @@ export const mapStateSlice = createSlice({
   name: 'mapState',
   initialState: {
     markers: [{}],
-    zoom: null,
+    // zoom: null,
     bounds: null
   },
   reducers: {
     saveMarkers: (state, action) => {
       state.markers = action.payload
     },
-    saveZoom: (state, action) => {
-      state.zoom = action.payload
-    },
+    // saveZoom: (state, action) => {
+    //   state.zoom = action.payload
+    // },
     saveBounds: (state, action) => {
       state.bounds = action.payload
     }
