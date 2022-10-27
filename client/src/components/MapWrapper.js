@@ -7,7 +7,7 @@ import {
   Marker,
   InfoWindow,
 } from "@react-google-maps/api";
-
+import { setMarkers } from "../features/mapState/mapStateSlice";
 import MarkerInfoCard from "./markerInfoCard/MarkerInfoCard";
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
