@@ -3,10 +3,17 @@ import { getAllPics } from "../../utils/api";
 import "./home.css";
 import "../../components/searchFooter/searchFooter.css";
 import MapWrapper from "../../components/MapWrapper";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveMarkers } from "../../features/mapState/mapStateSlice";
+import store from "../../app/store";
 
 const Home = (props) => {
   // Set marker state
   const [markers, setMarkers] = useState("");
+
+  // Define React Redux functions
+  const savedMarkers = useSelector((state) => state.mapState.markers);
+  const dispatch = useDispatch();
 
   // Map Container Styling
   const containerStyle = {
@@ -21,6 +28,8 @@ const Home = (props) => {
         const response = await getAllPics();
         const jsonData = await response.json();
         setMarkers(jsonData);
+        dispatch(saveMarkers(jsonData));
+        console.log(store.getState());
       } catch (error) {
         console.log("error", error);
       }
