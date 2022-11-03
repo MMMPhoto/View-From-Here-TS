@@ -5,7 +5,6 @@ import "../../components/searchFooter/searchFooter.css";
 import MapWrapper from "../../components/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers } from "../../features/mapState/mapStateSlice";
-import store from "../../app/store";
 
 const Home = (props) => {
   // Set marker state
@@ -29,7 +28,6 @@ const Home = (props) => {
         const jsonData = await response.json();
         setMarkers(jsonData);
         dispatch(saveMarkers(jsonData));
-        console.log(store.getState());
       } catch (error) {
         console.log("error", error);
       }

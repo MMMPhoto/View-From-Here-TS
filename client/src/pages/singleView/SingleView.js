@@ -5,6 +5,7 @@ import MapWrapper from "../../components/MapWrapper";
 import "./SingleView.css";
 import Auth from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";
+import { useSelector, useDispatch } from 'react-redux';
 
 const SingleView = () => {
   const { pictureId } = useParams();
@@ -13,6 +14,10 @@ const SingleView = () => {
   const [tags, setPicTags] = useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Define React Redux functions
+  const userSavedPhotos = useSelector((state) => state.userSavedPhotos.savedPhotos);
+  const dispatch = useDispatch();
 
   // Check login status on load
   useEffect(() => {
@@ -43,6 +48,11 @@ const SingleView = () => {
         jsonArray.push(jsonData);
         setPictureData(jsonArray);
         setPicTags(jsonData.tags);
+        console.log(`User saved photos from store: ${userSavedPhotos}`);
+        console.log(userSavedPhotos);
+        if (userSavedPhotos.find(photo => photo.id === pictureId)) {
+          setSavedPhoto(true);
+        };
         // Call API to set photo URL
         const url = `https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${jsonData.public_id}.jpg`;
         setPicUrl(url);

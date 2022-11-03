@@ -3,10 +3,17 @@ import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import Auth from "../../utils/auth";
 import "./login.css";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+import store from "../../app/store";
 
 function Login(props) {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
+
+  // Define React Redux functions
+  const userSavedPhotos = useSelector((state) => state.userSavedPhotos.savedPhotos);
+  const dispatch = useDispatch();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -21,7 +28,7 @@ function Login(props) {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-    }
+    };
 
     try {
       const response = await loginUser(userFormData);
@@ -32,17 +39,19 @@ function Login(props) {
       props.setLogin(true);
       const { token, user } = await response.json();
       console.log(user);
+      dispatch(saveSavedPhotos(user.savedPics));
       Auth.login(token);
       navigate("/");
     } catch (err) {
       console.error(err);
-    }
+    };
 
     setUserFormData({
       email: "",
       password: "",
     });
   };
+
   return (
     <>
       <section id="background">
@@ -129,6 +138,6 @@ function Login(props) {
       </section>
     </>
   );
-}
+};
 
 export default Login;
