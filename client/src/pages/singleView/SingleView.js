@@ -48,6 +48,8 @@ const SingleView = () => {
         jsonArray.push(jsonData);
         setPictureData(jsonArray);
         setPicTags(jsonData.tags);
+        console.log(`User saved photos from store: ${userSavedPhotos}`);
+        console.log(userSavedPhotos);
         if (userSavedPhotos.find(photo => photo.id === pictureId)) {
           setSavedPhoto(true);
         };

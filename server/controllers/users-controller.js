@@ -83,6 +83,9 @@ module.exports = {
   async login({ body }, res) {
     const user = await User.findOne({
       $or: [{ email: body.email }, { password: body.password }],
+    }).populate({
+      path: "savedPics",
+      options: { strictPopulate: false },
     });
     if (!user) {
       return res.status(400).json({ message: "No user found" });
