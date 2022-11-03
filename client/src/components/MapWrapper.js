@@ -9,7 +9,6 @@ import {
 } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveBounds } from "../features/mapState/mapStateSlice";
-import store from "../app/store";
 import MarkerInfoCard from "./markerInfoCard/MarkerInfoCard";
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;

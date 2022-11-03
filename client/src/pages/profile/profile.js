@@ -11,7 +11,6 @@ import {
 import "./profile.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
-import store from "../../app/store";
 
 const Profile = () => {
   const navigate = useNavigate();

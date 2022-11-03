@@ -6,8 +6,6 @@ import "./SingleView.css";
 import Auth from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
-import store from "../../app/store";
 
 const SingleView = () => {
   const { pictureId } = useParams();
