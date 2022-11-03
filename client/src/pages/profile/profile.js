@@ -45,7 +45,6 @@ const Profile = () => {
         setUserData(user);
         setSavedPics(user.savedPics);
         dispatch(saveSavedPhotos(user.savedPics));
-        console.log(store.getState());
         setNewDeletedPic(false);
         setnewLoad(false);
       } catch (err) {

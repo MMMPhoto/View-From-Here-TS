@@ -50,6 +50,9 @@ const SingleView = () => {
         jsonArray.push(jsonData);
         setPictureData(jsonArray);
         setPicTags(jsonData.tags);
+        if (userSavedPhotos.find(photo => photo.id === pictureId)) {
+          setSavedPhoto(true);
+        };
         // Call API to set photo URL
         const url = `https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${jsonData.public_id}.jpg`;
         setPicUrl(url);
