@@ -8,7 +8,7 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveZoom, saveBounds } from "../features/mapState/mapStateSlice";
+import { saveBounds } from "../features/mapState/mapStateSlice";
 import store from "../app/store";
 import MarkerInfoCard from "./markerInfoCard/MarkerInfoCard";
 
@@ -21,15 +21,12 @@ const MapWrapper = ({ markers, containerStyle }) => {
   // Set up redirect function
   const navigate = useNavigate();
   // Define React Redux functions
-  // const savedZoom = useSelector((state) => state.mapState.zoom);
   const savedBounds = useSelector((state) => state.mapState.bounds);
   const dispatch = useDispatch();
 
   // Set Map State
   const [map, setMap] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
-  // const [bounds, setBounds] = useState(null);
-
   const onLoad = useCallback((map) => setMap(map), []);
 
   // Set Bounds of Map to contain Markers
@@ -47,7 +44,7 @@ const MapWrapper = ({ markers, containerStyle }) => {
             });
           });
           map.setCenter(bounds.getCenter());
-          // Asjust map zoom for screen size or single marker
+          // Adjust map zoom for screen size or single marker
           if (markers.length === 1) {
             map.setZoom(12);
           } else if (isMobile) {
@@ -71,7 +68,6 @@ const MapWrapper = ({ markers, containerStyle }) => {
   const handleBoundsChange = () => {
     if (markers.length > 1) {
       dispatch(saveBounds(JSON.stringify(map.getBounds())));
-      console.log(store.getState());
     };
   };
 

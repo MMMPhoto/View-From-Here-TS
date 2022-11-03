@@ -5,6 +5,9 @@ import MapWrapper from "../../components/MapWrapper";
 import "./SingleView.css";
 import Auth from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+import store from "../../app/store";
 
 const SingleView = () => {
   const { pictureId } = useParams();
@@ -13,6 +16,10 @@ const SingleView = () => {
   const [tags, setPicTags] = useState([]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Define React Redux functions
+  const userSavedPhotos = useSelector((state) => state.userSavedPhotos.savedPhotos);
+  const dispatch = useDispatch();
 
   // Check login status on load
   useEffect(() => {

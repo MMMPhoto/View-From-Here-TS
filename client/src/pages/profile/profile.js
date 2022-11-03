@@ -9,6 +9,9 @@ import {
   savePic,
 } from "../../utils/api";
 import "./profile.css";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+import store from "../../app/store";
 
 const Profile = () => {
   const navigate = useNavigate();
@@ -21,6 +24,10 @@ const Profile = () => {
   // Image Upload State
   const [image, setImage] = useState();
   const [status, setStatus] = useState("");
+
+  // Define React Redux functions
+  const userSavedPhotos = useSelector((state) => state.userSavedPhotos.savedPhotos);
+  const dispatch = useDispatch();
 
   // Get Logged in User's Data
   useEffect(() => {
@@ -37,13 +44,14 @@ const Profile = () => {
         const user = await response.json();
         setUserData(user);
         setSavedPics(user.savedPics);
+        dispatch(saveSavedPhotos(user.savedPics));
+        console.log(store.getState());
         setNewDeletedPic(false);
         setnewLoad(false);
       } catch (err) {
         console.error(err);
       }
     };
-
     getUserData();
   }, [newLoad, newDeletedPic]);
 
