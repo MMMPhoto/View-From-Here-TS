@@ -41,7 +41,6 @@ function Login(props) {
       console.log(user);
       dispatch(saveSavedPhotos(user.savedPics));
       Auth.login(token);
-      console.log(store.getState());
       navigate("/");
     } catch (err) {
       console.error(err);
