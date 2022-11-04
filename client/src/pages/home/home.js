@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { getAllPics } from "../../utils/api";
 import "./home.css";
 import "../../components/searchFooter/searchFooter.css";
-import MapWrapper from "../../components/MapWrapper";
+import MapWrapper from "../../components/map/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers } from "../../features/mapState/mapStateSlice";
 
