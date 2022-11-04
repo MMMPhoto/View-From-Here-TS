@@ -8,8 +8,8 @@ import {
   InfoWindow,
 } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveBounds } from "../features/mapState/mapStateSlice";
-import MarkerInfoCard from "./markerInfoCard/MarkerInfoCard";
+import { saveBounds } from "../../features/mapState/mapStateSlice";
+import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -76,8 +76,11 @@ const MapWrapper = ({ markers, containerStyle }) => {
         zoom={4.5}
         mapContainerStyle={containerStyle}
         onLoad={onLoad}
-        mapTypeId="hybrid"
         onBoundsChanged={handleBoundsChange}
+        options={{
+          gestureHandling: 'greedy',
+          mapTypeId: 'hybrid'
+        }}
       >
         {markers &&
           markers.map((marker) => (
@@ -90,7 +93,7 @@ const MapWrapper = ({ markers, containerStyle }) => {
               //         handleActiveMarker(null);
               //     }, 1500);
               // }}
-              onClick={() => navigate(`/single-view/${marker.id}`)}
+              onClick={() => handleActiveMarker(marker.id)}
             >
               {activeMarker === marker.id && markers.length > 1 && (
                 <InfoWindow key={marker.id} position={marker.position}>

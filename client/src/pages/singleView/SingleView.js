@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GrFavorite } from "react-icons/gr";
-import MapWrapper from "../../components/MapWrapper";
+import MapWrapper from "../../components/map/MapWrapper";
 import "./SingleView.css";
 import Auth from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";

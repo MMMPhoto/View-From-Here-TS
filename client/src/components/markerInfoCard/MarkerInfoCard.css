@@ -1,5 +1,5 @@
 .info-div {
-    max-width: 12vw;
+    width: 45vw;
 }
 
 .marker-thumb {
@@ -15,4 +15,16 @@
     border: solid;
     border-width: 3px;
     border-color: black;
+}
+
+@media (min-width: 576px) {
+    .info-div {
+        max-width: 25vw;
+    }
+}
+
+@media (min-width: 992px) {
+    .info-div {
+        max-width: 12vw;
+    }
 }
