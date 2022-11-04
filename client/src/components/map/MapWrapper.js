@@ -6,7 +6,9 @@ import {
   LoadScript,
   Marker,
   InfoWindow,
+  MarkerClusterer
 } from "@react-google-maps/api";
+// import { MarkerClusterer } from "@googlemaps/markerclusterer";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveBounds } from "../../features/mapState/mapStateSlice";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
@@ -70,6 +72,11 @@ const MapWrapper = ({ markers, containerStyle }) => {
     };
   };
 
+  const clusterOptions = {
+    imagePath:
+      'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m', // so you must have m1.png, m2.png, m3.png, m4.png, m5.png and m6.png in that folder
+  }
+
   return (
     <LoadScript googleMapsApiKey={apiKey}>
       <GoogleMap
@@ -83,25 +90,27 @@ const MapWrapper = ({ markers, containerStyle }) => {
         }}
       >
         {markers &&
-          markers.map((marker) => (
-            <Marker
-              key={marker.id}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onMouseOver={() => handleActiveMarker(marker.id)}
-              // onMouseOut={() => {
-              //     setTimeout(() => {
-              //         handleActiveMarker(null);
-              //     }, 1500);
-              // }}
-              onClick={() => handleActiveMarker(marker.id)}
-            >
-              {activeMarker === marker.id && markers.length > 1 && (
-                <InfoWindow key={marker.id} position={marker.position}>
-                  <MarkerInfoCard marker={marker} navigate={navigate} />
-                </InfoWindow>
+            <MarkerClusterer options={clusterOptions}>
+              {(clusterer) => (
+                  markers.map((marker) => (
+                    <Marker
+                      key={marker.id}
+                      position={{ lat: marker.lat, lng: marker.lng }}
+                      onMouseOver={() => handleActiveMarker(marker.id)}
+
+                      onClick={() => handleActiveMarker(marker.id)}
+                      clusterer={clusterer}
+                    >
+                      {activeMarker === marker.id && markers.length > 1 && (
+                        <InfoWindow key={marker.id} position={marker.position}>
+                          <MarkerInfoCard marker={marker} navigate={navigate} />
+                        </InfoWindow>
+                      )}
+                    </Marker>
+                  ))
               )}
-            </Marker>
-          ))}
+            </MarkerClusterer>   
+        }       
       </GoogleMap>
     </LoadScript>
   );
