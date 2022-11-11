@@ -5,10 +5,14 @@ import "../../components/searchFooter/searchFooter.css";
 import MapWrapper from "../../components/map/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers } from "../../features/mapState/mapStateSlice";
+import { json } from "react-router-dom";
 
 const Home = (props) => {
   // Set marker state
   const [markers, setMarkers] = useState("");
+  const [tempMarkers, setTempMarkers] = useState("")
+  const [tempMarkerIndex, setTempMarkerIndex] = useState(null);
+  const [markerLoaded, setMarkerLoaded] = useState(false);
 
   // Define React Redux functions
   const savedMarkers = useSelector((state) => state.mapState.markers);
@@ -26,7 +30,13 @@ const Home = (props) => {
       try {
         const response = await getAllPics();
         const jsonData = await response.json();
-        setMarkers(jsonData);
+
+        // setMarkersLoaded(true);
+
+        // Timeout for Marker Drop
+        console.log(jsonData);
+        setTempMarkerIndex(0);
+        setTempMarkers(jsonData);
         dispatch(saveMarkers(jsonData));
       } catch (error) {
         console.log("error", error);
@@ -35,10 +45,17 @@ const Home = (props) => {
     fetchPicData();
   }, []);
 
+  useEffect(() => {
+      setTimeout(() => {
+      }, 1000)
+      setMarkers(current => [...current, tempMarkers[tempMarkerIndex]]);
+    // };
+  }, [markers, tempMarkers]);
+
   return (
     <>
       <div id="map" className="">
-        <MapWrapper markers={markers} containerStyle={containerStyle} />
+        <MapWrapper markers={markers} containerStyle={containerStyle} markerLoaded={markerLoaded} />
       </div>
     </>
   );
