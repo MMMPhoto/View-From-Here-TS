@@ -10,7 +10,7 @@ import { json } from "react-router-dom";
 const Home = (props) => {
   // Set marker state
   const [markers, setMarkers] = useState("");
-  const [tempMarkers, setTempMarkers] = useState("")
+  const [tempMarkers, setTempMarkers] = useState("");
   const [tempMarkerIndex, setTempMarkerIndex] = useState(null);
   const [markerLoaded, setMarkerLoaded] = useState(false);
 
@@ -31,12 +31,10 @@ const Home = (props) => {
         const response = await getAllPics();
         const jsonData = await response.json();
 
-        // setMarkersLoaded(true);
-
-        // Timeout for Marker Drop
+        setMarkerLoaded(true);
         console.log(jsonData);
         setTempMarkerIndex(0);
-        setTempMarkers(jsonData);
+        setMarkers(jsonData);
         dispatch(saveMarkers(jsonData));
       } catch (error) {
         console.log("error", error);
@@ -48,7 +46,9 @@ const Home = (props) => {
   useEffect(() => {
       setTimeout(() => {
       }, 1000)
-      setMarkers(current => [...current, tempMarkers[tempMarkerIndex]]);
+      console.log(`tempMarkers: ${tempMarkers}`);
+      // setMarkers(current => [...current, JSON.parse(tempMarkers[tempMarkerIndex])]);
+      console.log(markers);
     // };
   }, [markers, tempMarkers]);
 

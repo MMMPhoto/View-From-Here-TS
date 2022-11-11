@@ -15,7 +15,7 @@ import { Spring } from 'react-spring';
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-const MapWrapper = ({ markers, containerStyle }) => {
+const MapWrapper = ({ markers, containerStyle, markerLoaded }) => {
   // Query screen size for mobile and tablet
   const isMobile = useMediaQuery({ query: '(max-width: 700px)' });
   const isTablet = useMediaQuery({ query: '(max-width: 1200px)' })
