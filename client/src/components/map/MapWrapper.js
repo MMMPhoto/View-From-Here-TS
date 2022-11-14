@@ -10,8 +10,6 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { saveBounds } from "../../features/mapState/mapStateSlice";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
-// import { Transition } from 'react-transition-group';
-import { Spring } from 'react-spring';
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
@@ -29,8 +27,6 @@ const MapWrapper = ({ markers, containerStyle, markerLoaded }) => {
   const [map, setMap] = useState(null);
   const [activeMarker, setActiveMarker] = useState(null);
   const onLoad = useCallback((map) => setMap(map), []);
-
-  // const markerDrop = window.google.maps.Animation.DROP;
 
   // Set Bounds of Map to contain Markers
   useEffect(() => {
@@ -86,7 +82,7 @@ const MapWrapper = ({ markers, containerStyle, markerLoaded }) => {
           mapTypeId: 'hybrid'
         }}
       >
-        {markerLoaded &&
+        {markers &&
           markers.map((marker) => (
             <Marker
               key={marker.id}
@@ -94,24 +90,16 @@ const MapWrapper = ({ markers, containerStyle, markerLoaded }) => {
               onMouseOver={() => handleActiveMarker(marker.id)}
               // onLoad={() => markerDrop(marker)}
               animation={2}
-              // onMouseOut={() => {
-              //     setTimeout(() => {
-              //         handleActiveMarker(null);
-              //     }, 1500);
-              // }}
               onClick={() => handleActiveMarker(marker.id)}
             >
               {activeMarker === marker.id && markers.length > 1 && (
-                // <Spring
-                //   from={{ opacity: 0 }}
-                //   to={{ opacity: 1 }}
-                // >
-                //   {props => (
-                    <InfoWindow key={marker.id} position={marker.position}>
+
+                    <InfoWindow
+                      key={marker.id} 
+                      position={marker.position}
+                      >
                       <MarkerInfoCard marker={marker} navigate={navigate} />
                     </InfoWindow>
-                //   )}
-                // </Spring>
               )}
             </Marker>
           ))}
