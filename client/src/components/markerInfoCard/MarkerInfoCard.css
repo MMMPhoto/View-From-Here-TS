@@ -1,5 +1,6 @@
 .info-div {
     width: 45vw;
+    margin: 0px;
 }
 
 .marker-thumb {
@@ -8,13 +9,16 @@
 }
 
 .info-div img {
+    border-radius: 10px;
     width: 100%;
+    border: solid;
+    border-width: 2px;
+    border-color: white;
+    transition: all 0.3s ease-in-out;  
 }
 
 .info-div img:hover {
-    border: solid;
-    border-width: 3px;
-    border-color: black;
+    border-color: black;  
 }
 
 @media (min-width: 576px) {

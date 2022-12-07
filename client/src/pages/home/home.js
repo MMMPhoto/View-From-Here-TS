@@ -26,6 +26,7 @@ const Home = (props) => {
       try {
         const response = await getAllPics();
         const jsonData = await response.json();
+        console.log(jsonData);
         setMarkers(jsonData);
         dispatch(saveMarkers(jsonData));
       } catch (error) {
