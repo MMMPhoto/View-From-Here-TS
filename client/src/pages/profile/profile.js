@@ -132,25 +132,25 @@ const Profile = () => {
       <section id="background">
         <div className="container rounded bg-white mt-5 mb-5" id="formbg">
           <div className="row" id="formdiv">
-            <div className="col-md-3 border-right">
-              <div className="d-flex flex-column align-items-center text-center p-3 py-5">
+            <div className="col-12 col-md-3 border-right">
+              <div className="d-flex flex-column justify-content-around align-items-center text-center mt-3">
                 <img
-                  className="rounded-circle mt-5"
-                  width="200px"
+                  className="rounded-circle"
+                  width="100px"
                   src="https://www.pngkey.com/png/detail/966-9665347_icon-profile-circle.png"
-                  alt="Icon-profile - Circle@pngkey.com"
+                  alt="Profile Icon"
                 />
                 <span className="font-weight-bold">{userData.userName}</span>
                 <span className="text-black-50">{userData.email}</span>
                 <span></span>
               </div>
             </div>
-            <div className="col-md-9 border-right">
-              <div className="p-3 py-5">
+            <div className="col-12 col-md-9 border-right">
+              <div className="pt-4">
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h4 className="text-right">Your saved photos:</h4>
                 </div>
-                <Container id="contain">
+                <Container class="p-0 m-0" id="contain">
                   <h2>
                     {savedPics.length
                       ? `Viewing ${savedPics.length} saved ${
