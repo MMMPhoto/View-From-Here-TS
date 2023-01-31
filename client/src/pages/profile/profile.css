@@ -3,13 +3,11 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 100.9%;
-    padding: 12vh;
-
+    padding-top: 10vh;
 }
 
 #formdiv {
     margin-top: -50px;
-   
 }
 
 #formbg {
@@ -23,13 +21,14 @@
     border-style: solid;
     border-width: 2px;
     border-radius: 5%;
-    margin: 5px;
+    margin: 3px;
     background-color: black;
 }
 
 .card-group {
     display: flex;
     flex-wrap: wrap;
+    margin: 0px;
 
 }
 

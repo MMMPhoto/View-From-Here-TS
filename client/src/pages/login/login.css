@@ -3,8 +3,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     width: 100.9%;
-    padding: 12vh;
-
+    padding-top: 6vh;
 }
 
 #formbg {
@@ -14,4 +13,10 @@
 #loginFormImg {
     border-style: solid;
     border-radius: 7px;
+}
+
+@media only screen and (max-width: 992px) {
+  #loginFormImg {
+    display: none;
+  }
 }
