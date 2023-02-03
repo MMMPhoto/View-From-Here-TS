@@ -24,7 +24,7 @@ function App() {
   }, []);
 
   return (
-    <div className="wrapper">
+    <div className="wrapper d-flex flex-column justify-content-between">
       <Router>
         <Header loggedIn={isLoggedIn} />
         <Routes>

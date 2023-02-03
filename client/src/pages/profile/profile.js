@@ -129,7 +129,7 @@ const Profile = () => {
 
   return (
     <>
-      <section id="background">
+      <section id="background" className="flex-fill">
         <div className="container rounded bg-white mt-5 mb-5" id="formbg">
           <div className="row" id="formdiv">
             <div className="col-md-3 border-right">
