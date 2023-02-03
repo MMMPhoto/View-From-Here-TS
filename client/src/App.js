@@ -6,7 +6,7 @@ import Header from "./components/header/header.tsx";
 import Footer from "./components/footer/footer.tsx";
 import Home from "./pages/home/home.js";
 import SignUp from "./pages//signup/signup.js";
-import Login from "./pages/login/login.js";
+import Login from "./pages/login/Login.tsx";
 import Profile from "./pages/profile/profile.js";
 import SingleView from "./pages/singleView/SingleView.tsx";
 
