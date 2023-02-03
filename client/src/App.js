@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useEffect, useState } from "react";
-import Auth from "./utils/auth";
-import Header from "./components/header/header";
+import { loggedIn, getToken, } from "./utils/auth";
+import Header from "./components/header/header.tsx";
 import Footer from "./components/footer/footer.tsx";
 import Home from "./pages/home/home.js";
 import SignUp from "./pages//signup/signup.js";
@@ -15,7 +15,7 @@ function App() {
 
   // Check login status on reload
   useEffect(() => {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = loggedIn() ? getToken() : null;
     if (!token) {
       setIsLoggedIn(false);
     } else {

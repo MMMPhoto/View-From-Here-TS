@@ -1,9 +1,9 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
-import auth from "../../utils/auth";
+import { logout } from "../../utils/auth.js";
 import "./header.css";
 
-function Header(props) {
+const Header = ((props: any) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark " id="header">
       <div className="container">
@@ -33,7 +33,7 @@ function Header(props) {
               <>
                 <div id="cloud">
                   <NavLink
-                    onClick={auth.logout}
+                    onClick={logout}
                     className="nav-link"
                     to="signup"
                   >
@@ -65,6 +65,6 @@ function Header(props) {
       </div>
     </nav>
   );
-}
+});
 
 export default Header;

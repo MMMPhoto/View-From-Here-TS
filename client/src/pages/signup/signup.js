@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-import Auth from "../../utils/auth";
+import { login } from "../../utils/auth";
 import "./signup.css";
 
 function SignUp() {
@@ -37,7 +37,7 @@ function SignUp() {
 
       const { token, user } = await response.json();
       console.log(user);
-      Auth.login(token);
+      login(token);
       navigate("/login");
     } catch (err) {
       console.error(err);

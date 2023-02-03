@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
-import Auth from "../../utils/auth";
+import { login } from "../../utils/auth";
 import "./login.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
@@ -40,7 +40,7 @@ function Login(props) {
       const { token, user } = await response.json();
       console.log(user);
       dispatch(saveSavedPhotos(user.savedPics));
-      Auth.login(token);
+      login(token);
       navigate("/");
     } catch (err) {
       console.error(err);

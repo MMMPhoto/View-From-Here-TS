@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import Auth from "../../utils/auth";
+import { loggedIn, getToken, } from "../../utils/auth";
 import {
   getCurrentUser,
   deleteSavedPic,
@@ -32,7 +32,7 @@ const Profile = () => {
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const token = Auth.loggedIn() ? Auth.getToken() : null;
+        const token = loggedIn() ? getToken() : null;
         if (!token) {
           return false;
         }
@@ -55,7 +55,7 @@ const Profile = () => {
 
   // Delete Pic from User's Saved Pics
   const handleDeletePic = async (picId) => {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = loggedIn() ? getToken() : null;
     if (!token) {
       return false;
     }
@@ -90,7 +90,7 @@ const Profile = () => {
       setStatus("Image saved and uploaded!");
     }
     // get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = loggedIn() ? getToken() : null;
 
     if (!token) {
       return false;

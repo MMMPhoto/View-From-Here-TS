@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { GrFavorite } from "react-icons/gr";
 import MapWrapper from "../../components/map/MapWrapper";
 import "./SingleView.css";
-import Auth from "../../utils/auth";
+import { loggedIn, getToken } from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -21,7 +21,7 @@ const SingleView = () => {
 
   // Check login status on load
   useEffect(() => {
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = loggedIn() ? getToken() : null;
     if (!token) {
       setIsLoggedIn(false);
     } else {
@@ -70,7 +70,7 @@ const SingleView = () => {
     );
 
     // get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    const token = loggedIn() ? getToken() : null;
 
     if (!token) {
       return false;
