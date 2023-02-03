@@ -3,7 +3,7 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import Auth from "./utils/auth";
 import Header from "./components/header/header";
-import Footer from "./components/footer/footer";
+import Footer from "./components/footer/footer.tsx";
 import Home from "./pages/home/home.js";
 import SignUp from "./pages//signup/signup.js";
 import Login from "./pages/login/login.js";
