@@ -5,7 +5,7 @@ import decode from "jwt-decode";
 export function getToken() {
   // Retrieves the user token from localStorage
   return localStorage.getItem("id_token");
-}
+};
 
 // Check if token is expired
 export function isTokenExpired(token) {
@@ -16,26 +16,26 @@ export function isTokenExpired(token) {
     } else return false;
   } catch (err) {
     return false;
-  }
-}
+  };
+};
 
 // Get profile of current user
 export function getProfile() {
   return decode(getToken());
-}
+};
 
 // Check if user's logged in
 export function loggedIn() {
   // Checks if there is a saved token and it's still valid
   const token = getToken();
   return !!token && !isTokenExpired(token); // handwaiving here
-}
+};
 
 // Log in user
 export function login(idToken) {
   // Saves user token to localStorage
   localStorage.setItem("id_token", idToken);
-}
+};
 
 // Log out user
 export function logout() {
@@ -43,4 +43,4 @@ export function logout() {
   localStorage.clear();
   // this will reload the page and reset the state of the application
   window.location.assign("/");
-}
+};

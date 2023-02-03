@@ -8,7 +8,7 @@ import Home from "./pages/home/home.js";
 import SignUp from "./pages//signup/signup.js";
 import Login from "./pages/login/login.js";
 import Profile from "./pages/profile/profile.js";
-import SingleView from "./pages/singleView/SingleView.js";
+import SingleView from "./pages/singleView/SingleView.tsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);

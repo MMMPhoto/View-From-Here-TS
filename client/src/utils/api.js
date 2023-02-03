@@ -72,13 +72,3 @@ export const deleteSavedPic = (picId, token) => {
     },
   });
 };
-
-// export {
-//   getAllPics,
-//   getOnePic,
-//   createNewUser,
-//   loginUser,
-//   savePic,
-//   deleteSavedPic,
-//   getCurrentUser,
-// };
