@@ -1,1 +1,1 @@
-export declare const saveSavedPhotos: function;
+export declare const saveSavedPhotos: Function;

@@ -1,1 +1,1 @@
-export declare const configureStore: function;
+export declare const configureStore: Function;
