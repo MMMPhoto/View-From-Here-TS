@@ -1,33 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, FC, ChangeEvent, FormEvent } from "react";
 import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
 import "./login.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
-import store from "../../app/store";
+import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
 
-function Login(props) {
+const Login: FC<{setLogin: Function}> = ({setLogin}) => {
   const [userFormData, setUserFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
 
   // Define React Redux functions
-  const userSavedPhotos = useSelector((state) => state.userSavedPhotos.savedPhotos);
+  const userSavedPhotos = useSelector(selectSavedPhotos );
   const dispatch = useDispatch();
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
+    const form = e.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     };
 
     try {
@@ -36,7 +35,7 @@ function Login(props) {
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
-      props.setLogin(true);
+      setLogin(true);
       const { token, user } = await response.json();
       console.log(user);
       dispatch(saveSavedPhotos(user.savedPics));

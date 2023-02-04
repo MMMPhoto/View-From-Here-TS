@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { GrFavorite } from "react-icons/gr";
 import MapWrapper from "../../components/map/MapWrapper";
@@ -6,8 +6,10 @@ import "./SingleView.css";
 import { loggedIn, getToken } from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
+import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
 
-const SingleView = () => {
+
+const SingleView: FC<{}> = () => {
   const { pictureId } = useParams();
   const [pictureData, setPictureData] = useState([{}]);
   const [picUrl, setPicUrl] = useState("");
@@ -16,7 +18,7 @@ const SingleView = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Define React Redux functions
-  const userSavedPhotos = useSelector((state) => state.userSavedPhotos.savedPhotos);
+  const userSavedPhotos = useSelector(selectSavedPhotos);
   const dispatch = useDispatch();
 
   // Check login status on load
