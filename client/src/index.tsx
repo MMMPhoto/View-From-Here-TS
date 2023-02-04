@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { App } from './App';
+import App from './App';
 // import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -12,9 +12,9 @@ if (!rootElement) throw new Error('Failed to find the root Element');
 const root = createRoot(rootElement);
 root.render(
   <React.StrictMode>
-    {/* <Provider store={store}> */}
+    <Provider store={store}>
         <App />
-    {/* </Provider> */}
+    </Provider>
   </React.StrictMode>   
 );
 
