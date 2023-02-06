@@ -53,7 +53,8 @@ const SingleView: FC<{}> = () => {
         jsonData.tags && setPicTags(jsonData.tags);
         console.log(`User saved photos from store: ${savedPhotos}`);
         console.log(savedPhotos);
-        if (savedPhotos.find(photo: Photo => photo.id === pictureId)) {
+        const thisPhoto: Photo = savedPhotos.find((thisPhoto: Photo) => thisPhoto.id === pictureId)
+        if (thisPhoto) {
           setSavedPhoto(true);
         };
         // Call API to set photo URL
@@ -75,9 +76,7 @@ const SingleView: FC<{}> = () => {
     // get token
     const token = loggedIn() ? getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+    if (!token) {return false } else { return true }
 
     try {
       const response = await savePic(picToSave, token);
