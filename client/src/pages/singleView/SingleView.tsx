@@ -7,18 +7,19 @@ import { loggedIn, getToken } from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+import { Photo } from "../../types/Photo";
 
 
 const SingleView: FC<{}> = () => {
-  const { pictureId } = useParams();
-  const [pictureData, setPictureData] = useState([{}]);
-  const [picUrl, setPicUrl] = useState("");
-  const [tags, setPicTags] = useState([]);
+  const { pictureId } = useParams<string>();
+  const [pictureData, setPictureData] = useState<Photo[]>([]);
+  const [picUrl, setPicUrl] = useState<string>("");
+  const [tags, setPicTags] = useState<string[]>([]);
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   // Define React Redux functions
-  const userSavedPhotos = useSelector(selectSavedPhotos);
+  const savedPhotos: any=[] = useSelector(selectSavedPhotos);
   const dispatch = useDispatch();
 
   // Check login status on load
@@ -32,7 +33,7 @@ const SingleView: FC<{}> = () => {
   }, []);
 
   // Set state for saved photo
-  const [isSavedPhoto, setSavedPhoto] = useState(false);
+  const [isSavedPhoto, setSavedPhoto] = useState<boolean>(false);
 
   // Map Container Styling
   const containerStyle = {
@@ -45,14 +46,14 @@ const SingleView: FC<{}> = () => {
       try {
         // Get picture Data
         const response = await getOnePic(pictureId);
-        const jsonData = await response.json();
-        let jsonArray = [];
+        const jsonData: Photo = await response.json();
+        let jsonArray: Photo[] = [];
         jsonArray.push(jsonData);
         setPictureData(jsonArray);
-        setPicTags(jsonData.tags);
-        console.log(`User saved photos from store: ${userSavedPhotos}`);
-        console.log(userSavedPhotos);
-        if (userSavedPhotos.find(photo => photo.id === pictureId)) {
+        jsonData.tags && setPicTags(jsonData.tags);
+        console.log(`User saved photos from store: ${savedPhotos}`);
+        console.log(savedPhotos);
+        if (savedPhotos.find(photo: Photo => photo.id === pictureId)) {
           setSavedPhoto(true);
         };
         // Call API to set photo URL
@@ -66,7 +67,7 @@ const SingleView: FC<{}> = () => {
   }, []);
 
   // Handle save photo
-  const handleSavePhoto = async (picId) => {
+  const handleSavePhoto = async (picId: string) => {
     const picToSave = pictureData.find(
       (picture) => pictureData[0].id === picId
     );
@@ -116,13 +117,13 @@ const SingleView: FC<{}> = () => {
         )}
       </div>
       <img className="single-pic p-4" src={picUrl} id="singleViewImg" />
-      <div id="singleViewMap">
+      {/* <div id="singleViewMap">
         {pictureData[0].lat ? (
           <MapWrapper markers={pictureData} containerStyle={containerStyle} />
         ) : (
           <p>Loading...</p>
         )}
-      </div>
+      </div> */}
     </div>
   );
 };

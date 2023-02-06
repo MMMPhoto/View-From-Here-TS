@@ -1,21 +1,26 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
+import { Photo } from '../../types/Photo';
 
-interface userSavedPhotos {
-  savedPhotos: Array<Object>
-};
+// type Photo = {
+//   createdAt: Date,
+//   id:  string,
+//   lat: number,
+//   lng: number,
+//   public_id: string,
+//   tags?: string[],
+//   url: string
+// };
 
-const initialState: userSavedPhotos = {
-  savedPhotos: []
-};
+interface userSavedPhotos extends Array<Photo>{}
+
+const initialState: userSavedPhotos = []
 
 export const userSavedPhotosSlice = createSlice({
   name: 'userSavedPhotos',
   initialState,
   reducers: {
-    saveSavedPhotos: (state, action: PayloadAction<Array<Object>>) => {
-      state.savedPhotos = action.payload
-    }
+    saveSavedPhotos: (state, action: PayloadAction<userSavedPhotos>) => state = action.payload
   }
 });
 
