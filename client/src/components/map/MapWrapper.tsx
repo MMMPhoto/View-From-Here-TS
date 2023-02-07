@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import {
@@ -10,10 +10,12 @@ import {
 import { useSelector, useDispatch } from 'react-redux';
 import { saveBounds } from "../../features/mapState/mapStateSlice";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
+import { Photo } from '../../types/Photo';
+import { ContainterStyle } from "../../types/ContainerStyle";
 
 const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-const MapWrapper = ({ markers, containerStyle, markerLoaded }) => {
+const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerLoaded?: boolean }> = ({ markers, containerStyle, markerLoaded }) => {
   // Query screen size for mobile and tablet
   const isMobile = useMediaQuery({ query: '(max-width: 700px)' });
   const isTablet = useMediaQuery({ query: '(max-width: 1200px)' })

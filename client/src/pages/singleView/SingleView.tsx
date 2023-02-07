@@ -8,6 +8,7 @@ import { getOnePic, savePic } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
 import { Photo } from "../../types/Photo";
+import { ContainterStyle } from "../../types/ContainerStyle";
 
 
 const SingleView: FC<{}> = () => {
@@ -36,7 +37,7 @@ const SingleView: FC<{}> = () => {
   const [isSavedPhoto, setSavedPhoto] = useState<boolean>(false);
 
   // Map Container Styling
-  const containerStyle = {
+  const containerStyle: ContainterStyle = {
     width: "60vh",
     height: "60vh",
   };
@@ -75,12 +76,10 @@ const SingleView: FC<{}> = () => {
 
     // get token
     const token = loggedIn() ? getToken() : null;
-    
+
     try {
       const response = await savePic(picToSave, token);
-
       if (!response.ok) {
-        console.log(response);
         throw new Error("Something went wrong!");
       } else {
         setSavedPhoto(true);
@@ -114,13 +113,13 @@ const SingleView: FC<{}> = () => {
         )}
       </div>
       <img className="single-pic p-4" src={picUrl} id="singleViewImg" />
-      {/* <div id="singleViewMap">
+      <div id="singleViewMap">
         {pictureData[0].lat ? (
           <MapWrapper markers={pictureData} containerStyle={containerStyle} />
         ) : (
           <p>Loading...</p>
         )}
-      </div> */}
+      </div>
     </div>
   );
 };
