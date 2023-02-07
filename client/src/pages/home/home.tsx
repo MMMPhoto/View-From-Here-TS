@@ -1,17 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { getAllPics } from "../../utils/api";
 import "./home.css";
 import "../../components/searchFooter/searchFooter.css";
 import MapWrapper from "../../components/map/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveMarkers } from "../../features/mapState/mapStateSlice";
+import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
+import { Photo } from "../../types/Photo";
 
-const Home = (props) => {
+
+const Home: FC<{}> = () => {
   // Set marker state
-  const [markers, setMarkers] = useState("");
+  const [markers, setMarkers] = useState<Photo[]>([]);
 
   // Define React Redux functions
-  const savedMarkers = useSelector((state) => state.mapState.markers);
+  const savedMarkers = useSelector(selectMarkers);
   const dispatch = useDispatch();
 
   // Map Container Styling
@@ -24,11 +26,11 @@ const Home = (props) => {
   useEffect(() => {
     const fetchPicData = async () => {
       try {
-        const response = await getAllPics();
-        const jsonData = await response.json();
-        console.log(jsonData);
-        setMarkers(jsonData);
-        dispatch(saveMarkers(jsonData));
+        const response: any = await getAllPics();
+        const picData: Photo[] = await response.json();
+        console.log(picData);
+        setMarkers(picData);
+        dispatch(saveMarkers(picData));
       } catch (error) {
         console.log("error", error);
       }

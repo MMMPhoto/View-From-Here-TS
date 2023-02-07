@@ -1,20 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
+import { Photo } from '../../types/Photo';
 
 interface MapState {
-  markers: Array<Object>,
-  bounds: Object 
+  markers: Photo[],
+  bounds: object 
 };
 
 const initialState: MapState = {
-  markers: [{}],
+  markers: [],
   bounds: {}
 }
 export const mapStateSlice = createSlice({
   name: 'mapState',
   initialState, 
   reducers: {
-    saveMarkers: (state, action: PayloadAction<Array<Object>>) => {
+    saveMarkers: (state, action: PayloadAction<Photo[]>) => {
       state.markers = action.payload
     },
     saveBounds: (state, action: PayloadAction<Object>) => {
@@ -25,6 +26,8 @@ export const mapStateSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { saveMarkers, saveBounds } = mapStateSlice.actions;
-export const selectMapState = (state: RootState) => state.mapState;
+export const selectMarkers = (state: RootState) => state.mapState.markers;
+export const selectBounds = (state: RootState) => state.mapState.bounds;
+
 
 export default mapStateSlice.reducer;
