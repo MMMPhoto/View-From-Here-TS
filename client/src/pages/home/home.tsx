@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
 import { Photo } from "../../types/Photo";
 
-
 const Home: FC<{}> = () => {
   // Set marker state
   const [markers, setMarkers] = useState<Photo[]>([]);

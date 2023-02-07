@@ -1,39 +1,46 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
-import {
-  GoogleMap,
-  LoadScript,
-  Marker,
-  InfoWindow,
-} from "@react-google-maps/api";
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveBounds } from "../../features/mapState/mapStateSlice";
+import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
 import { Photo } from '../../types/Photo';
 import { ContainterStyle } from "../../types/ContainerStyle";
+// Need to use require to avoid weird error on googleMapsApiKey property
+const LoadScript = require('@react-google-maps/api').LoadScript;
 
-const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const apiKey: string | undefined = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+
+// interface MarkerData extends Photo {
+//   position: {
+//     lat: Photo["lat"],
+//     lng: Photo["lng"]
+//   }
+// };
 
 const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerLoaded?: boolean }> = ({ markers, containerStyle, markerLoaded }) => {
   // Query screen size for mobile and tablet
-  const isMobile = useMediaQuery({ query: '(max-width: 700px)' });
-  const isTablet = useMediaQuery({ query: '(max-width: 1200px)' })
+  const isMobile: boolean = useMediaQuery({ query: '(max-width: 700px)' });
+  const isTablet: boolean = useMediaQuery({ query: '(max-width: 1200px)' })
   // Set up redirect function
   const navigate = useNavigate();
   // Define React Redux functions
-  const savedBounds = useSelector((state) => state.mapState.bounds);
+  const savedBounds = useSelector(selectBounds);
   const dispatch = useDispatch();
 
   // Set Map State
-  const [map, setMap] = useState(null);
-  const [activeMarker, setActiveMarker] = useState(null);
-  const onLoad = useCallback((map) => setMap(map), []);
+  const [map, setMap] = useState<any>(null);
+  const [activeMarker, setActiveMarker] = useState<string>();
+  const onLoad = (map: any) => {
+    const bounds: any = new window.google.maps.LatLngBounds();
+    map.fitBounds(bounds);
+  };
 
   // Set Bounds of Map to contain Markers
   useEffect(() => {
     if (map) {
-      const bounds = new window.google.maps.LatLngBounds();
+      const bounds: any = new window.google.maps.LatLngBounds();
       if (savedBounds && markers.length > 1) {
         return map.fitBounds(JSON.parse(savedBounds));
       } else {
@@ -61,7 +68,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
   }, [map, markers, isMobile, isTablet]);
 
   // Handle Active Marker change
-  const handleActiveMarker = (markerId) => {
+  const handleActiveMarker = (markerId: string) => {
     setActiveMarker(markerId);
   };
 
@@ -98,7 +105,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
 
                     <InfoWindow
                       key={marker.id} 
-                      position={marker.position}
+                      position={{lat: marker.lat, lng: marker.lng}}
                       >
                       <MarkerInfoCard marker={marker} navigate={navigate} />
                     </InfoWindow>

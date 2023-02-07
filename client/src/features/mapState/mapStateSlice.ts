@@ -4,12 +4,12 @@ import { Photo } from '../../types/Photo';
 
 interface MapState {
   markers: Photo[],
-  bounds: object 
+  bounds: string 
 };
 
 const initialState: MapState = {
   markers: [],
-  bounds: {}
+  bounds: ""
 }
 export const mapStateSlice = createSlice({
   name: 'mapState',
@@ -18,7 +18,7 @@ export const mapStateSlice = createSlice({
     saveMarkers: (state, action: PayloadAction<Photo[]>) => {
       state.markers = action.payload
     },
-    saveBounds: (state, action: PayloadAction<Object>) => {
+    saveBounds: (state, action: PayloadAction<string>) => {
       state.bounds = action.payload
     }
   }
