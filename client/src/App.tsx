@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { useEffect, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { loggedIn, getToken, } from "./utils/auth";
 import Header from "./components/header/header";
 import Footer from "./components/footer/footer";
@@ -10,7 +10,7 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/profile";
 import SingleView from "./pages/singleView/SingleView";
 
-function App() {
+const App: FC<{}> = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   // Check login status on reload
@@ -42,6 +42,6 @@ function App() {
       </Router>
     </div>
   );
-}
+};
 
 export default App;

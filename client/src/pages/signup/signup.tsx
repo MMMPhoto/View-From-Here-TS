@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
 import "./signup.css";
 
-function SignUp() {
+const SignUp: FC<{}> = () => {
   // set initial form state
   const [userFormData, setUserFormData] = useState({
     userName: "",
