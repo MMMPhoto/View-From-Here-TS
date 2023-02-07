@@ -28,16 +28,15 @@ const App: FC<{}> = () => {
       <Router>
         <Header loggedIn={isLoggedIn} />
         <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/signup" element={<SignUp />} />
+          <Route path="/" element={<Home />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route
-            exact
             path="/login"
             element={<Login setLogin={setIsLoggedIn} />}
           />
-          <Route exact path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/single-view/:pictureId" element={<SingleView />} />
-        </Routes>
+        </Routes> 
         <Footer />
       </Router>
     </div>

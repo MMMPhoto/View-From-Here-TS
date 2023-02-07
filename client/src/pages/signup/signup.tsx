@@ -1,31 +1,38 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, ChangeEvent, FormEvent } from "react";
 import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
+import { User } from '../../types/User'
 import "./signup.css";
+
+interface SignupData {
+    userName: string,
+    email: string,
+    password: string,
+};
 
 const SignUp: FC<{}> = () => {
   // set initial form state
-  const [userFormData, setUserFormData] = useState({
+  const [userFormData, setUserFormData] = useState<SignupData>({
     userName: "",
     email: "",
     password: "",
   });
   const navigate = useNavigate();
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
     setUserFormData({ ...userFormData, [name]: value });
   };
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
+  const handleFormSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+    e.preventDefault();
 
     // check if form has everything (as per react-bootstrap docs)
-    const form = event.currentTarget;
+    const form = e.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     }
 
     try {

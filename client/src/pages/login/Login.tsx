@@ -1,4 +1,4 @@
-import React, { useState, FC, ChangeEvent, FormEvent } from "react";
+import React, {  FC, useState, ChangeEvent, FormEvent } from "react";
 import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
@@ -6,8 +6,13 @@ import "./login.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
 
+interface LoginData {
+  email: string,
+  password: string,
+};
+
 const Login: FC<{setLogin: Function}> = ({setLogin}) => {
-  const [userFormData, setUserFormData] = useState({ email: "", password: "" });
+  const [userFormData, setUserFormData] = useState<LoginData>({ email: "", password: "" });
   const navigate = useNavigate();
 
   // Define React Redux functions
