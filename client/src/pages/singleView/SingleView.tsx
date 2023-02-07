@@ -16,7 +16,7 @@ const SingleView: FC<{}> = () => {
   const [picUrl, setPicUrl] = useState<string>("");
   const [tags, setPicTags] = useState<string[]>([]);
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   // Define React Redux functions
   const savedPhotos: any=[] = useSelector(selectSavedPhotos);
@@ -24,7 +24,7 @@ const SingleView: FC<{}> = () => {
 
   // Check login status on load
   useEffect(() => {
-    const token = loggedIn() ? getToken() : null;
+    const token: string = loggedIn() ? getToken() : null;
     if (!token) {
       setIsLoggedIn(false);
     } else {
@@ -75,9 +75,7 @@ const SingleView: FC<{}> = () => {
 
     // get token
     const token = loggedIn() ? getToken() : null;
-
-    if (!token) {return false } else { return true }
-
+    
     try {
       const response = await savePic(picToSave, token);
 

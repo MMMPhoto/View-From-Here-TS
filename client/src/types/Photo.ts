@@ -4,6 +4,6 @@ export type Photo = {
   lat: number,
   lng: number,
   public_id: string,
-  tags?: string[],
+  tags?: string[] | undefined,
   url: string
 };

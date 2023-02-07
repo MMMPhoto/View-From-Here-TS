@@ -16,7 +16,7 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
   const navigate = useNavigate();
 
   // Define React Redux functions
-  const userSavedPhotos = useSelector(selectSavedPhotos );
+  const userSavedPhotos = useSelector(selectSavedPhotos);
   const dispatch = useDispatch();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {

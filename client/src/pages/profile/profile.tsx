@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { FC, useState, useEffect, SyntheticEvent, FormEvent } from "react";
 import { Container, CardGroup, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { loggedIn, getToken, } from "../../utils/auth";
@@ -8,42 +8,42 @@ import {
   uploadNewPic,
   savePic,
 } from "../../utils/api";
+import { User } from '../../types/User';
+import { Photo } from '../../types/Photo';
 import "./profile.css";
 import { useSelector, useDispatch } from 'react-redux';
-import { saveSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
 
-const Profile = () => {
+const Profile: FC<{}> = () => {
   const navigate = useNavigate();
 
-  const [userData, setUserData] = useState({});
-  const [savedPics, setSavedPics] = useState([{}]);
-  const [newLoad, setnewLoad] = useState(true);
-  const [newDeletedPic, setNewDeletedPic] = useState(false);
+  const [userData, setUserData] = useState<User>();
+  const [savedPics, setSavedPics] = useState<Photo[]>([]);
+  const [newLoad, setnewLoad] = useState<boolean>(true);
+  const [newDeletedPic, setNewDeletedPic] = useState<boolean>(false);
 
   // Image Upload State
-  const [image, setImage] = useState();
-  const [status, setStatus] = useState("");
+  interface Img { preview: string, data: any }
+  const [image, setImage] = useState<Img>({ preview: "", data: "" });
+  const [status, setStatus] = useState<string>("");
 
   // Define React Redux functions
-  const userSavedPhotos = useSelector((state) => state.userSavedPhotos.savedPhotos);
+  const userSavedPhotos = useSelector(selectSavedPhotos);
   const dispatch = useDispatch();
 
   // Get Logged in User's Data
   useEffect(() => {
     const getUserData = async () => {
       try {
-        const token = loggedIn() ? getToken() : null;
-        if (!token) {
-          return false;
-        }
+        const token: string = loggedIn() ? getToken() : null;
         const response = await getCurrentUser(token);
         if (!response.ok) {
           throw new Error("something went wrong!");
-        }
-        const user = await response.json();
+        };
+        const user: User = await response.json();
         setUserData(user);
-        setSavedPics(user.savedPics);
-        dispatch(saveSavedPhotos(user.savedPics));
+        setSavedPics(user.savedPics!);
+        dispatch(saveSavedPhotos(user.savedPics!));
         setNewDeletedPic(false);
         setnewLoad(false);
       } catch (err) {
@@ -54,17 +54,14 @@ const Profile = () => {
   }, [newLoad, newDeletedPic]);
 
   // Delete Pic from User's Saved Pics
-  const handleDeletePic = async (picId) => {
-    const token = loggedIn() ? getToken() : null;
-    if (!token) {
-      return false;
-    }
+  const handleDeletePic = async (picId: string) => {
+    const token: string = loggedIn() ? getToken() : null;
     try {
       const response = await deleteSavedPic(picId, token);
       if (!response.ok) {
         throw new Error("something went wrong!");
       }
-      const updatedUser = await response.json();
+      const updatedUser: User = await response.json();
       setUserData(updatedUser);
       setNewDeletedPic(true);
     } catch (err) {
@@ -73,7 +70,7 @@ const Profile = () => {
   };
 
   // Submit function for image Upload
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: SyntheticEvent<HTMLInputElement>) => {
     e.preventDefault();
     setStatus("Loading...");
     let formData = new FormData();
@@ -92,10 +89,6 @@ const Profile = () => {
     // get token
     const token = loggedIn() ? getToken() : null;
 
-    if (!token) {
-      return false;
-    }
-
     try {
       const response = await savePic(uploadedImage, token);
 
@@ -104,15 +97,17 @@ const Profile = () => {
         throw new Error("Something went wrong!");
       }
     } catch (err) {
-      console.error(err);
+      console.error(err); 
     }
     setNewDeletedPic(true);
   };
 
-  const handleFileChange = (e) => {
-    const img = {
-      preview: URL.createObjectURL(e.target.files[0]),
-      data: e.target.files[0],
+  const handleFileChange = (e: SyntheticEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const file = target.files![0];
+    const img: Img = {
+      preview: URL.createObjectURL(file),
+      data: file,
     };
     setStatus("File Chosen");
     setImage(img);
@@ -150,7 +145,7 @@ const Profile = () => {
                 <div className="d-flex justify-content-between align-items-center mb-3">
                   <h4 className="text-right">Your saved photos:</h4>
                 </div>
-                <Container class="p-0 m-0" id="contain">
+                <Container className="p-0 m-0" id="contain">
                   <h2>
                     {savedPics.length
                       ? `Viewing ${savedPics.length} saved ${
@@ -172,7 +167,7 @@ const Profile = () => {
                           ) : null}
                           <Button
                             className="btn-block btn-danger"
-                            onClick={() => handleDeletePic(pic._id)}
+                            onClick={() => handleDeletePic(pic.id)}
                           >
                             Delete
                           </Button>
@@ -186,11 +181,11 @@ const Profile = () => {
                   <h1>Upload your image:</h1>
                   {status && <h4>{status}</h4>}
                   <hr></hr>
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={e => handleSubmit}>
                     <input
                       type="file"
                       name="userFile"
-                      onChange={handleFileChange}
+                      onChange={e => handleFileChange(e)}
                     ></input>
                     <button type="submit" id="submit">
                       Submit

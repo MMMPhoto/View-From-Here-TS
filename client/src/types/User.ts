@@ -5,5 +5,5 @@ export type User = {
   userName: string,
   email: string,
   password: string,
-  savedPics?: Photo[]
+  savedPics?: Photo[] | undefined
 };
