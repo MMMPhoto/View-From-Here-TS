@@ -1,28 +1,23 @@
-import { FC, useCallback, useEffect, useState } from "react";
+import { FC, useCallback, useEffect, useState, ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
+import Map from "./Map";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
 import { Photo } from '../../types/Photo';
 import { ContainterStyle } from "../../types/ContainerStyle";
 // Need to use require to avoid weird error on googleMapsApiKey property
 const LoadScript = require('@react-google-maps/api').LoadScript;
 
-const apiKey: string | undefined = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const apiKey: any = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-// const render: Function = (status: Status) => {
-//   switch (status) {
-//     case Status.LOADING:
-//       return <Spinner />;
-//     case Status.FAILURE:
-//       return <ErrorComponent />;
-//     case Status.SUCCESS:
-//       return <MyMapComponent />;
-//   }
-// };
+const render = (status: Status): ReactElement => {
+  if (status === Status.FAILURE) return (<h1>Error</h1>);
+  return <h1>Loading...</h1>;
+};
 // interface MarkerData extends Photo {
 //   position: {
 //     lat: Photo["lat"],
@@ -91,7 +86,9 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
   };
 
   return (
-    <Wrapper apiKey={apiKey} render={render} />
+    <Wrapper apiKey={apiKey} render={render}>
+      <Map />
+    </Wrapper>
     // <LoadScript googleMapsApiKey={apiKey}>
     //   <GoogleMap
     //     zoom={4.5}
