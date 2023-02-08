@@ -1,6 +1,7 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
+import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
@@ -12,6 +13,16 @@ const LoadScript = require('@react-google-maps/api').LoadScript;
 
 const apiKey: string | undefined = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
+// const render: Function = (status: Status) => {
+//   switch (status) {
+//     case Status.LOADING:
+//       return <Spinner />;
+//     case Status.FAILURE:
+//       return <ErrorComponent />;
+//     case Status.SUCCESS:
+//       return <MyMapComponent />;
+//   }
+// };
 // interface MarkerData extends Photo {
 //   position: {
 //     lat: Photo["lat"],
@@ -80,40 +91,41 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
   };
 
   return (
-    <LoadScript googleMapsApiKey={apiKey}>
-      <GoogleMap
-        zoom={4.5}
-        mapContainerStyle={containerStyle}
-        onLoad={onLoad}
-        onBoundsChanged={handleBoundsChange}
-        options={{
-          gestureHandling: 'greedy',
-          mapTypeId: 'hybrid'
-        }}
-      >
-        {markers &&
-          markers.map((marker) => (
-            <Marker
-              key={marker.id}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onMouseOver={() => handleActiveMarker(marker.id)}
-              // onLoad={() => markerDrop(marker)}
-              animation={2}
-              onClick={() => handleActiveMarker(marker.id)}
-            >
-              {activeMarker === marker.id && markers.length > 1 && (
+    <Wrapper apiKey={apiKey} render={render} />
+    // <LoadScript googleMapsApiKey={apiKey}>
+    //   <GoogleMap
+    //     zoom={4.5}
+    //     mapContainerStyle={containerStyle}
+    //     onLoad={onLoad}
+    //     onBoundsChanged={handleBoundsChange}
+    //     options={{
+    //       gestureHandling: 'greedy',
+    //       mapTypeId: 'hybrid'
+    //     }}
+    //   >
+    //     {markers &&
+    //       markers.map((marker) => (
+    //         <Marker
+    //           key={marker.id}
+    //           position={{ lat: marker.lat, lng: marker.lng }}
+    //           onMouseOver={() => handleActiveMarker(marker.id)}
+    //           // onLoad={() => markerDrop(marker)}
+    //           animation={2}
+    //           onClick={() => handleActiveMarker(marker.id)}
+    //         >
+    //           {activeMarker === marker.id && markers.length > 1 && (
 
-                    <InfoWindow
-                      key={marker.id} 
-                      position={{lat: marker.lat, lng: marker.lng}}
-                      >
-                      <MarkerInfoCard marker={marker} navigate={navigate} />
-                    </InfoWindow>
-              )}
-            </Marker>
-          ))}
-      </GoogleMap>
-    </LoadScript>
+    //                 <InfoWindow
+    //                   key={marker.id} 
+    //                   position={{lat: marker.lat, lng: marker.lng}}
+    //                   >
+    //                   <MarkerInfoCard marker={marker} navigate={navigate} />
+    //                 </InfoWindow>
+    //           )}
+    //         </Marker>
+    //       ))}
+    //   </GoogleMap>
+    // </LoadScript>
   );
 };
 
