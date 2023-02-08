@@ -2,16 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
 import { Photo } from '../../types/Photo';
 
-// type Photo = {
-//   createdAt: Date,
-//   id:  string,
-//   lat: number,
-//   lng: number,
-//   public_id: string,
-//   tags?: string[],
-//   url: string
-// };
-
 interface userSavedPhotos extends Array<Photo>{}
 
 const initialState: userSavedPhotos = []
