@@ -1,45 +1,45 @@
-import React, { useEffect, useRef, ReactElement } from "react";
-import ReactDOM from "react-dom";
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+// import React, { useEffect, useRef, ReactElement } from "react";
+// import ReactDOM from "react-dom";
+// import { Wrapper, Status } from "@googlemaps/react-wrapper";
 
-const render = (status: Status): ReactElement => {
-  if (status === Status.LOADING) {
-    return <h3>{status} ..</h3>;
-  };
-  if (status === Status.FAILURE ) {
-    return <h3>{status} ...</h3>;
-  };
-  return;
-};
+// const render = (status: Status): ReactElement => {
+//   if (status === Status.LOADING) {
+//     return <h3>{status} ..</h3>;
+//   };
+//   if (status === Status.FAILURE ) {
+//     return <h3>{status} ...</h3>;
+//   };
+//   return;
+// };
 
-function MyMapComponent({
-  center,
-  zoom,
-}: {
-  center: google.maps.LatLngLiteral;
-  zoom: number;
-}) {
-  const ref = useRef();
+// function MyMapComponent({
+//   center,
+//   zoom,
+// }: {
+//   center: google.maps.LatLngLiteral;
+//   zoom: number;
+// }) {
+//   const ref = useRef();
 
-  useEffect(() => {
-    new window.google.maps.Map(ref.current, {
-      center,
-      zoom,
-    });
-  });
+//   useEffect(() => {
+//     new window.google.maps.Map(ref.current, {
+//       center,
+//       zoom,
+//     });
+//   });
 
-  return <div ref={ref} id="map" />;
-}
+//   return <div ref={ref} id="map" />;
+// }
 
-function Map() {
-  const center = { lat: -34.397, lng: 150.644 };
-  const zoom = 4;
+// function Map() {
+//   const center = { lat: -34.397, lng: 150.644 };
+//   const zoom = 4;
 
-  return (
-    <Wrapper apiKey="" render={render}>
-      <MyMapComponent center={center} zoom={zoom} />
-    </Wrapper>
-  );
-}
+//   return (
+//     <Wrapper apiKey="" render={render}>
+//       <MyMapComponent center={center} zoom={zoom} />
+//     </Wrapper>
+//   );
+// }
 
-export default Map;
+// export default Map;

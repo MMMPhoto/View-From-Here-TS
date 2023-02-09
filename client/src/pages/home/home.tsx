@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from "react";
 import { getAllPics } from "../../utils/api";
 import "./home.css";
 import "../../components/searchFooter/searchFooter.css";
-import MapWrapper from "../../components/MapRefactor/MapWrapper";
+import MapWrapper from "../../components/map/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
 import { Photo } from "../../types/Photo";
@@ -43,7 +43,7 @@ const Home: FC<{}> = () => {
     <>
       <div id="map" className="">
         <MapWrapper markers={markers}
-          // containerStyle={containerStyle}
+          containerStyle={containerStyle}
         />
       </div>
     </>

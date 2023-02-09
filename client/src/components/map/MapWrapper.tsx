@@ -5,7 +5,7 @@ import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
-import MapComponent from "./Map";
+// import MapComponent from "./Map";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
 import { Photo } from '../../types/Photo';
 import { ContainterStyle } from "../../types/ContainerStyle";
@@ -13,17 +13,6 @@ import { ContainterStyle } from "../../types/ContainerStyle";
 const LoadScript = require('@react-google-maps/api').LoadScript;
 
 const apiKey: any = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-
-const render = (status: Status): ReactElement => {
-  if (status === Status.FAILURE) return (<h1>Error</h1>);
-  return <h1>Loading...</h1>;
-};
-// interface MarkerData extends Photo {
-//   position: {
-//     lat: Photo["lat"],
-//     lng: Photo["lng"]
-//   }
-// };
 
 const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerLoaded?: boolean }> = ({ markers, containerStyle, markerLoaded }) => {
   // Query screen size for mobile and tablet
@@ -38,10 +27,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
   // Set Map State
   const [map, setMap] = useState<any>(null);
   const [activeMarker, setActiveMarker] = useState<string>();
-  const onLoad = (map: any) => {
-    const bounds: any = new window.google.maps.LatLngBounds();
-    map.fitBounds(bounds);
-  };
+  const onLoad = useCallback((map: any) => setMap(map), []);
 
   // Set Bounds of Map to contain Markers
   useEffect(() => {
@@ -86,43 +72,43 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
   };
 
   return (
-    <Wrapper apiKey={apiKey} render={render}>
-      <MapComponent />
-    </Wrapper>
-    // <LoadScript googleMapsApiKey={apiKey}>
-    //   <GoogleMap
-    //     zoom={4.5}
-    //     mapContainerStyle={containerStyle}
-    //     onLoad={onLoad}
-    //     onBoundsChanged={handleBoundsChange}
-    //     options={{
-    //       gestureHandling: 'greedy',
-    //       mapTypeId: 'hybrid'
-    //     }}
-    //   >
-    //     {markers &&
-    //       markers.map((marker) => (
-    //         <Marker
-    //           key={marker.id}
-    //           position={{ lat: marker.lat, lng: marker.lng }}
-    //           onMouseOver={() => handleActiveMarker(marker.id)}
-    //           // onLoad={() => markerDrop(marker)}
-    //           animation={2}
-    //           onClick={() => handleActiveMarker(marker.id)}
-    //         >
-    //           {activeMarker === marker.id && markers.length > 1 && (
+    // <Wrapper apiKey={apiKey} render={render}>
+    //   <MapComponent />
+    // </Wrapper>
+    <LoadScript googleMapsApiKey={apiKey}>
+      <GoogleMap
+        zoom={4.5}
+        mapContainerStyle={containerStyle}
+        onLoad={onLoad}
+        onBoundsChanged={handleBoundsChange}
+        options={{
+          gestureHandling: 'greedy',
+          mapTypeId: 'hybrid'
+        }}
+      >
+        {markers &&
+          markers.map((marker) => (
+            <Marker
+              key={marker.id}
+              position={{ lat: marker.lat, lng: marker.lng }}
+              onMouseOver={() => handleActiveMarker(marker.id)}
+              // onLoad={() => markerDrop(marker)}
+              animation={2}
+              onClick={() => handleActiveMarker(marker.id)}
+            >
+              {activeMarker === marker.id && markers.length > 1 && (
 
-    //                 <InfoWindow
-    //                   key={marker.id} 
-    //                   position={{lat: marker.lat, lng: marker.lng}}
-    //                   >
-    //                   <MarkerInfoCard marker={marker} navigate={navigate} />
-    //                 </InfoWindow>
-    //           )}
-    //         </Marker>
-    //       ))}
-    //   </GoogleMap>
-    // </LoadScript>
+                    <InfoWindow
+                      key={marker.id} 
+                      position={{lat: marker.lat, lng: marker.lng}}
+                      >
+                      <MarkerInfoCard marker={marker} navigate={navigate} />
+                    </InfoWindow>
+              )}
+            </Marker>
+          ))}
+      </GoogleMap>
+    </LoadScript>
   );
 };
 
