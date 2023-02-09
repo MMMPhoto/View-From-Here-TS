@@ -2,12 +2,14 @@ import React, { FC, useEffect, useState } from "react";
 import { getAllPics } from "../../utils/api";
 import "./home.css";
 import "../../components/searchFooter/searchFooter.css";
-import MapWrapper from "../../components/map/MapWrapper";
+import MapWrapper from "../../components/MapRefactor/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
 import { Photo } from "../../types/Photo";
 
 const Home: FC<{}> = () => {
+
+  type Markers = Photo[];
   // Set marker state
   const [markers, setMarkers] = useState<Photo[]>([]);
 
@@ -40,7 +42,9 @@ const Home: FC<{}> = () => {
   return (
     <>
       <div id="map" className="">
-        <MapWrapper markers={markers} containerStyle={containerStyle} />
+        <MapWrapper markers={markers}
+          // containerStyle={containerStyle}
+        />
       </div>
     </>
   );

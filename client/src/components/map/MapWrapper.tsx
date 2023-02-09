@@ -5,7 +5,7 @@ import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
-import Map from "./Map";
+import MapComponent from "./Map";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
 import { Photo } from '../../types/Photo';
 import { ContainterStyle } from "../../types/ContainerStyle";
@@ -87,7 +87,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
 
   return (
     <Wrapper apiKey={apiKey} render={render}>
-      <Map />
+      <MapComponent />
     </Wrapper>
     // <LoadScript googleMapsApiKey={apiKey}>
     //   <GoogleMap
