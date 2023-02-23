@@ -14,7 +14,7 @@ const LoadScript = require('@react-google-maps/api').LoadScript;
 
 const apiKey: any = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 
-const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerLoaded?: boolean }> = ({ markers, containerStyle, markerLoaded }) => {
+const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ markers, containerStyle }) => {
   // Query screen size for mobile and tablet
   const isMobile: boolean = useMediaQuery({ query: '(max-width: 700px)' });
   const isTablet: boolean = useMediaQuery({ query: '(max-width: 1200px)' })
@@ -27,6 +27,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
   // Set Map State
   const [map, setMap] = useState<any>(null);
   const [activeMarker, setActiveMarker] = useState<string>();
+  const [mapBounds, setMapBounds] = useState<any>();
   const onLoad = useCallback((map: any) => setMap(map), []);
 
   // Set Bounds of Map to contain Markers
@@ -44,6 +45,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
             });
           });
           map.setCenter(bounds.getCenter());
+          console.log(`map center: ${map.getCenter()}`);
           // Adjust map zoom for screen size or single marker
           if (markers.length === 1) {
             map.setZoom(12);
@@ -55,9 +57,11 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
             map.fitBounds(bounds);
           }
         };
+        setMapBounds(bounds);
+        console.log(bounds);
       // };      
     };
-  }, [map, markers, isMobile, isTablet]);
+  }, [map, markers, isMobile, isTablet, mapBounds]);
 
   // Handle Active Marker change
   const handleActiveMarker = (markerId: string) => {
