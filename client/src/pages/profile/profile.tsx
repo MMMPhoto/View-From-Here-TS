@@ -11,8 +11,8 @@ import {
 import { User } from '../../types/User';
 import { Photo } from '../../types/Photo';
 import "./profile.css";
-// import { useSelector, useDispatch } from 'react-redux';
-// import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 
 const Profile: FC<{}> = () => {
   const navigate = useNavigate();
@@ -28,8 +28,8 @@ const Profile: FC<{}> = () => {
   const [status, setStatus] = useState<string>("");
 
   // Define React Redux functions
-  // const userSavedPhotos = useSelector(selectSavedPhotos);
-  // const dispatch = useDispatch();
+  const userSavedPhotos = useSelector(selectSavedPhotos);
+  const dispatch = useDispatch();
 
   // Get Logged in User's Data
   useEffect(() => {
@@ -43,7 +43,7 @@ const Profile: FC<{}> = () => {
         const user: User = await response.json();
         setUserData(user);
         setSavedPics(user.savedPics!);
-        // dispatch(saveSavedPhotos(user.savedPics!));
+        dispatch(saveSavedPhotos(user.savedPics!));
         setNewDeletedPic(false);
         setnewLoad(false);
       } catch (err) {

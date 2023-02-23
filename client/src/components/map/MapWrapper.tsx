@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 // import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
-// import { useSelector, useDispatch } from 'react-redux';
-// import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
+import { useSelector, useDispatch } from 'react-redux';
+import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../store/mapStateSlice";
 // import MapComponent from "./Map";
 import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
 import { Photo } from '../../types/Photo';
@@ -21,8 +21,8 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
   // Set up redirect function
   const navigate = useNavigate();
   // Define React Redux functions
-  // const savedBounds = useSelector(selectBounds);
-  // const dispatch = useDispatch();
+  const savedBounds = useSelector(selectBounds);
+  const dispatch = useDispatch();
 
   // Set Map State
   const [map, setMap] = useState<any>(null);
@@ -34,9 +34,9 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
   useEffect(() => {
     if (map) {
       const bounds: any = new window.google.maps.LatLngBounds();
-      // if (savedBounds && markers.length > 1) {
-      //   return map.fitBounds(JSON.parse(savedBounds));
-      // } else {
+      if (savedBounds && markers.length > 1) {
+        return map.fitBounds(JSON.parse(savedBounds));
+      } else {
         if (markers) {
           markers.map((marker) => {
             return bounds.extend({
@@ -45,7 +45,6 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
             });
           });
           map.setCenter(bounds.getCenter());
-          console.log(`map center: ${map.getCenter()}`);
           // Adjust map zoom for screen size or single marker
           if (markers.length === 1) {
             map.setZoom(12);
@@ -58,10 +57,9 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
           }
         };
         setMapBounds(bounds);
-        console.log(bounds);
-      // };      
+      };      
     };
-  }, [map, markers, isMobile, isTablet, mapBounds]);
+  }, [map, markers, isMobile, isTablet]);
 
   // Handle Active Marker change
   const handleActiveMarker = (markerId: string) => {
@@ -70,9 +68,9 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
 
   // Record change in bounds
   const handleBoundsChange = () => {
-    // if (markers.length > 1) {
-    //   dispatch(saveBounds(JSON.stringify(map.getBounds())));
-    // };
+    if (markers.length > 1) {
+      dispatch(saveBounds(JSON.stringify(map.getBounds())));
+    };
   };
 
   return (

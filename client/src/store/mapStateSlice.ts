@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import type { RootState } from '../../app/store';
-import { Photo } from '../../types/Photo';
+import type { RootState } from './store';
+import { Photo } from '../types/Photo';
 
 interface MapState {
   markers: Photo[],
