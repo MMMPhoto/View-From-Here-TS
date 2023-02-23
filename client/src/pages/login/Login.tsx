@@ -3,8 +3,8 @@ import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
 import "./login.css";
-import { useSelector, useDispatch } from 'react-redux';
-import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+// import { useSelector, useDispatch } from 'react-redux';
+// import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
 
 interface LoginData {
   email: string,
@@ -16,8 +16,8 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
   const navigate = useNavigate();
 
   // Define React Redux functions
-  const userSavedPhotos = useSelector(selectSavedPhotos);
-  const dispatch = useDispatch();
+  // const userSavedPhotos = useSelector(selectSavedPhotos);
+  // const dispatch = useDispatch();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -43,7 +43,7 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
       setLogin(true);
       const { token, user } = await response.json();
       console.log(user);
-      dispatch(saveSavedPhotos(user.savedPics));
+      // dispatch(saveSavedPhotos(user.savedPics));
       login(token);
       navigate("/");
     } catch (err) {

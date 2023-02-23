@@ -5,8 +5,8 @@ import MapWrapper from "../../components/map/MapWrapper";
 import "./SingleView.css";
 import { loggedIn, getToken } from "../../utils/auth";
 import { getOnePic, savePic } from "../../utils/api";
-import { useSelector, useDispatch } from 'react-redux';
-import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
+// import { useSelector, useDispatch } from 'react-redux';
+// import { saveSavedPhotos, selectSavedPhotos } from "../../features/userSavedPhotos/userSavedPhotosSlice";
 import { Photo } from "../../types/Photo";
 import { ContainterStyle } from "../../types/ContainerStyle";
 
@@ -20,8 +20,8 @@ const SingleView: FC<{}> = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   // Define React Redux functions
-  const savedPhotos: any=[] = useSelector(selectSavedPhotos);
-  const dispatch = useDispatch();
+  // const savedPhotos: any=[] = useSelector(selectSavedPhotos);
+  // const dispatch = useDispatch();
 
   // Check login status on load
   useEffect(() => {
@@ -52,12 +52,12 @@ const SingleView: FC<{}> = () => {
         jsonArray.push(jsonData);
         setPictureData(jsonArray);
         jsonData.tags && setPicTags(jsonData.tags);
-        console.log(`User saved photos from store: ${savedPhotos}`);
-        console.log(savedPhotos);
-        const thisPhoto: Photo = savedPhotos.find((thisPhoto: Photo) => thisPhoto.id === pictureId)
-        if (thisPhoto) {
-          setSavedPhoto(true);
-        };
+        // console.log(`User saved photos from store: ${savedPhotos}`);
+        // console.log(savedPhotos);
+        // const thisPhoto: Photo = savedPhotos.find((thisPhoto: Photo) => thisPhoto.id === pictureId)
+        // if (thisPhoto) {
+        //   setSavedPhoto(true);
+        // };
         // Call API to set photo URL
         const url = `https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_2000/v1665696442/${jsonData.public_id}.jpg`;
         setPicUrl(url);
@@ -114,7 +114,7 @@ const SingleView: FC<{}> = () => {
       </div>
       <img className="single-pic p-4" src={picUrl} id="singleViewImg" />
       <div id="singleViewMap">
-        {pictureData[0].lat ? (
+        {pictureData ? (
           <MapWrapper markers={pictureData} containerStyle={containerStyle} />
         ) : (
           <p>Loading...</p>
