@@ -1,7 +1,7 @@
 import { FC, useCallback, useEffect, useState, ReactElement } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
-import { Wrapper, Status } from "@googlemaps/react-wrapper";
+// import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 // import { useSelector, useDispatch } from 'react-redux';
 // import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../features/mapState/mapStateSlice";
@@ -91,20 +91,20 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, markerL
             <Marker
               key={marker.id}
               position={{ lat: marker.lat, lng: marker.lng }}
-              // onMouseOver={() => handleActiveMarker(marker.id)}
+              onMouseOver={() => handleActiveMarker(marker.id)}
               // onLoad={() => markerDrop(marker)}
               animation={2}
               onClick={() => handleActiveMarker(marker.id)}
             >
-              {activeMarker === marker.id && markers.length > 1 && (
-
-                    <InfoWindow
-                      key={marker.id} 
-                      position={{lat: marker.lat, lng: marker.lng}}
-                      >
-                      <MarkerInfoCard marker={marker} navigate={navigate} />
-                    </InfoWindow>
-              )}
+              {activeMarker === marker.id && markers.length > 1
+                ? <InfoWindow
+                    key={marker.id} 
+                    position={{lat: marker.lat, lng: marker.lng}}
+                    >
+                    <MarkerInfoCard marker={marker} navigate={navigate} />
+                  </InfoWindow>
+                : null
+              }
             </Marker>
           ))}
       </GoogleMap>
