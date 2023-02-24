@@ -54,12 +54,12 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
             map.setZoom(3);
           } else {
             map.fitBounds(bounds);
-          }
+          };
         };
         setMapBounds(bounds);
       };      
     };
-  }, [map, markers, isMobile, isTablet]);
+  }, [map, markers, isMobile, isTablet, mapBounds]);
 
   // Handle Active Marker change
   const handleActiveMarker = (markerId: string) => {
@@ -69,6 +69,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
   // Record change in bounds
   const handleBoundsChange = () => {
     if (markers.length > 1) {
+      // setMapBounds(map.GetBounds());
       dispatch(saveBounds(JSON.stringify(map.getBounds())));
     };
   };
