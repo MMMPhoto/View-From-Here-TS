@@ -1,10 +1,10 @@
-#header {
-    background-image: url(../../../public/assets/clouds.jpg) ;
-    background-position: center;
+/* #header {
+    /* background-image: url(../../../public/assets/clouds.jpg) ; */
+    /* background-position: center;
     border-bottom: solid;
     border-color: black;
-    width: 100.9%;
-}
+    width: 100.9%; */
+ */
 
 #title {
     color: #FFF;
@@ -17,7 +17,7 @@
 }
 
 .nav-link li {
-    color: black;
+    color: #FFF;
     margin-top: 20px;
     margin-left: 12px;
 }
@@ -28,13 +28,13 @@
 }
 
 
-#cloud {
+/* #cloud {
     background-image: url(../../../public/assets/cloudicon.png);
     background-size: contain;
     background-repeat: no-repeat;
     min-width: 100px;
     min-height: 80px;
-}
+} */
 
 
 

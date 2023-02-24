@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { FC, useEffect, useState } from "react";
 import { loggedIn, getToken, } from "./utils/auth";
-import Header from "./components/header/header";
+import Header from "./components/header/Header";
 import Footer from "./components/footer/footer";
 import Home from "./pages/home/home";
 import SignUp from "./pages//signup/signup";

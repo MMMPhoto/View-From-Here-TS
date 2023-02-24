@@ -1,12 +1,14 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AppBar, AppBarTitle } from "@react-md/app-bar";
 import { logout } from "../../utils/auth.js";
+import { HeaderBar } from "./styles";
 import "./header.css";
 
 const Header = ((props: any) => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-dark " id="header">
-      <div className="container">
+    <HeaderBar className="navbar navbar-expand-lg navbar-light bg-dark">
+      {/* <div className="container"> */}
         <Link className="navbar-brand" id="title" to="/">
           View From Here
         </Link>
@@ -24,14 +26,14 @@ const Header = ((props: any) => {
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <div id="cloud">
+            {/* <div id="cloud"> */}
               <NavLink className="nav-link" to="/" end>
                 <li className="nav-item">Home</li>
               </NavLink>
-            </div>
+            {/* </div> */}
             {props.loggedIn ? (
               <>
-                <div id="cloud">
+                {/* <div id="cloud"> */}
                   <NavLink
                     onClick={logout}
                     className="nav-link"
@@ -39,31 +41,31 @@ const Header = ((props: any) => {
                   >
                     <li className="nav-item">Logout</li>
                   </NavLink>
-                </div>
-                <div id="cloud">
+                {/* </div> */}
+                {/* <div id="cloud"> */}
                   <NavLink className="nav-link" to="/profile">
                     <li className="nav-item">Profile</li>
                   </NavLink>
-                </div>
+                {/* </div> */}
               </>
             ) : (
               <>
-                <div id="cloud">
+                {/* <div id="cloud"> */}
                   <NavLink className="nav-link" to="/login">
                     <li className="nav-item">Login</li>
                   </NavLink>
-                </div>
-                <div id="cloud">
+                {/* </div> */}
+                {/* <div id="cloud"> */}
                   <NavLink className="nav-link" to="/signup">
                     <li className="nav-item">Signup</li>
                   </NavLink>
-                </div>
+                {/* </div> */}
               </>
             )}
           </ul>
         </div>
-      </div>
-    </nav>
+      {/* </div> */}
+    </HeaderBar>
   );
 });
 
