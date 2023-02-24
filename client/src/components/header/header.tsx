@@ -2,69 +2,43 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import { AppBar, AppBarTitle } from "@react-md/app-bar";
 import { logout } from "../../utils/auth.js";
-import { HeaderBar } from "./styles";
-import "./header.css";
+import { HeaderBar, Title, NavBar } from "./styles";
+// import "./header.css";
 
 const Header = ((props: any) => {
   return (
     <HeaderBar className="navbar navbar-expand-lg navbar-light bg-dark">
       {/* <div className="container"> */}
-        <Link className="navbar-brand" id="title" to="/">
+        <Title>
           View From Here
-        </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-          <i className="fa-solid fa-cloud"></i>
-        </button>
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            {/* <div id="cloud"> */}
-              <NavLink className="nav-link" to="/" end>
-                <li className="nav-item">Home</li>
+        </Title>          
+        {props.loggedIn
+          ? <NavBar>
+              <NavLink to="/" end>
+                Home
               </NavLink>
-            {/* </div> */}
-            {props.loggedIn ? (
-              <>
-                {/* <div id="cloud"> */}
-                  <NavLink
-                    onClick={logout}
-                    className="nav-link"
-                    to="signup"
-                  >
-                    <li className="nav-item">Logout</li>
-                  </NavLink>
-                {/* </div> */}
-                {/* <div id="cloud"> */}
-                  <NavLink className="nav-link" to="/profile">
-                    <li className="nav-item">Profile</li>
-                  </NavLink>
-                {/* </div> */}
-              </>
-            ) : (
-              <>
-                {/* <div id="cloud"> */}
-                  <NavLink className="nav-link" to="/login">
-                    <li className="nav-item">Login</li>
-                  </NavLink>
-                {/* </div> */}
-                {/* <div id="cloud"> */}
-                  <NavLink className="nav-link" to="/signup">
-                    <li className="nav-item">Signup</li>
-                  </NavLink>
-                {/* </div> */}
-              </>
-            )}
-          </ul>
-        </div>
-      {/* </div> */}
+              <NavLink
+                onClick={logout}
+                to="signup"
+              >
+                Logout
+              </NavLink>
+              <NavLink to="/profile">
+                Profile
+              </NavLink>
+            </NavBar>
+          : <NavBar>
+              <NavLink to="/" end>
+                Home
+              </NavLink>
+              <NavLink to="/login">
+                Login
+              </NavLink>
+              <NavLink to="/signup">
+                Signup
+              </NavLink>
+            </NavBar>
+          }
     </HeaderBar>
   );
 });
