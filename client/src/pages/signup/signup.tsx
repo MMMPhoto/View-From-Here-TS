@@ -5,7 +5,8 @@ import { Button } from "@react-md/button";
 import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
-import { Container, FormCard, FormContent } from "./styles";
+import { FormCard, FormContent } from "./styles";
+import { Container } from "../../styles/styles";
 import { User } from '../../types/User';
 import "./signup.css";
 
