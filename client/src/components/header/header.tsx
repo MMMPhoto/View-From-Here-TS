@@ -15,7 +15,6 @@ import { HeaderBar, Title, NavBar, NavElem } from "./styles";
 const Header = ((props: any) => {
   return (
     <HeaderBar>
-      {/* <div className="container"> */}
         <Title>
           View From Here
         </Title>          

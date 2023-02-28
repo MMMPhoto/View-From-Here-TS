@@ -5,7 +5,7 @@ import { loggedIn, getToken, } from "./utils/auth";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/home/home";
-import SignUp from "./pages//signup/signup";
+import SignUp from "./pages//signup/Signup";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/profile";
 import SingleView from "./pages/singleView/SingleView";
