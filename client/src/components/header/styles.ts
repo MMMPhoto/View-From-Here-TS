@@ -1,5 +1,6 @@
 import styled from "styled-components";
-import { AppBar, AppBarTitle } from "@react-md/app-bar";
+import { AppBar, AppBarTitle, AppBarNav } from "@react-md/app-bar";
+import { NavLink } from "react-router-dom";
 
 export const HeaderBar = styled(AppBar)`
   display: flex;
@@ -12,7 +13,7 @@ export const HeaderBar = styled(AppBar)`
   }
 `;
 
-export const Title = styled.h1`
+export const Title = styled(AppBarTitle)`
   color: #FFF;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 12vw;
@@ -41,4 +42,10 @@ export const NavBar = styled.nav`
   @media (min-width: 600px) {
     width: 40%;
   }
+`;
+
+export const NavElem = styled(NavLink)`
+  text-decoration: none;
+  color: #FFF;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `;

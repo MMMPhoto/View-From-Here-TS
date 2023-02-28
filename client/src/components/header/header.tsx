@@ -1,42 +1,49 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
-import { AppBar, AppBarTitle } from "@react-md/app-bar";
+// import { Link, NavLink } from "react-router-dom";
+import { AppBar, AppBarTitle, AppBarAction, AppBarTheme } from "@react-md/app-bar";
+import {
+  ArrowDropDownSVGIcon,
+  MenuSVGIcon,
+  MoreVertSVGIcon,
+  SearchSVGIcon,
+} from "@react-md/material-icons";
+
 import { logout } from "../../utils/auth.js";
-import { HeaderBar, Title, NavBar } from "./styles";
+import { HeaderBar, Title, NavBar, NavElem } from "./styles";
 // import "./header.css";
 
 const Header = ((props: any) => {
   return (
-    <HeaderBar className="navbar navbar-expand-lg navbar-light bg-dark">
+    <HeaderBar className="navbar navbar-expand-lg navbar-light bg-dark" theme="primary">
       {/* <div className="container"> */}
         <Title>
           View From Here
         </Title>          
         {props.loggedIn
           ? <NavBar>
-              <NavLink to="/" end>
+              <NavElem to="/" end>
                 Home
-              </NavLink>
-              <NavLink
+              </NavElem>
+              <NavElem
                 onClick={logout}
                 to="signup"
               >
                 Logout
-              </NavLink>
-              <NavLink to="/profile">
+              </NavElem>
+              <NavElem to="/profile">
                 Profile
-              </NavLink>
+              </NavElem>
             </NavBar>
           : <NavBar>
-              <NavLink to="/" end>
+              <NavElem to="/" end>
                 Home
-              </NavLink>
-              <NavLink to="/login">
+              </NavElem>
+              <NavElem to="/login">
                 Login
-              </NavLink>
-              <NavLink to="/signup">
+              </NavElem>
+              <NavElem to="/signup">
                 Signup
-              </NavLink>
+              </NavElem>
             </NavBar>
           }
     </HeaderBar>
