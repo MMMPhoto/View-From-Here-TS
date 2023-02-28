@@ -86,8 +86,10 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
         onBoundsChanged={handleBoundsChange}
         options={{
           gestureHandling: 'greedy',
-          mapTypeId: 'hybrid'
+          mapTypeId: 'hybrid',
+          disableDefaultUI: true
         }}
+        
       >
         {markers &&
           markers.map((marker) => (
