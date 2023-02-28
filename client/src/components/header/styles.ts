@@ -7,6 +7,7 @@ export const HeaderBar = styled(AppBar)`
   flex-direction: column;
   justify-content: space-around;
   background-position: center;
+  background-color: #000;
   width: 100.9%;
   @media (min-width: 600px) {
     flex-direction: row;
@@ -48,4 +49,8 @@ export const NavElem = styled(NavLink)`
   text-decoration: none;
   color: #FFF;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  &:hover {
+    color: #8282fe;
+    text-shadow: 2px 2px 10px black;
+  }
 `;

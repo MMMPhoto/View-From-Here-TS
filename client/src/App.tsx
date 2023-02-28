@@ -3,7 +3,7 @@ import "./App.css";
 import { FC, useEffect, useState } from "react";
 import { loggedIn, getToken, } from "./utils/auth";
 import Header from "./components/header/Header";
-import Footer from "./components/footer/footer";
+import Footer from "./components/footer/Footer";
 import Home from "./pages/home/home";
 import SignUp from "./pages//signup/signup";
 import Login from "./pages/login/Login";

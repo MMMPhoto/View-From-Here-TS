@@ -14,7 +14,7 @@ import { HeaderBar, Title, NavBar, NavElem } from "./styles";
 
 const Header = ((props: any) => {
   return (
-    <HeaderBar className="navbar navbar-expand-lg navbar-light bg-dark" theme="primary">
+    <HeaderBar>
       {/* <div className="container"> */}
         <Title>
           View From Here

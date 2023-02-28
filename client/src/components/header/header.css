@@ -4,7 +4,7 @@
     border-bottom: solid;
     border-color: black;
     width: 100.9%; */
- */
+/*/
 
 /* #title {
     color: #FFF;
@@ -15,7 +15,7 @@
     text-shadow: 3px 3px 3px black;
     
 } */
-
+/* 
 .nav-link {
     color: #FFF;
     margin-top: 20px;
@@ -23,10 +23,10 @@
 }
 
 .nav-link li:hover {
-    color: blue;
+    color: rgb(176, 176, 255);
     text-shadow: 2px 2px 10px black;
 }
-
+ */
 
 /* #cloud {
     background-image: url(../../../public/assets/cloudicon.png);
@@ -35,6 +35,3 @@
     min-width: 100px;
     min-height: 80px;
 } */
-
-
-
