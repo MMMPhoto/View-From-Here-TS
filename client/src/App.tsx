@@ -24,8 +24,9 @@ const App: FC<{}> = () => {
   }, []);
 
   return (
-    <div className="wrapper">
+ 
       <Router>
+           <div id="wrapper">
         <Header loggedIn={isLoggedIn} />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -38,8 +39,9 @@ const App: FC<{}> = () => {
           <Route path="/single-view/:pictureId" element={<SingleView />} />
         </Routes>  
         <Footer />
+        </div>
       </Router>
-    </div>
+
   );
 };
 
