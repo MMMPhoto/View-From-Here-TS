@@ -8,7 +8,7 @@ import { login } from "../../utils/auth";
 import { FormCard, FormContent } from "./styles";
 import { Container } from "../../styles/styles";
 import { User } from '../../types/User';
-import "./signup.css";
+// import "./signup.css";
 
 interface SignupData {
     userName: string,
@@ -63,10 +63,9 @@ const SignUp: FC<{}> = () => {
   };
 
   return (
-    <>
-      <section id="background">
-        <Container>
-          <FormCard>
+    <section id="background">
+      <Container>
+        <FormCard>
           <CardHeader>
             <CardTitle>Welcome!</CardTitle>
           </CardHeader>
@@ -109,12 +108,11 @@ const SignUp: FC<{}> = () => {
                 id="signupFormImg"
               />
             </Card>
-            </FormContent>
-          </FormCard>
-        </Container>
-      </section>
-    </>
-  );
-}
+          </FormContent>
+        </FormCard>
+      </Container>
+    </section>
+  )
+};
 
 export default SignUp;
