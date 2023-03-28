@@ -3,7 +3,7 @@ import { AppBar, AppBarTitle, AppBarNav } from "@react-md/app-bar";
 import { NavLink } from "react-router-dom";
 
 export const HeaderBar = styled(AppBar)`
-  display: flex;
+  /* display: flex;
   flex-direction: column;
   justify-content: space-around;
   background-position: center;
@@ -11,7 +11,7 @@ export const HeaderBar = styled(AppBar)`
   width: 100.9%;
   @media (min-width: 600px) {
     flex-direction: row;
-  }
+  } */
 `;
 
 export const Title = styled(AppBarTitle)`

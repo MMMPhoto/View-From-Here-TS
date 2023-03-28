@@ -29,7 +29,7 @@ const Home: FC<{}> = () => {
       try {
         const response: any = await getAllPics();
         const picData: Photo[] = await response.json();
-        console.log(picData);
+        // console.log(picData);
         setMarkers(picData);
         dispatch(saveMarkers(picData));
       } catch (error) {

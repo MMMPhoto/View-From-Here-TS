@@ -1,52 +1,58 @@
-import React from "react";
-// import { Link, NavLink } from "react-router-dom";
-import { AppBar, AppBarTitle, AppBarAction, AppBarTheme } from "@react-md/app-bar";
+import { FC } from "react";
+import { AppSizeListener, DropdownMenu } from "react-md";
+import { MenuItem } from "@react-md/menu";
+
 import {
   ArrowDropDownSVGIcon,
   MenuSVGIcon,
   MoreVertSVGIcon,
   SearchSVGIcon,
 } from "@react-md/material-icons";
+import { useNavigate } from "react-router-dom";
 
 import { logout } from "../../utils/auth.js";
-import { HeaderBar, Title, NavBar, NavElem } from "./styles";
-// import "./header.css";
+import { HeaderBar, Title } from "./styles";
 
-const Header = ((props: any) => {
+const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
+  const navigate = useNavigate();
+
   return (
+    <AppSizeListener>
+
     <HeaderBar>
         <Title>
           View From Here
         </Title>          
-        {props.loggedIn
-          ? <NavBar>
-              <NavElem to="/" end>
+        {loggedIn
+          ? <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
+              <MenuItem onClick={() => navigate("/")}>
                 Home
-              </NavElem>
-              <NavElem
+              </MenuItem>
+              <MenuItem
                 onClick={logout}
-                to="signup"
               >
                 Logout
-              </NavElem>
-              <NavElem to="/profile">
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/profile")}>
                 Profile
-              </NavElem>
-            </NavBar>
-          : <NavBar>
-              <NavElem to="/" end>
+              </MenuItem>               
+            </DropdownMenu>
+          : <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
+              <MenuItem onClick={() => navigate("/")}>
                 Home
-              </NavElem>
-              <NavElem to="/login">
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/login")}>
                 Login
-              </NavElem>
-              <NavElem to="/signup">
+              </MenuItem>
+              <MenuItem onClick={() => navigate("/signup")}>
                 Signup
-              </NavElem>
-            </NavBar>
-          }
+              </MenuItem>
+            </DropdownMenu>
+        }
     </HeaderBar>
+    
+</AppSizeListener>
   );
-});
+};
 
 export default Header;
