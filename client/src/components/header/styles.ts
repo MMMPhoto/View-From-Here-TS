@@ -3,54 +3,36 @@ import { AppBar, AppBarTitle, AppBarNav } from "@react-md/app-bar";
 import { NavLink } from "react-router-dom";
 
 export const HeaderBar = styled(AppBar)`
-  /* display: flex;
-  flex-direction: column;
+  display: flex;
+  flex-direction: row;
   justify-content: space-around;
-  background-position: center;
-  background-color: #000;
+  align-self: center;
+  background-color: #868cc4;
   width: 100.9%;
-  @media (min-width: 600px) {
-    flex-direction: row;
-  } */
+  min-height: 12vh;
+  border-bottom: 2px solid #000;
+  &:before {
+    content: "";
+    background-image: url("./assets/clouds.jpg");
+    background-size: cover;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    opacity: 40%;
+  }
 `;
 
 export const Title = styled(AppBarTitle)`
-  color: #FFF;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  font-size: 12vw;
-  font-style: italic;
-  opacity: 90%;
-  text-shadow: 3px 3px 3px black;
+  position: relative;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 8vh;
+  color: #000;
   width: 100%;
+  height: auto;
   @media (min-width: 600px) {
     font-size: 6vh;
-    flex-direction: row;
     width: 40%;
-  }
-`;
-
-export const NavBar = styled.nav`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  @media (min-width: 300px) {
-    flex-direction: row;
-    justify-content: space-around;
-    width: 100%;
-  }
-  @media (min-width: 600px) {
-    width: 40%;
-  }
-`;
-
-export const NavElem = styled(NavLink)`
-  text-decoration: none;
-  color: #FFF;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  &:hover {
-    color: #8282fe;
-    text-shadow: 2px 2px 10px black;
   }
 `;

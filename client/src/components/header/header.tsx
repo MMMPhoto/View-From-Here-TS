@@ -18,40 +18,38 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
 
   return (
     <AppSizeListener>
-
-    <HeaderBar>
-        <Title>
-          View From Here
-        </Title>          
-        {loggedIn
-          ? <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
-              <MenuItem onClick={() => navigate("/")}>
-                Home
-              </MenuItem>
-              <MenuItem
-                onClick={logout}
-              >
-                Logout
-              </MenuItem>
-              <MenuItem onClick={() => navigate("/profile")}>
-                Profile
-              </MenuItem>               
-            </DropdownMenu>
-          : <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
-              <MenuItem onClick={() => navigate("/")}>
-                Home
-              </MenuItem>
-              <MenuItem onClick={() => navigate("/login")}>
-                Login
-              </MenuItem>
-              <MenuItem onClick={() => navigate("/signup")}>
-                Signup
-              </MenuItem>
-            </DropdownMenu>
-        }
-    </HeaderBar>
-    
-</AppSizeListener>
+      <HeaderBar>
+          <Title>
+            View From Here
+          </Title>          
+          {loggedIn
+            ? <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
+                <MenuItem onClick={() => navigate("/")}>
+                  Home
+                </MenuItem>
+                <MenuItem
+                  onClick={logout}
+                >
+                  Logout
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/profile")}>
+                  Profile
+                </MenuItem>               
+              </DropdownMenu>
+            : <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
+                <MenuItem onClick={() => navigate("/")}>
+                  Home
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/login")}>
+                  Login
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/signup")}>
+                  Signup
+                </MenuItem>
+              </DropdownMenu>
+          }
+      </HeaderBar>
+      </AppSizeListener>
   );
 };
 
