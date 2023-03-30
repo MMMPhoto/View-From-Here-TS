@@ -1,13 +1,10 @@
 import React, {  FC, useState, ChangeEvent, FormEvent } from "react";
-import { Card, CardHeader, CardTitle, CardContent, CardActions } from "@react-md/card";
-import { Form, TextField, Password } from "@react-md/form";
-import { Button } from "@react-md/button";
+import { CardHeader, CardTitle } from "@react-md/card";
+import { Form } from "@react-md/form";
 import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
-import { FormCard, FormContent } from "./styles";
-import { Container } from "../../styles/styles";
-import "./login.css";
+import { Background, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 
@@ -62,36 +59,36 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
   };
 
   return (
-    <section id="background">
-      <Container>
+    <Background>
         <FormCard>
           <CardHeader>
             <CardTitle>Welcome Back!</CardTitle>
           </CardHeader>
           <FormContent>
             <Form>
-              <TextField
+              <Input
                 id="email"
                 name="email"
                 label="Email"
+                required
                 value={userFormData.email}
                 onChange={handleInputChange}
                 type="email"
               />
-              <Password
+              <PasswordInput
                 id="password"
                 name="password"
                 label="password"
-                disableVisibility={true}
+                disableVisibility={true} // Quick fix for problem displaying visibility icon
                 required
                 value={userFormData.password}
                 onChange={handleInputChange}
               />
-              <Button
+              <SubmitButton
                 onClick={handleFormSubmit}
               > 
                 Login
-              </Button>
+              </SubmitButton>
             </Form>
             {/* <Card>
               <img
@@ -103,8 +100,7 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
             </Card> */}
           </FormContent>
         </FormCard>
-      </Container>
-    </section>
+    </Background>
   )
 };
 
