@@ -1,11 +1,10 @@
-import React, { FC, useState, ChangeEvent, FormEvent } from "react";
+import { FC, useState, ChangeEvent, FormEvent } from "react";
 import { CardHeader, CardTitle } from "@react-md/card";
-import { Form, TextField, Password } from "@react-md/form";
+import { Form } from "@react-md/form";
 import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
-import { FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
-import { Container } from "../../styles/styles";
+import { Background, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
 import { User } from '../../types/User';
 
 interface SignupData {
@@ -61,7 +60,7 @@ const SignUp: FC<{}> = () => {
   };
 
   return (
-    <section id="background">
+    <Background>
         <FormCard>
           <CardHeader>
             <CardTitle>Welcome!</CardTitle>
@@ -111,7 +110,7 @@ const SignUp: FC<{}> = () => {
             </Card> */}
           </FormContent>
         </FormCard>
-    </section>
+    </Background>
   )
 };
 
