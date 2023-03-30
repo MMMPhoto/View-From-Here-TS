@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState, ReactElement } from "react";
+import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from 'react-responsive';
 // import { Wrapper, Status } from "@googlemaps/react-wrapper";
@@ -88,7 +88,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
         options={{
           gestureHandling: 'greedy',
           mapTypeId: 'hybrid',
-          disableDefaultUI: true,
+          streetViewControl: false,
           minZoom: 2.5
         }}
         

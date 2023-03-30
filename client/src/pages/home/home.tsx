@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useEffect, useState, useRef } from "react";
 import { getAllPics } from "../../utils/api";
 import "./home.css";
 import "../../components/searchFooter/searchFooter.css";
@@ -17,10 +17,16 @@ const Home: FC<{}> = () => {
   const savedMarkers = useSelector(selectMarkers);
   const dispatch = useDispatch();
 
+  // Query height of window to set map height, accounting for header height
+  const heightRef = useRef([window.innerHeight]);
+  const mapHeight = `${heightRef.current[0] - 70}px`;
+
+
+
   // Map Container Styling
   const containerStyle = {
     width: "100vw",
-    height: "100vh",
+    height: mapHeight,
   };
 
   // Load all pictures on page load
@@ -40,13 +46,10 @@ const Home: FC<{}> = () => {
   }, []);
 
   return (
-    <>
-      <div id="map" className="">
-        <MapWrapper markers={markers}
-          containerStyle={containerStyle}
-        />
-      </div>
-    </>
+      <MapWrapper
+        markers={markers}
+        containerStyle={containerStyle}
+      />
   );
 };
 

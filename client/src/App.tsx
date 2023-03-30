@@ -26,19 +26,19 @@ const App: FC<{}> = () => {
   return (
  
       <Router>
-           <div id="wrapper">
-        <Header loggedIn={isLoggedIn} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route
-            path="/login"
-            element={<Login setLogin={setIsLoggedIn} />}
-          />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/single-view/:pictureId" element={<SingleView />} />
-        </Routes>  
-        <Footer />
+        <div id="wrapper">
+          <Header loggedIn={isLoggedIn} />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route
+              path="/login"
+              element={<Login setLogin={setIsLoggedIn} />}
+            />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/single-view/:pictureId" element={<SingleView />} />
+          </Routes>  
+          {/* <Footer /> */}
         </div>
       </Router>
 

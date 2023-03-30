@@ -5,7 +5,7 @@ export const FooterBar = styled.footer`
   background-color: #000;
   border-top: solid;
   border-color: black;
-  width: 100.9%;
+  width: 100%;
 `;
 
 export const FooterText = styled.p`

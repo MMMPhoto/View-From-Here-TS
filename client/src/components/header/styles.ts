@@ -8,8 +8,7 @@ export const HeaderBar = styled(AppBar)`
   justify-content: space-around;
   align-self: center;
   background-color: #868cc4;
-  width: 100%;
-  min-height: 8vh;
+  height: 70px;
   border-bottom: 2px solid #000;
   &:before {
     content: "";
@@ -26,11 +25,5 @@ export const HeaderBar = styled(AppBar)`
 
 export const Title = styled(AppBarTitle)`
   position: relative;
-  font-size: 6vw;
   color: #000;
-  width: 100%;
-  @media (min-width: 600px) {
-    font-size: 2vw;
-    width: 40%;
-  }
 `;

@@ -18,7 +18,7 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
 
   return (
     <AppSizeListener>
-      <HeaderBar>
+      <HeaderBar height="dense">
           <Title>
             View From Here
           </Title>          
