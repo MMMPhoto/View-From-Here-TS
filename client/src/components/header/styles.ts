@@ -8,8 +8,8 @@ export const HeaderBar = styled(AppBar)`
   justify-content: space-around;
   align-self: center;
   background-color: #868cc4;
-  width: 100.9%;
-  min-height: 12vh;
+  width: 100%;
+  min-height: 8vh;
   border-bottom: 2px solid #000;
   &:before {
     content: "";
@@ -26,13 +26,11 @@ export const HeaderBar = styled(AppBar)`
 
 export const Title = styled(AppBarTitle)`
   position: relative;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  font-size: 8vh;
+  font-size: 6vw;
   color: #000;
   width: 100%;
-  height: auto;
   @media (min-width: 600px) {
-    font-size: 6vh;
+    font-size: 2vw;
     width: 40%;
   }
 `;

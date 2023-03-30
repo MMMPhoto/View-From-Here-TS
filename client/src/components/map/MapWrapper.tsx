@@ -17,7 +17,8 @@ const apiKey: any = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
 const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ markers, containerStyle }) => {
   // Query screen size for mobile and tablet
   const isMobile: boolean = useMediaQuery({ query: '(max-width: 700px)' });
-  const isTablet: boolean = useMediaQuery({ query: '(max-width: 1200px)' })
+  const isTablet: boolean = useMediaQuery({ query: '(max-width: 1200px)' });
+
   // Set up redirect function
   const navigate = useNavigate();
   // Define React Redux functions
@@ -48,10 +49,10 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
           // Adjust map zoom for screen size or single marker
           if (markers.length === 1) {
             map.setZoom(12);
-          } else if (isMobile) {
-            map.setZoom(2);
-          } else if (isTablet) {
-            map.setZoom(3);
+          // } else if (isMobile) {
+          //   map.setZoom(2);
+          // } else if (isTablet) {
+          //   map.setZoom(3);
           } else {
             map.fitBounds(bounds);
           };
@@ -87,7 +88,8 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
         options={{
           gestureHandling: 'greedy',
           mapTypeId: 'hybrid',
-          disableDefaultUI: true
+          disableDefaultUI: true,
+          minZoom: 2.5
         }}
         
       >
