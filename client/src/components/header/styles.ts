@@ -15,6 +15,7 @@ export const HeaderBar = styled(AppBar)`
     background-image: url("./assets/clouds.jpg");
     background-size: cover;
     position: absolute;
+    height: 70px;
     top: 0px;
     right: 0px;
     bottom: 0px;

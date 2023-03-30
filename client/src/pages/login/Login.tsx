@@ -1,6 +1,6 @@
 import React, {  FC, useState, ChangeEvent, FormEvent } from "react";
 import { Card, CardHeader, CardTitle, CardContent, CardActions } from "@react-md/card";
-import { Form, TextField, Password, useChecked } from "@react-md/form";
+import { Form, TextField, Password } from "@react-md/form";
 import { Button } from "@react-md/button";
 import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
@@ -82,6 +82,8 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
                 id="password"
                 name="password"
                 label="password"
+                disableVisibility={true}
+                required
                 value={userFormData.password}
                 onChange={handleInputChange}
               />
@@ -91,14 +93,14 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
                 Login
               </Button>
             </Form>
-            <Card>
+            {/* <Card>
               <img
                 src="https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_500/v1665696442/View-from-here/1ddfeb86305588512f79432b4a107ec5.jpg"
                 className="img-fluid"
                 alt="Sample view"
                 id="loginFormImg"
               />
-            </Card>
+            </Card> */}
           </FormContent>
         </FormCard>
       </Container>

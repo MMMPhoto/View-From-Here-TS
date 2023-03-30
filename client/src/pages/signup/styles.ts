@@ -1,14 +1,19 @@
 import styled from "styled-components";
 import { Card, CardContent } from "@react-md/card";
+import { Form, TextField, Password } from "@react-md/form";
+import { Button } from "@react-md/button";
 
 export const FormCard = styled(Card)`
   margin: 0 auto;
-  width: 100%;
+  width: 80vw;
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  @media (min-width: 350px) {
+    max-width: 350px;
+  }
 `;
 
 export const FormContent = styled(CardContent)`
@@ -21,3 +26,14 @@ export const FormContent = styled(CardContent)`
   align-items: center;
 `;
 
+export const Input = styled(TextField)`
+  margin-bottom: 15px;
+`;
+
+export const PasswordInput = styled(Password)`
+  margin-bottom: 15px;
+`;
+
+export const SubmitButton = styled(Button)`
+  background-color: #d1d4ed;
+`;

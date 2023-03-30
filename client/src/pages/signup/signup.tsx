@@ -1,14 +1,12 @@
 import React, { FC, useState, ChangeEvent, FormEvent } from "react";
-import { Card, CardHeader, CardTitle, CardContent, CardActions } from "@react-md/card";
-import { Form, TextField, Password, useChecked } from "@react-md/form";
-import { Button } from "@react-md/button";
+import { CardHeader, CardTitle } from "@react-md/card";
+import { Form, TextField, Password } from "@react-md/form";
 import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
-import { FormCard, FormContent } from "./styles";
+import { FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
 import { Container } from "../../styles/styles";
 import { User } from '../../types/User';
-// import "./signup.css";
 
 interface SignupData {
     userName: string,
@@ -64,53 +62,55 @@ const SignUp: FC<{}> = () => {
 
   return (
     <section id="background">
-      <Container>
         <FormCard>
           <CardHeader>
             <CardTitle>Welcome!</CardTitle>
           </CardHeader>
           <FormContent>
             <Form>
-              <TextField
+              <Input
                 id="username"
                 name="userName"
                 label="User Name"
+                required
                 value={userFormData.userName}
                 onChange={handleInputChange}
                 type="text"
               />
-              <TextField
+              <Input
                 id="email"
                 name="email"
                 label="Email"
+                required
                 value={userFormData.email}
                 onChange={handleInputChange}
                 type="email"
               />
-              <Password
+              <PasswordInput
                 id="password"
                 name="password"
                 label="password"
+                disableVisibility={true} // Quick fix for problem displaying visibility icon
+                required
                 value={userFormData.password}
                 onChange={handleInputChange}
               />
-              <Button
+              <SubmitButton
                 onClick={handleFormSubmit}
               > 
                 Sign Up
-              </Button>
+              </SubmitButton>
             </Form>
-            <Card>
+            {/* <Card>
               <img
                 src="https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_500/v1665696442/View-from-here/1ddfeb86305588512f79432b4a107ec5.jpg"
                 className="img-fluid"
                 alt="Sample view"
                 id="signupFormImg"
               />
-            </Card>
+            </Card> */}
           </FormContent>
         </FormCard>
-      </Container>
     </section>
   )
 };
