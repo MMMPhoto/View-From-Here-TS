@@ -5,7 +5,6 @@ import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
 import { Background, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
-import { User } from '../../types/User';
 
 interface SignupData {
     userName: string,

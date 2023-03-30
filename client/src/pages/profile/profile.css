@@ -6,23 +6,8 @@
     padding-top: 10vh;
 }
 
-#formdiv {
-    margin-top: -50px;
-}
-
 #formbg {
     opacity: 90%;
-}
-
-#cards {
-    min-width: min-content;
-    max-width: max-content;
-    width: 100%;
-    border-style: solid;
-    border-width: 2px;
-    border-radius: 5%;
-    margin: 3px;
-    background-color: black;
 }
 
 .card-group {

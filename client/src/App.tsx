@@ -37,7 +37,7 @@ const App: FC<{}> = () => {
             />
             <Route path="/profile" element={<Profile />} />
             <Route path="/single-view/:pictureId" element={<SingleView />} />
-          </Routes>  
+          </Routes>
           {/* <Footer /> */}
         </div>
       </Router>

@@ -1,5 +1,9 @@
-import React, { FC, useState, useEffect, SyntheticEvent, FormEvent } from "react";
-import { Container, CardGroup, Card, Button } from "react-bootstrap";
+import { FC, useState, useEffect, SyntheticEvent, Fragment } from "react";
+import { Card, CardHeader, CardSubtitle, CardTitle } from "@react-md/card";
+import { useFileUpload, FileInput, Form } from "@react-md/form";
+import { Avatar } from "@react-md/avatar";
+import { MediaContainer } from "@react-md/media";
+import { FileUploadSVGIcon } from "@react-md/material-icons";
 import { useNavigate } from "react-router-dom";
 import { loggedIn, getToken, } from "../../utils/auth";
 import {
@@ -10,6 +14,7 @@ import {
 } from "../../utils/api";
 import { User } from '../../types/User';
 import { Photo } from '../../types/Photo';
+import { Background, ProfileCard, UserInfo, ProfileContent, PicGrid, PicCard, Upload, SubmitButton } from "./styles";
 import "./profile.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
@@ -71,6 +76,7 @@ const Profile: FC<{}> = () => {
 
   // Submit function for image Upload
   const handleSubmit = async (e: SyntheticEvent<HTMLInputElement>) => {
+    console.log("uploading...")
     e.preventDefault();
     setStatus("Loading...");
     let formData = new FormData();
@@ -123,82 +129,60 @@ const Profile: FC<{}> = () => {
   }
 
   return (
-    <>
-      <section id="background">
-        <div className="container rounded bg-white mt-5 mb-5" id="formbg">
-          <div className="row" id="formdiv">
-            <div className="col-12 col-md-3 border-right">
-              <div className="d-flex flex-column justify-content-around align-items-center text-center mt-3">
-                <img
-                  className="rounded-circle"
-                  width="100px"
-                  src="https://www.pngkey.com/png/detail/966-9665347_icon-profile-circle.png"
-                  alt="Profile Icon"
-                />
-                <span className="font-weight-bold">{userData.userName}</span>
-                <span className="text-black-50">{userData.email}</span>
-                <span></span>
-              </div>
-            </div>
-            <div className="col-12 col-md-9 border-right">
-              <div className="pt-4">
-                <div className="d-flex justify-content-between align-items-center mb-3">
-                  <h4 className="text-right">Your saved photos:</h4>
-                </div>
-                <Container className="p-0 m-0" id="contain">
-                  <h2>
-                    {savedPics.length
-                      ? `Viewing ${savedPics.length} saved ${
-                          savedPics.length === 1 ? "pic" : "pics"
-                        }:`
-                      : "You have no saved photos!"}
-                  </h2>
-                  <CardGroup>
-                    {savedPics.map((pic, index) => {
-                      return (
-                        <Card id="cards" key={index}>
-                          {pic ? (
-                            <Card.Img
-                              id="cardimage"
-                              src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
-                              variant="top"
-                              onClick={() => navigate(`/single-view/${pic.id}`)}
-                            />
-                          ) : null}
-                          <Button
-                            className="btn-block btn-danger"
-                            onClick={() => handleDeletePic(pic.id)}
-                          >
-                            Delete
-                          </Button>
-                        </Card>
-                      );
-                    })}
-                  </CardGroup>
-                </Container>
-                <br></br>
-                <div>
-                  <h1>Upload your image:</h1>
-                  {status && <h4>{status}</h4>}
-                  <hr></hr>
-                  <form onSubmit={e => handleSubmit}>
-                    <input
-                      type="file"
-                      name="userFile"
-                      onChange={e => handleFileChange(e)}
-                    ></input>
-                    <button type="submit" id="submit">
-                      Submit
-                    </button>
-                  </form>
-                </div>
-              </div>
-              <div className="mt-5 text-center"></div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </>
+      <Background>
+        <ProfileCard>
+            <UserInfo>
+                <Avatar>{userData.userName.charAt(0)}</Avatar>
+                <CardTitle>{userData.userName}</CardTitle>
+                <CardSubtitle>{userData.email}</CardSubtitle>
+            </UserInfo>
+            <ProfileContent>
+                <CardTitle>
+                  {savedPics.length
+                    ? `Viewing ${savedPics.length} saved ${
+                        savedPics.length === 1 ? "pic" : "pics"
+                      }:`
+                    : "You have no saved photos!"}
+                </CardTitle>
+                <PicGrid>
+                  {savedPics.map((pic, index) => (
+                    <PicCard key={index}>
+                      <MediaContainer
+                        width={1}
+                        height={1}
+                      >
+                        <img
+                          src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
+                          onClick={() => navigate(`/single-view/${pic.id}`)}
+                        />
+                      </MediaContainer>
+                      {/* <Button
+                        className="btn-block btn-danger"
+                        onClick={() => handleDeletePic(pic.id)}
+                      >
+                        Delete
+                      </Button> */}
+                    </PicCard>                      
+                  ))}
+                </PicGrid>
+              <Upload>
+                <CardTitle>Upload your image:</CardTitle>
+                {status && <h4>{status}</h4>}
+                <Form onClick={e => handleSubmit}>
+                  <FileInput
+                    icon={<FileUploadSVGIcon />}
+                    id="file-upload"
+                    name="userFile"
+                    onChange={e => handleFileChange(e)}
+                  />
+                  <SubmitButton type="submit" id="submit">
+                    Submit
+                  </SubmitButton>
+                </Form>
+              </Upload>
+            </ProfileContent>
+        </ProfileCard>
+      </Background>
   );
 };
 
