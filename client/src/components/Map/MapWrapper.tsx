@@ -29,12 +29,12 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
   const [map, setMap] = useState<any>(null);
   const [activeMarker, setActiveMarker] = useState<string>();
   const [mapBounds, setMapBounds] = useState<any>();
-  const onLoad = useCallback((map: any) => setMap(map), []);
+  const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
 
   // Set Bounds of Map to contain Markers
   useEffect(() => {
     if (map) {
-      const bounds: any = new google.maps.LatLngBounds();
+      const bounds: google.maps.LatLngBounds = new google.maps.LatLngBounds();
       if (savedBounds && markers.length > 1) {
         return map.fitBounds(JSON.parse(savedBounds));
       } else {
