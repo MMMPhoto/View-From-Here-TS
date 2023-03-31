@@ -1,15 +1,8 @@
 import { FC } from "react";
 import { AppSizeListener, DropdownMenu } from "react-md";
 import { MenuItem } from "@react-md/menu";
-
-import {
-  ArrowDropDownSVGIcon,
-  MenuSVGIcon,
-  MoreVertSVGIcon,
-  SearchSVGIcon,
-} from "@react-md/material-icons";
+import { MenuSVGIcon } from "@react-md/material-icons";
 import { useNavigate } from "react-router-dom";
-
 import { logout } from "../../utils/auth.js";
 import { HeaderBar, Title } from "./styles";
 
@@ -27,6 +20,9 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
                 <MenuItem onClick={() => navigate("/")}>
                   Home
                 </MenuItem>
+                <MenuItem onClick={() => navigate("/about")}>
+                  About
+                </MenuItem>
                 <MenuItem
                   onClick={logout}
                 >
@@ -39,6 +35,9 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
             : <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
                 <MenuItem onClick={() => navigate("/")}>
                   Home
+                </MenuItem>
+                <MenuItem onClick={() => navigate("/about")}>
+                  About
                 </MenuItem>
                 <MenuItem onClick={() => navigate("/login")}>
                   Login

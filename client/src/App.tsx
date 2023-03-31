@@ -5,6 +5,7 @@ import { loggedIn, getToken, } from "./utils/auth";
 import Header from "./components/header/Header";
 import Footer from "./components/footer/Footer";
 import Home from "./pages/home/home";
+import About from "./pages/About/About";
 import SignUp from "./pages//signup/Signup";
 import Login from "./pages/login/Login";
 import Profile from "./pages/profile/profile";
@@ -30,6 +31,7 @@ const App: FC<{}> = () => {
           <Header loggedIn={isLoggedIn} />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
             <Route path="/signup" element={<SignUp />} />
             <Route
               path="/login"
