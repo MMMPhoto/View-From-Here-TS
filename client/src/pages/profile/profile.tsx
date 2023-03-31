@@ -166,8 +166,8 @@ const Profile: FC<{}> = () => {
                   ))}
                 </PicGrid>
               <Upload>
-                <CardTitle>Upload your image:</CardTitle>
-                {status && <h4>{status}</h4>}
+                <CardTitle>Upload your own image:</CardTitle>
+                {status ? <CardSubtitle>{status}</CardSubtitle> : null }
                 <Form onClick={e => handleSubmit}>
                   <FileInput
                     icon={<FileUploadSVGIcon />}
@@ -175,9 +175,12 @@ const Profile: FC<{}> = () => {
                     name="userFile"
                     onChange={e => handleFileChange(e)}
                   />
-                  <SubmitButton type="submit" id="submit">
-                    Submit
-                  </SubmitButton>
+                  {(status === "File Chosen") 
+                    ? <SubmitButton type="submit">
+                        Submit
+                      </SubmitButton>
+                    : null
+                  }
                 </Form>
               </Upload>
             </ProfileContent>
