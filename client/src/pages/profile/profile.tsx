@@ -15,7 +15,6 @@ import {
 import { User } from '../../types/User';
 import { Photo } from '../../types/Photo';
 import { Background, ProfileCard, UserInfo, ProfileContent, PicGrid, PicCard, Upload, SubmitButton } from "./styles";
-import "./profile.css";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 

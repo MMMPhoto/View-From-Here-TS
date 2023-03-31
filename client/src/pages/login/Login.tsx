@@ -1,6 +1,7 @@
 import React, {  FC, useState, ChangeEvent, FormEvent } from "react";
 import { CardHeader, CardTitle } from "@react-md/card";
 import { Form } from "@react-md/form";
+import { RemoveRedEyeSVGIcon } from "@react-md/material-icons";
 import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
@@ -79,7 +80,7 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
                 id="password"
                 name="password"
                 label="password"
-                disableVisibility={true} // Quick fix for problem displaying visibility icon
+                visibilityIcon={<RemoveRedEyeSVGIcon />}
                 required
                 value={userFormData.password}
                 onChange={handleInputChange}
