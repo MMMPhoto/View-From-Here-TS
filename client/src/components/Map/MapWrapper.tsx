@@ -6,7 +6,7 @@ import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../store/mapStateSlice";
 // import MapComponent from "./Map";
-import MarkerInfoCard from "../markerInfoCard/MarkerInfoCard";
+import MarkerInfoCard from "../MarkerInfoCard/MarkerInfoCard";
 import { Photo } from '../../types/Photo';
 import { ContainterStyle } from "../../types/ContainerStyle";
 // Need to use require to avoid weird error on googleMapsApiKey property
