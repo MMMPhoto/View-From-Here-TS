@@ -2,14 +2,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import { FC, useEffect, useState } from "react";
 import { loggedIn, getToken, } from "./utils/auth";
-import Header from "./components/header/Header";
-import Footer from "./components/footer/Footer";
-import Home from "./pages/home/home";
+import Header from "./components/Header/Header";
+import Footer from "./components/Footer/Footer";
+import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
-import SignUp from "./pages//signup/Signup";
-import Login from "./pages/login/Login";
-import Profile from "./pages/profile/profile";
-import SingleView from "./pages/singleView/SingleView";
+import SignUp from "./pages/Signup/Signup";
+import Login from "./pages/Login/Login";
+import Profile from "./pages/Profile/Profile";
+import SingleView from "./pages/SingleView/SingleView";
 
 const App: FC<{}> = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);

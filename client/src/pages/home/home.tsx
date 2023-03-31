@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState, useRef } from "react";
 import { getAllPics } from "../../utils/api";
-import MapWrapper from "../../components/map/MapWrapper";
+import MapWrapper from "../../components/Map/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../store/mapStateSlice";
 import { Photo } from "../../types/Photo";
