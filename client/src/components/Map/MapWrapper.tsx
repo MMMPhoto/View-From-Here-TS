@@ -34,7 +34,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
   // Set Bounds of Map to contain Markers
   useEffect(() => {
     if (map) {
-      const bounds: any = new window.google.maps.LatLngBounds();
+      const bounds: any = new google.maps.LatLngBounds();
       if (savedBounds && markers.length > 1) {
         return map.fitBounds(JSON.parse(savedBounds));
       } else {
