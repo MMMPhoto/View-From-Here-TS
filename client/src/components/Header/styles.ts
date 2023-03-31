@@ -10,6 +10,7 @@ export const HeaderBar = styled(AppBar)`
   background-color: #868cc4;
   height: 70px;
   border-bottom: 2px solid #000;
+  margin: 0px;
   &:before {
     content: "";
     background-image: url("./assets/clouds.jpg");
