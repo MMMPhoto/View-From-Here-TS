@@ -1,10 +1,11 @@
-import { FC, useState, useEffect, SyntheticEvent, Fragment } from "react";
+import { FC, useState, useEffect, FormEvent, MouseEvent, Fragment } from "react";
 import { Card, CardHeader, CardSubtitle, CardTitle } from "@react-md/card";
 import { useFileUpload, FileInput, Form } from "@react-md/form";
 import { Avatar } from "@react-md/avatar";
 import { MediaContainer } from "@react-md/media";
 import { FileUploadSVGIcon } from "@react-md/material-icons";
 import { useNavigate } from "react-router-dom";
+import { extensions } from "../../utils/photoExtensions";
 import { loggedIn, getToken, } from "../../utils/auth";
 import {
   getCurrentUser,
@@ -18,6 +19,10 @@ import { Background, ProfileCard, UserInfo, ProfileContent, PicGrid, PicCard, Up
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 
+// TODO: More user-friendly file input
+// const maxFiles = 1;
+// const TEN_MB = 10 * 1024 * 1024;
+
 const Profile: FC<{}> = () => {
   const navigate = useNavigate();
 
@@ -27,8 +32,8 @@ const Profile: FC<{}> = () => {
   const [newDeletedPic, setNewDeletedPic] = useState<boolean>(false);
 
   // Image Upload State
-  interface Img { preview: string, data: any }
-  const [image, setImage] = useState<Img>({ preview: "", data: "" });
+  interface Img { preview: string, name: string, data: any }
+  const [image, setImage] = useState<Img>({ preview: "", name: "", data: "" });
   const [status, setStatus] = useState<string>("");
 
   // Define React Redux functions
@@ -74,9 +79,9 @@ const Profile: FC<{}> = () => {
   };
 
   // Submit function for image Upload
-  const handleSubmit = async (e: SyntheticEvent<HTMLInputElement>) => {
+  const handleSubmit = async () => {
     console.log("uploading...")
-    e.preventDefault();
+    // e.preventDefault();
     setStatus("Loading...");
     let formData = new FormData();
     formData.append("userFile", image.data);
@@ -107,16 +112,27 @@ const Profile: FC<{}> = () => {
     setNewDeletedPic(true);
   };
 
-  const handleFileChange = (e: SyntheticEvent<HTMLInputElement>) => {
+  const handleFileChange = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
+    console.log(target.files![0]);
+    const name = target.files![0].name
     const file = target.files![0];
     const img: Img = {
       preview: URL.createObjectURL(file),
+      name: name,
       data: file,
     };
     setStatus("File Chosen");
     setImage(img);
   };
+
+  // TODO: More user-friendly file input
+  // const { stats, errors, onChange, clearErrors, reset, remove, accept } =
+  //   useFileUpload({
+  //     maxFiles,
+  //     maxFileSize: TEN_MB,
+  //     extensions,
+  //   });
 
   // if data isn't here yet, say so
   if (!userData) {
@@ -166,16 +182,45 @@ const Profile: FC<{}> = () => {
                 </PicGrid>
               <Upload>
                 <CardTitle>Upload your own image:</CardTitle>
-                {status ? <CardSubtitle>{status}</CardSubtitle> : null }
-                <Form onClick={e => handleSubmit}>
+                {status ? <CardSubtitle>{status}: {image.name}</CardSubtitle> : null }
+                <Form>
+                  <SubmitButton>
+                  <label
+                    // style={{
+                    //   backgroundColor: "#d1d4ed",
+                    //   padding: "8px",
+                    //   borderRadius: "10px"
+                    // }}
+                  >
+                    <input
+                      id="userFile" 
+                      type="file"
+                      name="userFile"
+                      style={{ display: "none" }}
+                      onChange={handleFileChange}
+                    />
+                    Choose {(status === "File Chosen") ? "Another" : null} File
+                  </label>
+                  </SubmitButton>
+                  {/* TODO: More user-friendly file input
                   <FileInput
-                    icon={<FileUploadSVGIcon />}
                     id="file-upload"
                     name="userFile"
-                    onChange={e => handleFileChange(e)}
-                  />
+                    icon={<FileUploadSVGIcon />}
+                    accept={accept}
+                    onChange={onChange}
+                    multiple={false}
+                    // onChange={e => handleFileChange(e)}
+                  /> */}
                   {(status === "File Chosen") 
-                    ? <SubmitButton type="submit">
+                    ? <SubmitButton 
+                        type="submit"
+                        name="submit"
+                        onClick={e => {
+                          e.preventDefault();
+                          handleSubmit();
+                        }}
+                      >
                         Submit
                       </SubmitButton>
                     : null

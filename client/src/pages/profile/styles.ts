@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Card, CardHeader, CardContent } from "@react-md/card";
-import { MediaContainer } from "react-md";
+import { Form } from "@react-md/form";
 import { Button } from "@react-md/button";
 
 export const Background = styled.div`
@@ -86,6 +86,11 @@ export const Upload = styled.div`
   }
 `;
 
+export const UploadForm = styled(Form)`
+
+`;
+
 export const SubmitButton = styled(Button)`
+  margin: 5px;
   background-color: #d1d4ed;
 `;
