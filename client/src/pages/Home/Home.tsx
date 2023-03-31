@@ -16,7 +16,7 @@ const Home: FC<{}> = () => {
 
   // Query height of window to set map height, accounting for header height
   const heightRef = useRef([window.innerHeight]);
-  const mapHeight = `${heightRef.current[0] - 70}px`;
+  const mapHeight = `${heightRef.current[0]}px`;
 
   // Map Container Styling
   const containerStyle = {
