@@ -11,18 +11,18 @@ export const HeaderBar = styled(AppBar)`
   /* height: 70px; */
   border-bottom: 2px solid #000;
   margin: 0px;
-  &:before {
+  /* &:before {
     content: "";
     background-image: url("./assets/clouds.jpg");
     background-size: cover;
     position: absolute;
-    height: 70px;
-    top: 0px;
+    /* height: 70px; */
+    /* top: 0px;
     right: 0px;
     bottom: 0px;
     left: 0px;
     opacity: 40%;
-  }
+  } */
 `;
 
 export const Title = styled(AppBarTitle)`
