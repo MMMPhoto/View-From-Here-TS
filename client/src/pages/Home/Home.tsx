@@ -20,9 +20,8 @@ const Home: FC<{}> = () => {
 
   // Map Container Styling
   const containerStyle = {
-    width: "100vw",
-    height: mapHeight,
-    margin: 0
+    width: "100%",
+    height: "100%"
   };
 
   // Load all pictures on page load
@@ -42,10 +41,13 @@ const Home: FC<{}> = () => {
   }, []);
 
   return (
+    <div style={{ flexGrow: "1" }}
+    >
       <MapWrapper
         markers={markers}
         containerStyle={containerStyle}
       />
+    </div>
   );
 };
 
