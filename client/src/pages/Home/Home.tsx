@@ -22,6 +22,7 @@ const Home: FC<{}> = () => {
   const containerStyle = {
     width: "100vw",
     height: mapHeight,
+    margin: 0
   };
 
   // Load all pictures on page load
