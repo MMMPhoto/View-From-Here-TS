@@ -14,10 +14,6 @@ const Home: FC<{}> = () => {
   const savedMarkers = useSelector(selectMarkers);
   const dispatch = useDispatch();
 
-  // Query height of window to set map height, accounting for header height
-  const heightRef = useRef([window.innerHeight]);
-  const mapHeight = `${heightRef.current[0]}px`;
-
   // Map Container Styling
   const containerStyle = {
     width: "100%",
