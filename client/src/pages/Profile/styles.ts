@@ -71,6 +71,17 @@ export const PicCard = styled(Card)`
   }
 `;
 
+export const DeleteButton = styled(Button)`
+  float: right;
+  width: 20px;
+  height: 20px;
+  background-color: lightgray;
+  @media (min-width: 600px) {
+    height: 25px;
+    width: 25px;
+  }
+`;
+
 export const Upload = styled.div`
   margin-top: 0px;
   width: 100%;
@@ -87,7 +98,14 @@ export const Upload = styled.div`
 `;
 
 export const UploadForm = styled(Form)`
-
+  display: flex;
+  flex-basis: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  @media (min-width: 600px) {
+    flex-direction: row;
+  }
 `;
 
 export const SubmitButton = styled(Button)`

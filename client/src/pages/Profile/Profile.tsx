@@ -1,11 +1,9 @@
-import { FC, useState, useEffect, FormEvent, MouseEvent, Fragment } from "react";
-import { Card, CardHeader, CardSubtitle, CardTitle } from "@react-md/card";
-import { useFileUpload, FileInput, Form } from "@react-md/form";
+import { FC, useState, useEffect, FormEvent } from "react";
+import { CardSubtitle, CardTitle } from "@react-md/card";
 import { Avatar } from "@react-md/avatar";
 import { MediaContainer } from "@react-md/media";
-import { FileUploadSVGIcon } from "@react-md/material-icons";
+import { CloseSVGIcon } from "@react-md/material-icons";
 import { useNavigate } from "react-router-dom";
-import { extensions } from "../../utils/photoExtensions";
 import { loggedIn, getToken, } from "../../utils/auth";
 import {
   getCurrentUser,
@@ -15,13 +13,20 @@ import {
 } from "../../utils/api";
 import { User } from '../../types/User';
 import { Photo } from '../../types/Photo';
-import { Background, ProfileCard, UserInfo, ProfileContent, PicGrid, PicCard, Upload, SubmitButton } from "./styles";
+import { 
+  Background, 
+  ProfileCard, 
+  UserInfo, 
+  ProfileContent, 
+  PicGrid, 
+  PicCard, 
+  Upload, 
+  UploadForm, 
+  SubmitButton, 
+  DeleteButton 
+} from "./styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
-
-// TODO: More user-friendly file input
-// const maxFiles = 1;
-// const TEN_MB = 10 * 1024 * 1024;
 
 const Profile: FC<{}> = () => {
   const navigate = useNavigate();
@@ -126,92 +131,60 @@ const Profile: FC<{}> = () => {
     setImage(img);
   };
 
-  // TODO: More user-friendly file input
-  // const { stats, errors, onChange, clearErrors, reset, remove, accept } =
-  //   useFileUpload({
-  //     maxFiles,
-  //     maxFileSize: TEN_MB,
-  //     extensions,
-  //   });
-
-  // if data isn't here yet, say so
-  if (!userData) {
-    return (
-      <section className="vh-100" id="background">
-        <h2>Loading your profile and saved pics...</h2>
-      </section>
-    );
-  }
-
   return (
-      <Background>
-        <ProfileCard>
+    <Background>
+      { userData
+        ? <ProfileCard>
             <UserInfo>
-                <Avatar>{userData.userName.charAt(0)}</Avatar>
-                <CardTitle>{userData.userName}</CardTitle>
-                <CardSubtitle>{userData.email}</CardSubtitle>
+              <Avatar>{userData.userName.charAt(0)}</Avatar>
+              <CardTitle>{userData.userName}</CardTitle>
+              <CardSubtitle>{userData.email}</CardSubtitle>
             </UserInfo>
             <ProfileContent>
-                <CardTitle>
-                  {savedPics.length
-                    ? `Viewing ${savedPics.length} saved ${
-                        savedPics.length === 1 ? "pic" : "pics"
-                      }:`
-                    : "You have no saved photos!"}
-                </CardTitle>
-                <PicGrid>
-                  {savedPics.map((pic, index) => (
-                    <PicCard key={index}>
-                      <MediaContainer
-                        width={1}
-                        height={1}
-                      >
-                        <img
-                          src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
-                          onClick={() => navigate(`/single-view/${pic.id}`)}
-                        />
-                      </MediaContainer>
-                      {/* <Button
-                        className="btn-block btn-danger"
+              <CardTitle>
+                {savedPics.length
+                  ? `Viewing ${savedPics.length} saved ${
+                      savedPics.length === 1 ? "pic" : "pics"
+                    }:`
+                  : "You have no saved photos!"}
+              </CardTitle>
+              <PicGrid>
+                {savedPics.map((pic, index) => (
+                  <PicCard key={index}>
+                    <MediaContainer
+                      width={1}
+                      height={1}
+                    >
+                      <img
+                        src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
+                        onClick={() => navigate(`/single-view/${pic.id}`)}
+                      />
+                      <DeleteButton
+                        buttonType="icon"
                         onClick={() => handleDeletePic(pic.id)}
                       >
-                        Delete
-                      </Button> */}
-                    </PicCard>                      
-                  ))}
-                </PicGrid>
+                        <CloseSVGIcon />
+                      </DeleteButton>
+                    </MediaContainer>
+                  </PicCard>                      
+                ))}
+              </PicGrid>
               <Upload>
                 <CardTitle>Upload your own image:</CardTitle>
                 {status ? <CardSubtitle>{status}: {image.name}</CardSubtitle> : null }
-                <Form>
+                <UploadForm>
                   <SubmitButton>
-                  <label
-                    // style={{
-                    //   backgroundColor: "#d1d4ed",
-                    //   padding: "8px",
-                    //   borderRadius: "10px"
-                    // }}
-                  >
-                    <input
-                      id="userFile" 
-                      type="file"
-                      name="userFile"
-                      style={{ display: "none" }}
-                      onChange={handleFileChange}
-                    />
-                    Choose {(status === "File Chosen") ? "Another" : null} File
-                  </label>
+                    <label>
+                      <input
+                        id="userFile" 
+                        type="file"
+                        name="userFile"
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                      />
+                      Choose {(status === "File Chosen") ? "Another" : null} File
+                    </label>
                   </SubmitButton>
-                  {/* TODO: More user-friendly file input
-                  <FileInput
-                    id="file-upload"
-                    name="userFile"
-                    icon={<FileUploadSVGIcon />}
-                    accept={accept}
-                    onChange={onChange}
-                    multiple={false}
-                    // onChange={e => handleFileChange(e)}
-                  /> */}
                   {(status === "File Chosen") 
                     ? <SubmitButton 
                         type="submit"
@@ -225,11 +198,15 @@ const Profile: FC<{}> = () => {
                       </SubmitButton>
                     : null
                   }
-                </Form>
+                </UploadForm>
               </Upload>
             </ProfileContent>
-        </ProfileCard>
-      </Background>
+          </ProfileCard>
+        : <ProfileCard>
+            <CardTitle>Loading your profile and saved pics...</CardTitle>
+          </ProfileCard>
+      }
+    </Background>
   );
 };
 

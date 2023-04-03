@@ -99,8 +99,6 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
               key={marker.id}
               position={{ lat: marker.lat, lng: marker.lng }}
               onMouseOver={() => handleActiveMarker(marker.id)}
-              // onLoad={() => markerDrop(marker)}
-              animation={2}
               onClick={() => handleActiveMarker(marker.id)}
             >
               {activeMarker === marker.id && markers.length > 1
