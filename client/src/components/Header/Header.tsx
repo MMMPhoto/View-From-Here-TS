@@ -23,13 +23,13 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
                 <MenuItem onClick={() => navigate("/about")}>
                   About
                 </MenuItem>
+                <MenuItem onClick={() => navigate("/profile")}>
+                  Profile
+                </MenuItem>
                 <MenuItem
                   onClick={logout}
                 >
                   Logout
-                </MenuItem>
-                <MenuItem onClick={() => navigate("/profile")}>
-                  Profile
                 </MenuItem>               
               </DropdownMenu>
             : <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>

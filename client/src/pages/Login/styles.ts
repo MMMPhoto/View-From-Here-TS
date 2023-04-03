@@ -8,7 +8,7 @@ export const Background = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  padding-top: 70px;
+  padding-top: 40px;
   flex-grow: 1;
 `;
 

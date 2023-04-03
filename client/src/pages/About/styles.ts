@@ -6,7 +6,7 @@ export const Background = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  padding-top: 70px;
+  padding-top: 40px;
   flex-grow: 1;
 `;
 
@@ -22,10 +22,5 @@ export const AboutCard = styled(Card)`
 
 export const AboutContent = styled(CardContent)`
   margin: 0 auto;
-  width: 100%;
-  display: flex;
-  flex-basis: 100%;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  width: 95%;
 `;

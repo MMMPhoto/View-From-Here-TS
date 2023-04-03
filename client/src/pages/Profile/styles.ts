@@ -8,7 +8,7 @@ export const Background = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
-  padding-top: 70px;
+  padding-top: 40px;
   flex-grow: 1;
 `;
 
@@ -83,7 +83,7 @@ export const DeleteButton = styled(Button)`
 `;
 
 export const Upload = styled.div`
-  margin-top: 0px;
+  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-basis: 100%;
@@ -91,7 +91,6 @@ export const Upload = styled.div`
   justify-content: center;
   align-items: center;
   @media (min-width: 600px) {
-    margin-top: 20px;
     flex-direction: row;
     justify-content: space-evenly;
   }
