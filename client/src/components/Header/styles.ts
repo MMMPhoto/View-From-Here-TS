@@ -7,9 +7,9 @@ export const HeaderBar = styled(AppBar)`
   flex-direction: row;
   justify-content: space-around;
   align-self: center;
-  background-color: #868cc4;
+  background-color: transparent;
   /* height: 70px; */
-  border-bottom: 2px solid #000;
+  /* border-bottom: 2px solid #000; */
   margin: 0px;
   /* &:before {
     content: "";
