@@ -38,7 +38,7 @@ const SingleView: FC<{}> = () => {
 
   // Map Container Styling
   const containerStyle: ContainterStyle = {
-    width: "60vh",
+    width: "70vw",
     height: "60vh",
   };
 

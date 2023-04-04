@@ -4,8 +4,9 @@
 }
 
 #singleViewBg {
-    background-color: rgb(229, 233, 242);
-    width: 100.9%;
+    position: relative;
+    /* background: transparent; */
+    width: 100%;
 }
 
 #singleViewImg {
