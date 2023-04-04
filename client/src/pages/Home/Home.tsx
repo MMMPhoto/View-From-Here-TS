@@ -17,7 +17,7 @@ const Home: FC<{}> = () => {
 
   // Map Container Styling
   const containerStyle = {
-    width: "95%",
+    width: "100%",
     height: "100%",
   };
 

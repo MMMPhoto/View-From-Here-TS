@@ -1,13 +1,27 @@
 import styled from "styled-components";
 import { AppBar, AppBarTitle, AppBarNav } from "@react-md/app-bar";
+import { Card } from "react-md";
 import { NavLink } from "react-router-dom";
 
+export const HeaderCard = styled(Card)`
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-self: center;
+  background-color: #FFF;
+  margin-top: 10px;
+  width: 98vw;
+`;
+
 export const HeaderBar = styled(AppBar)`
+  z-index: 2;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-self: center;
-  background-color: transparent;
+  border-radius: 10px;
+  background-color: #FFF;
   /* height: 70px; */
   /* border-bottom: 2px solid #000; */
   margin: 0px;

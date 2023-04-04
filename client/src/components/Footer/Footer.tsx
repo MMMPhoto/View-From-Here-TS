@@ -1,11 +1,11 @@
 import React from 'react'; 
-import { FooterBar, FooterText } from "./styles";
+import { FooterCard, FooterBar, FooterText } from "./styles";
 // import './footer.css'
 
 const Footer = (() => (
-  <FooterBar>
+  <FooterCard>
     <FooterText>Copyright &copy; View-From-Here 2022</FooterText>
-  </FooterBar>
+  </FooterCard>
 ));
 
 export default Footer;

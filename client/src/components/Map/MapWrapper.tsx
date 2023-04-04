@@ -31,9 +31,12 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
   const [mapBounds, setMapBounds] = useState<any>();
   const onLoad = useCallback((map: google.maps.Map) => setMap(map), []);
 
+  const defaultMapType: string = "hybrid";
+
   // Set Bounds of Map to contain Markers
   useEffect(() => {
     if (map) {
+      map.setMapTypeId('hybrid');
       const bounds: google.maps.LatLngBounds = new google.maps.LatLngBounds();
       if (savedBounds && markers.length > 1) {
         return map.fitBounds(JSON.parse(savedBounds));
@@ -60,7 +63,9 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
         setMapBounds(bounds);
       };      
     };
-  }, [map, markers, isMobile, isTablet, mapBounds]);
+  }, [map, markers, 
+    // isMobile, isTablet, mapBounds
+  ]);
 
   // Handle Active Marker change
   const handleActiveMarker = (markerId: string) => {
@@ -80,18 +85,24 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
     //   <MapComponent />
     // </Wrapper>
     <LoadScript googleMapsApiKey={apiKey}>
-      <GoogleMap
+     <GoogleMap
         zoom={4.5}
         mapContainerStyle={containerStyle}
         onLoad={onLoad}
         onBoundsChanged={handleBoundsChange}
         options={{
           gestureHandling: 'greedy',
-          mapTypeId: 'hybrid',
           streetViewControl: false,
-          minZoom: 2.5
+          fullscreenControl: false,
+          minZoom: 2.5,
+          zoomControlOptions: {
+            position: 8 // Shorthand for LEFT_CENTER
+          },
+          mapTypeControlOptions: {
+            style: 2, // Shorthand for DROPDOWN_MENU
+            position: 4 // Shorthand for RIGHT_CENTER
+          }
         }}
-        
       >
         {markers &&
           markers.map((marker) => (

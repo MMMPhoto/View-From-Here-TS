@@ -4,13 +4,16 @@ import { MenuItem } from "@react-md/menu";
 import { MenuSVGIcon } from "@react-md/material-icons";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../utils/auth.js";
-import { HeaderBar, Title } from "./styles";
+import { HeaderCard, HeaderBar, Title } from "./styles";
 
 const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
   const navigate = useNavigate();
 
   return (
     <AppSizeListener>
+      <HeaderCard>
+        
+      
       <HeaderBar height="dense">
           <Title>
             View From Here
@@ -48,6 +51,7 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
               </DropdownMenu>
           }
       </HeaderBar>
+      </HeaderCard>
       </AppSizeListener>
   );
 };
