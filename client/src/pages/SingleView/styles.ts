@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { Card, CardHeader, CardContent } from "@react-md/card";
-import { Form } from "@react-md/form";
 import { Button } from "@react-md/button";
+import { FavoriteBorderSVGIcon, FavoriteSVGIcon } from "@react-md/material-icons";
+
 
 export const SingleViewContainer = styled.div`
   overflow: auto;
@@ -33,9 +34,43 @@ export const SingleViewContent = styled.div`
   }
 `;
 
-export const PicCard = styled(Card)`
+export const PicCard = styled.div`
   border: 1px solid black;
   width: 90%;
   height: auto;
   margin: 30px 30px;
+`;
+
+export const FavButton = styled(Button)`
+  position: absolute;
+  padding: 0;
+  top: 5px;
+  right: 5px;
+  width: 20px;
+  height: 20px;
+  background-color: rgba(20,20,20,0.2);
+  @media (min-width: 600px) {
+    width: 65px;
+    height: 65px;
+  }
+`;
+
+
+export const UnsavedIcon = styled(FavoriteBorderSVGIcon)`
+  width: 20px;
+  height: 20px;
+  @media (min-width: 600px) {
+    width: 65px;
+    height: 65px;
+  }
+`;
+
+export const SavedIcon = styled(FavoriteSVGIcon)`
+  width: 20px;
+  height: 20px;
+  color: red;
+  @media (min-width: 600px) {
+    width: 65px;
+    height: 65px;
+  }
 `;

@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from "react";
 import { CardSubtitle, CardTitle } from "@react-md/card";
-import { MediaContainer } from "@react-md/media";
+import { MediaContainer, MediaOverlay } from "@react-md/media";
+import { FavoriteBorderSVGIcon } from "@react-md/material-icons";
 import { useParams } from "react-router-dom";
 import { GrFavorite } from "react-icons/gr";
 import MapWrapper from "../../components/Map/MapWrapper";
@@ -11,7 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 import { Photo } from "../../types/Photo";
 import { ContainterStyle } from "../../types/ContainerStyle";
-import { SingleViewCard, SingleViewContainer, PicCard, SingleViewContent } from "./styles";
+import { SingleViewCard, SingleViewContainer, SingleViewContent, PicCard, FavButton, UnsavedIcon, SavedIcon } from "./styles";
 
 
 const SingleView: FC<{}> = () => {
@@ -95,27 +96,24 @@ const SingleView: FC<{}> = () => {
   return (
     <SingleViewContainer>
       <SingleViewCard>
-        {isLoggedIn
-          ? <GrFavorite onClick={() => handleSavePhoto(pictureData[0].id)} />
-          : <CardTitle>You must be logged in to save photos!</CardTitle>
-        }
-          {isSavedPhoto
-            ? <p>Photo saved!</p> 
-            : null
-          }
+        { !isLoggedIn ? <CardSubtitle>You must be logged in to save photos!</CardSubtitle> : null }
         <SingleViewContent>
         <PicCard>
-          <MediaContainer>
+          <MediaContainer fullWidth={true}>
             <img src={picUrl} />
+            <FavButton 
+              onClick={() => handleSavePhoto(pictureData[0].id)}
+            >  
+              { isSavedPhoto ? <SavedIcon /> : <UnsavedIcon /> }
+            </FavButton>
+
           </MediaContainer>
         </PicCard>
         {pictureData
           ? <MapWrapper markers={pictureData} containerStyle={containerStyle} />
           : <p>Loading...</p>
         }
-
         </SingleViewContent>
-        
       </SingleViewCard>
     </SingleViewContainer>
   );
