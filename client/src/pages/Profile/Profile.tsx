@@ -95,7 +95,6 @@ const Profile: FC<{}> = () => {
 
     // Check to see if response is okay
     if (!response.ok) {
-      console.log(uploadedImage);
       setStatus(uploadedImage.message);
       return;
     } else {
@@ -108,7 +107,6 @@ const Profile: FC<{}> = () => {
       const response = await savePic(uploadedImage, token);
 
       if (!response.ok) {
-        console.log(response);
         throw new Error("Something went wrong!");
       }
     } catch (err) {
@@ -119,7 +117,6 @@ const Profile: FC<{}> = () => {
 
   const handleFileChange = (e: FormEvent<HTMLInputElement>) => {
     const target = e.target as HTMLInputElement;
-    console.log(target.files![0]);
     const name = target.files![0].name
     const file = target.files![0];
     const img: Img = {

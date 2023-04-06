@@ -45,7 +45,6 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
       }
       setLogin(true);
       const { token, user } = await response.json();
-      console.log(user);
       dispatch(saveSavedPhotos(user.savedPics));
       login(token);
       navigate("/");

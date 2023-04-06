@@ -45,7 +45,6 @@ const SignUp: FC<{}> = () => {
       }
 
       const { token, user } = await response.json();
-      console.log(user);
       login(token);
       navigate("/login");
     } catch (err) {

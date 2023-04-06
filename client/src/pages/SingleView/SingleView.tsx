@@ -60,8 +60,6 @@ const SingleView: FC<{}> = () => {
         jsonArray.push(jsonData);
         setPictureData(jsonArray);
         jsonData.tags && setPicTags(jsonData.tags);
-        console.log(`User saved photos from store: ${savedPhotos}`);
-        console.log(savedPhotos);
         const thisPhoto: Photo = savedPhotos.find((thisPhoto: Photo) => thisPhoto.id === pictureId)
         if (thisPhoto) {
           setSavedPhoto(true);

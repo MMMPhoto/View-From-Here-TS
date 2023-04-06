@@ -15,12 +15,10 @@
 #wrapper::before {
   content: "";
   background-image: url("../public/assets/VFH-Background.png");
-  /* background-image: url("https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,h_1000/v1665696442/View-from-here/cb8dfbf5ae26096301c2c3fd7e8c5a1e.jpg"); */
   background-size: cover;
-  background-repeat: no-repeat;
-  opacity: 100%;
+  background-position: center;
   position: absolute;
-  top: -200px;
+  top: 0px;
   bottom: 0px;
   right: 0px;
   left: 0px;
