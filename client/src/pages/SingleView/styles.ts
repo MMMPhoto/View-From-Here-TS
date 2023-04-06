@@ -3,7 +3,6 @@ import { Card } from "@react-md/card";
 import { Button } from "@react-md/button";
 import { FavoriteBorderSVGIcon, FavoriteSVGIcon } from "@react-md/material-icons";
 
-
 export const SingleViewContainer = styled.div`
   overflow: auto;
   margin: 30px auto; 
