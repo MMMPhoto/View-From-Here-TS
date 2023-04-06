@@ -1,4 +1,6 @@
 import React, { FC, useEffect, useState } from "react";
+import { CardSubtitle, CardTitle } from "@react-md/card";
+import { MediaContainer } from "@react-md/media";
 import { useParams } from "react-router-dom";
 import { GrFavorite } from "react-icons/gr";
 import MapWrapper from "../../components/Map/MapWrapper";
@@ -9,6 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 import { Photo } from "../../types/Photo";
 import { ContainterStyle } from "../../types/ContainerStyle";
+import { SingleViewCard, SingleViewContainer, PicCard, SingleViewContent } from "./styles";
 
 
 const SingleView: FC<{}> = () => {
@@ -38,8 +41,8 @@ const SingleView: FC<{}> = () => {
 
   // Map Container Styling
   const containerStyle: ContainterStyle = {
-    width: "70vw",
-    height: "60vh",
+    width: "50vw",
+    height: "50vh",
   };
 
   useEffect(() => {
@@ -90,37 +93,31 @@ const SingleView: FC<{}> = () => {
   };
 
   return (
-    <div
-      className="d-flex flex-column align-items-center p-4"
-      id="singleViewBg"
-    >
-      {isLoggedIn ? (
-        <p className="save-pic">Click the heart to save the photo!</p>
-      ) : (
-        <p className="save-pic">You must be logged in to save photos!</p>
-      )}
-      <div
-        className="d-flex flex-row justify-content-center align-items-center"
-        id="savePhoto"
-      >
-        <h3>
-          <GrFavorite onClick={() => handleSavePhoto(pictureData[0].id)} />
-        </h3>
-        {isSavedPhoto ? (
-          <p className="ms-3 mb-0 save-pic">Photo saved!</p>
-        ) : (
-          <div></div>
-        )}
-      </div>
-      <img className="single-pic p-4" src={picUrl} id="singleViewImg" />
-      <div id="singleViewMap">
-        {pictureData ? (
-          <MapWrapper markers={pictureData} containerStyle={containerStyle} />
-        ) : (
-          <p>Loading...</p>
-        )}
-      </div>
-    </div>
+    <SingleViewContainer>
+      <SingleViewCard>
+        {isLoggedIn
+          ? <GrFavorite onClick={() => handleSavePhoto(pictureData[0].id)} />
+          : <CardTitle>You must be logged in to save photos!</CardTitle>
+        }
+          {isSavedPhoto
+            ? <p>Photo saved!</p> 
+            : null
+          }
+        <SingleViewContent>
+        <PicCard>
+          <MediaContainer>
+            <img src={picUrl} />
+          </MediaContainer>
+        </PicCard>
+        {pictureData
+          ? <MapWrapper markers={pictureData} containerStyle={containerStyle} />
+          : <p>Loading...</p>
+        }
+
+        </SingleViewContent>
+        
+      </SingleViewCard>
+    </SingleViewContainer>
   );
 };
 

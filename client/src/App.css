@@ -14,7 +14,6 @@
 
 #wrapper::before {
   content: "";
-  /* mask-image: linear-gradient(#FFF, #000); */
   background-image: url("../public/assets/VFH-Background.png");
   /* background-image: url("https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,h_1000/v1665696442/View-from-here/cb8dfbf5ae26096301c2c3fd7e8c5a1e.jpg"); */
   background-size: cover;

@@ -5,19 +5,12 @@
 
 #singleViewBg {
     position: relative;
-    /* background: transparent; */
     width: 100%;
 }
 
 #singleViewImg {
     border-style: solid;
     padding: 0!important;
-    
-}
-
-#singleViewMap {
-    border-style: solid;
-    margin-top: 20px;
 }
 
 svg {
