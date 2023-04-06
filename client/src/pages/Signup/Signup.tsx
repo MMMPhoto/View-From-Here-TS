@@ -5,7 +5,7 @@ import { RemoveRedEyeSVGIcon } from "@react-md/material-icons";
 import { createNewUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
-import { Background, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
+import { SignupContainer, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
 
 interface SignupData {
     userName: string,
@@ -60,7 +60,7 @@ const SignUp: FC<{}> = () => {
   };
 
   return (
-    <Background>
+    <SignupContainer>
         <FormCard>
           <CardHeader>
             <CardTitle>Welcome!</CardTitle>
@@ -100,17 +100,9 @@ const SignUp: FC<{}> = () => {
                 Sign Up
               </SubmitButton>
             </Form>
-            {/* <Card>
-              <img
-                src="https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_500/v1665696442/View-from-here/1ddfeb86305588512f79432b4a107ec5.jpg"
-                className="img-fluid"
-                alt="Sample view"
-                id="signupFormImg"
-              />
-            </Card> */}
           </FormContent>
         </FormCard>
-    </Background>
+    </SignupContainer>
   )
 };
 

@@ -29,7 +29,6 @@ const App: FC<{}> = () => {
       <Router>
         <div id="wrapper">
           <Header loggedIn={isLoggedIn} />
-          {/* <div style={{ margin: "0" }}> */}
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
@@ -41,8 +40,7 @@ const App: FC<{}> = () => {
               <Route path="/profile" element={<Profile />} />
               <Route path="/single-view/:pictureId" element={<SingleView />} />
             </Routes>
-          {/* </div> */}
-          {/* <Footer /> */}
+          <Footer />
         </div>
       </Router>
 

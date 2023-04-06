@@ -1,12 +1,11 @@
 import {  FC } from "react";
 import { CardHeader, CardTitle } from "@react-md/card";
-import { Typography } from "@react-md/typography";
-import { Background, AboutCard, AboutContent } from "./styles";
+import { AboutContainer, AboutCard, AboutContent } from "./styles";
 
 const About: FC<{}> = ({}) => {
 
   return (
-    <Background>
+    <AboutContainer>
         <AboutCard>
           <CardHeader>
             <CardTitle>About</CardTitle>
@@ -37,7 +36,7 @@ const About: FC<{}> = ({}) => {
             </p>       
           </AboutContent>
         </AboutCard>
-    </Background>
+    </AboutContainer>
   )
 };
 

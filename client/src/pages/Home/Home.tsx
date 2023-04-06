@@ -4,6 +4,7 @@ import MapWrapper from "../../components/Map/MapWrapper";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../store/mapStateSlice";
 import { Photo } from "../../types/Photo";
+import { MapDiv } from "./styles";
 
 const Home: FC<{}> = () => {
 
@@ -14,14 +15,10 @@ const Home: FC<{}> = () => {
   const savedMarkers = useSelector(selectMarkers);
   const dispatch = useDispatch();
 
-  // Query height of window to set map height, accounting for header height
-  const heightRef = useRef([window.innerHeight]);
-  const mapHeight = `${heightRef.current[0]}px`;
-
   // Map Container Styling
   const containerStyle = {
     width: "100%",
-    height: "100%"
+    height: "100%",
   };
 
   // Load all pictures on page load
@@ -30,7 +27,6 @@ const Home: FC<{}> = () => {
       try {
         const response: any = await getAllPics();
         const picData: Photo[] = await response.json();
-        // console.log(picData);
         setMarkers(picData);
         dispatch(saveMarkers(picData));
       } catch (error) {
@@ -41,13 +37,12 @@ const Home: FC<{}> = () => {
   }, []);
 
   return (
-    <div style={{ flexGrow: "1" }}
-    >
+    <MapDiv>
       <MapWrapper
         markers={markers}
         containerStyle={containerStyle}
       />
-    </div>
+    </MapDiv>
   );
 };
 

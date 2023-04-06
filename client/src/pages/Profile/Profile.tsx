@@ -1,4 +1,4 @@
-import { FC, useState, useEffect, FormEvent } from "react";
+import { FC, useState, useEffect, FormEvent, Fragment } from "react";
 import { CardSubtitle, CardTitle } from "@react-md/card";
 import { Avatar } from "@react-md/avatar";
 import { MediaContainer } from "@react-md/media";
@@ -14,7 +14,7 @@ import {
 import { User } from '../../types/User';
 import { Photo } from '../../types/Photo';
 import { 
-  Background, 
+  ProfileContainer,
   ProfileCard, 
   UserInfo, 
   ProfileContent, 
@@ -132,7 +132,7 @@ const Profile: FC<{}> = () => {
   };
 
   return (
-    <Background>
+    <ProfileContainer>
       { userData
         ? <ProfileCard>
             <UserInfo>
@@ -141,34 +141,6 @@ const Profile: FC<{}> = () => {
               <CardSubtitle>{userData.email}</CardSubtitle>
             </UserInfo>
             <ProfileContent>
-              <CardTitle>
-                {savedPics.length
-                  ? `Viewing ${savedPics.length} saved ${
-                      savedPics.length === 1 ? "pic" : "pics"
-                    }:`
-                  : "You have no saved photos!"}
-              </CardTitle>
-              <PicGrid>
-                {savedPics.map((pic, index) => (
-                  <PicCard key={index}>
-                    <MediaContainer
-                      width={1}
-                      height={1}
-                    >
-                      <img
-                        src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
-                        onClick={() => navigate(`/single-view/${pic.id}`)}
-                      />
-                      <DeleteButton
-                        buttonType="icon"
-                        onClick={() => handleDeletePic(pic.id)}
-                      >
-                        <CloseSVGIcon />
-                      </DeleteButton>
-                    </MediaContainer>
-                  </PicCard>                      
-                ))}
-              </PicGrid>
               <Upload>
                 <CardTitle>Upload your own image:</CardTitle>
                 {status ? <CardSubtitle>{status}: {image.name}</CardSubtitle> : null }
@@ -200,13 +172,44 @@ const Profile: FC<{}> = () => {
                   }
                 </UploadForm>
               </Upload>
+              <CardTitle>
+                {savedPics.length
+                  ? `Viewing ${savedPics.length} saved ${
+                      savedPics.length === 1 ? "pic" : "pics"
+                    }:`
+                  : "You have no saved photos!"}
+              </CardTitle>
+              <PicGrid>
+                {savedPics.map((pic, index) => (
+                  <PicCard 
+                    key={index} 
+                    style={{ order: savedPics.length - index}} // Reverse order so most recent saved pics are first
+                  >
+                    <MediaContainer
+                      width={1}
+                      height={1}
+                    >
+                      <img
+                        src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
+                        onClick={() => navigate(`/single-view/${pic.id}`)}
+                      />
+                      <DeleteButton
+                        buttonType="icon"
+                        onClick={() => handleDeletePic(pic.id)}
+                      >
+                        <CloseSVGIcon />
+                      </DeleteButton>
+                    </MediaContainer>
+                  </PicCard>                      
+                ))}
+              </PicGrid>
             </ProfileContent>
           </ProfileCard>
         : <ProfileCard>
             <CardTitle>Loading your profile and saved pics...</CardTitle>
           </ProfileCard>
       }
-    </Background>
+    </ProfileContainer>
   );
 };
 

@@ -1,19 +1,16 @@
 import styled from "styled-components";
+import { Container } from "../../styles/styles";
 import { Card, CardHeader, CardContent } from "@react-md/card";
 import { Form } from "@react-md/form";
 import { Button } from "@react-md/button";
 
-export const Background = styled.div`
- background-image: url(https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_1000/v1665696442/View-from-here/1ddfeb86305588512f79432b4a107ec5.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  padding-top: 40px;
-  flex-grow: 1;
+export const ProfileContainer = styled.div`
+  overflow: auto;
+  margin: 40px auto;  
 `;
 
 export const ProfileCard = styled(Card)`
-  margin: 0 auto;
+  position: relative;
   width: 85vw;
   padding: 20px;
   display: flex;
@@ -28,7 +25,8 @@ export const ProfileCard = styled(Card)`
 `;
 
 export const UserInfo = styled.div`
-  width: 250px;
+  margin-top: 20px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -36,7 +34,6 @@ export const UserInfo = styled.div`
 `;
 
 export const ProfileContent = styled.div`
-  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-basis: 100%;
@@ -51,7 +48,6 @@ export const ProfileContent = styled.div`
 export const PicGrid = styled.div`
   width: 100%;
   display: flex;
-  flex-basis: 100%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -83,7 +79,7 @@ export const DeleteButton = styled(Button)`
 `;
 
 export const Upload = styled.div`
-  margin-top: 20px;
+  margin: 20px 20px;
   width: 100%;
   display: flex;
   flex-basis: 100%;
@@ -91,8 +87,7 @@ export const Upload = styled.div`
   justify-content: center;
   align-items: center;
   @media (min-width: 600px) {
-    flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
   }
 `;
 
