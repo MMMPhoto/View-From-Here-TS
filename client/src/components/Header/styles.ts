@@ -1,12 +1,10 @@
 import styled from "styled-components";
-import { AppBar, AppBarTitle, AppBarNav } from "@react-md/app-bar";
+import { AppBar, AppBarTitle } from "@react-md/app-bar";
 import { Card } from "react-md";
-import { NavLink } from "react-router-dom";
 
 export const HeaderCard = styled(Card)`
   z-index: 2;
   display: flex;
-  /* flex-shrink: 1; */
   flex-direction: column;
   justify-content: center;
   align-self: center;
