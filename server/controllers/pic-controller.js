@@ -39,6 +39,7 @@ module.exports = {
     try {
       // Define path of uploaded picture
       const filePath = path.join(`./uploads/${req.file.filename}`);
+      console.log(req.file);
       // Get GPS and Exif data from picture
       const gpsData = await getGpsData(filePath);
       // Return error if no GPS data present
