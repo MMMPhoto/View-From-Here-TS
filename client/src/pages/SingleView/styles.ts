@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Card, CardHeader, CardContent } from "@react-md/card";
+import { Card } from "@react-md/card";
 import { Button } from "@react-md/button";
 import { FavoriteBorderSVGIcon, FavoriteSVGIcon } from "@react-md/material-icons";
 

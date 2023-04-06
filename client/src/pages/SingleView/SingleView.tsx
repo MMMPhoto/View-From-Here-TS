@@ -1,19 +1,23 @@
 import React, { FC, useEffect, useState } from "react";
 import { CardSubtitle, CardTitle } from "@react-md/card";
 import { MediaContainer, MediaOverlay } from "@react-md/media";
-import { FavoriteBorderSVGIcon } from "@react-md/material-icons";
 import { useParams } from "react-router-dom";
-import { GrFavorite } from "react-icons/gr";
 import MapWrapper from "../../components/Map/MapWrapper";
-import "./SingleView.css";
 import { loggedIn, getToken } from "../../utils/auth";
-import { getOnePic, savePic } from "../../utils/api";
+import { getOnePic, savePic, deleteSavedPic } from "../../utils/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 import { Photo } from "../../types/Photo";
 import { ContainterStyle } from "../../types/ContainerStyle";
-import { SingleViewCard, SingleViewContainer, SingleViewContent, PicCard, FavButton, UnsavedIcon, SavedIcon } from "./styles";
-
+import { 
+  SingleViewCard, 
+  SingleViewContainer, 
+  SingleViewContent, 
+  PicCard, 
+  FavButton, 
+  UnsavedIcon, 
+  SavedIcon 
+} from "./styles";
 
 const SingleView: FC<{}> = () => {
   const { pictureId } = useParams<string>();
@@ -72,21 +76,16 @@ const SingleView: FC<{}> = () => {
     getPicData();
   }, []);
 
-  // Handle save photo
+  // Handle Save or Unsave Photo
   const handleSavePhoto = async (picId: string) => {
-    const picToSave = pictureData.find(
-      (picture) => pictureData[0].id === picId
-    );
-
-    // get token
     const token = loggedIn() ? getToken() : null;
-
+    const picToSave = pictureData.find((picture) => pictureData[0].id === picId);
     try {
-      const response = await savePic(picToSave, token);
+      const response = await (isSavedPhoto ? deleteSavedPic(picId, token) : savePic(picToSave, token));
       if (!response.ok) {
         throw new Error("Something went wrong!");
       } else {
-        setSavedPhoto(true);
+        setSavedPhoto(!isSavedPhoto);
       }
     } catch (err) {
       console.error(err);
