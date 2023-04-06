@@ -187,7 +187,7 @@ const Profile: FC<{}> = () => {
                       height={1}
                     >
                       <img
-                        src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_150/v1665696442/${pic.public_id}.jpg`}
+                        src={`https://res.cloudinary.com/dwuqez3pg/image/upload/c_scale,w_300/v1665696442/${pic.public_id}.jpg`}
                         style={{ objectFit: "cover" }} // Force image to maintain aspect ratio
                         onClick={() => navigate(`/single-view/${pic.id}`)}
                       />
