@@ -1,6 +1,5 @@
 import React from 'react'; 
-import { FooterCard, FooterBar, FooterText } from "./styles";
-// import './footer.css'
+import { FooterCard, FooterText } from "./styles";
 
 const Footer = (() => (
   <FooterCard>

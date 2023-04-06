@@ -1,19 +1,18 @@
 import styled from "styled-components";
-import { Container } from "../../styles/styles";
 import { Card, CardHeader, CardContent } from "@react-md/card";
 import { Form } from "@react-md/form";
 import { Button } from "@react-md/button";
 
-export const ProfileContainer = styled.div`
-  overflow: auto;
-  margin: 40px auto;  
+export const Background = styled.div`
+  padding-top: 40px;
+  flex-grow: 1;
 `;
 
-export const ProfileCard = styled(Card)`
-  position: relative;
+export const SingleViewCard = styled(Card)`
+position: relative;
+  margin: 0 auto;
   width: 85vw;
-  padding: 20px;
-  background-color: white;
+  padding: 200px;
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
@@ -34,6 +33,7 @@ export const UserInfo = styled.div`
 `;
 
 export const ProfileContent = styled.div`
+  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-basis: 100%;
@@ -48,6 +48,7 @@ export const ProfileContent = styled.div`
 export const PicGrid = styled.div`
   width: 100%;
   display: flex;
+  flex-basis: 100%;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
@@ -67,19 +68,8 @@ export const PicCard = styled(Card)`
   }
 `;
 
-export const DeleteButton = styled(Button)`
-  float: right;
-  width: 20px;
-  height: 20px;
-  background-color: lightgray;
-  @media (min-width: 600px) {
-    height: 25px;
-    width: 25px;
-  }
-`;
-
 export const Upload = styled.div`
-  margin: 20px 20px;
+  margin-top: 0px;
   width: 100%;
   display: flex;
   flex-basis: 100%;
@@ -87,20 +77,14 @@ export const Upload = styled.div`
   justify-content: center;
   align-items: center;
   @media (min-width: 600px) {
-    /* flex-direction: row; */
-    justify-content: space-around;
+    margin-top: 20px;
+    flex-direction: row;
+    justify-content: space-evenly;
   }
 `;
 
 export const UploadForm = styled(Form)`
-  display: flex;
-  flex-basis: 100%;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  @media (min-width: 600px) {
-    flex-direction: row;
-  }
+
 `;
 
 export const SubmitButton = styled(Button)`

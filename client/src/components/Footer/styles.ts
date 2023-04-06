@@ -13,17 +13,6 @@ export const FooterCard = styled(Card)`
   width: 98vw;
 `;
 
-export const FooterBar = styled.footer`
-  position: relative;
-  z-index: 2;
-  /* background-position: 5% 65%; */
-  /* padding-top: 10px; */
-  background-color: #000;
-  /* border-top: solid; */
-  /* border-color: black; */
-  width: 100%;
-`;
-
 export const FooterText = styled.p`
   margin: 5px;
   color: #000;
