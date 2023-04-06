@@ -45,7 +45,7 @@ export const FavButton = styled(Button)`
   right: 5px;
   width: 20px;
   height: 20px;
-  background-color: rgba(20,20,20,0.2);
+  background-color: rgba(200,200,200,0.7);
   @media (min-width: 600px) {
     width: 65px;
     height: 65px;
