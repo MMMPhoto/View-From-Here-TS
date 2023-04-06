@@ -13,7 +13,6 @@ export const ProfileCard = styled(Card)`
   position: relative;
   width: 85vw;
   padding: 20px;
-  background-color: white;
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
@@ -26,7 +25,8 @@ export const ProfileCard = styled(Card)`
 `;
 
 export const UserInfo = styled.div`
-  width: 250px;
+  margin-top: 20px;
+  width: 200px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
