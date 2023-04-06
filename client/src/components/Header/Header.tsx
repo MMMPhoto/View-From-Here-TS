@@ -11,10 +11,8 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
 
   return (
     <AppSizeListener>
-      <HeaderCard>
-        
-      
-      <HeaderBar height="dense">
+      <HeaderCard>      
+        <HeaderBar height="dense">
           <Title>
             View From Here
           </Title>          
@@ -26,13 +24,13 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
                 <MenuItem onClick={() => navigate("/about")}>
                   About
                 </MenuItem>
+                <MenuItem onClick={() => navigate("/profile")}>
+                  Profile
+                </MenuItem>
                 <MenuItem
                   onClick={logout}
                 >
                   Logout
-                </MenuItem>
-                <MenuItem onClick={() => navigate("/profile")}>
-                  Profile
                 </MenuItem>               
               </DropdownMenu>
             : <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
@@ -50,7 +48,7 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
                 </MenuItem>
               </DropdownMenu>
           }
-      </HeaderBar>
+        </HeaderBar>
       </HeaderCard>
       </AppSizeListener>
   );

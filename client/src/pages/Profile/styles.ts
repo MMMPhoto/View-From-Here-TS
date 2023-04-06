@@ -87,7 +87,6 @@ export const Upload = styled.div`
   justify-content: center;
   align-items: center;
   @media (min-width: 600px) {
-    /* flex-direction: row; */
     justify-content: space-around;
   }
 `;
