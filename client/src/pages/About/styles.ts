@@ -3,7 +3,7 @@ import { Card, CardContent } from "@react-md/card";
 
 export const AboutContainer = styled.div`
   overflow: auto;
-  margin: 30px auto; 
+  margin: 40px auto; 
 `;
 
 export const AboutCard = styled(Card)`

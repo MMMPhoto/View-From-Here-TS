@@ -5,7 +5,7 @@ import { FavoriteBorderSVGIcon, FavoriteSVGIcon } from "@react-md/material-icons
 
 export const SingleViewContainer = styled.div`
   overflow: auto;
-  margin: 30px auto; 
+  margin: 40px auto; 
 `;
 
 export const SingleViewCard = styled(Card)`
