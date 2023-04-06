@@ -41,15 +41,24 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
           });
           // Adjust map zoom for single marker
           map.setCenter(bounds.getCenter());
-          if (markers.length === 1) map.setZoom(12);
+          markers.length === 1 ? map.setZoom(12) : map.fitBounds(bounds);
         };
       };      
     };
   }, [map, markers]);
 
   // Handle Active Marker change
-  const handleActiveMarker = (markerId: string) => {
-    setActiveMarker(markerId);
+  const handleActiveMarker = (marker: Photo) => {
+    setActiveMarker(marker.id);
+    // Logic to pan map if Info Window is too close to top
+    const bounds = map.getBounds();
+    const centerLat = map.getCenter().lat();
+    const centerLng = map.getCenter().lng();
+    const top = bounds.Wa.hi;
+    const height = bounds.Wa.hi - bounds.Wa.lo;
+    if (top - marker.lat < height / 4) {
+      map.panTo({lat: centerLat + (height / 4), lng: centerLng})
+    }
   };
 
   // Record change in bounds
@@ -83,8 +92,8 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
             <Marker
               key={marker.id}
               position={{ lat: marker.lat, lng: marker.lng }}
-              onMouseOver={() => handleActiveMarker(marker.id)}
-              onClick={() => handleActiveMarker(marker.id)}
+              onMouseOver={() => handleActiveMarker(marker)}
+              onClick={() => handleActiveMarker(marker)}
             >
               {activeMarker === marker.id && markers.length > 1
                 ? <InfoWindow
