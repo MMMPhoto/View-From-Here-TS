@@ -12,7 +12,7 @@ export const HeaderCard = styled(Card)`
   align-self: center;
   background-color: #FFF;
   margin-top: 10px;
-  width: 98vw;
+  width: 95vw;
 `;
 
 export const HeaderBar = styled(AppBar)`

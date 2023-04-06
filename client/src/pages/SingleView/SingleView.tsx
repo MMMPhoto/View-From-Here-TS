@@ -46,7 +46,7 @@ const SingleView: FC<{}> = () => {
 
   // Map Container Styling
   const containerStyle: ContainterStyle = {
-    width: "50vw",
+    width: "80vw",
     height: "50vh",
   };
 
@@ -95,23 +95,23 @@ const SingleView: FC<{}> = () => {
   return (
     <SingleViewContainer>
       <SingleViewCard>
-        { !isLoggedIn ? <CardSubtitle>You must be logged in to save photos!</CardSubtitle> : null }
+        { !isLoggedIn ? <p>You must be logged in to save photos!</p> : null }
         <SingleViewContent>
-        <PicCard>
-          <MediaContainer fullWidth={true}>
-            <img src={picUrl} />
-            <FavButton 
-              onClick={() => handleSavePhoto(pictureData[0].id)}
-            >  
-              { isSavedPhoto ? <SavedIcon /> : <UnsavedIcon /> }
-            </FavButton>
+          <PicCard>
+            <MediaContainer fullWidth={true}>
+              <img src={picUrl} />
+              <FavButton 
+                onClick={() => handleSavePhoto(pictureData[0].id)}
+              >  
+                { isSavedPhoto ? <SavedIcon /> : <UnsavedIcon /> }
+              </FavButton>
 
-          </MediaContainer>
-        </PicCard>
-        {pictureData
-          ? <MapWrapper markers={pictureData} containerStyle={containerStyle} />
-          : <p>Loading...</p>
-        }
+            </MediaContainer>
+          </PicCard>
+          {pictureData
+            ? <MapWrapper markers={pictureData} containerStyle={containerStyle} />
+            : <p>Loading...</p>
+          }
         </SingleViewContent>
       </SingleViewCard>
     </SingleViewContainer>

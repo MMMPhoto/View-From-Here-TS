@@ -6,12 +6,12 @@ import { Button } from "@react-md/button";
 
 export const ProfileContainer = styled.div`
   overflow: auto;
-  margin: 40px auto;  
+  margin: 20px auto;  
 `;
 
 export const ProfileCard = styled(Card)`
   position: relative;
-  width: 85vw;
+  width: 90vw;
   padding: 20px;
   display: flex;
   flex-basis: 100%;
@@ -25,7 +25,7 @@ export const ProfileCard = styled(Card)`
 `;
 
 export const UserInfo = styled.div`
-  margin-top: 20px;
+  margin-top: 10px;
   width: 200px;
   display: flex;
   flex-direction: column;
@@ -58,8 +58,8 @@ export const PicGrid = styled.div`
 export const PicCard = styled(Card)`
   border: 1px solid lightgray;
   border-radius: 5%;
-  height: 100px;
-  width: 100px;
+  height: 85px;
+  width: 85px;
   margin: 3px;
   @media (min-width: 600px) {
     height: 150px;

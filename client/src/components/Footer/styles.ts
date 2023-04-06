@@ -10,7 +10,7 @@ export const FooterCard = styled(Card)`
   background-color: #FFF;
   border-radius: 5px;
   margin-bottom: 35px;
-  width: 98vw;
+  width: 95vw;
 `;
 
 export const FooterText = styled.p`

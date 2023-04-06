@@ -5,14 +5,13 @@ import { FavoriteBorderSVGIcon, FavoriteSVGIcon } from "@react-md/material-icons
 
 export const SingleViewContainer = styled.div`
   overflow: auto;
-  margin: 40px auto; 
+  margin: 20px auto; 
 `;
 
 export const SingleViewCard = styled(Card)`
   position: relative;
   margin: 0 auto;
   width: 90vw;
-  padding: 20px;
   display: flex;
   flex-basis: 100%;
   flex-direction: column;
@@ -21,7 +20,6 @@ export const SingleViewCard = styled(Card)`
 `;
 
 export const SingleViewContent = styled.div`
-  margin-top: 20px;
   width: 100%;
   display: flex;
   flex-basis: 100%;
