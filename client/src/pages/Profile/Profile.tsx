@@ -99,6 +99,9 @@ const Profile: FC<{}> = () => {
       return;
     } else {
       setStatus("Image saved and uploaded!");
+      setTimeout(() => {
+        setStatus("");
+      }, 4000);
     }
     // get token
     const token = loggedIn() ? getToken() : null;
@@ -140,7 +143,7 @@ const Profile: FC<{}> = () => {
             <ProfileContent>
               <Upload>
                 <CardTitle>Upload your own image:</CardTitle>
-                {status ? <CardSubtitle>{status}: {image.name}</CardSubtitle> : null }
+                {status ? <CardSubtitle>{status}: {image.name}</CardSubtitle> : <CardSubtitle>Requirements: Image files only, 10MB size limit, GPS data must be embedded on file. <br/>There is a known issue uploading photos with GPS data on iOS devices, try uploading via desktop.</CardSubtitle> }
                 <UploadForm>
                   <SubmitButton>
                     <label>
