@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AppBar, AppBarTitle } from "@react-md/app-bar";
 import { Card } from "react-md";
+import { Button } from "react-md";
 
 export const HeaderCard = styled(Card)`
   z-index: 2;
@@ -24,12 +25,12 @@ export const HeaderBar = styled(AppBar)`
   margin: 0px;
 `;
 
+export const HomeButton = styled(Button)`
+  margin-left: 10px;
+`;
+
 export const Title = styled(AppBarTitle)`
+  margin-left: 0;
   position: relative;
   color: #000;
-  /* padding: 10px;
-  border-radius: 5px;
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.08);
-  } */
 `;

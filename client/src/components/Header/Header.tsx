@@ -1,10 +1,10 @@
 import { FC } from "react";
-import { AppSizeListener, Button, DropdownMenu } from "react-md";
+import { AppSizeListener, DropdownMenu } from "react-md";
 import { MenuItem } from "@react-md/menu";
 import { MenuSVGIcon } from "@react-md/material-icons";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { logout } from "../../utils/auth.js";
-import { HeaderCard, HeaderBar, Title } from "./styles";
+import { HeaderCard, HeaderBar, HomeButton, Title } from "./styles";
 
 const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
   const navigate = useNavigate();
@@ -13,11 +13,11 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
     <AppSizeListener>
       <HeaderCard>      
         <HeaderBar height="dense">
-          <Button onClick={() => navigate("/")}>
+          <HomeButton onClick={() => navigate("/")}>
             <Title>
               View From Here
             </Title> 
-          </Button>       
+          </HomeButton>       
           {loggedIn
             ? <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
                 <MenuItem onClick={() => navigate("/")}>
