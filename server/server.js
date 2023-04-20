@@ -6,6 +6,10 @@ const routes = require("./routes/index.js");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
+// Other Express Middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
 // Production Build Check Middleware
 if (process.env.NODE_ENV === "production") {
   // app.use((req, res, next) => {
@@ -16,10 +20,6 @@ if (process.env.NODE_ENV === "production") {
   // });
   app.use(express.static(path.join(__dirname, "../client/build")));
 };
-
-// Other Express Middleware
-app.use(express.urlencoded({ extended: false }));
-app.use(express.json());
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
