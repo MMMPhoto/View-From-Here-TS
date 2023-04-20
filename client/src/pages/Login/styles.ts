@@ -5,7 +5,7 @@ import { Button } from "@react-md/button";
 
 export const LoginContainer = styled.div`
   overflow: auto;
-  margin: 20px auto;  
+  margin: auto;  
 `;
 
 export const FormCard = styled(Card)`

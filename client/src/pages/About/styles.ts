@@ -16,7 +16,7 @@ export const AboutCard = styled(Card)`
   justify-content: center;
   align-items: center;
   @media (min-width: 600px) {
-    width: 60vw;
+    width: 50vw;
   }
 `;
 

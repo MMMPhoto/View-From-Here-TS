@@ -79,11 +79,11 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
           fullscreenControl: false,
           minZoom: 2.5,
           zoomControlOptions: {
-            position: 8 // Shorthand for LEFT_CENTER
+            position: 6 // Shorthand for lower right corner
           },
           mapTypeControlOptions: {
             style: 2, // Shorthand for DROPDOWN_MENU
-            position: 4 // Shorthand for RIGHT_CENTER
+            position: 6 // Shorthand for lower right corner
           }
         }}
       >

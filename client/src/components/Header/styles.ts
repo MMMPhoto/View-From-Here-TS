@@ -17,7 +17,7 @@ export const HeaderBar = styled(AppBar)`
   z-index: 2;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-self: center;
   border-radius: 10px;
   background-color: #FFF;
@@ -27,4 +27,9 @@ export const HeaderBar = styled(AppBar)`
 export const Title = styled(AppBarTitle)`
   position: relative;
   color: #000;
+  /* padding: 10px;
+  border-radius: 5px;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.08);
+  } */
 `;

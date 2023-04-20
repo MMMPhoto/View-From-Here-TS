@@ -10,7 +10,7 @@ const MarkerInfoCard: FC<{ marker: Photo, navigate: Function }> = ({ marker, nav
     from: { opacity: 0, transform: 'scale(0)', maxHeight: '0px', maxWidth: '0px' },
     to: { opacity: 1, transform: 'scale(1)', maxHeight: '1000px', maxWidth: '1000px' },
     // leave: { opacity: 0, transform: 'scaleY(0)', maxHeight: '0px' },
-    config: { duration: 300, easing: easings.easeInOutQuad }
+    config: { duration: 100, easing: easings.easeInOutQuad }
   });
 
   return (

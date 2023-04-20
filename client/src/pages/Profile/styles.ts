@@ -18,10 +18,6 @@ export const ProfileCard = styled(Card)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  @media (min-width: 600px) {
-    flex-direction: row;
-    align-items: flex-start;
-  }
 `;
 
 export const UserInfo = styled.div`
