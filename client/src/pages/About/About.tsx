@@ -18,12 +18,12 @@ const About: FC<{}> = ({}) => {
             <img style={{width: "100%"}} src={"/assets/vfh-popup-screenshot.png"} alt="popup-screenshot" />
             <p>Click or hover over a marker and see a thumbnail of the view at that location. Click on the thumbnail to see the view full size.</p>
             <h5>Login and Signup</h5>
-            <img style={{width: "100%"}} src={"/assets/vfh-login-screenshot.png"} alt="popup-screenshot" />
+            <img style={{width: "100%"}} src={"/assets/vfh-login-screenshot.png"} alt="login-screenshot" />
             <p>Navigate to the Signup Page to create an account. Once your account has been created, use the Login Page to log in with your credentials.</p>
             <h5>Saving Favorite Views</h5>
-            <img style={{width: "100%"}} src={"/assets/vfh-save-view-screenshot.png"} alt="popup-screenshot" />
+            <img style={{width: "100%"}} src={"/assets/vfh-save-view-screenshot.png"} alt="save-view-screenshot" />
             <p>Once you are logged in, you will be able to save your favorite Views. Save a View by clicking the heart at the top of the page for each view.</p>
-            <img style={{width: "100%"}} src={"/assets/vfh-favorites-screenshot.png"} alt="popup-screenshot" />
+            <img style={{width: "100%"}} src={"/assets/vfh-favorites-screenshot.png"} alt="favorites-screenshot" />
             <p>You can then navigate to the Profile Page, where you will be shown all of your saved Views.</p>
             <h5>Uploading New Views</h5>
             <p>At the top of the Profile Page, you can find the form to upload your own Views. Click the button to choose a file from your device. Image files are acceptable file types. You can only upload one file at a time, and there is a maximum file size of 10 MB.</p>
