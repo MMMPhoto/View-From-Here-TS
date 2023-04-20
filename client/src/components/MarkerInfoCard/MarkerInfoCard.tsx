@@ -1,6 +1,6 @@
 import { FC } from "react";
 import "./MarkerInfoCard.css";
-import { useSpring, animated, easings } from 'react-spring';
+import { useSpring, animated, easings } from '@react-spring/web';
 import { Photo } from "../../types/Photo";
 
 const MarkerInfoCard: FC<{ marker: Photo, navigate: Function }> = ({ marker, navigate }) => {
