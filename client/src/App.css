@@ -4,7 +4,7 @@
 
 #wrapper {
   position: relative;
-  height: 100dvh;
+  height: 100dvh; /* Have to use "dvh" (dynamic vieport height) to avoid issue with mobile browser url window blocking part of map */
   width: 100vw;
   display: flex;
   flex-direction: column;
