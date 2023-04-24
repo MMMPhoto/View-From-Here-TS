@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api";
+import { GoogleMap, MarkerClusterer, Marker, InfoWindow } from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveMarkers, saveBounds, selectMarkers, selectBounds } from "../../store/mapStateSlice";
 import MarkerInfoCard from "../MarkerInfoCard/MarkerInfoCard";
@@ -10,6 +10,10 @@ import { ContainterStyle } from "../../types/ContainerStyle";
 const LoadScript = require('@react-google-maps/api').LoadScript;
 
 const apiKey: any = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+const clusterOptions = {
+  imagePath:
+  'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+}
 
 const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ markers, containerStyle }) => {
 
@@ -88,24 +92,39 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
         }}
       >
         {markers &&
-          markers.map((marker) => (
-            <Marker
-              key={marker.id}
-              position={{ lat: marker.lat, lng: marker.lng }}
-              onMouseOver={() => handleActiveMarker(marker)}
-              onClick={() => handleActiveMarker(marker)}
-            >
-              {activeMarker === marker.id && markers.length > 1
-                ? <InfoWindow
-                    key={marker.id} 
-                    position={{lat: marker.lat, lng: marker.lng}}
-                    >
-                    <MarkerInfoCard marker={marker} navigate={navigate} />
-                  </InfoWindow>
-                : null
-              }
-            </Marker>
-          ))}
+          <MarkerClusterer
+            maxZoom={10}
+            options={clusterOptions}
+          >
+            {((clusterer) =>
+            <div>
+              {markers.map((marker) => (
+                <Marker
+                  key={marker.id}
+                  position={{ lat: marker.lat, lng: marker.lng }}
+                  onMouseOver={() => handleActiveMarker(marker)}
+                  onClick={() => handleActiveMarker(marker)}
+                  clusterer={clusterer}
+                >
+                  {activeMarker === marker.id && markers.length > 1
+                    ? <InfoWindow
+                        key={marker.id} 
+                        position={{lat: marker.lat, lng: marker.lng}}
+                        >
+                        <MarkerInfoCard marker={marker} navigate={navigate} />
+                      </InfoWindow>
+                    : null
+                  }
+                </Marker>
+              ))}
+
+            </div>
+              
+            )}
+            
+
+          </MarkerClusterer>
+          }
       </GoogleMap>
     </LoadScript>
   );
