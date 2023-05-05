@@ -2,7 +2,7 @@
   "name": "test",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001",
+  "proxy": "http://nodebackend:3001",
   "dependencies": {
     "@react-google-maps/api": "^2.13.1",
     "@react-md/app-bar": "^5.1.3",
