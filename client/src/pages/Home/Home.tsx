@@ -41,6 +41,7 @@ const Home: FC<{}> = () => {
       <MapWrapper
         markers={markers}
         containerStyle={containerStyle}
+        isMainMap={true}
       />
     </MapDiv>
   );

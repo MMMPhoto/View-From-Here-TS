@@ -15,7 +15,7 @@ const clusterOptions = {
   'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 }
 
-const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ markers, containerStyle }) => {
+const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, isMainMap?: boolean | undefined}> = ({ markers, containerStyle, isMainMap }) => {
 
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
     if (map) {
       map.setMapTypeId("hybrid");
       const bounds: google.maps.LatLngBounds = new google.maps.LatLngBounds();
-      if (savedBounds && markers.length > 1) {
+      if (savedBounds && isMainMap) {
         return map.fitBounds(JSON.parse(savedBounds));
       } else {
         if (markers.length > 0) {
@@ -83,7 +83,7 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle}> = ({ m
           gestureHandling: 'greedy',
           streetViewControl: false,
           fullscreenControl: false,
-          minZoom: 2.5,
+          minZoom: 2,
           zoomControlOptions: {
             position: 6 // Shorthand for lower right corner
           },

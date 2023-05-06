@@ -5,6 +5,7 @@ import { MediaContainer } from "@react-md/media";
 import { CloseSVGIcon } from "@react-md/material-icons";
 import { useNavigate } from "react-router-dom";
 import { loggedIn, getToken, } from "../../utils/auth";
+import MapWrapper from "../../components/Map/MapWrapper";
 import {
   getCurrentUser,
   deleteSavedPic,
@@ -13,6 +14,7 @@ import {
 } from "../../utils/api";
 import { User } from '../../types/User';
 import { Photo } from '../../types/Photo';
+import { ContainterStyle } from "../../types/ContainerStyle";
 import { 
   ProfileContainer,
   ProfileCard, 
@@ -35,6 +37,12 @@ const Profile: FC<{}> = () => {
   const [savedPics, setSavedPics] = useState<Photo[]>([]);
   const [newLoad, setnewLoad] = useState<boolean>(true);
   const [newDeletedPic, setNewDeletedPic] = useState<boolean>(false);
+
+  // Map Container Styling
+  const containerStyle: ContainterStyle = {
+    width: "80vw",
+    height: "50vh",
+  };
 
   // Image Upload State
   interface Img { preview: string, name: string, data: any }
@@ -204,6 +212,10 @@ const Profile: FC<{}> = () => {
                   </PicCard>                      
                 ))}
               </PicGrid>
+              {savedPics
+                ? <MapWrapper markers={savedPics} containerStyle={containerStyle} />
+                : <p>Loading...</p>
+              }
             </ProfileContent>
           </ProfileCard>
         : <ProfileCard>
