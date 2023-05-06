@@ -36,6 +36,10 @@ export const Title = styled(AppBarTitle)`
 `;
 
 export const Subtitle = styled(AppBarTitle)`
+  display: none;
   margin: 5px;
   color: #000;
+  @media (min-width: 600px) {
+    display: inline;
+  }
 `;

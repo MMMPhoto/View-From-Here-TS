@@ -8,7 +8,7 @@ import { logout } from "../../utils/auth.js";
 import { User } from "../../types/User.js";
 import { HeaderCard, HeaderBar, HomeButton, Title, Subtitle } from "./styles";
 
-const Header: FC<{loggedIn: boolean, user: User | undefined}> = ({loggedIn, user}) => {
+const Header: FC<{user: User | undefined}> = ({user}) => {
   const navigate = useNavigate();
 
   return (
