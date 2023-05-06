@@ -14,7 +14,7 @@ interface LoginData {
   password: string,
 };
 
-const Login: FC<{setLogin: Function}> = ({setLogin}) => {
+const Login: FC<{setLogin: Function, setUser: Function}> = ({setLogin, setUser}) => {
   const [userFormData, setUserFormData] = useState<LoginData>({ email: "", password: "" });
   const navigate = useNavigate();
 
@@ -45,6 +45,7 @@ const Login: FC<{setLogin: Function}> = ({setLogin}) => {
       }
       setLogin(true);
       const { token, user } = await response.json();
+      setUser(user);
       dispatch(saveSavedPhotos(user.savedPics));
       login(token);
       navigate("/");

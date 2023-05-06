@@ -26,11 +26,16 @@ export const HeaderBar = styled(AppBar)`
 `;
 
 export const HomeButton = styled(Button)`
-  margin-left: 10px;
+  margin-left: 15px;
 `;
 
 export const Title = styled(AppBarTitle)`
-  margin-left: 0;
+  margin-left: 0px;
   position: relative;
+  color: #000;
+`;
+
+export const Subtitle = styled(AppBarTitle)`
+  margin: 5px;
   color: #000;
 `;

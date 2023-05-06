@@ -1,12 +1,14 @@
 import { FC } from "react";
 import { AppSizeListener, DropdownMenu } from "react-md";
 import { MenuItem } from "@react-md/menu";
+import { Avatar } from "@react-md/avatar";
 import { MenuSVGIcon } from "@react-md/material-icons";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../utils/auth.js";
-import { HeaderCard, HeaderBar, HomeButton, Title } from "./styles";
+import { User } from "../../types/User.js";
+import { HeaderCard, HeaderBar, HomeButton, Title, Subtitle } from "./styles";
 
-const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
+const Header: FC<{loggedIn: boolean, user: User | undefined}> = ({loggedIn, user}) => {
   const navigate = useNavigate();
 
   return (
@@ -17,24 +19,28 @@ const Header: FC<{loggedIn: boolean}> = ({loggedIn}) => {
             <Title>
               View From Here
             </Title> 
-          </HomeButton>       
-          {loggedIn
-            ? <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
-                <MenuItem onClick={() => navigate("/")}>
-                  Home
-                </MenuItem>
-                <MenuItem onClick={() => navigate("/about")}>
-                  About
-                </MenuItem>
-                <MenuItem onClick={() => navigate("/profile")}>
-                  Profile
-                </MenuItem>
-                <MenuItem
-                  onClick={logout}
-                >
-                  Logout
-                </MenuItem>               
-              </DropdownMenu>
+          </HomeButton>
+          {user
+            ? <div style={{display: "flex", flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
+                <Avatar>{user!.userName.charAt(0)}</Avatar>
+                <Subtitle>{user!.userName}</Subtitle>
+                <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
+                  <MenuItem onClick={() => navigate("/")}>
+                    Home
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/about")}>
+                    About
+                  </MenuItem>
+                  <MenuItem onClick={() => navigate("/profile")}>
+                    Profile
+                  </MenuItem>
+                  <MenuItem
+                    onClick={logout}
+                  >
+                    Logout
+                  </MenuItem>               
+                </DropdownMenu>
+              </div> 
             : <DropdownMenu id="dropdown-menu" buttonType="icon" buttonChildren={<MenuSVGIcon />}>
                 <MenuItem onClick={() => navigate("/")}>
                   Home
