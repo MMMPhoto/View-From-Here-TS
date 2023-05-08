@@ -98,13 +98,14 @@ module.exports = {
       options: { strictPopulate: false },
     });
     if (!user) {
-      return res.status(400).json({ message: "No user found" });
+      res.statusMessage = "No user found with that email!"
+      return res.status(400).end();
     }
 
     const correctPw = await user.isCorrectPassword(body.password);
-
     if (!correctPw) {
-      return res.status(400).json({ message: "Incorrect Password!" });
+      res.statusMessage = "Incorrect Password!"
+      return res.status(400).end();
     }
     const token = signToken(user);
     res.json({ token, user });

@@ -1,4 +1,4 @@
-import React, {  FC, useState, ChangeEvent, FormEvent } from "react";
+import React, {  FC, useState, ChangeEvent, FormEvent, useRef } from "react";
 import { CardHeader, CardTitle } from "@react-md/card";
 import { Form } from "@react-md/form";
 import { RemoveRedEyeSVGIcon } from "@react-md/material-icons";
@@ -16,6 +16,8 @@ interface LoginData {
 
 const Login: FC<{setUser: Function}> = ({setUser}) => {
   const [userFormData, setUserFormData] = useState<LoginData>({ email: "", password: "" });
+  const [validationError, setValidationError] = useState<string>("");
+  const loginForm = useRef<any>(null);
   const navigate = useNavigate();
 
   // Define React Redux functions
@@ -25,37 +27,29 @@ const Login: FC<{setUser: Function}> = ({setUser}) => {
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserFormData({ ...userFormData, [name]: value });
+    setValidationError("");
   };
 
   const handleFormSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
+    const formValid = loginForm.current.reportValidity();
+    if (formValid) {
+      try {
+        const response = await loginUser(userFormData);
+        if (response.ok) {
+          const { token, user } = await response.json();
+          setUser(user);
+          if (user.savedPics) dispatch(saveSavedPhotos(user.savedPics));
+          login(token);
+          navigate("/");
+        } else {
+          setValidationError(response.statusText);
+        }
+      } catch (err) {
+        console.error(err);
+      };
     };
-
-    try {
-      const response = await loginUser(userFormData);
-
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-      const { token, user } = await response.json();
-      setUser(user);
-      if (user.savedPics) dispatch(saveSavedPhotos(user.savedPics));
-      login(token);
-      navigate("/");
-    } catch (err) {
-      console.error(err);
-    };
-
-    setUserFormData({
-      email: "",
-      password: "",
-    });
   };
 
   return (
@@ -65,7 +59,7 @@ const Login: FC<{setUser: Function}> = ({setUser}) => {
           <CardTitle>Welcome Back!</CardTitle>
         </CardHeader>
         <FormContent>
-          <Form>
+          <Form ref={loginForm}>
             <Input
               id="email"
               name="email"
@@ -84,6 +78,7 @@ const Login: FC<{setUser: Function}> = ({setUser}) => {
               value={userFormData.password}
               onChange={handleInputChange}
             />
+            <p style={{ color: "red" }}>{validationError}</p>
             <SubmitButton
               onClick={handleFormSubmit}
             > 
