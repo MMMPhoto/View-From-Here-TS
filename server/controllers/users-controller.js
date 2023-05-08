@@ -21,7 +21,7 @@ module.exports = {
     if (!foundUser) {
       return res
         .status(400)
-        .json({ message: "Cannot find a user with this id!" });
+        .json({ statusMessage: "Cannot find a user with this id!" });
     }
 
     res.json(foundUser);
@@ -32,7 +32,7 @@ module.exports = {
       .select("-__v")
       .then((dbUserData) => {
         if (!dbUserData) {
-          res.status(404).json({ message: "No user found with that ID" });
+          res.status(404).json({ statusMessage: "No user found with that ID" });
           return;
         }
         res.json(dbUserData);
@@ -44,9 +44,19 @@ module.exports = {
   },
 
   async createNewUser(req, res) {
-    User.create(req.body)
-      .then((dbUserData) => res.json(dbUserData))
-      .catch((err) => res.status(500).json(err));
+    const userExists = await User.findOne({$or: [{userName: req.body.userName},{email: req.body.email}]});
+    if (userExists) {
+      if (userExists.userName === req.body.userName) {
+        res.statusMessage = "User Name already exists!";
+      } else if (userExists.email === req.body.email) {
+        res.statusMessage = "User with that Email already exists!";
+      };      
+      return res.status(400).end();
+    };
+    const user = await User.create(req.body);
+    if (!user) return res.status(500).json(err)
+    const token = signToken(user);
+    return res.json({ token, user });
   },
 
   async updateUser({ params, body }, res) {

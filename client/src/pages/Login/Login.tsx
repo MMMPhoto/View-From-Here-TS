@@ -43,10 +43,9 @@ const Login: FC<{setUser: Function}> = ({setUser}) => {
       if (!response.ok) {
         throw new Error("Something went wrong!");
       }
-      // setLogin(true);
       const { token, user } = await response.json();
       setUser(user);
-      dispatch(saveSavedPhotos(user.savedPics));
+      if (user.savedPics) dispatch(saveSavedPhotos(user.savedPics));
       login(token);
       navigate("/");
     } catch (err) {

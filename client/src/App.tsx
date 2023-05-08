@@ -20,12 +20,14 @@ const App: FC<{}> = () => {
     const getUser = async () => {
       try {
         const token: string = loggedIn() ? getToken() : null;
-        const response = await getCurrentUser(token);
-        if (!response.ok) {
-          throw new Error("something went wrong!");
+        if (token) {
+          const response = await getCurrentUser(token);
+          if (!response.ok) {
+            throw new Error("something went wrong!");
+          };
+          const user: User = await response.json();
+          setUser(user);
         };
-        const user: User = await response.json();
-        setUser(user);
       } catch (err) {
         console.error(err);
       }
@@ -41,11 +43,8 @@ const App: FC<{}> = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/signup" element={<SignUp />} />
-              <Route
-                path="/login"
-                element={<Login setUser={setUser}/>}
-              />
+              <Route path="/signup" element={<SignUp setUser={setUser} />} />
+              <Route path="/login" element={<Login setUser={setUser}/>} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/single-view/:pictureId" element={<SingleView />} />
             </Routes>

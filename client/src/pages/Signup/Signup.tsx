@@ -1,4 +1,4 @@
-import { FC, useState, ChangeEvent, FormEvent } from "react";
+import { FC, useState, ChangeEvent, FormEvent, useRef } from "react";
 import { CardHeader, CardTitle } from "@react-md/card";
 import { Form } from "@react-md/form";
 import { RemoveRedEyeSVGIcon } from "@react-md/material-icons";
@@ -13,49 +13,42 @@ interface SignupData {
     password: string,
 };
 
-const SignUp: FC<{}> = () => {
+const SignUp: FC<{setUser: Function}> = ({setUser}) => {
   // set initial form state
   const [userFormData, setUserFormData] = useState<SignupData>({
     userName: "",
     email: "",
     password: "",
   });
+  const [validationError, setValidationError] = useState<string>("");
+  const signupForm = useRef<any>(null);
   const navigate = useNavigate();
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setUserFormData({ ...userFormData, [name]: value });
+    setValidationError("");
   };
 
   const handleFormSubmit = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    // check if form has everything (as per react-bootstrap docs)
-    const form = e.currentTarget;
-    if (form.checkValidity() === false) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-
-    try {
-      const response = await createNewUser(userFormData);
-
-      if (!response.ok) {
-        throw new Error("Something went wrong!");
-      }
-
-      const { token, user } = await response.json();
-      login(token);
-      navigate("/login");
-    } catch (err) {
-      console.error(err);
-    }
-
-    setUserFormData({
-      userName: "",
-      email: "",
-      password: "",
-    });
+    const formValid = signupForm.current.reportValidity();
+    if (formValid) {
+      try {
+        const response = await createNewUser(userFormData);
+        if (response.ok) {
+          const { token, user } = await response.json();
+          setUser(user);
+          login(token);
+          navigate("/");
+        } else {
+          setValidationError(response.statusText);
+        };
+      } catch (err) {
+        console.error(err);
+      };
+    };
   };
 
   return (
@@ -65,7 +58,7 @@ const SignUp: FC<{}> = () => {
             <CardTitle>Welcome!</CardTitle>
           </CardHeader>
           <FormContent>
-            <Form>
+            <Form ref={signupForm}>
               <Input
                 id="username"
                 name="userName"
@@ -93,6 +86,7 @@ const SignUp: FC<{}> = () => {
                 value={userFormData.password}
                 onChange={handleInputChange}
               />
+              <p style={{ color: "red" }}>{validationError}</p>
               <SubmitButton
                 onClick={handleFormSubmit}
               > 
