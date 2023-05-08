@@ -212,9 +212,9 @@ const Profile: FC<{}> = () => {
                   </PicCard>                      
                 ))}
               </PicGrid>
-              {savedPics
+              {savedPics.length > 0
                 ? <MapWrapper markers={savedPics} containerStyle={containerStyle} />
-                : <p>Loading...</p>
+                : null
               }
             </ProfileContent>
           </ProfileCard>
