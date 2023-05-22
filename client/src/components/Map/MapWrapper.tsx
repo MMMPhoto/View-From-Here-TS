@@ -83,14 +83,15 @@ const MapWrapper: FC<{markers: Photo[], containerStyle: ContainterStyle, isMainM
           gestureHandling: 'greedy',
           streetViewControl: false,
           fullscreenControl: false,
+          mapTypeControl: false,
           minZoom: 2,
           zoomControlOptions: {
             position: 6 // Shorthand for lower right corner
           },
-          mapTypeControlOptions: {
-            style: 2, // Shorthand for DROPDOWN_MENU
-            position: 6 // Shorthand for lower right corner
-          }
+          // mapTypeControlOptions: {
+          //   style: 2, // Shorthand for DROPDOWN_MENU
+          //   position: 6 // Shorthand for lower right corner
+          // }
         }}
       >
         {markers &&
