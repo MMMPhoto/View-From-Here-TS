@@ -1,5 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 
 const userSchema = new Schema(
   {
@@ -18,6 +19,14 @@ const userSchema = new Schema(
     password: {
       type: String,
       required: true,
+    },
+    resetPasswordToken: {
+      type: String,
+      required: false
+    },
+    resetPasswordExpires: {
+      type: Date,
+      required: false
     },
     savedPics: [
       {
@@ -43,6 +52,11 @@ userSchema.pre("save", async function (next) {
 
 userSchema.methods.isCorrectPassword = async function (password) {
   return bcrypt.compare(password, this.password);
+};
+
+userSchema.methods.generatePasswordReset = function() {
+  this.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+  this.resetPasswordExpires = Date.now() + 3600000; //expires in an hour
 };
 
 userSchema.virtual("picCount").get(function () {

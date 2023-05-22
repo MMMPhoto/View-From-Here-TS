@@ -1,5 +1,6 @@
 const { User, Picture } = require("../models/");
 const { signToken } = require("../utils/auth.js");
+const { newUserEmail } = require("../utils/sendgrid.js");
 
 module.exports = {
   async getAllUsers(req, res) {
@@ -54,7 +55,8 @@ module.exports = {
       return res.status(400).end();
     };
     const user = await User.create(req.body);
-    if (!user) return res.status(500).json(err)
+    if (!user) return res.status(500).json(err);
+    await newUserEmail(user.email);
     const token = signToken(user);
     return res.json({ token, user });
   },
