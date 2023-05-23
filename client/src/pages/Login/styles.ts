@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { Card, CardContent } from "@react-md/card";
 import { TextField, Password } from "@react-md/form";
+import { Link } from "react-router-dom";
 import { Button } from "@react-md/button";
 
 export const LoginContainer = styled.div`
@@ -38,6 +39,12 @@ export const Input = styled(TextField)`
 
 export const PasswordInput = styled(Password)`
   margin-bottom: 15px;
+`;
+
+export const UnstyledLink = styled(Link)`
+  color: #000;
+  margin: 0;
+  text-decoration: none;
 `;
 
 export const SubmitButton = styled(Button)`

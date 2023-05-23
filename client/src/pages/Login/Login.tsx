@@ -5,7 +5,7 @@ import { RemoveRedEyeSVGIcon } from "@react-md/material-icons";
 import { loginUser } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../utils/auth";
-import { LoginContainer, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
+import { LoginContainer, FormCard, FormContent, Input, PasswordInput, UnstyledLink, SubmitButton } from "./styles";
 import { useSelector, useDispatch } from 'react-redux';
 import { saveSavedPhotos, selectSavedPhotos } from "../../store/userSavedPhotosSlice";
 
@@ -78,6 +78,7 @@ const Login: FC<{setUser: Function}> = ({setUser}) => {
               value={userFormData.password}
               onChange={handleInputChange}
             />
+            <UnstyledLink to="/request-reset">Forgot Password?</UnstyledLink>
             <p style={{ color: "red" }}>{validationError}</p>
             <SubmitButton
               onClick={handleFormSubmit}
