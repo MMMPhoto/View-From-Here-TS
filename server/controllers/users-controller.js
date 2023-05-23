@@ -1,6 +1,6 @@
 const { User, Picture } = require("../models/");
 const { signToken } = require("../utils/auth.js");
-const { newUserEmail } = require("../utils/sendgrid.js");
+const { newUserEmail, passwordResetEmail } = require("../utils/sendgrid.js");
 
 module.exports = {
   async getAllUsers(req, res) {
@@ -113,8 +113,26 @@ module.exports = {
     res.json({ token, user });
   },
 
+  async recoverPassword({ body }, res) {
+    try {
+      const user = await User.findOne({email: body.email});
+      if (!user) {
+        res.statusMessage = "No user found with that email!"
+        return res.status(404).end();
+      } else {
+        const resetCode = await user.generatePasswordReset();
+        console.log(resetCode);
+        console.log(body.email);
+        await passwordResetEmail(body.email, resetCode);
+        return  res.json({ message: "Check your email for password reset email." })
+      };
+    } catch(err) {
+      console.log(err);
+      return err.end();
+    };
+  },
+
   async savePic({ user, body }, res) {
-    console.log(user);
     try {
       const updatedUser = await User.findByIdAndUpdate(
         { _id: user._id },
