@@ -7,6 +7,7 @@ import Home from "./pages/Home/Home";
 import About from "./pages/About/About";
 import SignUp from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
+import RequestPasswordReset from "./pages/RequestPasswordReset/RequestPasswordReset";
 import Profile from "./pages/Profile/Profile";
 import SingleView from "./pages/SingleView/SingleView";
 import { getCurrentUser } from "./utils/api";
@@ -45,6 +46,7 @@ const App: FC<{}> = () => {
               <Route path="/about" element={<About />} />
               <Route path="/signup" element={<SignUp setUser={setUser} />} />
               <Route path="/login" element={<Login setUser={setUser}/>} />
+              <Route path="/request-reset" element={<RequestPasswordReset />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/single-view/:pictureId" element={<SingleView />} />
             </Routes>

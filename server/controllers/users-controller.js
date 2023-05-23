@@ -124,7 +124,8 @@ module.exports = {
         console.log(resetCode);
         console.log(body.email);
         await passwordResetEmail(body.email, resetCode);
-        return  res.json({ message: "Check your email for password reset email." })
+        res.statusMessage = "Check your email for a link to reset your password."
+        return res.status(200).end();
       };
     } catch(err) {
       console.log(err);

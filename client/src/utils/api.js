@@ -44,6 +44,16 @@ export const loginUser = (userData) => {
   });
 };
 
+export const recoverPassword = (email) => {
+  return fetch("/api/users/recover", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(email),
+  });
+};
+
 export const getCurrentUser = (token) => {
   return fetch("/api/users/me", {
     headers: {
