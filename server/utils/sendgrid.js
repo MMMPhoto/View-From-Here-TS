@@ -28,7 +28,7 @@ module.exports = {
       from: process.env.FROM_EMAIL,
       subject: "Reset Password Request",
       // text: 'Add simple text',
-      html: `<h4>You have requested to reset your password on the View From Here site.</h4><p>Click <a href="https://localhost:3000/password-reset/${resetCode}">here</a> to reset your password.</p><p>If you did not request a password reset, please change your password!</p>`,
+      html: `<h4>You have requested to reset your password on the View From Here site.</h4><p>Click <a href="http://localhost:3000/password-reset/?code=${resetCode}">here</a> to reset your password.</p><p>If you did not request a password reset, please change your password!</p>`,
     };
     sendgrid
       .send(msg)

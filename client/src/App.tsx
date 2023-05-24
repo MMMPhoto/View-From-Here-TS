@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import "./App.css";
 import { FC, useEffect, useState } from "react";
 import { loggedIn, getToken, } from "./utils/auth";
@@ -8,6 +8,7 @@ import About from "./pages/About/About";
 import SignUp from "./pages/Signup/Signup";
 import Login from "./pages/Login/Login";
 import RequestPasswordReset from "./pages/RequestPasswordReset/RequestPasswordReset";
+import PasswordReset from "./pages/PasswordReset/PasswordReset";
 import Profile from "./pages/Profile/Profile";
 import SingleView from "./pages/SingleView/SingleView";
 import { getCurrentUser } from "./utils/api";
@@ -47,6 +48,7 @@ const App: FC<{}> = () => {
               <Route path="/signup" element={<SignUp setUser={setUser} />} />
               <Route path="/login" element={<Login setUser={setUser}/>} />
               <Route path="/request-reset" element={<RequestPasswordReset />} />
+              <Route path="/password-reset" element={<PasswordReset />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/single-view/:pictureId" element={<SingleView />} />
             </Routes>

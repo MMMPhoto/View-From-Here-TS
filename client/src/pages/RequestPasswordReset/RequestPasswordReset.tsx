@@ -52,7 +52,7 @@ const RequestPasswordReset: FC<{}> = () => {
             <SubmitButton
               onClick={handleFormSubmit}
             > 
-              Login
+              Reset Password
             </SubmitButton>
           </Form>
         </FormContent>
