@@ -64,6 +64,16 @@ export const checkPasswordCode = (code) => {
   });
 };
 
+export const changePassword = (data) => {
+  return fetch("/api/users/change-password", {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+};
+
 export const getCurrentUser = (token) => {
   return fetch("/api/users/me", {
     headers: {

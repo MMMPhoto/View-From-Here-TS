@@ -5,6 +5,7 @@ export declare const createNewUser: function;
 export declare const loginUser: function;
 export declare const recoverPassword: function;
 export declare const checkPasswordCode: function;
+export declare const changePassword: function;
 export declare const getCurrentUser: function;
 export declare const savePic: function;
 export declare const deleteSavedPic: function;

@@ -2,10 +2,11 @@ import { FC, useState, useRef, useEffect, ChangeEvent, FormEvent } from "react";
 import { CardHeader, CardTitle } from "@react-md/card";
 import { Form } from "@react-md/form";
 import { RemoveRedEyeSVGIcon } from "@react-md/material-icons";
-import { checkPasswordCode } from "../../utils/api";
+import { checkPasswordCode, changePassword } from "../../utils/api";
 import { useNavigate, useLocation } from "react-router-dom";
 import { login } from "../../utils/auth";
 import { SignupContainer, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
+import { set } from "immer/dist/internal";
 
 interface PasswordResetData {
     newPassword: string,
@@ -19,35 +20,55 @@ const PasswordReset: FC<{}> = () => {
     newPassword: "",
     passwordConfirmation: ""
   });
-  const [validationError, setValidationError] = useState<string>("");
+  const [validationMessage, setValidationMessage] = useState<string>("");
   const resetForm = useRef<any>(null);
+  const passwordConfirmation = useRef<any>(null);
+
   const navigate = useNavigate();
   const { search } = useLocation();
   
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setResetFormData({ ...resetFormData, [name]: value });
-    setValidationError("");
+    setValidationMessage("");
   };
 
-  const handleFormSubmit = async (e: FormEvent<HTMLButtonElement>) => {
+  const passwordsDontMatch = () => {
+    return (
+      resetFormData.newPassword.length &&
+      resetFormData.passwordConfirmation.length &&
+      resetFormData.newPassword !== resetFormData.passwordConfirmation
+    );
+  };
+
+  const submitChangePassword = async (e: FormEvent<HTMLButtonElement>) => {
     e.preventDefault();
+    if (passwordsDontMatch()) {
+      console.log("passwords don't match")
+      passwordConfirmation.current.setCustomValidity(
+        "Passwords do not match."
+      );
+    };
 
     const formValid = resetForm.current.reportValidity();
     if (formValid) {
-      // try {
-      //   const response = await createNewUser(resetFormData); //TODO: Create new function in utils for route
-      //   if (response.ok) {
-      //     const { token, user } = await response.json();
-      //     // setUser(user);
-      //     // login(token);
-      //     navigate("/");
-      //   } else {
-      //     setValidationError(response.statusText);
-      //   };
-      // } catch (err) {
-      //   console.error(err);
-      // };
+      try {
+        const data = {
+          code: passwordResetCode,
+          newPassword: resetFormData.newPassword
+        };
+        const response = await changePassword(data);
+        if (response.ok) {
+          setValidationMessage(response.statusText);
+          setTimeout(() => {
+            navigate("/login");
+          }, 2000);
+        } else {
+          setValidationMessage(response.statusText);
+        };
+      } catch (err) {
+        console.error(err);
+      };
     };
   };
 
@@ -55,7 +76,7 @@ const PasswordReset: FC<{}> = () => {
     if (search) {
       const checkCode = async (code: string) => {
         try {
-          const response = await checkPasswordCode({ code: code });
+          await checkPasswordCode({ code: code });
         } catch(err) {
           console.error(err);
         };
@@ -80,6 +101,7 @@ const PasswordReset: FC<{}> = () => {
                 id="new-password"
                 name="newPassword"
                 label="New Password"
+                ref={passwordConfirmation}
                 visibilityIcon={<RemoveRedEyeSVGIcon />}
                 required
                 value={resetFormData.newPassword}
@@ -87,16 +109,17 @@ const PasswordReset: FC<{}> = () => {
               />
               <PasswordInput
                 id="password-confirm"
-                name="passwordConfirm"
+                name="passwordConfirmation"
                 label="Confirm Password"
+                ref={passwordConfirmation}
                 visibilityIcon={<RemoveRedEyeSVGIcon />}
                 required
                 value={resetFormData.passwordConfirmation}
                 onChange={handleInputChange}
               />
-              <p style={{ color: "red" }}>{validationError}</p>
+              <p style={{ color: "red" }}>{validationMessage}</p>
               <SubmitButton
-                onClick={handleFormSubmit}
+                onClick={submitChangePassword}
               > 
                 Sign Up
               </SubmitButton>

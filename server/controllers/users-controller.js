@@ -134,12 +134,6 @@ module.exports = {
 
   async checkPasswordCode({ body }, res) {
     try {
-      const user = await User.findOne({email: "max.mcdonough@gmail.com"})
-      .populate({
-        path: "resetPasswordToken",
-        options: { strictPopulate: false },
-      });
-      console.log(user);
       const validCode = await User.findOne(
         {resetPasswordToken: body.code, resetPasswordExpires: {$gt: Date.now()}}
       );
@@ -147,6 +141,26 @@ module.exports = {
         res.statusMessage = "Your code is invalid or expired!"
         return res.status(404).end();
       } else {
+        return res.status(200).end();
+      };
+    } catch(err) {
+      console.log(err);
+      return res.json(err);
+    };
+  },
+
+  async changePassword({ body }, res) {
+    try {
+      const user = await User.findOne(
+        {resetPasswordToken: body.code, resetPasswordExpires: {$gt: Date.now()}}
+      );
+      if (!user) {
+        res.statusMessage = "Your code is invalid or expired!"
+        return res.status(404).end();
+      } else {
+        user.password = body.newPassword;
+        await user.save();
+        res.statusMessage = "Your password has been changed!"
         return res.status(200).end();
       };
     } catch(err) {
@@ -170,8 +184,6 @@ module.exports = {
   },
 
   async deleteSavedPic({ user, params }, res) {
-    console.log(user);
-    console.log(params);
     const updatedUser = await User.findOneAndUpdate(
       { _id: user._id },
       { $pull: { savedPics: { $in: [params.picId] } } },

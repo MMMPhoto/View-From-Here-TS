@@ -12,6 +12,7 @@ const {
   getCurrentUser,
   recoverPassword,
   checkPasswordCode,
+  changePassword
 } = require("../../controllers/users-controller.js");
 
 const { authMiddleware } = require("../../utils/auth.js");
@@ -27,6 +28,8 @@ router.route("/login").post(login);
 router.route("/recover").put(recoverPassword);
 
 router.route("/check-code").post(checkPasswordCode);
+
+router.route("/change-password").put(changePassword);
 
 router.route("/me").get(authMiddleware, getCurrentUser);
 
