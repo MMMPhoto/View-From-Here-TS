@@ -2,7 +2,7 @@ import { FC, useState, useRef, useEffect, ChangeEvent, FormEvent } from "react";
 import { CardHeader, CardTitle } from "@react-md/card";
 import { Form } from "@react-md/form";
 import { RemoveRedEyeSVGIcon } from "@react-md/material-icons";
-import { createNewUser } from "../../utils/api";
+import { checkPasswordCode } from "../../utils/api";
 import { useNavigate, useLocation } from "react-router-dom";
 import { login } from "../../utils/auth";
 import { SignupContainer, FormCard, FormContent, Input,PasswordInput, SubmitButton } from "./styles";
@@ -35,26 +35,34 @@ const PasswordReset: FC<{}> = () => {
 
     const formValid = resetForm.current.reportValidity();
     if (formValid) {
-      try {
-        const response = await createNewUser(resetFormData); //TODO: Create new function in utils for route
-        if (response.ok) {
-          const { token, user } = await response.json();
-          // setUser(user);
-          // login(token);
-          navigate("/");
-        } else {
-          setValidationError(response.statusText);
-        };
-      } catch (err) {
-        console.error(err);
-      };
+      // try {
+      //   const response = await createNewUser(resetFormData); //TODO: Create new function in utils for route
+      //   if (response.ok) {
+      //     const { token, user } = await response.json();
+      //     // setUser(user);
+      //     // login(token);
+      //     navigate("/");
+      //   } else {
+      //     setValidationError(response.statusText);
+      //   };
+      // } catch (err) {
+      //   console.error(err);
+      // };
     };
   };
 
   useEffect(() => {
     if (search) {
-      setPasswordResetCode(search.replace("?code=", ""));
-      console.log("code exists!")
+      const checkCode = async (code: string) => {
+        try {
+          const response = await checkPasswordCode({ code: code });
+        } catch(err) {
+          console.error(err);
+        };
+      };
+      const code = search.replace("?code=", "");
+      checkCode(code);
+      setPasswordResetCode(code);
     } else {
       navigate("/");
     };

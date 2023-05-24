@@ -51,7 +51,7 @@ const App: FC<{}> = () => {
               <Route path="/password-reset" element={<PasswordReset />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/single-view/:pictureId" element={<SingleView />} />
-            </Routes>
+git             </Routes>
         </div>
       </Router>
 

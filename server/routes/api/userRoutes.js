@@ -10,7 +10,8 @@ const {
   savePic,
   deleteSavedPic,
   getCurrentUser,
-  recoverPassword
+  recoverPassword,
+  checkPasswordCode,
 } = require("../../controllers/users-controller.js");
 
 const { authMiddleware } = require("../../utils/auth.js");
@@ -24,6 +25,8 @@ router
 router.route("/login").post(login);
 
 router.route("/recover").put(recoverPassword);
+
+router.route("/check-code").post(checkPasswordCode);
 
 router.route("/me").get(authMiddleware, getCurrentUser);
 

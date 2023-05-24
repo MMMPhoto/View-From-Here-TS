@@ -54,6 +54,16 @@ export const recoverPassword = (email) => {
   });
 };
 
+export const checkPasswordCode = (code) => {
+  return fetch("/api/users/check-code", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(code),
+  });
+};
+
 export const getCurrentUser = (token) => {
   return fetch("/api/users/me", {
     headers: {

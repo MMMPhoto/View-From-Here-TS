@@ -121,15 +121,37 @@ module.exports = {
         return res.status(404).end();
       } else {
         const resetCode = await user.generatePasswordReset();
-        console.log(resetCode);
-        console.log(body.email);
+        user.save();
         await passwordResetEmail(body.email, resetCode);
         res.statusMessage = "Check your email for a link to reset your password."
         return res.status(200).end();
       };
     } catch(err) {
       console.log(err);
-      return err.end();
+      return res.json(err);
+    };
+  },
+
+  async checkPasswordCode({ body }, res) {
+    try {
+      const user = await User.findOne({email: "max.mcdonough@gmail.com"})
+      .populate({
+        path: "resetPasswordToken",
+        options: { strictPopulate: false },
+      });
+      console.log(user);
+      const validCode = await User.findOne(
+        {resetPasswordToken: body.code, resetPasswordExpires: {$gt: Date.now()}}
+      );
+      if (!validCode) {
+        res.statusMessage = "Your code is invalid or expired!"
+        return res.status(404).end();
+      } else {
+        return res.status(200).end();
+      };
+    } catch(err) {
+      console.log(err);
+      return res.json(err);
     };
   },
 
