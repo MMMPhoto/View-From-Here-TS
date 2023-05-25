@@ -35,7 +35,7 @@ const App: FC<{}> = () => {
       }
     };
     getUser();
-  }, [user]);
+  }, []);
 
   return (
  
